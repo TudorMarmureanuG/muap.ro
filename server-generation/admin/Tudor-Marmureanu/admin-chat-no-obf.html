@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=1024">
+  <title>Muap Admin Chatroom</title>
+  <link rel="shortcut icon" href="./images/logo.png">
+  <style>
+    /* CSS pentru stilul paginii */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      display: flex;
+      height: 100vh;
+      color: #e0e0e0;
+      background-color: #1a1d21;
+      justify-content: center;
+      align-items: center;
+    }
+
+    /* Login */
+    .login-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      background-color: #2b2b2b;
+      padding: 20px;
+      border-radius: 10px;
+      width: 300px;
+    }
+
+    .login-container input {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border: none;
+      border-radius: 5px;
+      background-color: #4d4d4d;
+      color: #fff;
+    }
+
+    .login-container button {
+      padding: 10px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      background-color: #7289da;
+      color: #fff;
+      width: 100%;
+    }
+
+    /* Chat Container */
+    .chat-container {
+      display: none;
+      flex-direction: row;
+      height: 100%;
+      width: 100%;
+    }
+
+    .sidebar {
+      width: 250px;
+      background-color: #310233;
+      display: flex;
+      flex-direction: column;
+      padding: 15px;
+    }
+
+    .header {
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    .header h1 {
+      font-size: 1.5em;
+      color: #ffffff;
+      margin-bottom: 5px;
+    }
+
+    .header span {
+      color: #b2b2b2;
+      font-size: 0.9em;
+    }
+
+    .menu, .channels, .direct-messages {
+      margin-bottom: 20px;
+    }
+
+    .menu button {
+      background: none;
+      border: none;
+      color: #b2b2b2;
+      font-size: 1em;
+      text-align: left;
+      padding: 10px 0;
+      width: 100%;
+      cursor: pointer;
+    }
+
+    .menu button:hover {
+      color: #ffffff;
+    }
+
+    .channels h2, .direct-messages h2 {
+      font-size: 1.2em;
+      color: #b2b2b2;
+      margin-bottom: 10px;
+    }
+
+    .channels ul, .direct-messages ul {
+      list-style: none;
+    }
+
+    .channels ul li, .direct-messages ul li {
+      padding: 5px 0;
+      cursor: pointer;
+      color: #b2b2b2;
+    }
+
+    .channels ul li:hover, .direct-messages ul li:hover {
+      color: #ffffff;
+    }
+
+    .content {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      background-color: #32353b;
+    }
+
+    .content-header {
+      padding: 15px;
+      background-color: #48034b;
+      border-bottom: 1px solid #9c1e87;
+    }
+
+    .content-header h2 {
+      font-size: 1.5em;
+      color: #ffffff;
+    }
+
+    .messages {
+      flex: 1;
+      padding: 15px;
+      overflow-y: auto;
+    }
+
+    .message {
+      display: flex;
+      align-items: flex-start;
+      margin-bottom: 15px;
+    }
+
+    .message img {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      margin-right: 10px;
+    }
+
+    .message-content {
+      background-color: #3b3f45;
+      padding: 10px 15px;
+      border-radius: 5px;
+    }
+
+    .message-content h4 {
+      margin-bottom: 5px;
+      font-size: 1em;
+      color: #ffffff;
+    }
+
+    .message-content p {
+      font-size: 0.9em;
+      color: #cecece;
+    }
+
+    .message-bar {
+      display: flex;
+      align-items: center;
+      padding: 10px 15px;
+      background-color: #2c2f33;
+      border-top: 1px solid #4d4d4d;
+    }
+
+    .message-bar input {
+      flex: 1;
+      padding: 10px;
+      background-color: #4d4d4d;
+      border: none;
+      border-radius: 5px;
+      color: #ffffff;
+    }
+
+    .message-bar button {
+      background-color: #7289da;
+      color: #ffffff;
+      border: none;
+      padding: 10px 15px;
+      margin-left: 10px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .message.self {
+      flex-direction: row-reverse;
+    }
+
+    .message.self .message-content {
+      background-color: #525252; /*#46af2e*/
+    }
+
+    .message.self img {
+      margin-left: 10px;
+      margin-right: 0;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Login -->
+  <div class="login-container" id="loginContainer">
+    <h2>Login</h2>
+    <input type="text" id="username" placeholder="Username" required>
+    <input type="password" id="password" placeholder="Password" required><br><br>
+    <button onclick="login()">Login</button>
+  </div>
+
+  <!-- Chat -->
+  <div class="chat-container" id="chatContainer">
+    <div class="sidebar">
+      <div class="header">
+        <h1>Muap Team Chat</h1>
+        <span>Only for short announcements</span>
+      </div>
+      <div class="menu">
+        <button>Home</button>
+        <button>Activity</button>
+        <button>More</button>
+      </div>
+      <div class="channels">
+        <h2>Channels</h2>
+        <ul>
+          <li><a href="support-chat.html"># support</a></li>
+          <li><a href="admin-chat.html" style="color: #df30b6;"># admins</a></li>
+        </ul>
+      </div>
+      <div class="direct-messages">
+        <h2>Direct messages</h2>
+        <ul>
+          <li><a href="WickedKey_194-chat.httml">WickedKey_194</a></li>
+          <li><a href="Block_Chain-chat.html">Block_chain</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="content">
+      <div class="content-header">
+        <h2># admins</h2>
+      </div>
+      <div class="messages" id="messages">
+        <!-- Mesajele vor fi adăugate aici -->
+      </div>
+      <div class="message-bar">
+        <input type="text" id="messageInput" placeholder="Message #admins">
+        <button onclick="sendMessage()">Send</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Funcția de autentificare
+    function login() {
+      const username = document.getElementById('username').value;
+      const password = document.getElementById('password').value;
+
+      if (username === 'admin' && password === '*****') {
+        document.getElementById('loginContainer').style.display = 'none';
+        document.getElementById('chatContainer').style.display = 'flex';
+      } else {
+        alert('Invalid data...');
+      }
+    }
+
+    // Funcția pentru a verifica tasta apăsată
+    function handleKeyPress(event) {
+      if (event.key === 'Enter') {
+        login(); // Apelează funcția de login
+      }
+    }
+
+    // Adaugă event listener pe câmpurile de input
+    document.getElementById('username').addEventListener('keypress', handleKeyPress);
+    document.getElementById('password').addEventListener('keypress', handleKeyPress);
+  </script>
+  <script>
+    
+
+    // Adaugă un mesaj în chat
+    function addMessage(username, messageText, isSelf) {
+      const messagesDiv = document.getElementById('messages');
+      
+      const newMessage = document.createElement('div');
+      newMessage.classList.add('message');
+      if (isSelf) {
+        newMessage.classList.add('self');
+      }
+      newMessage.innerHTML = `
+        <img src="images/user.png" alt="User">
+        <div class="message-content">
+          <h4>${username}</h4>
+          <p>${messageText}</p>
+        </div>
+      `;
+      
+      messagesDiv.appendChild(newMessage);
+      messagesDiv.scrollTop = messagesDiv.scrollHeight;  // Scroll la ultimul mesaj
+    }
+
+    // Trimite un mesaj
+    function sendMessage() {
+      const messageInput = document.getElementById('messageInput');
+      const messageText = messageInput.value.trim();
+      if (messageText !== "") {
+        addMessage('You', messageText, true);
+        messageInput.value = '';  // Golește câmpul de text
+      }
+    }
+
+    // Adaugă mesajele inițiale la încărcarea paginii
+    window.onload = function() {
+      addMessage('WickedKey_194', 'Eu am avut o chestie dubioasa cu unul de la Hologram saptamana trecuta...', false);
+      addMessage('You', 'Ce s-a intamplat?', true);
+      addMessage('Block_Chain', 'Mai bine nu mai intreba :)', false);
+      addMessage('Block_Chain', 'Ideea e ca trebuie sa facem ceva cu aceste reguli de transcriere..', false);
+      addMessage('WickedKey_194', 'Ne ajuti @Tudor Marmureanu? Nu am idee ce reguli trebuie sa creez.', false);
+      addMessage('You', '"Ideea e ca" nu pot sa fiu tot timpul langa voi :)', true);
+      addMessage('Block_Chain', 'esti rau ba tudore :))))', false);
+      addMessage('You', 'Va rog sa va ocupati de automatizare in seara asta.', true);
+      addMessage('You', 'Sunteti in urma si vreau ca pana joi sa fie gata, urmand ca vineri sa le testez dupa program. Am asignat la amandoi in dashboard task-urile.', true);
+      addMessage('Block_Chain', 'Ok. Dar cum facem cu meeting-ul de maine?', false);
+      addMessage('Block_Chain', 'Cred ca raman peste program la munca :-|', false);
+      addMessage('Block_Chain', '@Wicked_Key194? esti?', false);
+      addMessage('Block_Chain', 'L-ai suparat Tudor :)) acum impaca-l, ca dupa te lasa cu ochii in soare :)))))))))', false);
+      addMessage('Block_Chain', '@Wicked_Key194', false);
+      addMessage('Block_Chain', '@Wicked_Key194', false);
+      addMessage('Block_Chain', '@Wicked_Key194', false);
+      addMessage('Block_Chain', '@Wicked_Key194', false);
+      addMessage('WickedKey_194', 'Esti retard?:)))', false);
+      addMessage('WickedKey_194', '@Tudor Marmureanu te las cu ochii in soare, gata', false);
+      addMessage('WickedKey_194', 'Mie imi e cam somn, dormiti cu fetele', false);
+      addMessage('WickedKey_194', 'NB', false);
+      addMessage('Block_Chain', 'Neata, dc plm avem pe server 8 conturi asociate pt o licenta??', false);
+      addMessage('Block_Chain', 'vad ca e si Enterprise.. dar au fost alocate intentionat, s-a sarit peste 4 scripturi de validare..wtf', false);
+      addMessage('WickedKey_194', 'stai asa, ma uit si revn', false);
+      addMessage('WickedKey_194', '*revin', false);
+      addMessage('Block_Chain', 'ma gandesc..ca a fost un bug, desi in log-urile de la Event Viewer nu este nimic critic sau warn.', false);
+      addMessage('Block_Chain', 'vezi putin cu debuggerul daca sunt bucle netestate inca..', false);
+      addMessage('Block_Chain', 'eu stiu ce a facut asta aseara', false);
+      addMessage('You', 'Ba banditilor :) ce am vb eu cu voi acum 3 zile?', true);
+      addMessage('You', '?????', true);
+      addMessage('You', 'suport_it cu parola dedeman este pt echipa mea', true);
+      addMessage('Block_Chain', 'eu nu tin minte sa ne fi spus de alocarea asta a licentelor:))', false);
+      addMessage('You', 'adica? ia verifica te rog notitele de la meeting.', true);
+      addMessage('You', 'in plm, trebuie sa va explic ca la copchii', true);
+      addMessage('You', 'sunt curios daca si @Wicked_Key194 mai tine minte de la mana pan la gura', true);
+      addMessage('You', 'vedeti ca azi le voi arata dashboard-ul si daca trimit vreun mail catre server cu domeniul @dedeman.ro, sa ii ajutati.', true);
+      addMessage('You', 'daca o vor folosi, atunci e bine, daca nu, aia e. Eu le-am alocat-o.', true);
+      addMessage('You', 'oricum nu le-am cerut bani, nu e ca si cum ne ocupa 1GB cu asocierea asta de conturi', true);
+      addMessage('You', 'fiti atenti daca identificati mai multe conturi asociate (>8). Daca da, atunci dezactivati cheia. Le voi spune asta intr-un mail.', true);
+      addMessage('You', 'Sau ma intrebati si vad eu ce fac.', true);
+      addMessage('You', 'Eu imi voi face datoria si le zic', true);
+      addMessage('WickedKey_194', 'salut, inteleg!', false);
+      addMessage('WickedKey_194', 'si da, stiam deja :)) eu sunt cel mai bun angajat, stii asta..poti conta pe mine', false);
+      addMessage('Block_Chain', 'auzi? te cam dai mare ba:-|', false);
+      addMessage('You', 'Azi voi fi prins pana diseara la 19:00, asa ca va rog sa va ocupati in continuare de solicitarile ce tin de conturile Muap.', true);
+      addMessage('You', 'Am modificat cateva linii de cod in transf.sql si in fisierul add_queue.sql pentru o eficienta mai buna.', true);
+      addMessage('You', 'Testat, functioneaza.', true);
+      addMessage('Block_Chain', 'pai si de ce nu mai ai join?', false);
+      addMessage('Block_Chain', 'aaa..deci tu ai facut un tabel mai mare si ai inglobat toate campurile din conturi si licente', false);
+      addMessage('Block_Chain', 'si apoi vad ca ai lasat pivotul pentru tabelul cu conturile aplicatiei. Doar acolo, interesant.', false);
+      addMessage('WickedKey_194', 'ma uit si eu imd', false);
+      addMessage('WickedKey_194', 'hmm..am gasit un bug. @Block_Chain ai msg in prv', false);
+      addMessage('Block_Chain', '@Tudor Marmureanu', false);
+      addMessage('WickedKey_194', 'acum trb sa il asteptam.. il sun, sa-mi bag pl.', false);
+      addMessage('You', 'Salut, ne auzim azi la 18:30?', true);
+      addMessage('WickedKey_194', 'in principiu, da. Salut.', false);
+      addMessage('Block_Chain', 'te sun pe la 18', false);
+      addMessage('You', 'OK', true);
+      addMessage('You', 'Voiam sa discutam azi despre stabilitate si despre acel bug.', true);
+      addMessage('You', 'S-ar putea sa fi gasit o alta metoda care scuteste inglobarea in aceeasi baza de date a tuturor datelor', true);
+      addMessage('You', 'Dar..va fi mai complicat putin..', true);
+      addMessage('You', 'Fiecare dintre voi sa foloseasca debuger-ul si testam in paralel', true);
+      addMessage('You', 'am uitat sa zic: ne vom folosi de serviciile connector.sql de la fiecare cont :)', true);
+      addMessage('WickedKey_194', 'aha..', false);
+      addMessage('WickedKey_194', 'bun, macar stim ca avem o seara fututa:))))', false);
+      addMessage('You', 'folosim si contul Dev pt sarcina asta, sper sa ne ajute cat de cat..', true);
+      addMessage('WickedKey_194', 'mna, nu avem ce pierde pana la urma', false);
+      addMessage('You', 'De asemenea, bugetul alocat pentru amandoi va fi 11.630 lei luna asta.', true);
+      addMessage('You', 'Avem o crestere de 30% si s-au cumparat Enterprise', true);
+      addMessage('You', 'Am zis ca va zic la meeting, dar si asa v-am futut la cap zilele astea :)))', true);
+      addMessage('Block_Chain', 'bine ba!!!', false);
+      addMessage('You', 'ia uite-l si pe asta, cand vb de chestii serioase taci, acum tipi in gura mare :)', true);
+      addMessage('You', 'deci faceti calculul, impartit la 2 = 5815 lei de fiecare', true);
+      addMessage('Block_Chain', 'Si tu cu CAT RAMAI????', false);
+      addMessage('WickedKey_194', 'pui intrebari ca sa nu taci :))) deja ai chartul de pe Admin, normal ca ramane mai mult pentru el, noi avem cateva procente acolo amarate:))', false);
+      addMessage('Block_Chain', 'A avut curaj sa porneasca la drum..', false);
+      addMessage('Block_Chain', 'adica uite si tu: are un server gata configurat de peste 5000 de lei, infrastructura creata tot de el, toate serviciile gestionate de el si noi il ajutam pt ca sunt cerinte mari..', false);
+      addMessage('You', 'Va rog sa lasati matrimonialele pe #admins, nu vreau nici sa golesc istoricul mereu ca vb voi numai despre altele', true);
+      addMessage('You', 'Ce scrie sus in engleza? :)', true);
+      addMessage('You', 'linistea s-a asternut pe acest taram...', true);
+      addMessage('WickedKey_194', 'pai vezi ca vorbesti si tu in plus, mai sus O_o', false);
+      addMessage('Block_Chain', 'noi am tacut:)))))))))', false);
+      addMessage('You', 'Vedeti ca am primit o solicitare de la o firma de service din Bucuresti..vor sa ne deplasam pana acolo', true);
+      addMessage('You', 'Sunati la ei si sa incercam sa le configuram aplicatia in functie de reteaua lor, macar sa ne dea o lista detaliata.', true);
+      addMessage('WickedKey_194', 'ok, lasa ca ma ocup eu', false);
+      addMessage('You', 'all good...ti-m asignat task-ul, succes baieti', true);
+      addMessage('You', 'daca cer mai mult decat facem noi, le spuneti sa ma contacteze si ii lamuresc eu.', true);
+      addMessage('WickedKey_194', 'ok', false);
+      addMessage('Block_Chain', 'ok', false);
+      addMessage('You', '@Block_Chain, ti-am lasat un task cu cei de la Figo. Te rog sa te ocupi de testare si sa imi dai raportul in seara aceasta.', true);
+      addMessage('You', 'sabloanele sunt salvate in Test_Suite si le iei pe fiecare de acolo si incerci', true);
+      addMessage('Block_Chain', 'incerc, dar sunt vreo 20...nu cred ca voi reusi', false);
+      addMessage('You', 'pai nu tu m-ai sunat si mi-ai zis ca azi nu ai treaba la serviciu? mai ales ca lucrezi de acasa, plm..', true);
+      addMessage('You', 'v-ati asumat in baza contractului ca ma ajutati. Acum daca a intervenit treaba asta, nu am ce face. Eu implementez interfata pentru cei de la Bucuresti.', true);
+      addMessage('You', '@WickedKey_194 iti dau msg prv cand termin', true);
+      addMessage('You', 'eu stiu ca va este greu, dar gandeste-te ca nu am timp nici de familie..voi nu aveti alte responsabilitati pe cap, eu am facut tot ce era mai greu pana acum', true);
+      addMessage('You', 'nu e usor, iti mananca timp o afacere, stiu..dar uite ca totusi avem bani frumosi.', true);
+      addMessage('You', 'Vrei, nu vrei, daca nu te implici suficient nu vei reusi sa ai succes.', true);
+      addMessage('You', 'Si tot eu incerc sa va usurez munca. Va las sabloane de testat, codul aplicatiei a fost excplicat si creat de mine si acum folosind contul Dev puteti crea totul mult mai usor.', true);
+      addMessage('You', 'Aveti unelte, tot ce va trebuie. Atata ca trb sa va doriti asta.', true);
+      addMessage('You', 'O sa mai angajez un om daca treaba devine prea dificila, dar trebuie sa saltam oleaca pasul ca sa am din ce sa va tin pe toti.', true);
+      addMessage('You', 'vad ca s-a aglomerat chat-ul de mesaje, o sa le mai sterg pe cele din urma care nu mai sunt relevante', true);
+      addMessage('Block_Chain', 'Adevarat. Ideea este ca e mult, greu, suntem 3 pers care se ocupa de afacerea asta si totusi am avut un start bun.', false);
+      addMessage('WickedKey_194', 'stai sa vezi daca facem indexare la site...', false);
+      addMessage('WickedKey_194', 'atunci belea cu solicitarile', false);
+      addMessage('You', 'nu va faceti griji de asta, pana nu automatizam mai multe procese in spate si eventual sa mai aduc un om, nu voi face publicitate mai mare.', true);
+      addMessage('You', 'cert este ca nu o sa murim de foame :))', true);
+      addMessage('You', 'am avut o intalnire interesanta, de fapt 3 interviuri cu niste firme din Iasi, inclusiv Mambu, care isi doresc acest soft.', true);
+      addMessage('Block_Chain', 'PAI SI NOI CAND STIAM DE ASTA??????', false);
+      addMessage('You', 'Rabdare.', true);
+      addMessage('WickedKey_194', 'vb in numele tau @Block_Chain:)', false);
+      addMessage('Block_Chain', '??', false);
+      addMessage('Block_Chain', 'adica', false);
+      addMessage('You', 'Va rog sa va linistiti.', true);
+      addMessage('Block_Chain', 'pai ne spui sa ne linistim cand ai ascuns asta de noi?', false);
+      addMessage('You', 'Deci Sa o luam cu inceputul.', true);
+      addMessage('Block_Chain', 'te rog..', false);
+      addMessage('You', 'Am vorbit cu ei, nebunii, publicitate din partea unui developer si a ajuns la urechile Team Liderului lui, totul bine si frumos.', true);
+      addMessage('You', 'concluzia este ca vor sa ne cumpere..ghiciti cate', true);
+      addMessage('You', '@WickedKey_194 stie povestea ca din intamplare am stat langa el si am vb la telefon', true);
+      addMessage('Block_Chain', 'ce inseamna sa stai in Iasi si voi doi la Bacau..', false);
+      addMessage('WickedKey_194', 'vezi? tu nu, ca vrei facultate acolo, te duci cu turma dupa toti:))', false);
+      addMessage('Block_Chain', 'HAI SICTIR', false);
+      addMessage('You', 'Discutiile astea le purtati in prv, va rog sa ma lasati sa termin ideea.', true);
+      addMessage('Block_Chain', 'scz.. continua', false);
+      addMessage('You', '1400 de licente', true);
+      addMessage('You', 'Pentru cele 3 firme, in total.', true);
+      addMessage('You', 'Enterprise, evident. Atata ca nu avem certificare de la Microsoft si e ft scump si implica alte nebunii de care nu am habar momentan.', true);
+      addMessage('Block_Chain', 'deci.. asta inseamna ca vom avea finantare destul de mare ca sa angajam in plus macar 2 sau 3 oameni', false);
+      addMessage('Block_Chain', 'plus profitul adus din urma... wow', false);
+      addMessage('You', 'Si ne putem extinde, asta voiam sa zic.', true);
+      addMessage('WickedKey_194', 'ar fi... multi bani la mijloc.', false);
+      addMessage('WickedKey_194', 'dar totusi, nu putem sa facem treaba asta in 3 oameni.', false);
+      addMessage('You', 'Din detaliile discutate cu ei telefonic, au zis ca acele conturi sunt perfecte pentru departamentul de suport.', true);
+      addMessage('You', 'Problema e alta: nu am timpul necesar pentru deplasare. Cel mai usor ar fi ca @Block_Chain sa se duca sa semneze contractele.', true);
+      addMessage('You', 'Dar ne trebuie certificarea de la Microsoft.', true);
+      addMessage('Block_Chain', 'serios? dar nu stiu ce sa le zic... sau unde si cu cine trebuie sa discut...', false);
+      addMessage('You', 'Detaliile astea le-am salvat in Notepad pe telefon.', true);
+      addMessage('Block_Chain', 'ok, deci intai sa ne interesam de certificare..', false);
+      addMessage('You', 'Exact.', true);
+      addMessage('You', 'Pana una, alta, va rog sa terminati task-urile asignate.', true);
+      addMessage('You', 'Salutare. Ce ati mai facut? nu am avut azi timp de meeting din pacate, am fost pe la facultate.', true);
+      addMessage('Block_Chain', 'prea multe nu am facut, dar presimpt ca cei de la Bucuresti tot nu se vor lasa..', false);
+      addMessage('Block_Chain', 'ma refer la Figo.....', false);
+      addMessage('You', 'Am inteles. O sa preiau eu fraiele. multumesc ca mi-ai zis.', true);
+      addMessage('Block_Chain', 'din pacate stabilitatea e 80%. Noi am incercat, dar fiind ocupati cu proiectele astea 2 e cam cam..', false);
+      addMessage('You', 'inteleg. nu e bai, avem timp si de restul. Important e sa ne iasa banii de pe urma lor', true);
+      addMessage('You', 'seara faina tuturor!', true);
+      addMessage('Block_Chain', 'same dude', false);
+      addMessage('You', 'inca ceva, am uitat: ma gandesc ca nu este bine cu ultimele 3 SFD-uri. Au insecuritati cam multe.', true);
+      addMessage('Block_Chain', 'pai ar fi bine sa lasam acel update in prima faza.', false);
+      addMessage('Block_Chain', 'o sa ne uitam dupa ce terminam cu astia de la bucuresti ca ne mananca ficatii..sa-mi bag pl in ei', false);
+      addMessage('You', 'Salut. Sa stiti ca azi voi fi prins cu cei de la Iasi, care ne-au trimis mail aseara.', true);
+      addMessage('You', 'nu am reusit sa termin de asamblat reteaua in contul Multiapp', true);
+      addMessage('Block_Chain', 'stai linistit', false);
+      addMessage('Block_Chain', 'nu e Alex pe faza, dar el cel putin nici nu a pus osul la treaba:)))', false);
+      addMessage('WickedKey_194', 'Imi sugi pl', false);
+      addMessage('Block_Chain', 'lasa ba, am glumit handicapatule', false);
+      addMessage('Block_Chain', 'daca implementai optiunea de block, ii dadeam si report, desi tot la tine ajungea sesizarea:))', false);
+      addMessage('You', 'oricum eu am control asupra a tot ce se intampla :) deci.. degeaba', true);
+      addMessage('You', 'dar pentru prostia din capul vostru nu pot implementa politici 0_O', true);
+      addMessage('You', 'o sa caut sa angajez cu part-time, nu am apucat sa discut la meeting cu voi si stiu ca m-ati intrebat', true);
+      addMessage('WickedKey_194', 'si ce salariu le oferi', false);
+      addMessage('You', 'Nu m-am gandit, momentan am facut pagina web https://muap.ro/job-opening.html', true);
+      addMessage('Block_Chain', 'interesant..', false);
+      addMessage('Block_Chain', 'totusi trebuie facut cumva sa stabilim de la inceput procedurile de lucru pt a nu fi haos...', false);
+      addMessage('You', 'in orice caz, vom discuta aspectele astea la un meeting creat de mine in room server.', true);
+      addMessage('You', 'va rog, de asemenea, sa va ganditi in decurs de 2 zile daca mai sunt necesare si alte pozitii sau daca nu considerati relevante pozitiile propuse de mine.', true);
+      addMessage('You', 'legat de pontaj si de program,  voi implementa eu o plaforma separata pentru treaba asta. Eu voi gestiona programul de lucru pentru fiecare din voi.', true);
+    };
+
+    document.getElementById("messageInput").addEventListener("keypress", function(event) {
+      if (event.key === "Enter") {
+        sendMessage();
+      }
+    });
+  </script>
+</body>
+</html>

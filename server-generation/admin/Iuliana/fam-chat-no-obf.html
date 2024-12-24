@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=1024">
+  <title>Muap Admin Chatroom</title>
+  <link rel="shortcut icon" href="./images/logo.png">
+  <style>
+    /* CSS pentru stilul paginii */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      display: flex;
+      height: 100vh;
+      color: #e0e0e0;
+      background-color: #1a1d21;
+      justify-content: center;
+      align-items: center;
+    }
+
+    /* Login */
+    .login-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      background-color: #2b2b2b;
+      padding: 20px;
+      border-radius: 10px;
+      width: 300px;
+    }
+
+    .login-container input {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border: none;
+      border-radius: 5px;
+      background-color: #4d4d4d;
+      color: #fff;
+    }
+
+    .login-container button {
+      padding: 10px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      background-color: #7289da;
+      color: #fff;
+      width: 100%;
+    }
+
+    /* Chat Container */
+    .chat-container {
+      display: none;
+      flex-direction: row;
+      height: 100%;
+      width: 100%;
+    }
+
+    .sidebar {
+      width: 250px;
+      background-color: #310233;
+      display: flex;
+      flex-direction: column;
+      padding: 15px;
+    }
+
+    .header {
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    .header h1 {
+      font-size: 1.5em;
+      color: #ffffff;
+      margin-bottom: 5px;
+    }
+
+    .header span {
+      color: #b2b2b2;
+      font-size: 0.9em;
+    }
+
+    .menu, .channels, .direct-messages {
+      margin-bottom: 20px;
+    }
+
+    .menu button {
+      background: none;
+      border: none;
+      color: #b2b2b2;
+      font-size: 1em;
+      text-align: left;
+      padding: 10px 0;
+      width: 100%;
+      cursor: pointer;
+    }
+
+    .menu button:hover {
+      color: #ffffff;
+    }
+
+    .channels h2, .direct-messages h2 {
+      font-size: 1.2em;
+      color: #b2b2b2;
+      margin-bottom: 10px;
+    }
+
+    .channels ul, .direct-messages ul {
+      list-style: none;
+    }
+
+    .channels ul li, .direct-messages ul li {
+      padding: 5px 0;
+      cursor: pointer;
+      color: #b2b2b2;
+    }
+
+    .channels ul li:hover, .direct-messages ul li:hover {
+      color: #ffffff;
+    }
+
+    .content {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      background-color: #32353b;
+    }
+
+    .content-header {
+      padding: 15px;
+      background-color: #48034b;
+      border-bottom: 1px solid #9c1e87;
+    }
+
+    .content-header h2 {
+      font-size: 1.5em;
+      color: #ffffff;
+    }
+
+    .messages {
+      flex: 1;
+      padding: 15px;
+      overflow-y: auto;
+    }
+
+    .message {
+      display: flex;
+      align-items: flex-start;
+      margin-bottom: 15px;
+    }
+
+    .message img {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      margin-right: 10px;
+    }
+
+    .message-content {
+      background-color: #3b3f45;
+      padding: 10px 15px;
+      border-radius: 5px;
+    }
+
+    .message-content h4 {
+      margin-bottom: 5px;
+      font-size: 1em;
+      color: #ffffff;
+    }
+
+    .message-content p {
+      font-size: 0.9em;
+      color: #cecece;
+    }
+
+    .message-bar {
+      display: flex;
+      align-items: center;
+      padding: 10px 15px;
+      background-color: #2c2f33;
+      border-top: 1px solid #4d4d4d;
+    }
+
+    .message-bar input {
+      flex: 1;
+      padding: 10px;
+      background-color: #4d4d4d;
+      border: none;
+      border-radius: 5px;
+      color: #ffffff;
+    }
+
+    .message-bar button {
+      background-color: #7289da;
+      color: #ffffff;
+      border: none;
+      padding: 10px 15px;
+      margin-left: 10px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .message.self {
+      flex-direction: row-reverse;
+    }
+
+    .message.self .message-content {
+      background-color: #525252; /*#46af2e*/
+    }
+
+    .message.self img {
+      margin-left: 10px;
+      margin-right: 0;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Login -->
+  <div class="login-container" id="loginContainer">
+    <h2>Login</h2>
+    <input type="text" id="username" placeholder="Username" required>
+    <input type="password" id="password" placeholder="Password" required><br><br>
+    <button onclick="login()">Login</button>
+  </div>
+
+  <!-- Chat -->
+  <div class="chat-container" id="chatContainer">
+    <div class="sidebar">
+      <div class="header">
+        <h1>Muap Team Chat</h1>
+        <span>Only for short announcements</span>
+      </div>
+      <div class="menu">
+        <button>Home</button>
+        <button>Activity</button>
+        <button>More</button>
+      </div>
+      <div class="channels">
+        <h2>Channels</h2>
+        <ul>
+          <li><a href="fam-chat.html" style="color: #df30b6;"># fam</a></li>
+        </ul>
+      </div>
+      <div class="direct-messages">
+        <h2>Direct messages</h2>
+        <ul>
+          <li><a href="Tudor-Marmureanu-chat.html">Tudor Marmureanu</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="content">
+      <div class="content-header">
+        <h2># fam</h2>
+      </div>
+      <div class="messages" id="messages">
+        <!-- Mesajele vor fi adăugate aici -->
+      </div>
+      <div class="message-bar">
+        <input type="text" id="messageInput" placeholder="Message #admins">
+        <button onclick="sendMessage()">Send</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Funcția de autentificare
+    function login() {
+      const username = document.getElementById('username').value;
+      const password = document.getElementById('password').value;
+
+      if (username === 'Iuliana' && password === 'testoasa') {
+        document.getElementById('loginContainer').style.display = 'none';
+        document.getElementById('chatContainer').style.display = 'flex';
+      } else {
+        alert('Invalid data...');
+      }
+    }
+
+    // Funcția pentru a verifica tasta apăsată
+    function handleKeyPress(event) {
+      if (event.key === 'Enter') {
+        login(); // Apelează funcția de login
+      }
+    }
+
+    // Adaugă event listener pe câmpurile de input
+    document.getElementById('username').addEventListener('keypress', handleKeyPress);
+    document.getElementById('password').addEventListener('keypress', handleKeyPress);
+  </script>
+  <script>
+    
+
+    // Adaugă un mesaj în chat
+    function addMessage(username, messageText, isSelf) {
+      const messagesDiv = document.getElementById('messages');
+      
+      const newMessage = document.createElement('div');
+      newMessage.classList.add('message');
+      if (isSelf) {
+        newMessage.classList.add('self');
+      }
+      newMessage.innerHTML = `
+        <img src="images/user.png" alt="User">
+        <div class="message-content">
+          <h4>${username}</h4>
+          <p>${messageText}</p>
+        </div>
+      `;
+      
+      messagesDiv.appendChild(newMessage);
+      messagesDiv.scrollTop = messagesDiv.scrollHeight;  // Scroll la ultimul mesaj
+    }
+
+    // Trimite un mesaj
+    function sendMessage() {
+      const messageInput = document.getElementById('messageInput');
+      const messageText = messageInput.value.trim();
+      if (messageText !== "") {
+        addMessage('You', messageText, true);
+        messageInput.value = '';  // Golește câmpul de text
+      }
+    }
+
+    // Adaugă mesajele inițiale la încărcarea paginii
+    window.onload = function() {
+      addMessage('Tudor Marmureanu', 'Buniaaaa, aici te rog sa lasi doar mesaje importante/confidentiale! Te iubeste Poncho! <3', false);
+      addMessage('You', 'Binii', true);
+    };
+
+    document.getElementById("messageInput").addEventListener("keypress", function(event) {
+      if (event.key === "Enter") {
+        sendMessage();
+      }
+    });
+  </script>
+</body>
+</html>

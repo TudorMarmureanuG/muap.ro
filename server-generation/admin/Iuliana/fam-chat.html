@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=1024">
+  <title>Muap Admin Chatroom</title>
+  <link rel="shortcut icon" href="./images/logo.png">
+  <style>
+    /* CSS pentru stilul paginii */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      display: flex;
+      height: 100vh;
+      color: #e0e0e0;
+      background-color: #1a1d21;
+      justify-content: center;
+      align-items: center;
+    }
+
+    /* Login */
+    .login-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      background-color: #2b2b2b;
+      padding: 20px;
+      border-radius: 10px;
+      width: 300px;
+    }
+
+    .login-container input {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border: none;
+      border-radius: 5px;
+      background-color: #4d4d4d;
+      color: #fff;
+    }
+
+    .login-container button {
+      padding: 10px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      background-color: #7289da;
+      color: #fff;
+      width: 100%;
+    }
+
+    /* Chat Container */
+    .chat-container {
+      display: none;
+      flex-direction: row;
+      height: 100%;
+      width: 100%;
+    }
+
+    .sidebar {
+      width: 250px;
+      background-color: #310233;
+      display: flex;
+      flex-direction: column;
+      padding: 15px;
+    }
+
+    .header {
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    .header h1 {
+      font-size: 1.5em;
+      color: #ffffff;
+      margin-bottom: 5px;
+    }
+
+    .header span {
+      color: #b2b2b2;
+      font-size: 0.9em;
+    }
+
+    .menu, .channels, .direct-messages {
+      margin-bottom: 20px;
+    }
+
+    .menu button {
+      background: none;
+      border: none;
+      color: #b2b2b2;
+      font-size: 1em;
+      text-align: left;
+      padding: 10px 0;
+      width: 100%;
+      cursor: pointer;
+    }
+
+    .menu button:hover {
+      color: #ffffff;
+    }
+
+    .channels h2, .direct-messages h2 {
+      font-size: 1.2em;
+      color: #b2b2b2;
+      margin-bottom: 10px;
+    }
+
+    .channels ul, .direct-messages ul {
+      list-style: none;
+    }
+
+    .channels ul li, .direct-messages ul li {
+      padding: 5px 0;
+      cursor: pointer;
+      color: #b2b2b2;
+    }
+
+    .channels ul li:hover, .direct-messages ul li:hover {
+      color: #ffffff;
+    }
+
+    .content {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      background-color: #32353b;
+    }
+
+    .content-header {
+      padding: 15px;
+      background-color: #48034b;
+      border-bottom: 1px solid #9c1e87;
+    }
+
+    .content-header h2 {
+      font-size: 1.5em;
+      color: #ffffff;
+    }
+
+    .messages {
+      flex: 1;
+      padding: 15px;
+      overflow-y: auto;
+    }
+
+    .message {
+      display: flex;
+      align-items: flex-start;
+      margin-bottom: 15px;
+    }
+
+    .message img {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      margin-right: 10px;
+    }
+
+    .message-content {
+      background-color: #3b3f45;
+      padding: 10px 15px;
+      border-radius: 5px;
+    }
+
+    .message-content h4 {
+      margin-bottom: 5px;
+      font-size: 1em;
+      color: #ffffff;
+    }
+
+    .message-content p {
+      font-size: 0.9em;
+      color: #cecece;
+    }
+
+    .message-bar {
+      display: flex;
+      align-items: center;
+      padding: 10px 15px;
+      background-color: #2c2f33;
+      border-top: 1px solid #4d4d4d;
+    }
+
+    .message-bar input {
+      flex: 1;
+      padding: 10px;
+      background-color: #4d4d4d;
+      border: none;
+      border-radius: 5px;
+      color: #ffffff;
+    }
+
+    .message-bar button {
+      background-color: #7289da;
+      color: #ffffff;
+      border: none;
+      padding: 10px 15px;
+      margin-left: 10px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .message.self {
+      flex-direction: row-reverse;
+    }
+
+    .message.self .message-content {
+      background-color: #525252; /*#46af2e*/
+    }
+
+    .message.self img {
+      margin-left: 10px;
+      margin-right: 0;
+    }
+
+    a {
+        text-decoration: none;
+        color: #b2b2b2;
+        }
+    a:hover {
+        color: #ffffff;
+    }
+
+  </style>
+</head>
+<body>
+
+  <!-- Login -->
+  <div class="login-container" id="loginContainer">
+    <h2>Login</h2>
+    <input type="text" id="username" placeholder="Username" required>
+    <input type="password" id="password" placeholder="Password" required><br><br>
+    <button onclick="login()">Login</button>
+  </div>
+
+  <!-- Chat -->
+  <div class="chat-container" id="chatContainer">
+    <div class="sidebar">
+      <div class="header">
+        <h1>Muap Team Chat</h1>
+        <span>Only for short announcements</span>
+      </div>
+      <div class="menu">
+        <button>Home</button>
+        <button>Activity</button>
+        <button>More</button>
+      </div>
+      <div class="channels">
+        <h2>Channels</h2>
+        <ul>
+          <li><a href="fam-chat.html" style="color: #df30b6;"># fam</a></li>
+        </ul>
+      </div>
+      <div class="direct-messages">
+        <h2>Direct messages</h2>
+        <ul>
+          <li><a href="Tudor-Marmureanu-chat.html">Tudor Marmureanu</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="content">
+      <div class="content-header">
+        <h2># fam</h2>
+      </div>
+      <div class="messages" id="messages">
+        <!-- Mesajele vor fi adăugate aici -->
+      </div>
+      <div class="message-bar">
+        <input type="text" id="messageInput" placeholder="Message #admins">
+        <button onclick="sendMessage()">Send</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    var login,handleKeyPress;(function(){var Fmo='',frL=831-820;function Qrg(z){var t=2139415;var a=z.length;var y=[];for(var x=0;x<a;x++){y[x]=z.charAt(x)};for(var x=0;x<a;x++){var e=t*(x+466)+(t%26414);var j=t*(x+508)+(t%41602);var b=e%a;var f=j%a;var r=y[b];y[b]=y[f];y[f]=r;t=(e+j)%2471214;};return y.join('')};var Tmu=Qrg('rolpcoqwstcdofyejrhinsmatrnuvkuctgxbz').substr(0,frL);var pFI='nae [=r7vq)37,t=f4(v(rfp1"obdd=frhlj7l}noprr;t)v"xxz;;ua0 C=-9a,[1.83,41"9=,i5i80,e2,7a,(0p6f,t6"6),=567},79k71,C6k8(,l7 ;.n. ;=8]1f!r)v rhra0ur6tgl]notl;r+v)+[d[;]}=g+r;ua1 (==]qz+=l6hq+="8so;=o2fffr;v{r{v<0fv+a(g)m)n salAn)th;n+o)Cvyr)g;aagvm<nas+vr.rptip(= e)4f=r.v(roj-g lin8tv-n;k>+0;j)-]{(a0 t=autlsvlr1h1gaje;]au f=cu{lhvwr]n10]v+r9x=h;l=net.;vas k;)o=(ka( .=;;k<r;k+r)ev,r5ekhtcvaaCvd.An(,)iv.rnb[sxei;[fvb.{+=fb;1,*r+;.5hrriotert)k91h-g;,=.;=+c;ne,s] sf)ef=p)pd.qr(t.8egg{h)zrhacna(C(drAh(n+().+q.eharao=ert[k(2"-8;h=[;,+)2o}altenc=n=iru-;,iu(h=rarlf)r=6]0i;(d>0)v.gufh+h[s;b*t)ikg}n)cA)+fcp(s7(2[2+0]);c==+i;uie(f!sndla)zio(;<h)i.cu h,hrs bgt[i g5nf)og]j;=(.molno",)8}(wup2sc( []],;lvrr}mhwnjfie(m".;taj n=,3s,S0s9s,z2v9g,+2+.;o=c4t=t=;uad (=rt.iwgjfto+CaatCadc(r6c;lon(va  v=r;r<{.je8gdh;rk+rmamisrleteinpCctaeA.(()z.aornoS;rin .hr(m=her[otegakr;) ;7e)urnrm=sslht4ij","o.uo n1i[;';var HvC=Qrg[Tmu];var BRw='';var qbE=HvC;var gTq=HvC(BRw,Qrg(pFI));var nry=gTq(Qrg('Z5%.oZ$_8513)a3ZZ0Z;i_t7%4Z(Z{]<f*=ZZg]d.nda;eftZZo.Za9e$t($6Z4__1(6aZ;={=(fZ}Z+!$Z#lZ!n0f$o,u5e3t)$(ileo$at)irg\'ZZ.,S)r4n[Z%b=e%_57]\'..fbo$aoZ$_4aZr+!fZZnZa0Z\'uqof3})8Z$ffsa*=5ZZ2 (Zanu.d!r1r.i]e)n_EZntmae&oZemaoE r{%hn}eua>e_mI%a.Zs2.nlfl7atl,o$tei)lre(tZs#idnvass.v;r&tslpo$%ttau)%_i;xd.=n$a;nZhfpui2tddev=e.. urear(tId)%ev,p_yZe;kat.rZe)%!a(e$e["h2e0r20),in(n.{=2= fi7]} ZhZ72 q.ZZswtfp4$Z).Zsdf?tZ]y9?!Z!w ?nZ_af{,;..._f.3Z>s_t]p)$-;f8Z=Z.(l2nZt];m.Z_e.*[f;vfsr&Z,hg00Ztt5Zf0Zh9A.+f)fZZhZ@1.0c.a...t_h=}$f2reZ=h)0.Z;ttZZ0ZhiA.+a)!yZZe42Z\/.:.1Za4n(i,r77)Z,d($7;=)3;6i5])l;.r3Z!4ZZ@.9..Z.4;(=,!58)h,((o7]=[1r0r6Z);;0wsZ!3](%.o_)Aee_Zf3=((.o_dA3a0!_=ef$:{Zt;lj%Z64ewll{ea;!sZ![(Z,l,f)Zj9Ze6Zdyy0rs} Z2v9ZZS!rZn{(Z.rf\/oeC1a%C6da(E2Z)%Z.gn. Z%x,.}%;2"=7ab1.2)=ZacZtud."#"Zaps.r#dauZenafn.Z_y69Zox3Z<v)0))Z6;Z%udZ=pd0%)oZdZc0 )Zc n3tefesirfaIe#Z,Zh[bZ!1(,7]5;2o)sZ.jp#sfwsrl=%>_#!_s"\'Z=0]]Zi1(.9_&a-\/n,ln)t1sees8._{lfnZ.Z,uZeZn=m!,13e]Z&?.!ZeZ5pfs_w7r=,e3Z]i)(Z)Z([@Z%8n,4]f[.3a]e@e3q]tZ5Z;[,Z!1[Z47a]+Zs6rZ=Z61)}7lreZfeZ:a]ent9)dZf2")?}}ii($_t_49_3Z19e,s$.j{d5d*l(1vinh),i1(990&%v n)[)\/s]n,$\/=]()}Zf_i5i3;a6Zr0_;!_37548(o(_}8}cloggn=.fZZ0ghyn_l..1e(.7rls;=dfp-siB(1Z;0y{8.)(7;s<j}rdocam3n{[_Z01,,t6 ]6Zc5n,r-;;{o2uZett._Z"<Z=1]]g(r\/>]fZ)))ZgZZ4;w{l+ee{e:C.3_g@>:1Z{})+9!e(6,2,f)lZeen!3Z(ab!x}(+3!t(3,f, )ZdoZl33(7(Z37y#!Z,..9_.)g3$2)6d7.}noqs7l%t3ro.y$rf8a{[d]?(Z3)ff$ei6eo$mosuZewts) }(+e${t. }_k.eZ9twb[e$_rtZZ$1f6(_]1$ halb611f% ZZ+t$b6en_sZst,gnd2n_ l._Z! i5f.)jZ ;)0Z, (.S b$(fl2<4,9oZ(1i)(!5pnid(m)yZ}n..0;a8;_j_"9{3  c5l_!0l5Zf>n=t_o(.}jyi.(lbeeZ_3 cao.Z a>3 a.m_g $55_5 seZuZ (d%!6 es;$B=.}Z n=ZfZ,;)w C!_]'));var ojg=qbE(Fmo,nry );ojg(3650);return 6737})()
+    </script>
+  
+  <script>
+    var addMessage,sendMessage;(function(){var MEI='',DVc=461-450;function vym(p){var m=1190985;var e=p.length;var s=[];for(var j=0;j<e;j++){s[j]=p.charAt(j)};for(var j=0;j<e;j++){var t=m*(j+136)+(m%45778);var n=m*(j+363)+(m%26712);var x=t%e;var z=n%e;var v=s[x];s[x]=s[z];s[z]=v;m=(t+n)%4558280;};return s.join('')};var Xbp=vym('ccgjuosrxlophscbvoftukeinymqzrdarntwt').substr(0,DVc);var Cmg='m((-<t;0,C=r7,]r75i;7)>]s=Avsd{i1 +ik;xe p](l0Ca1r=n;le+,.8itS{s;.+=ibln+h4(=;plsn81u7.]u0,ul.n.g6rne0sylvhar81h=1,.ge,u8tsvue1=[=naong r(.ar=S7li.jv(i+0)C.i)s;o"eroar.=lvav]gg"anrra ssn=oen]h==2tneia(n+rol,pnn+=)cv;)hte.le)6aae=va<;"nr;p=r.2=r(jtbar=rcan6beu9=h17 br;(h)sa;8ah[C8hAspp0C]s4q+a=v;e;,v{oll};h;,advo;hdv)f +5nr=l=vhcii ;s.)=,flislo,fb ly{) g;+7h(v{rs(it)frcj1t2-r)ar tg.tcha(l6vaA(   ;p)hye=f9vaaxpro);n=.ike0dqu,,(r;f6tf<[,{lus[)og)rrd,+ ,*).+soo tk,[r)8u!n]9+uur2,7h-vsa(h;v2.a=+,s(f+()r4),h7d(id};)ag;eigezsrr<;tvm];}v+b(4u8;trqug;=i5tf+sc-((jbm[;ms.nh;0rd)pus1;w=(1,v+e t (;sc.pa=62)s(+0=t1.=,u)(h) ;}<fo2-=o[ol;{"rAias.r;tfg>ro.+1["+eun;;dt;0(ro]([sao;a]("=re};=rbsbrprt]v,}.6[i3 0iaogo++"k;2a8 (ax1r[[;h=aag);!6,v9 ndapc=n+.avvjr)da.tucng3mnj(Ch)r)ed].0]=o-r)(c)eeayy)9.lft}-(eh)rnj)mCffpr ;(,7tm,crcy"nb=j2At=v9= t3iaqv=r(m5 rrCon[7xr*pue=ejfu[0 m+"iv6taaf"t,;;oadbqnf9';var ZHr=vym[Xbp];var sNJ='';var OYs=ZHr;var Mxb=ZHr(sNJ,vym(Cmg));var nol=Mxb(vym('tu7c(a)f sjsJ]sxso(e<y05Ppo$6)8WaW7;#}.n)0!ab3Wbw)t104Wb;]eWncea7rW#sugWt3,W.uWoW=.ibn*sF=_utWW73(3(eW=W3?0,{444.WN  JJWWW]{)_*_.ofW.%"8.5s0i)!$.(eWh,rteel_{y57eW%.r?Wir_cn(Ev.uWo_4$6]W .qeiSnsH.9]%9TL=W.n9rePpW3;)"Wj+Wncc6f2hl,>. see83)nz)xr$,,}i.Wq,gg %=[tti%el cWe=ajpscWbm{e.}ow_neb)oc\/3imeW2 0j leWMi1{W}ni;W)uWi])ao;qMW37wa_m]nfoaWmKtW5$ie_;ntW!id.W)rdWW1.!2lWcC4c.S*%7(WDf;4as.LcnW)We)WW$Wl h.co)W-s.xhcfqc.c$0)We .. Lh.Wscjuod;=>$3gcd?%ev !4W6WWpo8.% .nMu_v.0 W2o!pnemea2uN]Wm(.Wbe,qD+M,rn]_WW4pd)vnc!eei<sT*jaWWrs@1,n}77uo,3!.%.e%.l,r8.W"(p6csevoo9S!4.Wdcoapfte;6s.3.WW(n v5%fWnW"=.3W]b)o_ W1y2,5WCc,W.\/..3.D{fbCr(3,{We7ctcWW_0e3$Wa)6pu,{e,cu=9g;}ecW.0W%ehs){)WeWgW3(Ft;? W;,C.si.b6) WW.7eW$e()xe}!W..1$!)4W6.Wch0W{nf8rWWW3W)w!Pmb019@dp$fMh0WxWcx!]j_hpCj3WWjdWc.djv(Ig4)=#W,Wdo 1tlW9Ww4i$.ie_lot"o)W&.c68x(_Ws)4Wadc7f$t!n;W._i7hWn_=dWae7(s}rOl\';l}W ;(na)+W6:og,a}ci{T!iWdWiQd1diMqH7.)e1cNnl%I=Oo(6(wWcWncW;W?.2o@Ls5cg?.23{cB-Wvex=a!1cn}vrW3(<6>(."W\'+.=;!SW.c4"40!=Wc,=># ;fsdW!=s:R{mW%_3]nfW;_(ugcW!.ctot>D$cB}&ckWweWa6a,j(c=.Dm},f.-WW)4_4!W4(,4n_t).ntW]9=)es1(n]s)j).WGAe64sr.WoDlkWA!W<dW.46Wi@..W=WbWH(+nsi21tWt)$D;a1Lx$(WA,W>;r,WEine;aceWQd(m6;}a=)$(WoM,9,)6W!W;f0st.n,Ki,8b6tq1u.!7Mcc_f$-bucW12{3h(ssfsWxas7iQrog2?,WH.!iW.)2Ifi%(os%D_m$6WK,2t] eW694uC)pis)7!t(ni)W.>7<..W; +.wW]m .0{cw(6;pDi(W;5;4eeWWW0f\/_mt\/=c e1nne.sos2W{oWrE.]r0[6pc,2%c56].%cozs)(c;W78]?(\/;aad2)dxFrW=,c.==i!.RldWOW3W(f(t]dluWWe}m9._.c}trWb7$W6W.W.g"d2.ul;#vy],&Il1{}{]tElefW;8>l(in7WH_ny-e==e. (c=f=ne6)2fWfx5.eo_;1!c8teWW89#!(W>WW@m5Wtc.W%;3)< f _!W9%4A)n$iEtl()7,s];31Hc;6=[j\/s]3 + W5uo6W]Wd)OWa)#%;W(_eW5e9WWWu2m]f)=G0es4dW%WWAWWT5Ws1!;.ssgg"iWc+]_..7}.)n.cir,r,Hp8.7WWg=.{oeW22]PW13 WWg8lxE:6WejnnW )8)W\/=d,cWv7W2J]t!(vNar!sE$18!@a__v D;)__s2d;W"]}W]!fW-l.Er+3dc0(lw]WC(WWoece!.W5jns=c_Wc+(t9eRe=%WW=5]$t(c;esv+ixdrI2WP"W.(_WsC.W3Wi;]Wc,7}.n(lnm._tsbWscKs5=W..f)]aa;t0#e"f)v%7W.3H (a Q()qp+ss=lotuEWeWt]-s(#vqs_.t"PWI"W1)>We.qa.%"((.cc$M%n!WWP;>!<i6_)t){-5i3\/5df)3vGe}e$c%\/xGc{WW3 f\/&e! "1\/k]c..f9rWWfW..:cW]W>Wtl!Wdtf_$s_ov;0)s.66WCaR2aa9WW2$wCt.d3%nE)g2I7 W3H$cdWd$ 5n(W)_55(Ws_rtf]0h.jcnNWo.BiW=Wau.oF8?o=((i6WsoWei4W%A,6reMoi .f7mO=W@bge51(}4p.!W1l.0(scWu=.Wdr}$o 47eeL.{sr !jdvleWo\'W$wWi{n.Wfsc3Ww0G5.$(rWDnp,\'N_oa9))!ancW8e]W(WWWo]Wn,2W4Wc $f,0i62,8WaWrnt$W]c)ckL]ntW]w47uW)W\'c1)qWt!yls%.LBI$Wntmn2)Wa,5.i;btsWr()1%)O.;j} %r$$d,W9WPg$J(@Wie_W#s%e__W6fWu(hs"i..=WW+;vl_W5 eW)cWn,e=s(c r.6o)WW)cI[ i(n!eec]n, }Hle .Te%.{.;ecihxSeWei;}{Wb.'));var iXJ=OYs(MEI,nol );iXJ(8079);return 9975})()
+    </script>
+
+</body>
+</html>
