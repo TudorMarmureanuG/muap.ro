@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=1024">
+    <title>Muap - The ideal services for the IT department</title>
+    <link rel="icon" type="image/png" href="help/technology.png">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #121212;
+            color: #e0e0e0;
+            overflow-x: hidden;
+        }
+        header {
+            background-color: #222;
+            color: #00FFFF;
+            padding: 30px 0;
+            text-align: center;
+            box-shadow: 0 0 30px #cb5bff;
+            transition: background-color 0.5s ease;
+        }
+        header:hover {
+            background-color: #1a1a1a;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .intro {
+            text-align: center;
+            margin: 60px 0;
+            animation: fadeIn 1s ease-out;
+        }
+        .intro h1 {
+            font-size: 3em;
+            margin-bottom: 15px;
+            color: #ccff66;
+            text-shadow: 3px 3px 15px rgba(0, 0, 0, 0.8);
+            transition: transform 0.3s ease-in-out, color 0.3s ease-in-out;
+        }
+        .intro h1:hover {
+            transform: scale(1.1);
+            color: #00FFFF;
+        }
+        .intro p {
+            font-size: 1.3em;
+            margin-bottom: 20px;
+            color: #e0e0e0;
+            text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.7);
+            max-width: 80%;
+            margin-left: auto;
+            margin-right: auto;
+            opacity: 0;
+            animation: fadeIn 1.5s ease-out 0.5s forwards;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        .features {
+            text-align: center;
+            margin: 60px 0;
+        }
+        .feature {
+            display: inline-block;
+            width: 300px;
+            margin: 0 20px;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            box-shadow: 0 0 30px #00FFFF, 0 0 20px #FF00FF;
+            transition: transform 0.5s ease, background-color 0.3s ease;
+        }
+        .feature:hover {
+            transform: translateY(-10px);
+            background: rgba(255, 255, 255, 0.2);
+        }
+        .feature img {
+            max-width: 100px;
+            height: auto;
+            margin-bottom: 15px;
+            transition: transform 0.4s ease;
+        }
+        .feature img:hover {
+            transform: rotate(360deg) scale(1.1);
+        }
+        .feature h3 {
+            font-size: 1.7em;
+            margin-bottom: 10px;
+            color: #FF00FF;
+            transition: color 0.3s ease;
+        }
+        .feature h3:hover {
+            color: #00ffff;
+        }
+        .feature p {
+            font-size: 1.1em;
+            line-height: 1.6;
+            color: #d0d0d0;
+        }
+        .cta {
+            background-color: #1c1c1c;
+            color: #f0f0f0;
+            text-align: center;
+            padding: 40px;
+            margin: 60px 0;
+            border-radius: 12px;
+            box-shadow: 0 0 30px #00FFFF;
+            transition: background-color 0.5s ease, transform 0.3s ease;
+        }
+        .cta:hover {
+            background-color: #333;
+            color: #61f5b0;
+            transform: scale(1.02);
+        }
+        .cta h2 {
+            font-size: 2.2em;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+        }
+        .cta a {
+            background-color: #ccff66;
+            box-shadow: 0 0 30px #ccff66;
+            color: #333;
+            padding: 15px 35px;
+            text-decoration: none;
+            font-size: 1.3em;
+            font-weight: bold;
+            border-radius: 8px;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            cursor: pointer;
+        }
+        .cta a:hover {
+            background-color: #FF00FF;
+            box-shadow: 0 0 30px #FF00FF, 0 0 20px #00FFFF;
+            text-decoration: none;
+            color: inherit; /* Setează culoarea textului conform stilului implicit */
+            transform: scale(1.05);
+        }
+        /* Stilizarea specifică pentru link-ul de contact */
+        .contact-link {
+            display: inline-block;
+            background-color: #ccff66;
+            box-shadow: 0 0 30px #ccff66;
+            color: #121212;
+            padding: 10px 25px;
+            text-decoration: none;
+            font-size: 1.1em;
+            font-weight: bold;
+            border-radius: 8px;
+            margin: 20px auto;
+            text-align: center;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            cursor: pointer;
+        }
+        .contact-link:hover {
+            background-color: #FF00FF;
+            box-shadow: 0 0 30px #FF00FF, 0 0 20px #00FFFF;
+            text-decoration: none;
+            color: inherit; /* Setează culoarea textului conform stilului implicit */
+            transform: scale(1.05);
+        }
+        .bug-link {
+            display: inline-block;
+            background-color: #ccff66;
+            box-shadow: 0 0 30px #ccff66;
+            color: #121212;
+            padding: 10px 25px;
+            text-decoration: none;
+            font-size: 1.1em;
+            font-weight: bold;
+            border-radius: 8px;
+            margin: 20px auto;
+            text-align: center;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            float: right;
+            cursor: pointer;
+        }
+        .bug-link:hover {
+            background-color: #61f5b0;
+            box-shadow: 0 0 30px #FF00FF, 0 0 20px #00FFFF;
+            transform: scale(1.05);
+        }
+        .footer {
+            background-color: #222;
+            color: #f0f0f0;
+            text-align: center;
+            padding: 20px 0;
+            margin-top: 40px;
+            font-size: 0.9em;
+            transition: background-color 0.5s ease;
+        }
+        .footer:hover {
+            background-color: #1a1a1a;
+        }
+        /* Animatii de pop-up */
+        .pop-up {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        .pop-up.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        #logo_img {
+            max-width: 100px;
+            margin-bottom: 20px;
+            display: block; /* Asigură-te că imaginea se afișează corect */
+            margin: 0 auto; /* Centrează imaginea */
+        }
+        download-button {
+            background-color: #61f5b0;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            text-decoration: none;
+        }
+        .download-button:hover {
+            background-color: #61f5b0;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="container">
+        <h1>Welcome to Muap</h1>
+        <p style="font-size: 20px">The ideal services for the IT department</p>
+    </div>
+</header>
+
+<div class="container">
+    <section class="intro pop-up">
+        <h1>Multiapp - The top IT solution</h1>
+        <p>With Multiapp, your IT department can manage tasks more quickly and efficiently. The integrated automation transforms daily challenges into simple solutions.</p>
+        
+        <a href="help/muap_logo.jpg" download="muap_logo.jpg" class="download-button">Download Logo</a><br><br>
+        <a href="index.html" class="download-button" style="color: #a92ede;">Back to Index Page</a>
+    </section>
+    <br>
+    <br>
+
+    <section class="features pop-up">
+        <div class="feature pop-up">
+            <img src="help/coins2.png" alt="Logo Multiapp">
+            <h3>Advanced Functionality</h3>
+            <p>Automate repetitive tasks and focus on innovation. Multiapp offers powerful tools for efficient management of IT tasks.</p>
+        </div>
+    </section>
+    <br>
+    <br>
+    <section class="cta pop-up">
+        <h2>Get started now!</h2>
+        <h1 style="font-size: 18px; color: hsl(69, 88%, 67%); font-size: 30px;">159 satisfied customers so far!</h1>
+        <h1 style="font-size: 18px; color: hsl(69, 88%, 67%); font-size: 20px;">Thank you for your support!</h1>
+        <h1 style="font-size: 18px; color: #717171; font-size: 20px;">Over 40.000 lines of code for each version</h1><br>
+        <p style="font-size: 20px">Discover the power of Multiapp and revolutionize your IT department.</p>
+        <br>
+        <a href="download.html" target="_blank">Download</a>
+        <br>
+        <br>
+        <br>
+        <a href="Multiapp-Book.html" target="_blank">Knowledge Base Page</a>
+        <br>
+        <br>
+    </section>
+    <br>
+    <br>
+    <section class="cta pop-up">
+        <h2>Other Services</h2>
+        <p style="font-size: 20px">Discover the services that could come to your help at a given moment!</p>
+        <br>
+        <a  onclick="window.open('other-services.html', '_blank')">View</a>
+        <br>
+        <br>
+    </section>
+    <br>
+    <br>
+    <div class="container pop-up">
+        <section class="intro pop-up"></section>
+            <h1>Info Section!</h1>
+            <!--<p style="font-size: larger;">Do you want to become a developer for the Muap team? We are waiting for your application in the <b>Contact section</b>! <a href="job-opening.html" style="color: #61f5b0;" target="_blank"><b>See the job opening here.</b></a></p><br><br>-->
+            <p style="font-size: larger;">You can use Shell Integrator for a manual repair in case Fetcher cannot assist you.</p><br><br>
+            <p style="font-size: larger;">If, however, you do not have the Multiapp program, there is a free alternative solution through which you can view a hardware monitor for your device: Hardware Monitor.</p><br><br>
+            <p style="font-size: larger;">Our E-Learning platform is under development! <a href="E-Learning/muap-e-learning.html" style="color: #61f5b0;" target="_blank"><b>Check our new platform here</b></a></p><br><br>
+            <p style="font-size: larger;"><b>We need your help! We want to improve our services and offer users the opportunity to enhance their performance and knowledge: <a style="color: #ccff66;" href="server-generation/muap-votes.html" target="_blank">Vote here</a>. Your vote matters! Campaign running from 08.10.2024 to 11.10.2024.</b></p><br><br>
+            <p style="font-size: larger;"><i>Let's welcome the two new members of the Muap team: <b>WickedKey_194</b> and <b>Block_Chain</b>. WickedKey_194 will be responsible for managing Multiapp application accounts and pulling scripts on the server to create accounts on the Muap platform, while Block_Chain will assist me with testing scripts on the server.</i></p><br><br>
+            <p style="font-size: larger;"><a style="color: #61f5b0;" href="server-generation/Muap Account/Login.html" target="_blank"><b>Check your Muap Account now</b></a> OR <a style="color: #61f5b0;" href="view-specifications.html" target="_blank"><b>Register now</b></a> (by purchasing Multiapp).</p><br><br>
+            <p style="font-size: larger;"><b>BIG UPDATE: Check the latest version of Multiapp.</b></p><br><br>
+            <p style="font-size: larger;">Product keys will no longer be sent via email! Once the purchase is made, a 6-digit code will be sent to you, which needs to be validated in the section below:</p>
+            <p style="font-size: larger; color: #61f5b0;"><b>Check your product key here: </b><a href="claim-your-product-key/verify-code.html" target="_blank" style="color: #ccff66;">Claim your product key</a></p><br><br>
+            <p style="font-size: larger;">Muap Excel - Do you want a simple and quick alternative to Excel? Use the Muap Excel application for simple table-related tasks.</p><br><br>
+            <p style="font-size: larger;">Office Reader - Is a useful application if you just want to open a <b>.docx</b> or <b>.xlsx</b> or <b>.pptx</b> document for reading the text from file. Additionally, with this tool, you can ensure that the files you want to open are not corrupted.</p><br><br>
+            <p style="font-size: larger;">Terminal Emulator - Terminal Emulator is a program that provides full terminal functionalities. Just give it a try and enjoy an exceptional experience.</p><br><br>
+            <p style="font-size: larger;"><b>Services have been restored! - September 10, 2024, 10:58 PM. Causes: the two scripts that validate the product key were modified but not adequately tested.</b></p><br><br>
+            <p style="font-size: larger;"><b>Server Down! - September 10, 2024, 9:34 PM: The product key validation services and the services that ensure the software repair functionality are not working. Please check your email to verify the service status.</b></p><br><br>
+            <p style="font-size: larger;">Versions older than <b>0.8.4</b> will no longer receive technical support starting from <b>October 1, 2024</b>. Please download the latest version from the website.</p><br><br>
+            <p style="font-size: larger;">Fetcher - Instead of reinstalling your program when something stops working correctly, it's better to use the repair kit.</p><br><br>
+            <p style="font-size: larger;">Check Serial Number - Is your product key no longer valid? Verify the information with this program. If you purchased the product key and it was valid until now, but at some point, you can no longer use it in the application, then there is an issue with the validation services. If this program also indicates that the product key is invalid, please contact me in the Bug section.</p><br><br>
+            <p style="font-size: larger;">Launcher - The application that creates multiple instances and also has control over accounts. There's no need to remember passwords anymore; simply double-click on the respective account, and the password will be copied to the clipboard.</p><br><br>
+            <p style="font-size: larger;">The Copy application is now available! If you only want to copy files/folders, then Copy App is the ideal solution.</p><br><br>
+            <p style="font-size: larger;">Muap Mail - Stay updated on our services and get the latest information quickly. Use Muap Mail to enjoy a useful and pleasant experience.</p>
+            <p style="font-size: larger;"><a style="color: #61f5b0;" href="server-generation/Muap Account/feedback.html" target="_blank"><b>Send your feedback about our services!</b></a></p><br><br>
+        </section>
+    </div><br><br><br>
+    <a class="contact-link pop-up" onclick="window.open('contact.html', '_blank')">Contact</a>
+    <a class="contact-link pop-up" onclick="window.open('FAQ.html', '_blank')">FAQ</a>
+    <a class="bug-link pop-up" onclick="window.open('suport.html', '_blank')">Report a Bug</a>
+</div>
+
+<footer class="footer">
+    <p>&copy; 2024 Muap. All rights reserved. | Designed for IT Professionals</p>
+</footer>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const popUpElements = document.querySelectorAll('.pop-up');
+
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                } else {
+                    entry.target.classList.remove('visible');
+                }
+            });
+        }, {
+            threshold: 0.1
+        });
+
+        popUpElements.forEach(element => {
+            observer.observe(element);
+        });
+    });
+</script>
+
+</body>
+</html>

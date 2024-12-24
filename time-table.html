@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Timetable Generator</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        /* Stiluri CSS */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f4f4f9;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .title {
+            font-size: 2rem;
+            text-align: center;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 500;
+            color: #555;
+        }
+
+        input[type="text"], .btn {
+            width: 100%;
+            padding: 10px;
+            border-radius: 6px;
+            border: 1px solid #ddd;
+            font-size: 1rem;
+        }
+
+        .checkbox-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .btn {
+            background-color: #4CAF50;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            font-weight: 500;
+            margin-top: 10px;
+        }
+
+        .btn:hover {
+            background-color: #45a049;
+        }
+
+        .timetable {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        .timetable th, .timetable td {
+            padding: 12px;
+            text-align: center;
+            border: 1px solid #ddd;
+        }
+
+        .timetable th {
+            background-color: #4CAF50;
+            color: white;
+            font-weight: 500;
+        }
+
+        .timetable tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        .timetable tr:hover {
+            background-color: #ddd;
+        }
+
+        .export-btn {
+            background-color: #007BFF;
+            margin-top: 10px;
+        }
+
+        .export-btn:hover {
+            background-color: #0056b3;
+        }
+    </style>
+    <script src="xlsx-export.js"></script> <!--https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.16.9/xlsx.full.min.js-->
+</head>
+<body>
+    <div class="container">
+        <h1 class="title">Timetable Generator</h1>
+        <form id="timetable-form">
+            <div class="form-group">
+                <label for="subject">Subject:</label>
+                <input type="text" id="subject" required placeholder="Enter Subject">
+            </div>
+            <div class="form-group">
+                <label for="start-time">Start Time (HH:MM):</label>
+                <input type="text" id="start-time" required placeholder="HH:MM">
+            </div>
+            <div class="form-group">
+                <label for="end-time">End Time (HH:MM):</label>
+                <input type="text" id="end-time" required placeholder="HH:MM">
+            </div>
+            <div class="form-group">
+                <label for="days">Days:</label>
+                <div id="days" class="checkbox-group">
+                    <label><input type="checkbox" value="Monday"> Monday</label>
+                    <label><input type="checkbox" value="Tuesday"> Tuesday</label>
+                    <label><input type="checkbox" value="Wednesday"> Wednesday</label>
+                    <label><input type="checkbox" value="Thursday"> Thursday</label>
+                    <label><input type="checkbox" value="Friday"> Friday</label>
+                    <label><input type="checkbox" value="Saturday"> Saturday</label>
+                </div>
+            </div>
+            <button type="submit" class="btn">Add to Timetable</button>
+            <button type="button" class="btn export-btn" id="export-btn">Export to Excel</button>
+        </form>
+
+        <table id="timetable" class="timetable">
+            <thead>
+                <tr>
+                    <th>Time</th>
+                    <th>Monday</th>
+                    <th>Tuesday</th>
+                    <th>Wednesday</th>
+                    <th>Thursday</th>
+                    <th>Friday</th>
+                    <th>Saturday</th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </div>
+    <script>
+        document.getElementById('timetable-form').addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            const subject = document.getElementById('subject').value;
+            const startTime = document.getElementById('start-time').value;
+            const endTime = document.getElementById('end-time').value;
+            const selectedDays = getSelectedDays();
+
+            if (subject && isValidTime(startTime) && isValidTime(endTime) && selectedDays.length > 0) {
+                addTimetableEntry(subject, startTime, endTime, selectedDays);
+            } else {
+                alert("Please fill in all fields with valid times in HH:MM format.");
+            }
+
+            this.reset();
+        });
+
+        document.getElementById('export-btn').addEventListener('click', function () {
+            exportToExcel();
+        });
+
+        function isValidTime(time) {
+            const timePattern = /^([01]\d|2[0-3]):([0-5]\d)$/; // Validates HH:MM format
+            return timePattern.test(time);
+        }
+
+        function getSelectedDays() {
+            const days = document.querySelectorAll('#days input[type="checkbox"]:checked');
+            return Array.from(days).map(day => day.value);
+        }
+
+        function addTimetableEntry(subject, startTime, endTime, selectedDays) {
+            const timetableBody = document.querySelector('#timetable tbody');
+            let rowExists = false;
+            let targetRow;
+
+            Array.from(timetableBody.rows).forEach(row => {
+                const rowTime = row.cells[0].textContent;
+                if (rowTime === `${startTime} - ${endTime}`) {
+                    rowExists = true;
+                    targetRow = row;
+                }
+            });
+
+            if (rowExists) {
+                selectedDays.forEach(day => {
+                    const dayIndex = getDayIndex(day);
+                    targetRow.cells[dayIndex].innerHTML = subject;
+                });
+            } else {
+                const newRow = document.createElement('tr');
+                newRow.innerHTML = `<td>${startTime} - ${endTime}</td><td></td><td></td><td></td><td></td><td></td><td></td>`;
+
+                selectedDays.forEach(day => {
+                    const dayIndex = getDayIndex(day);
+                    newRow.cells[dayIndex].innerHTML = subject;
+                });
+
+                insertSortedRow(newRow, startTime, timetableBody);
+            }
+        }
+
+        function insertSortedRow(newRow, startTime, timetableBody) {
+            const existingRows = Array.from(timetableBody.rows);
+
+            if (existingRows.length === 0) {
+                timetableBody.appendChild(newRow);
+            } else {
+                let inserted = false;
+                for (let i = 0; i < existingRows.length; i++) {
+                    const rowTime = existingRows[i].cells[0].textContent.split(' - ')[0];
+                    if (compareTimes(startTime, rowTime)) {
+                        timetableBody.insertBefore(newRow, existingRows[i]);
+                        inserted = true;
+                        break;
+                    }
+                }
+
+                if (!inserted) {
+                    timetableBody.appendChild(newRow);
+                }
+            }
+        }
+
+        function compareTimes(time1, time2) {
+            const [hours1, minutes1] = time1.split(':').map(Number);
+            const [hours2, minutes2] = time2.split(':').map(Number);
+
+            if (hours1 < hours2) return true;
+            if (hours1 === hours2 && minutes1 < minutes2) return true;
+            return false;
+        }
+
+        function getDayIndex(day) {
+            const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+            return days.indexOf(day) + 1; // +1 because first column is for time
+        }
+
+        function exportToExcel() {
+            const workbook = XLSX.utils.book_new();
+            const worksheetData = [];
+            const tableHeaders = ['Time', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+            worksheetData.push(tableHeaders);
+
+            const rows = document.querySelectorAll('#timetable tbody tr');
+            rows.forEach(row => {
+                const rowData = Array.from(row.cells).map(cell => cell.innerText);
+                worksheetData.push(rowData);
+            });
+
+            const worksheet = XLSX.utils.aoa_to_sheet(worksheetData);
+            XLSX.utils.book_append_sheet(workbook, worksheet, 'Timetable');
+
+            // Generate file and trigger download
+            XLSX.writeFile(workbook, 'timetable.xlsx');
+        }
+    </script>
+</body>
+</html>

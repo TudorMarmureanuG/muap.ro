@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<head>
+    <link rel="stylesheet" href="sorting.css">
+    <title>
+        Muap - Sorting Visualizer
+    </title>
+    <link rel="icon" href="../help/technology.png" />
+</head>
+<body>
+    <h1>Muap Sorting Visualizer</h1>
+    <button id="newarr">New array</button>
+    <span style="font-size: large; color: white;">
+        Size:<input id="sizer" type="range" min=20 max=100 step=1 value=60>
+    </span>
+    <span style="font-size: large; color: white;">
+        Speed:<input id="speed" type="range" min=10 max=240 step=1 value=100>
+    </span>
+    <button id="bubble">Bubble Sort</button>
+    <button id="selection">Selection Sort</button>
+    <button id="insertion">Insertion Sort</button>
+    <button id="merge">Merge Sort</button>
+    <button id="quick">Quick Sort</button>
+
+    <div id="bar"></div>
+
+
+    <script src="scripts/sorting.js"></script>
+    <script src="scripts/bubble.js"></script>
+    <script src="scripts/selection.js"></script>
+    <script src="scripts/insertion.js"></script>
+    <script src="scripts/merge.js"></script>
+    <script src="scripts/quick.js"></script>
+</body>
+
+</html>

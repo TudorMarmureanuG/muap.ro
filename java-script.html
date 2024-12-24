@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=1024">
+    <title>Online JavaScript Compiler</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #121212; /* Dark background */
+            color: #e0e0e0; /* Light text color */
+            margin: 20px;
+            overflow-y: auto; /* Allow vertical scrollbar if content overflows */
+            overflow-x: hidden; /* Hide horizontal scrollbar */
+        }
+
+        .editor-container {
+            display: flex;
+            align-items: flex-start;
+            position: relative;
+            border: 1px solid #333; /* Border around the editor */
+            border-radius: 5px;
+            background-color: #1e1e1e; /* Dark gray background */
+            box-shadow: 0 0 30px #00FFFF, 0 0 20px #FF00FF;
+        }
+
+        .line-numbers {
+            background-color: #2d2d2d; /* Slightly lighter dark gray */
+            color: #00ffe5; /* Light gray for line numbers */
+            border-radius: 5px 0 0 5px;
+            padding: 10px;
+            text-align: right;
+            user-select: none; /* Prevent selection of line numbers */
+            white-space: nowrap;
+            overflow: hidden;
+            width: 50px; /* Fixed width for line numbers */
+            font-size: 14px; /* Font size for line numbers */
+            line-height: 1.5; /* Line height for line numbers */
+        }
+
+        textarea {
+            width: calc(100% - 50px); /* Adjusted width to fit container */
+            background-color: #1e1e1e; /* Dark gray background */
+            color: #e0e0e0; /* Light text color */
+            border: none; /* Remove border */
+            border-radius: 0 5px 5px 0;
+            padding: 10px;
+            box-shadow: none;
+            outline: none;
+            resize: none; /* Prevent resizing */
+            overflow-x: auto; /* Allow horizontal scrollbar */
+            overflow-y: hidden; /* Hide vertical scrollbar */
+            white-space: pre; /* Preserve white spaces and line breaks */
+            margin: 0; /* Reset margin */
+            position: relative;
+            z-index: 1;
+            font-size: 14px; /* Font size for code */
+            line-height: 1.5; /* Line height for code */
+        }
+
+        button {
+            background: linear-gradient(to right, #00ffe5, #FF00FF);
+            color: #000000;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.5);
+            transition: background 0.3s ease;
+        }
+
+        button:hover {
+            background: linear-gradient(to right, #FF00FF, #00ffe5);
+        }
+
+        #output {
+            margin-top: 20px;
+            padding: 20px;
+            background-color: #1e1e1e; /* Dark gray background */
+            color: #e0e0e0; /* Light text color */
+            border: 1px solid #333; /* Border around output */
+            border-radius: 5px;
+            box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.5);
+            min-height: 100px;
+            white-space: pre-wrap; /* Preserve spaces and new lines */
+            box-shadow: 0 0 30px #cb5bff;
+        }
+
+        .error {
+            color: #ff6f6f; /* Light red for errors */
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+    <h3 style="color: #e0e0e0;">JavaScript Code</h3>
+    <div class="editor-container">
+        <div id="line-numbers" class="line-numbers"></div>
+        <textarea id="zone" rows="6" placeholder="Write your JavaScript code here...">console.log("Hello World!");</textarea>
+    </div>
+    <br>
+    <button id="mybutton">Run Code</button><br><br><br>
+
+    <h3>Output</h3>
+    <div id="output">Output will appear here:</div>
+
+    <script>
+        function updateEditor() {
+            var textarea = document.getElementById('zone');
+            var lineNumbers = document.getElementById('line-numbers');
+            var lines = textarea.value.split('\n').length;
+
+            // Update line numbers
+            var lineNumberText = '';
+            for (var i = 1; i <= lines; i++) {
+                lineNumberText += i + '<br>';
+            }
+            lineNumbers.innerHTML = lineNumberText;
+
+            // Adjust the height of the line numbers div and textarea to match content
+            lineNumbers.style.height = textarea.scrollHeight + 'px';
+            textarea.style.height = 'auto'; // Reset height to auto for accurate calculation
+            textarea.style.height = textarea.scrollHeight + 'px'; // Set new height based on content
+        }
+
+        // Function to handle TAB key press
+        function handleTab(event) {
+            var textarea = document.getElementById('zone');
+            if (event.key === 'Tab') {
+                event.preventDefault(); // Prevent default tab behavior
+                var start = textarea.selectionStart;
+                var end = textarea.selectionEnd;
+
+                // Set textarea value to the new value with 4 spaces inserted
+                textarea.value = textarea.value.substring(0, start) + '    ' + textarea.value.substring(end);
+
+                // Move the caret to the new position
+                textarea.selectionStart = textarea.selectionEnd = start + 4;
+                updateEditor(); // Update line numbers after insertion
+            }
+        }
+        
+        document.getElementById('zone').addEventListener('keydown', handleTab);
+        
+        // Function to execute JavaScript code
+        function executeCode() {
+            var code = document.getElementById('zone').value;  // Get the code from textarea
+            var output = document.getElementById('output');
+            output.innerHTML = ''; // Clear previous output
+
+            try {
+                // Redirect console.log to display in the output div
+                var oldConsoleLog = console.log;
+                console.log = function(message) {
+                    output.innerHTML += message + "<br>";
+                };
+
+                // Execute the dynamic code
+                eval(code);  
+
+                // Restore original console.log
+                console.log = oldConsoleLog;
+            } catch (e) {
+                // Display error with specific styling
+                output.innerHTML = `<span class='error'>Error! ${e}</span>`;
+            }
+        }
+
+        document.getElementById('mybutton').addEventListener('click', executeCode);
+
+        // Initial call to set line numbers when page loads
+        updateEditor();
+
+        // Add event listener to update line numbers on input change
+        document.getElementById('zone').addEventListener('input', updateEditor);
+    </script>
+</body>
+</html>

@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1024">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #121212;
+  font-family: 'Roboto', sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  margin: 0;
+}
+
+canvas {
+  border: 2px solid #222;
+  background-color: white;
+}
+
+.toolbox {
+  background-color: #222;
+  border: 1px solid #222;
+  display: flex;
+  width: 804px;
+  padding: 1rem;
+}
+
+.toolbox > * {
+  background-color: #fff;
+  border: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  height: 50px;
+  width: 50px;
+  margin: 0.25rem;
+  padding: 0.25rem;
+  cursor: pointer;
+}
+
+.toolbox > *:last-child {
+  margin-left: auto;
+}
+
+.color-choice {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: 2px solid #000;
+  cursor: pointer;
+}
+
+#custom-color {
+  width: 100px;
+}
+    </style>
+    <title>Whiteboard</title>
+  </head>
+  <body>
+    <canvas id="canvas" width="800" height="700"></canvas>
+    <div class="toolbox">
+      <button id="decrease">-</button>
+      <span id="size">10</span>
+      <button id="increase">+</button>
+
+      <!-- Culoare predefinită -->
+      <div class="color-choice" id="red" style="background-color: red;"></div>
+      <div class="color-choice" id="blue" style="background-color: blue;"></div>
+      <div class="color-choice" id="green" style="background-color: green;"></div>
+      <div class="color-choice" id="yellow" style="background-color: yellow;"></div>
+
+      <!-- Culoare personalizată -->
+      <input type="color" id="custom-color">
+      <button id="clear">X</button>
+    </div>
+
+    <script>
+        const canvas = document.getElementById('canvas');
+const increaseBtn = document.getElementById('increase');
+const decreaseBtn = document.getElementById('decrease');
+const sizeEL = document.getElementById('size');
+const clearEl = document.getElementById('clear');
+const customColorEl = document.getElementById('custom-color');
+
+const ctx = canvas.getContext('2d');
+
+let size = 10;
+let isPressed = false;
+let color = 'black';
+let x, y;
+
+canvas.addEventListener('mousedown', (e) => {
+    isPressed = true;
+    x = e.offsetX;
+    y = e.offsetY;
+});
+
+document.addEventListener('mouseup', () => {
+    isPressed = false;
+    x = undefined;
+    y = undefined;
+});
+
+canvas.addEventListener('mousemove', (e) => {
+    if(isPressed) {
+        const x2 = e.offsetX;
+        const y2 = e.offsetY;
+        drawCircle(x2, y2);
+        drawLine(x, y, x2, y2);
+        x = x2;
+        y = y2;
+    }
+});
+
+function drawCircle(x, y) {
+    ctx.beginPath();
+    ctx.arc(x, y, size, 0, Math.PI * 2);
+    ctx.fillStyle = color;
+    ctx.fill();
+}
+
+function drawLine(x1, y1, x2, y2) {
+    ctx.beginPath();
+    ctx.moveTo(x1, y1);
+    ctx.lineTo(x2, y2);
+    ctx.strokeStyle = color;
+    ctx.lineWidth = size * 2;
+    ctx.stroke();
+}
+
+function updateSizeOnScreen() {
+    sizeEL.innerText = size;
+}
+
+increaseBtn.addEventListener('click', () => {
+    size += 5;
+    if(size > 50) size = 50;
+    updateSizeOnScreen();
+});
+
+decreaseBtn.addEventListener('click', () => {
+    size -= 5;
+    if(size < 5) size = 5;
+    updateSizeOnScreen();
+});
+
+// Schimbare culoare
+document.getElementById('red').addEventListener('click', () => color = 'red');
+document.getElementById('blue').addEventListener('click', () => color = 'blue');
+document.getElementById('green').addEventListener('click', () => color = 'green');
+document.getElementById('yellow').addEventListener('click', () => color = 'yellow');
+
+// Culoare personalizată
+customColorEl.addEventListener('change', (e) => color = e.target.value);
+
+clearEl.addEventListener('click', () => ctx.clearRect(0, 0, canvas.width, canvas.height));
+    </script>
+  </body>
+</html>

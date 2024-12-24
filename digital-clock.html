@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=1024">
+    <title>Digital Clock</title>
+    <style>
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+.container {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #2f363e;
+}
+
+#time {
+  display: flex;
+  gap: 100px;
+  color: #fff;
+}
+
+#time .circle {
+  position: relative;
+  width: 300px;
+  height: 300px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#time .circle svg {
+  width: 100%;
+  height: 100%;
+  transform: rotate(270deg);
+}
+
+#time .circle svg circle {
+  width: 100%;
+  height: 100%;
+  fill: transparent;
+  stroke: #191919;
+  stroke-width: 8px;
+  transform: translate(0px, 0px);
+}
+
+#time .circle svg circle:nth-child(2) {
+  stroke: var(--color);
+  stroke-dasharray: 880;
+}
+
+#time div {
+  position: absolute;
+  text-align: center;
+  font-size: 2.5rem;
+  font-weight: 500;
+}
+
+#time div span {
+  position: absolute;
+  transform: translate(-50%, 0px);
+  font-size: 0.8rem;
+  font-weight: 300;
+  letter-spacing: 0.1rem;
+  text-transform: uppercase;
+}
+
+#time .ap {
+  position: relative;
+  font-size: 2rem;
+  transform: translate(-40px);
+}
+
+.dots {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10;
+}
+
+.dots::before {
+  content: '';
+  position: absolute;
+  top: -3px;
+  width: 25px;
+  height: 25px;
+  background: var(--color);
+  border-radius: 50%;
+  box-shadow: 0 0 20px var(--color), 0 0 60px var(--color);
+}
+</style>
+</head>
+<body>
+  <div class="container">
+    <div id="time">
+      <div class="circle" style="--color: #ff2972">
+        <div class="dots h_dot"></div>
+        <svg>
+          <circle cx="150" cy="150" r="140"></circle>
+          <circle cx="150" cy="150" r="140" id="hh"></circle>
+        </svg>
+        <div id="hours">00</div>
+      </div>
+      <div class="circle" style="--color: #fee800">
+        <div class="dots m_dot"></div>
+        <svg>
+          <circle cx="150" cy="150" r="140"></circle>
+          <circle cx="150" cy="150" r="140" id="mm"></circle>
+        </svg>
+        <div id="minutes">00</div>
+      </div>
+      <div class="circle" style="--color: #04fc43">
+        <div class="dots s_dot"></div>
+        <svg>
+          <circle cx="150" cy="150" r="140"></circle>
+          <circle cx="150" cy="150" r="140" id="ss"></circle>
+        </svg>
+        <div id="seconds">00</div>
+      </div>
+      <div class="ap">
+        <div id="ampm">AM</div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    setInterval(() => {
+      // get time indicator elements
+      let hours = document.getElementById('hours');
+      let minutes = document.getElementById('minutes');
+      let secondes = document.getElementById('seconds');
+      let ampm = document.getElementById('ampm');
+
+      // digits time indicator
+      let hh = document.getElementById('hh');
+      let mm = document.getElementById('mm');
+      let ss = document.getElementById('ss');
+
+      // dot time indicator
+      let dotH = document.querySelector('.h_dot');
+      let dotM = document.querySelector('.m_dot');
+      let dotS = document.querySelector('.s_dot');
+
+      // get current time
+      let h = new Date().getHours();
+      let m = new Date().getMinutes();
+      let s = new Date().getSeconds();
+      let ap = h >= 12 ? 'PM' : 'AM';
+
+      // convert to 12 hour format
+      if (h > 12) {
+        h = h - 12;
+      }
+
+      // add 0 before single digit
+      h = h < 10 ? '0' + h : h;
+      m = m < 10 ? '0' + m : m;
+      s = s < 10 ? '0' + s : s;
+
+      // set time and label
+      hours.innerHTML = h + ' Hours';
+      minutes.innerHTML = m + ' Minutes';
+      secondes.innerHTML = s + ' Seconds';
+      ampm.innerHTML = ap;
+
+      // set time circular indicator
+      hh.style.strokeDashoffset = 880 - (880 * h) / 12;
+      mm.style.strokeDashoffset = 880 - (880 * m) / 60;
+      ss.style.strokeDashoffset = 880 - (880 * s) / 60;
+
+      // set dot time position indicator
+      dotH.style.transform = `rotate(${h * 30}deg)`;
+      dotM.style.transform = `rotate(${m * 6}deg)`;
+      dotS.style.transform = `rotate(${s * 6}deg)`;
+    }, 1000);
+  </script>
+</body>
+</html>

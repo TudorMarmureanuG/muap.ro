@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Countdown Timer</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap">
+    <style>
+        * {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: #121212;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.countdown-container {
+  position: relative;
+  width: 200px;
+  height: 200px;
+  margin-bottom: 20px;
+}
+
+.countdown-svg {
+  width: 100%;
+  height: 100%;
+  transform: rotate(-90deg);
+}
+
+.countdown-circle {
+  fill: none;
+  stroke: url(#warm-gradient);
+  stroke-width: 10;
+  stroke-dasharray: 282.743;
+  stroke-dashoffset: 282.743;
+  stroke-linecap: round;
+  transition: stroke-dashoffset 1s linear;
+}
+
+.countdown-text {
+  font-family: 'Orbitron', Helvetica, sans-serif;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 28px;
+  font-weight: bold;
+  color: #fff;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.controls {
+  text-align: center;
+  width: 100%;
+}
+
+input[type="number"] {
+  padding: 10px;
+  font-size: 18px;
+  font-family: 'Orbitron', Helvetica, sans-serif;
+  width: 80%;
+  border: 1px solid #fff;
+  margin-bottom: 15px;
+  outline: none;
+  text-align: center;
+  background-color: transparent;
+  color: white;
+}
+
+input[type="number"]:focus {
+  border-color: aqua;
+}
+
+input[type="number"]::placeholder {
+  color: rgb(190, 189, 189);
+  opacity: 1;
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.buttons, button {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+button {
+  position: relative;
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.875rem;
+  background-color: transparent;
+  border: 1px solid #fff;
+  color: #fff;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  transition: color 0.3s;
+}
+
+button:hover {
+  color: black;
+}
+
+button lord-icon{
+  width:20px;
+  height:20px;
+}
+
+button::before {
+  content: '';
+  position: absolute;
+  display: block;
+  background-color: #fff;
+  top: -1px;
+  bottom: -1px;
+  left: -1px;
+  right: 100%;
+  z-index: -10;
+  transition: right 0.3s;
+}
+
+button:hover::before {
+  right: -1px;
+}
+
+button:active {
+  transform: translateY(2px);
+}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="countdown-container">
+            <svg class="countdown-svg" viewBox="0 0 100 100">
+                <defs>
+                    <linearGradient id="warm-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" style="stop-color:#85FFBD"></stop>
+                        <stop offset="100%" style="stop-color:#FFFB7D"></stop>
+                    </linearGradient>
+                </defs>
+                <circle class="countdown-circle" cx="50" cy="50" r="45"></circle>
+            </svg>
+            <div class="countdown-text" id="countdown">00:00</div>
+        </div>
+        <div class="controls">
+            <input type="number" id="timeInput" placeholder="Enter time in seconds" min="1">
+            <div class="buttons">
+                <button id="startBtn"
+                    trigger="hover"
+                    colors="primary:#ffffff">
+                Start</button>
+                <button id="pauseBtn"
+                    trigger="hover"
+                    colors="primary:#ffffff">
+                Pause</button>
+                <button id="resetBtn"
+                    trigger="hover"
+                    colors="primary:#ffffff">
+                Reset</button>
+            </div>
+        </div>
+    </div>
+    <script>
+        const startBtn = document.getElementById('startBtn');
+const pauseBtn = document.getElementById('pauseBtn');
+const resetBtn = document.getElementById('resetBtn');
+const timeInput = document.getElementById('timeInput');
+const countdownText = document.getElementById('countdown');
+const countdownCircle = document.querySelector('.countdown-circle');
+
+let timer;
+let totalTime;
+let remainingTime;
+let isPaused = false;
+
+document.querySelectorAll('.buttons button').forEach(button => {
+    const icon = button.querySelector('lord-icon');
+    button.addEventListener('mouseover', () => {
+        icon.setAttribute('colors', 'primary:#000000');
+    });
+
+    button.addEventListener('mouseout', () => {
+        icon.setAttribute('colors', 'primary:#ffffff');
+    });
+});
+
+function formatTime(seconds) {
+    const mins = Math.floor(seconds / 60);
+    const secs = seconds % 60;
+    return `${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
+}
+
+function updateTimer() {
+    if (remainingTime <= 0) {
+        clearInterval(timer);
+        countdownCircle.style.strokeDashoffset = '0';
+        countdownText.textContent = '00:00';
+        return;
+    }
+
+    remainingTime--;
+    countdownText.textContent = formatTime(remainingTime);
+
+    const dashOffset = (282.743 * (remainingTime / totalTime)).toFixed(3);
+    countdownCircle.style.strokeDashoffset = dashOffset;
+}
+
+startBtn.addEventListener('click', () => {
+    if (isPaused && timer) {
+        isPaused = false;
+        timer = setInterval(updateTimer, 1000);
+        return;
+    }
+
+    clearInterval(timer);
+    totalTime = parseInt(timeInput.value) || 0;
+    remainingTime = totalTime;
+
+    if (totalTime > 0) {
+        countdownText.textContent = formatTime(totalTime);
+        countdownCircle.style.strokeDashoffset = 282.743;
+        timer = setInterval(updateTimer, 1000);
+    }
+});
+
+pauseBtn.addEventListener('click', () => {
+    if (!isPaused) {
+        clearInterval(timer);
+        isPaused = true;
+    }
+});
+
+resetBtn.addEventListener('click', () => {
+    clearInterval(timer);
+    countdownText.textContent = '00:00';
+    countdownCircle.style.strokeDashoffset = 282.743;
+    isPaused = false;
+});
+    </script>
+</body>
+</html>

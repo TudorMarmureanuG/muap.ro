@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>ToDo List</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1024">
+    <style>
+      body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background: linear-gradient(to right, #00ffff, #ff00ff);    
+        margin: 0;
+      }
+
+      .todo-list {
+        display: flex;
+        flex-direction: column;
+        padding: 0 20px 10px 20px;
+        background: #162740;
+        border: transparent;
+        box-sizing: border-box;
+        width: 100%; /* Full width of its container */
+        max-width: 400px; /* Fixed width for the todo list */
+      }
+
+      #task-list {
+        max-height: 400px; /* Set a maximum height for the task list */
+        overflow-y: auto; /* Add a vertical scrollbar if content exceeds the height */
+      }
+
+      .todo-list .todo-list__title {
+        padding: 3px 6px;
+        color: #ccff66;
+        background-color: #264456;
+        text-align: center;
+        margin: 0;
+      }
+
+      .todo-list .todo-list__label {
+        display: flex;
+        align-items: flex-start; /* Align items to the start to handle multiline */
+        margin: 10px 0;
+        font-size: 18px;
+        font-family: Lato, sans-serif;
+        color: aqua;
+        cursor: pointer;
+        position: relative;
+        width: 100%; /* Ensure label takes up full width */
+        box-sizing: border-box; /* Include padding and borders in width */
+        overflow: hidden; /* Hide overflow to prevent expanding beyond container */
+      }
+
+      .todo-list .todo-list__label input[type="checkbox"] {
+        opacity: 0;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+      }
+
+      .todo-list .todo-list__label input[type="checkbox"] + .check {
+        position: relative;
+        width: 25px;
+        height: 25px;
+        border: 2px solid #ccff66;
+        margin-right: 10px;
+        transition: 0.2s;
+      }
+
+      .todo-list .todo-list__label input[type="checkbox"]:checked + .check {
+        width: 25px;
+        height: 15px;
+        border-top: transparent;
+        border-right: transparent;
+        transform: rotate(-45deg);
+      }
+
+      .todo-list .todo-list__label input[type="checkbox"] ~ span {
+        flex: 1;
+        display: inline-block;
+        word-wrap: break-word; /* Wrap long text */
+        overflow-wrap: break-word; /* Additional support for breaking long words */
+        word-break: break-all; /* Break long words to prevent overflow */
+        white-space: normal; /* Allow text to wrap */
+        overflow: hidden; /* Hide overflow text */
+      }
+
+      .todo-list .todo-list__label input[type="checkbox"] ~ span::before {
+        position: absolute;
+        content: "";
+        top: 50%;
+        left: 0;
+        width: 0;
+        height: 1px;
+        background: #f1faee;
+        transition: width 0.5s;
+        transform: translateY(-50%);
+      }
+
+      .todo-list .todo-list__label input[type="checkbox"]:checked ~ span::before {
+        width: 100%; /* Line appears only over the text */
+      }
+
+      .todo-list .todo-list__label input[type="checkbox"]:checked ~ span {
+        color: #858585;
+      }
+
+      .add-task {
+        display: flex;
+        margin-top: 20px;
+        width: 100%;
+        box-sizing: border-box;
+      }
+
+      .add-task input {
+        flex: 1;
+        padding: 10px;
+        font-size: 16px;
+        border: none;
+        border-radius: 5px;
+        margin-right: 10px;
+      }
+
+      .add-task button {
+        padding: 10px 20px;
+        background-color: #264456;
+        color: #f1faee;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+
+      .add-task button:hover {
+        background-color: #ff00ff;
+      }
+
+      fieldset {
+        width: 100%;
+        max-width: 400px; /* Fixed width for the form */
+        box-sizing: border-box; /* Include padding and borders in width */
+        border: none; /* Remove default border */
+      }
+    </style>
+  </head>
+  <body>
+    <form onsubmit="event.preventDefault();">
+      <fieldset class="todo-list">
+        <legend class="todo-list__title">Todo List</legend>
+        <div id="task-list"></div>
+        <div class="add-task">
+          <input type="text" id="new-task" placeholder="Enter a new task" />
+          <button type="button" onclick="addTask()">Add Task</button>
+        </div>
+      </fieldset>
+    </form>
+
+    <script>
+      document.getElementById("new-task").addEventListener("keypress", function (event) {
+        if (event.key === "Enter") {
+          event.preventDefault();
+          addTask();
+        }
+      });
+
+      function scrollToBottom() {
+        const taskList = document.getElementById("task-list");
+        taskList.scrollTop = taskList.scrollHeight;
+      }
+
+      function addTask() {
+        const taskText = document.getElementById("new-task").value;
+        if (taskText.trim() === "") return;
+
+        const taskList = document.getElementById("task-list");
+
+        const label = document.createElement("label");
+        label.classList.add("todo-list__label");
+
+        const checkbox = document.createElement("input");
+        checkbox.type = "checkbox";
+
+        const checkMark = document.createElement("i");
+        checkMark.classList.add("check");
+
+        const span = document.createElement("span");
+        span.textContent = taskText;
+
+        label.appendChild(checkbox);
+        label.appendChild(checkMark);
+        label.appendChild(span);
+
+        taskList.appendChild(label);
+
+        document.getElementById("new-task").value = ""; // Clear input field
+
+        scrollToBottom(); // Scroll to the bottom of the task list
+      }
+    </script>
+  </body>
+</html>

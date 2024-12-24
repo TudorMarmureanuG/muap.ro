@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1024">
+    <title>Muap - Support Page</title>
+    <link rel="icon" type="image/png" href="help/technology.png">
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            transition: background-color 0.5s ease, transform 0.3s ease;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #121212;
+            color: #e0e0e0;
+            overflow-x: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+        header {
+            background-color: #222;
+            color: #00FFFF;
+            padding: 30px 0;
+            text-align: center;
+            box-shadow: 0 0 30px #cb5bff;
+            transition: background-color 0.5s ease;
+            position: relative;
+        }
+
+        header:hover {
+            background-color: #1a1a1a;
+        }
+
+        .add {
+            position: absolute;
+            top: 100%;
+            right: 1rem;
+            background-color: #ccff66;
+            box-shadow: 0 0 30px #ccff66;
+            color: #121212;
+            border: none;
+            border-radius: 3px;
+            padding: 0.5rem 1rem;
+            cursor: pointer;
+            margin-top: 10px;
+            padding: 10px 25px;
+            text-decoration: none;
+            font-size: 1.1em;
+            font-weight: bold;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .add:hover {
+            background-color: #61f5b0;
+            box-shadow: 0 0 30px #00FFFF, 0 0 20px #FF00FF;
+            transform: scale(1.05);
+        }
+
+        .main-content {
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+        }
+
+        .notes-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            padding: 20px;
+        }
+
+        .note {
+            background-color: #000;
+            box-shadow: 0 0 30px #00FFFF, 0 0 20px #FF00FF;
+            height: 450px;
+            width: 400px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            overflow-y: auto;
+            overflow-x: hidden;
+            margin: 0; /* Elimină marginile externe ale notelor pentru a le aranja corect */
+        }
+
+        .note .tools {
+            background-color: #444;
+            display: flex;
+            justify-content: space-between;
+            padding: 0.2rem;
+            align-items: center;
+            min-height: 40px;
+        }
+
+        .note .title-input {
+            flex-grow: 1;
+            margin-right: 5px;
+            font-size: 1rem;
+            font-weight: bold;
+            border: none;
+            padding: 5px;
+            background-color: #444;
+            color: #00FFFF;
+        }
+
+        .note .buttons {
+            display: flex;
+            gap: 5px;
+        }
+
+        .note .buttons button {
+            background-color: #444;
+            border: none;
+            color: #FF00FF;
+            cursor: pointer;
+            font-size: 1rem;
+            padding: 5px;
+        }
+
+        .note textarea {
+            outline: none;
+            font-family: inherit;
+            font-size: 1.2rem;
+            border: none;
+            width: 100%;
+            height: calc(100% - 40px);
+            padding: 10px;
+            resize: none;
+            box-sizing: border-box;
+            background-color: #222;
+            color: #ccff66;
+        }
+
+        .note .main {
+            padding: 10px;
+            box-sizing: border-box;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        /* Iconițe */
+        .icon-edit::before {
+            content: '\270E';
+        }
+
+        .icon-trash::before {
+            content: '\1F5D1';
+        }
+
+        .icon-plus::before {
+            content: '\2795';
+        }
+
+        .icon-send::before {
+            content: '\2709';
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .intro {
+            text-align: center;
+            margin: 60px 0;
+            animation: fadeIn 1s ease-out;
+        }
+        .intro h1 {
+            font-size: 3em;
+            margin-bottom: 15px;
+            color: #ccff66;
+            text-shadow: 3px 3px 15px rgba(0, 0, 0, 0.8);
+            transition: transform 0.3s ease-in-out, color 0.3s ease-in-out;
+        }
+        .intro h1:hover {
+            transform: scale(1.1);
+            color: #00FFFF;
+        }
+        .intro p {
+            font-size: 1.3em;
+            margin-bottom: 20px;
+            color: #e0e0e0;
+            text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.7);
+            max-width: 80%;
+            margin-left: auto;
+            margin-right: auto;
+            opacity: 0;
+            animation: fadeIn 1.5s ease-out 0.5s forwards;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .footer {
+            background-color: #222;
+            color: #f0f0f0;
+            text-align: center;
+            padding: 20px 0;
+            font-size: 0.9em;
+            transition: background-color 0.5s ease;
+        }
+
+        .footer:hover {
+            background-color: #1a1a1a;
+        }
+
+        /* CSS pentru notificare */
+        .notification {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #444;
+            color: #fff;
+            padding: 15px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            display: none;
+            z-index: 1000;
+            transition: opacity 0.5s ease-in-out;
+        }
+
+        .notification .close {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            background: none;
+            border: none;
+            color: #fff;
+            font-size: 18px;
+            cursor: pointer;
+        }
+    </style>
+    <title>Multiapp - Bug Report</title>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Multiapp - Bug Report</h1>
+            <p style="font-size: 20px">Encountering problems, have questions, or found a bug? Report your issues here to help improve the application!</p>
+        </div>
+        <button class="add" id="add"><span class="icon-plus"></span> Add note</button>
+    </header>
+
+    <main class="main-content">
+        <div class="notes-container">
+        </div>
+    </main>
+
+    <footer class="footer">
+        <p>&copy; 2024 Muap. All rights reserved. | Designed for IT Professionals</p>
+    </footer>
+
+    <!-- Notificare -->
+    <div class="notification" id="notification">
+        <button class="close" id="notification-close">&times;</button>
+        <p>Save as .txt is set for systems without a default mail app.</p>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const notification = document.getElementById("notification");
+            const notificationCloseButton = document.getElementById("notification-close");
+
+            let notificationShown = false; // Flag pentru a controla afișarea notificării
+
+            const showNotification = () => {
+                if (!notificationShown) {
+                    setTimeout(() => {
+                        notification.style.display = "block";
+                        notification.style.opacity = 1;
+                        notificationShown = true; // Setează flagul după prima afișare
+                    }, 2000); // 2000 ms = 2 secunde
+                }
+            };
+
+            notificationCloseButton.addEventListener("click", () => {
+                notification.style.opacity = 0;
+                setTimeout(() => {
+                    notification.style.display = "none";
+                }, 500); // Așteaptă animarea de închidere
+            });
+
+            const addButton = document.getElementById("add");
+            const notes = JSON.parse(localStorage.getItem("notes")) || [];
+
+            const updateLocalStorage = () => {
+                const notesData = document.querySelectorAll(".note");
+                const notes = [];
+                notesData.forEach((note) => {
+                    const title = note.querySelector(".title-input").value;
+                    const content = note.querySelector("textarea").value;
+                    notes.push({ title, content });
+                });
+                localStorage.setItem("notes", JSON.stringify(notes));
+            };
+
+            const addNewNote = (noteData = { title: "", content: "" }) => {
+                const note = document.createElement("div");
+                note.classList.add("note");
+                note.innerHTML = `
+                    <div class="tools">
+                        <input type="text" class="title-input" placeholder="Title" value="${noteData.title}">
+                        <div class="buttons">
+                            <button class="send"><span class="icon-send"></span></button>
+                            <button class="edit"><span class="icon-edit"></span></button>
+                            <button class="delete"><span class="icon-trash"></span></button>
+                            <button class="save-txt"><span class="icon-save"></span> Save as .txt</button>
+                        </div>
+                    </div>
+                    <textarea class="${noteData.content ? "hidden" : ""}"></textarea>
+                    <div class="main ${noteData.content ? "" : "hidden"}">${noteData.content}</div>`;
+
+                const editButton = note.querySelector(".edit");
+                const deleteButton = note.querySelector(".delete");
+                const sendButton = note.querySelector(".send");
+                const saveTxtButton = note.querySelector(".save-txt");
+                const main = note.querySelector(".main");
+                const textArea = note.querySelector("textarea");
+                const titleInput = note.querySelector(".title-input");
+
+                textArea.value = noteData.content;
+
+                deleteButton.addEventListener("click", () => {
+                    note.remove();
+                    updateLocalStorage();
+                });
+
+                editButton.addEventListener("click", () => {
+                    main.classList.toggle("hidden");
+                    textArea.classList.toggle("hidden");
+                    showNotification(); // Arată notificarea când se deschide o notă
+                });
+
+                sendButton.addEventListener("click", () => {
+                    const subject = encodeURIComponent(titleInput.value);
+                    const body = encodeURIComponent(textArea.value);
+                    window.location.href = `mailto:suport@muap.ro?subject=${subject}&body=${body}`;
+                });
+
+                saveTxtButton.addEventListener("click", () => {
+                    const title = titleInput.value || "Untitled";
+                    const content = textArea.value;
+                    const recipient = "suport@muap.ro";
+
+                    const textContent = `To: ${recipient}\nTitle: ${title}\nContent:\n${content}`;
+
+                    const blob = new Blob([textContent], { type: 'text/plain' });
+                    const url = URL.createObjectURL(blob);
+                    const a = document.createElement("a");
+                    a.href = url;
+                    a.download = `${title}.txt`;
+                    a.click();
+                    URL.revokeObjectURL(url);
+                });
+
+                textArea.addEventListener("input", (e) => {
+                    const { value } = e.target;
+                    main.textContent = value;
+                    updateLocalStorage();
+                });
+
+                titleInput.addEventListener("input", () => {
+                    updateLocalStorage();
+                });
+
+                document.querySelector(".notes-container").appendChild(note);
+            };
+
+            addButton.addEventListener("click", () => {
+                addNewNote();
+                showNotification(); // Arată notificarea la prima adăugare a unei note
+            });
+
+            if (notes.length) {
+                notes.forEach((note) => addNewNote(note));
+            }
+        });
+    </script>
+</body>
+</html>

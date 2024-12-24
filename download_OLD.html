@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multiapp - Download</title>
+	<link rel="icon" type="image/png" href="help/technology.png">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background-image: url('help/backgr.jpg'); /* Calea către imagine */
+            background-size: cover; /* Face ca imaginea să acopere întreaga fereastră */
+            background-repeat: no-repeat; /* Evită repetarea imaginii */
+            background-position: center center; /* Poziționează imaginea în centrul paginii */
+            background-attachment: fixed; /* Fixează imaginea de fundal, astfel încât să nu se miște la derulare */
+            margin: 0; /* Elimină marginile implicite ale corpului paginii */
+            opacity: 0;
+            animation: fadeIn 2s ease-in-out forwards;
+        }
+        @keyframes fadeIn {
+    to {
+        opacity: 1;
+    }
+}
+
+        h1 {
+            text-align: center;
+            color: #ccff66; /* titluri culoare #ccff66 */
+            font-weight: bold;
+            animation: bounce 3s ease infinite;
+        }
+        
+        h3 {
+            text-align: center;
+            color: #ccff66; /* titluri culoare #ccff66 */
+        }
+        
+        h2 {
+            text-align: center;
+            color: #ccff66; /* titluri culoare #ccff66 */
+        }
+
+        .content {
+            margin: 0 auto;
+            max-width: 800px;
+        }
+
+        .image-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin: 20px 0;
+        }
+
+        .image-container img {
+            margin: 10px;
+            max-width: 100%;
+            height: auto;
+            border: 1px solid #ccc;
+            box-shadow: 2px 2px 12px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+
+        .image-container img:hover {
+            transform: scale(1.05);
+            box-shadow: 2px 2px 20px rgba(0,0,0,0.2);
+        }
+
+        p {
+            text-align: left;
+            transition: all 0.3s ease;
+            color: #fff; /* text alb */
+        }
+
+        h4 {
+            text-align: left;
+            color: #ccff66; /* titluri culoare #ccff66 */
+        }
+
+        .bold-black {
+            color: black;
+            font-weight: bold;
+        }
+
+        .bold-red {
+            color: red;
+            font-weight: bold;
+        }
+
+        .bold-green {
+            color: #66ff66;
+            font-weight: bold;
+        }
+
+        .fog {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 140px;
+            background: linear-gradient(to bottom, rgba(204, 204, 204, 0), rgba(204, 204, 204, 0.512));
+            pointer-events: none;
+        }
+
+        .pricing-table {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            margin: 20px 0;
+        }
+
+        .pricing-card {
+            background-color: #333333;
+            color: #ffffff;
+            border: 1px solid #ccff66;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 10px;
+            max-width: 300px;
+            text-align: center;
+            box-shadow: 2px 2px 12px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .pricing-card:hover {
+            transform: scale(1.05);
+            box-shadow: 2px 2px 20px rgba(0,0,0,0.2);
+        }
+
+        .pricing-card h3 {
+            margin-top: 0;
+            color: #ccff66;
+        }
+
+        .pricing-card .price {
+            font-size: 24px;
+            color: #66ff66;
+            margin: 10px 0;
+        }
+
+        .pricing-card ul {
+            list-style: none;
+            padding: 0;
+            text-align: left;
+        }
+
+        .pricing-card ul li {
+            margin: 10px 0;
+        }
+
+        .pricing-card button {
+            background-color: #66ff66;
+            color: #333333;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .pricing-card button:hover {
+            background-color: #ccff66;
+        }
+
+        /* Style pentru cartonaș */
+        .card-modal {
+            display: none; /* Ascuns inițial */
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #fff;
+            padding: 20px;
+            border: 2px solid #ccff66;
+            border-radius: 10px;
+            z-index: 1000;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        }
+
+        .card-modal h3 {
+            margin-top: 0;
+            color: #333;
+        }
+
+        .card-modal ul {
+            list-style: none;
+            padding: 0;
+            color: #333;
+        }
+
+        .card-modal ul li {
+            margin: 10px 0;
+        }
+
+        .card-modal button {
+            background-color: #66ff66;
+            color: #333;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+            margin-top: 20px;
+        }
+
+        .card-modal button:hover {
+            background-color: #ccff66;
+        }
+
+        /* Overlay pentru cartonaș */
+        .overlay {
+            display: none; /* Ascuns inițial */
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+        }
+
+        .button-with-icon {
+            display: flex;
+            align-items: center;
+            background-color: #4CAF50; /* Green */
+            border: none;
+            color: black;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+
+        .button-with-icon img {
+            margin-right: 8px;
+        }
+        .button-with-icon:hover {
+    background-color: #61f5b0 !important;
+    transform: scale(1.05);
+}
+        @keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {
+        transform: translateY(0);
+    }
+    40% {
+        transform: translateY(-30px);
+    }
+    60% {
+        transform: translateY(-15px);
+    }
+}
+
+.animated-text {
+    text-align: center;
+    display: inline-block;
+    font-size: 2em; /* Ajustează dimensiunea textului după preferințe */
+    font-weight: bold;
+    color: #ccff66;
+    animation: bounce 2s ease infinite;
+}
+
+.btn {
+        width: 9em;
+        height: 3em;
+        border-radius: 30em;
+        font-size: 15px;
+        font-family: inherit;
+        border: none;
+        position: relative;
+        cursor: pointer;
+        overflow: hidden;
+        z-index: 1;
+        box-shadow: 6px 6px 12px #c5c5c5, -6px -6px 12px #ffffff;
+    }
+    .btn::before {
+        content: '';
+        width: 0;
+        height: 3em;
+        border-radius: 30em;
+        position: absolute;
+        top: 0;
+        left: 0;
+        background-image: linear-gradient(to right, #0fd850 0%, #f9f047 100%);
+        transition: .5s ease;
+        display: block;
+        z-index: -1;
+    }
+    .btn:hover::before {
+    width: 9em;
+}
+
+#homeButton {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    width: 50px;
+    height: 50px;
+    background-color: #ccff66; /* Fundal portocaliu */
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    background-image: url('help/home.png'); /* Imaginea butonului */
+    background-size: cover;
+    background-position: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    z-index: 3;
+}
+
+#homeButton:hover {
+    transform: scale(1.1); /* Mărește butonul la hover */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3); /* Adaugă o umbră mai mare la hover */
+    background-color: #61f5b0
+}
+    </style>
+</head>
+<body>
+    <h1>Multiapp Download Registration</h1>
+    <button id="homeButton" onclick="window.location.href='home.html'"></button>
+    <div class="content">
+        <p>To download this application, you need to request a license key at the address <b class="bold-green">tudor.marmureanu@outlook.com</b> via an email with <b class="bold-black">the subject <i>"multiapp"</i></b> and an <b class="bold-black">additional text if a special configuration for the copy menu is desired (program paths, rules/profiles according to the equipment sheet, etc.)</b>. </i><br><br><i>In the <b class="bold-black">Details</b> section, a <b class="bold-green">Buy</b> button will appear, which will redirect you to the purchase page.</i><br><br><br><p><i><b class="bold-black">The purchase instructions will be sent by email as a response.</i></p> <br><br>If the above steps have been completed successfully, the corresponding license key for the download package will be sent, or a new link if the one displayed on the site is no longer available. Without the license key, the application cannot be used properly.</p>
+        <br>
+        <br>
+        <br>
+        <h2><u><b>Prices</b></u></h2>
+        <div class="pricing-table">
+            <div class="pricing-card">
+                <h3>Standard</h3>
+                <p class="price">50.00 RON</p>
+                <ul>
+                    <li>Basic functionality</li>
+                    <li>Email support</li>
+                    <li>Regular updates</li>
+                </ul>
+                <button onclick="showCard('Standard', '50.00 RON', ['IT Account (Copy App, Explorer Mode, Text Editor, Paint, Find & Replace, Create/Extract Zip, PDF to Word, Backup Utility, Rename Utility)', 'Task Manager', 'Password Generator', 'File Encryption', 'Cracking ZIP Passwords'])">Details</button>
+            </div>
+            <div class="pricing-card">
+                <h3>Premium</h3>
+                <p class="price">70.00 RON</p>
+                <ul>
+                    <li>Advanced functionality</li>
+                    <li>Phone and email support</li>
+                    <li>Priority updates</li>
+                </ul>
+                <button onclick="showCard('Premium', '70.00 RON', ['IT Account (Copy App, Explorer Mode, Text Editor, Paint, Find & Replace, Open the Equipment Sheet, Create/Extract Zip, Pdf to Word, Backup Utility, Rename Utility, Network Console, Get IP & MAC, Ping Tool, Port Scanner, AI Chatbot, PDF Tools, System Info, Real Time System Info, Screen Events, Comparator)', 'Task manager', 'Password Manager + Generating functions', 'File Encryption', 'Cracking ZIP Passwords', 'Terminal Emulator', 'Network Bandwidth Monitoring', 'File Organizer'])">Details</button>
+            </div>
+            <div class="pricing-card">
+                <h3>Enterprise</h3>
+                <p class="price">150.00 RON</p>
+                <ul>
+                    <li>Full functionality</li>
+                    <li>Phone and email support</li>
+                    <li>Priority updates</li>
+                </ul>
+                <button onclick="showCard('Enterprise', '150.00 RON', ['All functionalities mentioned in the Help menu are available.', 'Beta access to new functionalities.'])">Details</button>
+            </div>
+        </div>
+        <br>
+        <br>
+        <br>
+        <p><i>It is recommended that for using the application, the screen zoom be set to 100%, especially for laptops. If the screen resolution is not set to 100%, you can follow these steps: right-click on the Multiapp.exe application -> Properties -> Change settings for all users -> Change high DPI settings -> and check the options in the last image. (Screenshots of the described procedure are provided below). The program will be intended for computers with a 64-bit architecture.</i></p>
+        <div class="image-container">
+            <img src="help/image44.png" alt="Resolution">
+        </div>
+        <div class="image-container">
+            <img src="help/image45.png" alt="Resolution">
+        </div>
+        <div class="image-container">
+            <img src="help/image46.png" alt="Resolution">
+        </div>
+        <br>
+        <p><i><b class="bold-red">!</b><b class="bold-black"><i>It is very important to read the terms and conditions when running the installer.</b><b class="bold-red">!</b></i></p>
+		<br>
+		<br>
+        <p><b class="bold-black">If the program's license key does not work in the validation field, you can use the <b class="bold-red">Check Serial Number</b> kit. If the license key is also not valid in that application, please contact me at <b class="bold-green">tudor.marmureanu@outlook.com</b>. If the license key is valid but you still cannot use it in the application, it is recommended to use the <b class="bold-red">repair</b> kit.</b></p>
+	</div>
+    <br>
+    <br>
+    <div style="text-align: center; margin-top: 20px;">
+        <h2><u><b>Download Kits (Windows Setup)</b></u></h2>
+        <button class="button-with-icon" onclick="window.location.href='https://mega.nz/file/RMgjiKAY#HG68_kEsLD5BdUjMfbg-LmAlLuW0s9qjQAQDEkr2P64';"  style="display: block; margin: 10px auto; padding: 10px 20px; font-size: 16px; background-color: #ccff66; border: none; border-radius: 5px; cursor: pointer;"><img src="help/technology.png" alt="Icon" width="20" height="20">Standard Setup x64</button>
+        <button class="button-with-icon" onclick="window.location.href='https://mega.nz/file/AdYjzYSY#IcrUGgfdUvVEqYqLdB5soEM669ySxviIw7oGV0C1pIc';"  style="display: block; margin: 10px auto; padding: 10px 20px; font-size: 16px; background-color: #ccff66; border: none; border-radius: 5px; cursor: pointer;"><img src="help/technology.png" alt="Icon" width="20" height="20">Premium Setup x64</button>
+        <button class="button-with-icon" onclick="window.location.href='https://mega.nz/file/pUAk2CLC#rlkRZOyP3E0TMXrm0F8zupUCVfVHrc9Uo04rIVrlGrs';"  style="display: block; margin: 10px auto; padding: 10px 20px; font-size: 16px; background-color: #ccff66; border: none; border-radius: 5px; cursor: pointer;"><img src="help/technology.png" alt="Icon" width="20" height="20">Enterprise Setup x64</button>
+        <button class="button-with-icon" onclick="window.location.href='https://mega.nz/file/gNg3DTyT#XJ3SxMYNzp_IQY1wHjazsYE2ZA8UkVU7Y0G1XszTzkU';"  style="display: block; margin: 10px auto; padding: 10px 20px; font-size: 16px; background-color: #ccff66; border: none; border-radius: 5px; cursor: pointer;"><img src="help/zip_folder.png" alt="Icon" width="20" height="20">Copy App x64</button>
+    </div>
+    <br>
+    <br>
+    <br>
+    <div style="text-align: center; margin-top: 20px;">
+        <h2><u><b>Additional Kits</b></u></h2>
+        <!-- <button onclick="window.location.href='https://wetransfer.com/downloads/66cd06646863f58975d693b5131f389e20240630174626/bdfaa4';"  style="display: block; margin: 10px auto; padding: 10px 20px; font-size: 16px; background-color: #ccff66; border: none; border-radius: 5px; cursor: pointer;">Launcher</button> -->
+        <button class="button-with-icon" onclick="window.location.href='https://mega.nz/file/kYRziIaR#A3f6i6PRdDQGOJzPVft5WYUKdUVT4PaWrF85ii44wlM';"  style="display: block; margin: 10px auto; padding: 10px 20px; font-size: 16px; background-color: #ccff66; border: none; border-radius: 5px; cursor: pointer;">
+            <img src="help/Launcher.png" alt="Icon" width="20" height="20">
+            Launcher x64
+        </button>
+        <!-- <button onclick="window.location.href='https://wetransfer.com/downloads/72a320d39e1cfb6daff8a1a411d5401320240630174508/844fbe';"  style="display: block; margin: 10px auto; padding: 10px 20px; font-size: 16px; background-color: #ccff66; border: none; border-radius: 5px; cursor: pointer;">Repair Setup</button> -->
+        <button class="button-with-icon" onclick="window.location.href='https://mega.nz/file/9IxSEQCT#79cpdmsX_wXx9gwasWdAXsuXXQ4XWNUwnAZqR5FX2bY';"   style="display: block; margin: 10px auto; padding: 10px 20px; font-size: 16px; background-color: #ccff66; border: none; border-radius: 5px; cursor: pointer;">
+            <img src="help/FetcherICO2.png" alt="Icon" width="20" height="20">
+            Repair Setup x64
+        </button>
+        <button class="button-with-icon" onclick="window.location.href='https://mega.nz/file/xJ4HVbaA#5SwB0bEqqARJGysKq_x_B4turytlTEYVL_37SwIoQ4g';"   style="display: block; margin: 10px auto; padding: 10px 20px; font-size: 16px; background-color: #ccff66; border: none; border-radius: 5px; cursor: pointer;">
+            <img src="help/keylogo.png" alt="Icon" width="20" height="20">
+            Check Serial Number x64
+        </button>
+    </div>
+       
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <div style="text-align: center; margin-top: 20px;">
+        <button class="btn" onclick="window.location.href='help.html'"> <!--  style="padding: 10px 20px; font-size: 16px; background-color: #ccff66; border: none; border-radius: 5px; cursor: pointer;" -->
+            ◄ To Help Page
+        </button>
+        <button class="btn" onclick="window.location.href='home.html'"> <!--  style="padding: 10px 20px; font-size: 16px; background-color: #ccff66; border: none; border-radius: 5px; cursor: pointer;" -->
+            Home
+        </button>
+    </div>
+	<br>
+	<br>
+	<h4><b><u>Minimum system requirements:</u></b></h4>
+	<p>Operating System: Windows 10 (x64).</p>
+	<p>Processor: Între 1 și 2 GHz.</p>
+	<p>RAM: 4 GB.</p>
+	<p>Disk space: 300 MB free for installation and operation.</p>
+	<p>Internet connection: Recommended for network functionalities.</p>
+    <br>
+    <br>
+    <br>
+    <br>
+    
+    <p><i>*This site is created to present information regarding the dissertation project for the Faculty of Computer Science at 'Vasile Alecsandri' University of Bacău, which will be defended in 2025. The information presented above will not be used for commercializing the software. In other words, this site simulates the commercialization of the software according to my project.*</i></p>
+    <br>
+    <div class="fog"></div> <!-- Div-ul pentru efectul de ceață -->
+
+    <div class="overlay" id="overlay"></div>
+    <div class="card-modal" id="cardModal">
+        <h3 id="cardTitle"></h3>
+        <p class="price" id="cardPrice"></p>
+        <ul id="cardFeatures"></ul>
+        <button onclick="closeCard()">Close</button>
+        <button onclick="window.open('buy-product.html', '_blank')">Buy</button>
+    </div>
+
+    <script>
+        function showCard(title, price, features) {
+            document.getElementById('cardTitle').textContent = title;
+            document.getElementById('cardPrice').textContent = price;
+            
+            const featuresList = document.getElementById('cardFeatures');
+            featuresList.innerHTML = '';
+            features.forEach(feature => {
+                const li = document.createElement('li');
+                li.textContent = feature;
+                featuresList.appendChild(li);
+            });
+
+            document.getElementById('overlay').style.display = 'block';
+            document.getElementById('cardModal').style.display = 'block';
+        }
+
+        function closeCard() {
+            document.getElementById('overlay').style.display = 'none';
+            document.getElementById('cardModal').style.display = 'none';
+        }
+    </script>
+</body>
+</html>

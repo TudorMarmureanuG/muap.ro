@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Image to ICO Converter</title>
+  <style>
+    body {
+      background-color: #282c34;
+      color: #e0e0e0;
+      font-family: 'Arial', sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+    .container {
+      background-color: #1f1f1f;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
+      max-width: 400px;
+      text-align: center;
+    }
+    h1 {
+      color: #00bfa5;
+    }
+    input[type="file"] {
+      margin: 20px 0;
+      padding: 10px;
+      background-color: #333;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      width: 100%;
+      box-sizing: border-box;
+    }
+    .sizes {
+      text-align: left;
+      margin: 20px 0;
+    }
+    .sizes label {
+      display: block;
+      margin: 10px 0;
+    }
+    button {
+      background-color: #00bfa5;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      cursor: pointer;
+      color: #fff;
+      font-size: 16px;
+      margin-top: 20px;
+      width: 100%;
+      box-sizing: border-box;
+    }
+    button:hover {
+      background-color: #009a8f;
+    }
+    #downloadLink {
+      display: none;
+      margin-top: 20px;
+      color: #fff;
+      background-color: #17a2b8;
+      padding: 10px 20px;
+      border-radius: 5px;
+      text-decoration: none;
+      display: inline-block;
+      width: 100%;
+      box-sizing: border-box;
+    }
+    #downloadLink:hover {
+      background-color: #138496;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Image to ICO Converter</h1>
+    <input type="file" id="upload" accept="image/*">
+    <div class="sizes">
+      <h3>Select Sizes:</h3>
+      <label><input type="checkbox" value="16"> 16x16</label>
+      <label><input type="checkbox" value="32"> 32x32</label>
+      <label><input type="checkbox" value="48"> 48x48</label>
+      <label><input type="checkbox" value="64"> 64x64</label>
+      <label><input type="checkbox" value="128"> 128x128</label>
+      <label><input type="checkbox" value="256"> 256x256</label>
+    </div>
+    <button id="convertBtn">Convert to ICO</button>
+    <a id="downloadLink" href="#" download="favicon.ico">Download ICO</a>
+  </div>
+
+  <script>
+    const upload = document.getElementById('upload');
+    const convertBtn = document.getElementById('convertBtn');
+    const downloadLink = document.getElementById('downloadLink');
+    const checkboxes = document.querySelectorAll('.sizes input[type="checkbox"]');
+
+    // Function to reset options and hide download link
+    function resetOptions() {
+      checkboxes.forEach(cb => cb.checked = false);
+      downloadLink.style.display = 'none';
+      downloadLink.href = '#';
+    }
+
+    // Reset options when a new image is selected
+    upload.addEventListener('change', () => {
+      resetOptions();
+    });
+
+    convertBtn.addEventListener('click', async () => {
+      const file = upload.files[0];
+      if (!file) {
+        alert('Please upload an image.');
+        return;
+      }
+
+      const selectedCheckboxes = document.querySelectorAll('.sizes input[type="checkbox"]:checked');
+      if (selectedCheckboxes.length === 0) {
+        alert('Please select at least one size.');
+        return;
+      }
+
+      const sizes = Array.from(selectedCheckboxes).map(cb => parseInt(cb.value));
+
+      const img = new Image();
+      img.src = URL.createObjectURL(file);
+
+      img.onload = async () => {
+        const canvas = document.createElement('canvas');
+        const ctx = canvas.getContext('2d');
+
+        const pngImages = [];
+
+        for (let size of sizes) {
+          canvas.width = size;
+          canvas.height = size;
+          ctx.clearRect(0, 0, size, size);
+          ctx.drawImage(img, 0, 0, size, size);
+          const pngData = canvas.toDataURL('image/png').split(',')[1];
+          const pngBytes = Uint8Array.from(atob(pngData), c => c.charCodeAt(0));
+          pngImages.push({ size, data: pngBytes });
+        }
+
+        const icoBytes = createIco(pngImages);
+        const blob = new Blob([icoBytes], { type: 'image/x-icon' });
+        const url = URL.createObjectURL(blob);
+
+        downloadLink.href = url;
+        downloadLink.style.display = 'inline-block';
+      };
+
+      img.onerror = () => {
+        alert('Could not load the image. Please try another one.');
+      };
+    });
+
+    function createIco(images) {
+      const numImages = images.length;
+      const header = new ArrayBuffer(6);
+      const headerView = new DataView(header);
+      headerView.setUint16(0, 0, true); // Reserved
+      headerView.setUint16(2, 1, true); // Type: 1 for icons
+      headerView.setUint16(4, numImages, true); // Count
+
+      const directoryEntrySize = 16;
+      const entries = new ArrayBuffer(directoryEntrySize * numImages);
+      const entriesView = new DataView(entries);
+
+      let imageDataOffset = 6 + directoryEntrySize * numImages;
+      const icoArray = [header, entries];
+
+      images.forEach((img, index) => {
+        const { size, data } = img;
+        const pngLength = data.length;
+
+        // Directory entry
+        entriesView.setUint8(index * directoryEntrySize + 0, size >= 256 ? 0 : size); // Width
+        entriesView.setUint8(index * directoryEntrySize + 1, size >= 256 ? 0 : size); // Height
+        entriesView.setUint8(index * directoryEntrySize + 2, 0); // Colors (0 for 256+)
+        entriesView.setUint8(index * directoryEntrySize + 3, 0); // Reserved
+        entriesView.setUint16(index * directoryEntrySize + 4, 0, true); // Color planes
+        entriesView.setUint16(index * directoryEntrySize + 6, 32, true); // Bits per pixel
+        entriesView.setUint32(index * directoryEntrySize + 8, pngLength, true); // Image size
+        entriesView.setUint32(index * directoryEntrySize + 12, imageDataOffset, true); // Offset
+
+        icoArray.push(img.data.buffer);
+        imageDataOffset += pngLength;
+      });
+
+      // Concatenate header, directory entries, and image data
+      const totalLength = icoArray.reduce((acc, buf) => acc + buf.byteLength, 0);
+      const icoBuffer = new Uint8Array(totalLength);
+      let offset = 0;
+      icoArray.forEach(buf => {
+        icoBuffer.set(new Uint8Array(buf), offset);
+        offset += buf.byteLength;
+      });
+
+      return icoBuffer.buffer;
+    }
+  </script>
+</body>
+</html>

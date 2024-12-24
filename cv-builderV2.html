@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CV Builder Theme 2</title>
+    <link rel="icon" type="image/png" href="help/CV.png">
+    <style>
+        /* Reset default styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #222;
+            color: #fff;
+            display: flex;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        h2 {
+            color: #a855f7; /* Purple */
+            margin-bottom: 20px;
+        }
+
+        .form-container, .preview-container {
+            width: 50%;
+            padding: 20px;
+            overflow-y: auto;
+            max-height: 90vh;
+        }
+
+        .form-container {
+            border-right: 2px solid #444;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #a855f7; /* Purple */
+        }
+
+        input[type="text"], textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #555;
+            border-radius: 5px;
+            background-color: #333;
+            color: #fff;
+            transition: border 0.3s;
+        }
+
+        input[type="text"]:focus, textarea:focus {
+            border-color: #a855f7; /* Purple */
+            outline: none;
+        }
+
+        .checkbox-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .checkbox-group label {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            color: #ddd;
+        }
+
+        .checkbox-group input {
+            margin-right: 5px;
+            accent-color: #a855f7; /* Purple */
+            cursor: pointer;
+        }
+
+        #downloadBtn {
+            margin-top: 20px;
+            padding: 12px 20px;
+            background-color: #a855f7; /* Purple */
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.2s;
+            font-size: 16px;
+        }
+
+        #downloadBtn:hover {
+            background-color: #9333ea;
+            transform: scale(1.05);
+        }
+
+        /* CV Preview Styling */
+        .preview {
+            background-color: #1e1e1e;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.5);
+            position: relative;
+        }
+
+        #cv-preview {
+            font-size: 16px;
+            line-height: 1.6;
+        }
+
+        .cv-section {
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #555;
+            transition: all 0.3s;
+        }
+
+        .cv-section:last-child {
+            border-bottom: none;
+        }
+
+        .cv-section h3 {
+            color: #a855f7; /* Purple */
+            margin-bottom: 10px;
+            border-bottom: 2px solid #a855f7;
+            display: inline-block;
+            padding-bottom: 5px;
+        }
+
+        .cv-section ul {
+            list-style-type: disc;
+            margin-left: 20px;
+            color: #ccc;
+        }
+
+        .cv-section li {
+            margin-bottom: 5px;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #333;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background-color: #a855f7; /* Purple */
+            border-radius: 4px;
+        }
+
+        /* Add Button Styling */
+        .add-btn {
+            margin-top: 10px;
+            padding: 8px 12px;
+            background-color: #a855f7;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            font-size: 14px;
+        }
+
+        .add-btn:hover {
+            background-color: #9333ea;
+        }
+
+        /* Container for Multiple Fields */
+        .dynamic-fields {
+            margin-top: 10px;
+        }
+
+        .dynamic-field {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .dynamic-field input {
+            flex: 1;
+            margin-right: 10px;
+        }
+
+        .remove-btn {
+            padding: 8px 12px;
+            background-color: #ff4d4d;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .remove-btn:hover {
+            background-color: #e60000;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1200px) {
+            body {
+                flex-direction: column;
+            }
+            .form-container, .preview-container {
+                width: 100%;
+                border-right: none;
+                border-bottom: 2px solid #444;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="form-container">
+        <h2>Create Your CV</h2>
+        <form id="cv-form">
+            <div class="form-group">
+                <label for="fullName">Full Name</label>
+                <input type="text" id="fullName" name="fullName" placeholder="e.g., John Doe">
+            </div>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="text" id="email" name="email" placeholder="e.g., john.doe@example.com">
+            </div>
+            <div class="form-group">
+                <label for="phone">Phone</label>
+                <input type="text" id="phone" name="phone" placeholder="e.g., +1 234 567 890">
+            </div>
+
+            <!-- Professional Summary -->
+            <div class="form-group">
+                <label>Professional Summary</label>
+                <div id="summary-fields" class="dynamic-fields">
+                    <div class="dynamic-field">
+                        <input type="text" class="summary-input" placeholder="e.g., Experienced in web development...">
+                        <button type="button" class="remove-btn" onclick="removeField(this)">Delete</button>
+                    </div>
+                </div>
+                <button type="button" class="add-btn" onclick="addField('summary')">Add Summary</button>
+            </div>
+
+            <!-- Education -->
+            <div class="form-group">
+                <label>Education</label>
+                <div id="education-fields" class="dynamic-fields">
+                    <div class="dynamic-field">
+                        <input type="text" class="education-input" placeholder="e.g., XYZ University, B.Sc. in Computer Science">
+                        <button type="button" class="remove-btn" onclick="removeField(this)">Delete</button>
+                    </div>
+                </div>
+                <button type="button" class="add-btn" onclick="addField('education')">Add Education</button>
+            </div>
+
+            <!-- Professional Experience -->
+            <div class="form-group">
+                <label>Professional Experience</label>
+                <div id="experience-fields" class="dynamic-fields">
+                    <div class="dynamic-field">
+                        <input type="text" class="experience-input" placeholder="e.g., ABC Company, Web Developer">
+                        <button type="button" class="remove-btn" onclick="removeField(this)">Delete</button>
+                    </div>
+                </div>
+                <button type="button" class="add-btn" onclick="addField('experience')">Add Experience</button>
+            </div>
+
+            <!-- Skills -->
+            <div class="form-group">
+                <label>Skills</label>
+                <div id="skills-fields" class="dynamic-fields">
+                    <div class="dynamic-field">
+                        <input type="text" class="skills-input" placeholder="e.g., JavaScript">
+                        <button type="button" class="remove-btn" onclick="removeField(this)">Delete</button>
+                    </div>
+                </div>
+                <button type="button" class="add-btn" onclick="addField('skills')">Add Skill</button>
+            </div>
+
+            <div class="form-group">
+                <label>Select Sections to Include in CV:</label>
+                <div class="checkbox-group">
+                    <label><input type="checkbox" id="chkFullName" checked> Full Name</label>
+                    <label><input type="checkbox" id="chkEmail" checked> Email</label>
+                    <label><input type="checkbox" id="chkPhone" checked> Phone</label>
+                    <label><input type="checkbox" id="chkSummary" checked> Professional Summary</label>
+                    <label><input type="checkbox" id="chkEducation" checked> Education</label>
+                    <label><input type="checkbox" id="chkExperience" checked> Professional Experience</label>
+                    <label><input type="checkbox" id="chkSkills" checked> Skills</label>
+                </div>
+            </div>
+            <button type="button" id="downloadBtn">Download CV as PDF</button>
+        </form>
+    </div>
+
+    <div class="preview-container">
+        <h2>CV Preview</h2>
+        <div id="cv-preview" class="preview">
+            <!-- CV will be generated here -->
+            <div id="previewFullName" class="cv-section"><strong>Full Name:</strong> <span></span></div>
+            <div id="previewEmail" class="cv-section"><strong>Email:</strong> <span></span></div>
+            <div id="previewPhone" class="cv-section"><strong>Phone:</strong> <span></span></div>
+            <div id="previewSummary" class="cv-section">
+                <h3>Professional Summary</h3>
+                <ul></ul>
+            </div>
+            <div id="previewEducation" class="cv-section">
+                <h3>Education</h3>
+                <ul></ul>
+            </div>
+            <div id="previewExperience" class="cv-section">
+                <h3>Professional Experience</h3>
+                <ul></ul>
+            </div>
+            <div id="previewSkills" class="cv-section">
+                <h3>Skills</h3>
+                <ul></ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Include html2pdf.js library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+
+    <script>
+        // Function to add a dynamic field
+        function addField(section) {
+            const fieldsContainer = document.getElementById(`${section}-fields`);
+            let inputClass = '';
+            let placeholder = '';
+
+            switch(section) {
+                case 'summary':
+                    inputClass = 'summary-input';
+                    placeholder = 'e.g., Experienced in web development...';
+                    break;
+                case 'education':
+                    inputClass = 'education-input';
+                    placeholder = 'e.g., XYZ University, B.Sc. in Computer Science';
+                    break;
+                case 'experience':
+                    inputClass = 'experience-input';
+                    placeholder = 'e.g., ABC Company, Web Developer';
+                    break;
+                case 'skills':
+                    inputClass = 'skills-input';
+                    placeholder = 'e.g., JavaScript';
+                    break;
+            }
+
+            const fieldDiv = document.createElement('div');
+            fieldDiv.classList.add('dynamic-field');
+
+            const input = document.createElement('input');
+            input.type = 'text';
+            input.classList.add(`${inputClass}`);
+            input.placeholder = placeholder;
+
+            const removeBtn = document.createElement('button');
+            removeBtn.type = 'button';
+            removeBtn.classList.add('remove-btn');
+            removeBtn.textContent = 'Delete';
+            removeBtn.onclick = () => removeField(removeBtn);
+
+            fieldDiv.appendChild(input);
+            fieldDiv.appendChild(removeBtn);
+            fieldsContainer.appendChild(fieldDiv);
+        }
+
+        // Function to remove a dynamic field
+        function removeField(button) {
+            const fieldDiv = button.parentElement;
+            const fieldsContainer = fieldDiv.parentElement;
+            if (fieldsContainer.children.length > 1) {
+                fieldsContainer.removeChild(fieldDiv);
+                updatePreview();
+            }
+        }
+
+        // Function to update the CV preview
+        function updatePreview() {
+            // Update simple fields
+            document.querySelector('#previewFullName span').textContent = document.getElementById('fullName').value;
+            document.querySelector('#previewEmail span').textContent = document.getElementById('email').value;
+            document.querySelector('#previewPhone span').textContent = document.getElementById('phone').value;
+
+            // Update Professional Summary
+            const summaryInputs = document.querySelectorAll('.summary-input');
+            const summaryList = document.querySelector('#previewSummary ul');
+            summaryList.innerHTML = '';
+            summaryInputs.forEach(input => {
+                if (input.value.trim() !== '') {
+                    const li = document.createElement('li');
+                    li.textContent = input.value;
+                    summaryList.appendChild(li);
+                }
+            });
+
+            // Update Education
+            const educationInputs = document.querySelectorAll('.education-input');
+            const educationList = document.querySelector('#previewEducation ul');
+            educationList.innerHTML = '';
+            educationInputs.forEach(input => {
+                if (input.value.trim() !== '') {
+                    const li = document.createElement('li');
+                    li.textContent = input.value;
+                    educationList.appendChild(li);
+                }
+            });
+
+            // Update Professional Experience
+            const experienceInputs = document.querySelectorAll('.experience-input');
+            const experienceList = document.querySelector('#previewExperience ul');
+            experienceList.innerHTML = '';
+            experienceInputs.forEach(input => {
+                if (input.value.trim() !== '') {
+                    const li = document.createElement('li');
+                    li.textContent = input.value;
+                    experienceList.appendChild(li);
+                }
+            });
+
+            // Update Skills
+            const skillsInputs = document.querySelectorAll('.skills-input');
+            const skillsList = document.querySelector('#previewSkills ul');
+            skillsList.innerHTML = '';
+            skillsInputs.forEach(input => {
+                if (input.value.trim() !== '') {
+                    const li = document.createElement('li');
+                    li.textContent = input.value;
+                    skillsList.appendChild(li);
+                }
+            });
+
+            // Manage visibility of sections
+            document.getElementById('previewFullName').style.display = document.getElementById('chkFullName').checked ? 'block' : 'none';
+            document.getElementById('previewEmail').style.display = document.getElementById('chkEmail').checked ? 'block' : 'none';
+            document.getElementById('previewPhone').style.display = document.getElementById('chkPhone').checked ? 'block' : 'none';
+            document.getElementById('previewSummary').style.display = document.getElementById('chkSummary').checked ? 'block' : 'none';
+            document.getElementById('previewEducation').style.display = document.getElementById('chkEducation').checked ? 'block' : 'none';
+            document.getElementById('previewExperience').style.display = document.getElementById('chkExperience').checked ? 'block' : 'none';
+            document.getElementById('previewSkills').style.display = document.getElementById('chkSkills').checked ? 'block' : 'none';
+        }
+
+        // Event listeners for real-time updates
+        document.getElementById('cv-form').addEventListener('input', updatePreview);
+        document.querySelectorAll('#cv-form input[type="checkbox"]').forEach(function(checkbox) {
+            checkbox.addEventListener('change', updatePreview);
+        });
+
+        // Function to download CV as PDF
+        document.getElementById('downloadBtn').addEventListener('click', function () {
+            const element = document.getElementById('cv-preview');
+
+            // PDF options
+            const opt = {
+                margin:       [0.5, 0.5, 0.5, 0.5], // top, left, bottom, right
+                filename:     'CV.pdf',
+                image:        { type: 'jpeg', quality: 0.98 },
+                html2canvas:  { scale: 2, logging: false },
+                jsPDF:        { unit: 'in', format: 'letter', orientation: 'portrait' }
+            };
+            // Generate PDF
+            html2pdf().set(opt).from(element).save();
+        });
+
+        // Initialize preview
+        updatePreview();
+    </script>
+
+</body>
+</html>

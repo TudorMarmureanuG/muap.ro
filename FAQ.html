@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=1024">
+    <link rel="icon" type="image/png" href="help/technology.png">
+    <title>Muap - FAQ Section</title>
+    <style>
+        /* Stilizarea generală */
+        html, body {
+            height: 100%;
+            margin: 0;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #121212;
+            color: #e0e0e0;
+            overflow-x: hidden;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        header {
+            background-color: #222;
+            color: #00FFFF;
+            padding: 30px 0;
+            text-align: center;
+            box-shadow: 0 0 30px #cb5bff;
+            transition: background-color 0.5s ease;
+        }
+        header:hover {
+            background-color: #1a1a1a;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .intro {
+            text-align: center;
+            margin: 60px 0;
+            animation: fadeIn 1s ease-out;
+        }
+        .intro h1 {
+            font-size: 3em;
+            margin-bottom: 15px;
+            color: #ccff66;
+            text-shadow: 3px 3px 15px rgba(0, 0, 0, 0.8);
+            transition: transform 0.3s ease-in-out, color 0.3s ease-in-out;
+        }
+        .intro h1:hover {
+            transform: scale(1.1);
+            color: #00FFFF;
+        }
+        .intro p {
+            font-size: 1.3em;
+            margin-bottom: 20px;
+            color: #e0e0e0;
+            text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.7);
+            max-width: 80%;
+            margin-left: auto;
+            margin-right: auto;
+            opacity: 0;
+            animation: fadeIn 1.5s ease-out 0.5s forwards;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        .features {
+            text-align: center;
+            margin: 60px 0;
+        }
+        .feature {
+            display: inline-block;
+            width: 300px;
+            margin: 0 20px;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            box-shadow: 0 0 30px #00FFFF, 0 0 20px #FF00FF;
+            transition: transform 0.5s ease, background-color 0.3s ease;
+        }
+        .feature:hover {
+            transform: translateY(-10px);
+            background: rgba(255, 255, 255, 0.2);
+        }
+        .feature img {
+            max-width: 100px;
+            height: auto;
+            margin-bottom: 15px;
+            transition: transform 0.4s ease;
+        }
+        .feature img:hover {
+            transform: rotate(360deg) scale(1.1);
+        }
+        .feature h3 {
+            font-size: 1.7em;
+            margin-bottom: 10px;
+            color: #FF00FF;
+            transition: color 0.3s ease;
+        }
+        .feature h3:hover {
+            color: #00ffff;
+        }
+        .feature p {
+            font-size: 1.1em;
+            line-height: 1.6;
+            color: #d0d0d0;
+        }
+        
+        .cta {
+            background-color: #1c1c1c;
+            color: #f0f0f0;
+            text-align: center;
+            padding: 40px;
+            margin: 60px 0;
+            border-radius: 12px;
+            box-shadow: 0 0 30px #00FFFF;
+            transition: background-color 0.5s ease, transform 0.3s ease;
+        }
+        .cta:hover {
+            background-color: #333;
+            transform: scale(1.02);
+        }
+        .cta h2 {
+            font-size: 2.2em;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+        }
+        .cta a {
+            background-color: #ccff66;
+            box-shadow: 0 0 30px #ccff66;
+            color: #333;
+            padding: 15px 35px;
+            text-decoration: none;
+            font-size: 1.3em;
+            font-weight: bold;
+            border-radius: 8px;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            cursor: pointer;
+        }
+        .cta a:hover {
+            background-color: #FF00FF;
+            box-shadow: 0 0 30px #FF00FF, 0 0 20px #00FFFF;
+            text-decoration: none;
+            color: inherit; /* Setează culoarea textului conform stilului implicit */
+            transform: scale(1.05);
+        }
+        
+        /* Stilizarea specifică pentru link-ul de contact */
+        .contact-link {
+            display: inline-block;
+            background-color: #ccff66;
+            box-shadow: 0 0 30px #ccff66;
+            color: #121212;
+            padding: 10px 25px;
+            text-decoration: none;
+            font-size: 1.1em;
+            font-weight: bold;
+            border-radius: 8px;
+            margin: 20px auto;
+            text-align: center;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            cursor: pointer;
+        }
+        .contact-link:hover {
+            background-color: #FF00FF;
+            box-shadow: 0 0 30px #FF00FF, 0 0 20px #00FFFF;
+            text-decoration: none;
+            color: inherit; /* Setează culoarea textului conform stilului implicit */
+            transform: scale(1.05);
+        }
+        .bug-link {
+            display: inline-block;
+            background-color: #ccff66;
+            box-shadow: 0 0 30px #ccff66;
+            color: #121212;
+            padding: 10px 25px;
+            text-decoration: none;
+            font-size: 1.1em;
+            font-weight: bold;
+            border-radius: 8px;
+            margin: 20px auto;
+            text-align: center;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            float: right;
+            cursor: pointer;
+        }
+        .bug-link:hover {
+            background-color: #FF00FF;
+            box-shadow: 0 0 30px #FF00FF, 0 0 20px #00FFFF;
+            transform: scale(1.05);
+        }
+        
+        .faq-container {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .faq {
+            background-color: transparent;
+            box-shadow: 0 0 30px #00FFFF, 0 0 20px #FF00FF;
+            border: 1px solid #9fa4a8;
+            border-radius: 10px;
+            margin: 20px 0;
+            padding: 30px;
+            position: relative;
+            overflow: hidden;
+            transition: 0.3s ease;
+        }
+        
+        .faq.active {
+            background-color: #000;
+            color: #ccff66;
+            box-shadow: 0 0 30px #cb5bff;
+        }
+        
+        .faq.active::before,
+        .faq.active::after {
+            content: "\25B2"; /* Unicode pentru săgeata în sus */
+            font-size: 2rem;
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            z-index: 0;
+            opacity: 0.5;
+            color: #2ecc71;
+        }
+        
+        .faq.active::before {
+            content: "\25B2"; /* Săgeata în sus */
+            top: -10px;
+            left: -30px;
+            color: #3498db;
+        }
+        
+        .faq-title {
+            margin: 0 35px 0 0;
+            font-size: 1.5em;
+        }
+        
+        .faq-text {
+            display: none;
+            margin: 30px 0 0;
+        }
+        
+        .faq.active .faq-text {
+            display: block;
+        }
+        
+        .faq-toggle {
+            background-color: transparent;
+            border: 0;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            padding: 0;
+            position: absolute;
+            top: 30px;
+            right: 30px;
+            height: 30px;
+            width: 30px;
+        }
+        
+        .faq-toggle:focus {
+            outline: 0;
+        }
+        
+        .faq-toggle::before {
+            content: "\25BC"; /* Unicode pentru săgeata în jos */
+            font-size: 1.5rem;
+            color: #bdc3c7; /* Gri deschis pentru săgeata în jos */
+        }
+
+        .faq.active .faq-toggle::before {
+            content: "\2716"; /* Unicode pentru X */
+            color: #7f8c8d; /* Gri închis pentru X */
+        }
+        
+        .footer {
+            background-color: #222;
+            color: #f0f0f0;
+            text-align: center;
+            padding: 20px 0;
+            font-size: 0.9em;
+            transition: background-color 0.5s ease;
+            margin-top: auto; /* Asigură că footer-ul este la fundul paginii */
+        }
+        
+        .footer:hover {
+            background-color: #1a1a1a;
+        }
+        /* Animatii de pop-up */
+        .pop-up {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        .pop-up.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Welcome to FAQ Section</h1>
+            <p style="font-size: 20px">In the following section, I will outline various requests concerning the services provided. Additionally, written solutions are provided as responses in the applicant's email.</p>
+        </div>
+    </header>
+    <main>
+        <br>
+        <br>
+        <br>
+        <h1 class="pop-up">Frequently Asked Questions</h1>
+        <br>
+        <br>
+        <div class="faq-container pop-up">
+          <div class="faq pop-up">
+            <h3 class="faq-title pop-up">
+                Why doesn't the copy application work with local files?
+            </h3>
+            <p class="faq-text">
+                Because the parser only looks for files located on the network, for example \\192.168.....\....
+            </p>
+            <button class="faq-toggle"></button>
+          </div>
+
+          <div class="faq pop-up">
+            <h3 class="faq-title pop-up">
+                Why does the repair kit (Fetcher.exe) write in the log that it has repaired the application even if I haven't noticed any problems?
+            </h3>
+            <p class="faq-text">
+                Because it repairs the Multiapp.exe application regardless of the situation, and if it doesn't find any other design errors, it will always report that it has repaired mopad.ini and rebuilt the Assembly for the entire application and performs the usual port checks. The final results will be displayed in HEX format and only Tudor Marmureanu can decode them.
+            </p>
+            <button class="faq-toggle"></button>
+          </div>
+          
+          <div class="faq pop-up">
+            <h3 class="faq-title pop-up">
+                Why isn't Launcher.exe working?
+            </h3>
+            <p class="faq-text">
+                Please check if it is copied into the current folder where Multiapp.exe is located.
+            </p>
+            <button class="faq-toggle"></button>
+          </div>
+          
+          <div class="faq pop-up">
+            <h3 class="faq-title pop-up">
+                I have a small issue: for the past 4 days, I have been trying to log in to the application with my specially configured account (I replied to your email with the account details), and I keep receiving a warning message that my license expires in 30 days. From what I can see, the product key was purchased (Multiapp Premium version + specially configured account).
+            </h3>
+            <p class="faq-text">
+                Please check the license key using the Check Serial Number.exe software, and then send me an email using the Bugs section on the official website.
+            </p>
+            <button class="faq-toggle"></button>
+          </div>
+          
+          <div class="faq pop-up">
+            <h3 class="faq-title pop-up">
+                Are the licenses permanent?
+            </h3>
+            <p class="faq-text">
+              Yes.
+            </p>
+            <button class="faq-toggle"></button>
+          </div>
+
+          <div class="faq pop-up">
+            <h3 class="faq-title pop-up">
+                I can't log in simultaneously with the same account. I used Launcher.exe (version 0.1.2).
+            </h3>
+            <p class="faq-text">
+                Please download version 0.12.6 of Multiapp.exe and you can use multiple instances. Also, you should update your launcher to benefit from the latest features.
+            </p>
+            <button class="faq-toggle"></button>
+          </div>
+
+          <div class="faq pop-up">
+            <h3 class="faq-title pop-up">
+                If I want to configure another account, what should I do? Please note that I have Multiapp Standard Version 0.12.6.
+            </h3>
+            <p class="faq-text">
+                You need to go to the Buy Product page and send me an email for this feature. I would like to mention that there will be a separate fee based on the complexity of the account.
+            </p>
+            <button class="faq-toggle"></button>
+          </div>
+
+          <div class="faq pop-up">
+            <h3 class="faq-title pop-up">
+                How can I create a quiz?
+            </h3>
+            <p class="faq-text">
+                The information for creating a quiz will be sent via email along with the provided product key. Note: It will only work on an Enterprise version, which you do not have. You are using Premium Version 0.11.8. Additionally, I suggest upgrading according to the information sent by email or directly from the official website.
+            </p>
+            <button class="faq-toggle"></button>
+          </div>
+
+          <div class="faq pop-up">
+            <h3 class="faq-title pop-up">
+                If I lose my product key, what should I do? Suppose I accidentally delete the email containing the product information and also delete the file 'product_key.txt'.
+            </h3>
+            <p class="faq-text">
+                In such cases, please send me an email with the software details and the purchase date. If you don't remember the date of purchase, I will try to locate you in my database using other criteria.
+            </p>
+            <button class="faq-toggle"></button>
+          </div>
+
+          <div class="faq pop-up">
+            <h3 class="faq-title pop-up">
+                Ugh, why do I have access to almost nothing in the application without a product key? Still, there could have been a Trial version... How am I supposed to know if I like this software and if I need it? :)
+            </h3>
+            <p class="faq-text">
+                ... a Trial version is not available at the moment because it is still being worked on. My server is not fully configured, which is why there is limited access to some functionalities.
+            </p>
+            <button class="faq-toggle"></button>
+          </div>
+
+          <div class="faq pop-up">
+            <h3 class="faq-title pop-up">
+                If the license was stolen by another user?
+            </h3>
+            <p class="faq-text">
+                In what sense was it stolen? Perhaps you mean that the product key was copied to another computer that has this application. In that case, please send me an email about it, and I will deactivate the license key. A new product key will be sent to you by email.
+            </p>
+            <button class="faq-toggle"></button>
+          </div>
+
+          <div class="faq pop-up">
+            <h3 class="faq-title pop-up">
+                My colleague is complaining that he cannot run the program: the error refers to 'mopad.ini' being missing or corrupted. See the attachment. What should be done?
+            </h3>
+            <p class="faq-text">
+                Well, it's simple: you can download the application again, but this would overwrite all data from the start. Another method is to use an updated version (from 0.12.2 and above) and the file will be created automatically each time the program is opened. The third method is to use the repair kit (Fetcher.exe).
+            </p>
+            <button class="faq-toggle"></button>
+          </div>
+
+          <div class="faq pop-up">
+            <h3 class="faq-title pop-up">
+                Why isn't the product key working anymore?
+            </h3>
+            <p class="faq-text">
+                Why are you using it on 2 computers without notifying me? :) I will send you another key by email. Please use it on only one computer. Note: Future policy will require, in addition to deactivating the product key, that a new key be purchased.
+            </p>
+            <button class="faq-toggle"></button>
+          </div>
+
+          <div class="faq pop-up">
+            <h3 class="faq-title pop-up">
+                When my laptop is replaced by the company, but I already had the Enterprise version installed on the old laptop, how will the product key be handled? I assume I can use it on another device, right?
+            </h3>
+            <p class="faq-text">
+                In these conditions, the product key will not be deactivated if the other device is not active. It would be preferable to be notified about this change. It helps me keep track, after all.
+            </p>
+            <button class="faq-toggle"></button>
+          </div>
+
+          <div class="faq pop-up">
+            <h3 class="faq-title pop-up">
+                How secure is the application?
+            </h3>
+            <p class="faq-text">
+                Do you have doubts that the Multiapp application is insecure? It uses advanced data encryption technologies and communication with the domain is efficient and secure. In any case, the application stores data locally and uses the domain to analyze potential errors or conflicts and to repair itself.
+            </p>
+            <button class="faq-toggle"></button>
+          </div>
+          
+          <!--
+          <div class="faq pop-up">
+            <h3 class="faq-title pop-up">
+                I want to collaborate with you, Tudor Marmureanu. I have sent my CV as an attachment.
+            </h3>
+            <p class="faq-text">
+                I'm sorry, but I cannot engage in collaborations at the moment. In any case, the application is written in Python and I don't see any skills listed for this programming language.
+            </p>
+            <button class="faq-toggle"></button>
+          </div>
+        -->
+
+          <div class="faq pop-up">
+            <h3 class="faq-title pop-up">
+                Are there going to be significant updates that will change the application's infrastructure?
+            </h3>
+            <p class="faq-text">
+                It depends; generally, the updates involve adding new accounts and fixing bugs if necessary.
+            </p>
+            <button class="faq-toggle"></button>
+          </div>
+
+          <div class="faq pop-up">
+            <h3 class="faq-title pop-up">
+                I would like to be able to close the login window using the X button at the top... Not from the Terminal, anyway.
+            </h3>
+            <p class="faq-text">
+                Unfortunately, the application would close much more slowly due to the background processes running. That's why I decided to configure this option to ensure the application remains efficient.
+            </p>
+            <button class="faq-toggle"></button>
+          </div>
+
+          <div class="faq pop-up">
+            <h3 class="faq-title pop-up">
+                The interfaces of your application are quite outdated.
+            </h3>
+            <p class="faq-text">
+                As long as the Multiapp helps with daily tasks, I don't see this as a major issue. In the upcoming updates, these changes will also be made. These are just the early versions of the application.
+            </p>
+            <button class="faq-toggle"></button>
+          </div>
+
+        </div>
+        <br>
+        <br>
+        <br>
+
+        <a class="contact-link pop-up" onclick="window.open('contact.html', '_blank')">Contact</a>
+        <a class="contact-link pop-up" onclick="window.open('suport.html', '_blank')">Report a Bug</a>
+        <a class="contact-link pop-up" onclick="window.open('home.html', '_blank')">Home</a>
+    </main>
+    <br>
+    <br>
+    <footer class="footer">
+        <p>&copy; 2024 Muap. All rights reserved. | Designed for IT Professionals</p>
+    </footer>
+
+    <script>
+        const toggles = document.querySelectorAll('.faq-toggle');
+
+        toggles.forEach(toggle => {
+            toggle.addEventListener('click', () => {
+                toggle.parentNode.classList.toggle('active');
+            });
+        });
+
+        document.addEventListener('DOMContentLoaded', function() {
+        const popUpElements = document.querySelectorAll('.pop-up');
+
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                } else {
+                    entry.target.classList.remove('visible');
+                }
+            });
+        }, {
+            threshold: 0.1
+        });
+
+        popUpElements.forEach(element => {
+            observer.observe(element);
+        });
+    });
+    </script>
+
+</body>
+</html>

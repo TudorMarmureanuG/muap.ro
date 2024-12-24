@@ -1,0 +1,856 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multiapp - Help</title>
+    <link rel="icon" type="image/png" href="help/technology.png">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background-image: url('help/wp.jpg'); /* Calea către imagine */
+            background-size: cover; /* Face ca imaginea să acopere întreaga fereastră */
+            background-repeat: no-repeat; /* Evită repetarea imaginii */
+            background-position: center center; /* Poziționează imaginea în centrul paginii */
+            background-attachment: fixed; /* Fixează imaginea de fundal, astfel încât să nu se miște la derulare */
+            margin: 0; /* Elimină marginile implicite ale corpului paginii */
+            opacity: 0;
+            animation: fadeIn 2s ease-in-out forwards;
+        }
+        @keyframes fadeIn {
+    to {
+        opacity: 1;
+    }
+}
+
+        h1 {
+            text-align: center;
+            color: #ccff66; /* titluri culoare #ccff66 */
+            font-weight: bold;
+            animation: bounce 3s ease infinite;
+        }
+        
+        h3 {
+            text-align: center;
+            color: #ccff66; /* titluri culoare #ccff66 */
+        }
+        
+        h2 {
+            text-align: center;
+            color: #ccff66; /* titluri culoare #ccff66 */
+        }
+
+        .content {
+            margin: 0 auto;
+            max-width: 800px;
+        }
+
+        .image-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin: 20px 0;
+        }
+
+        .image-container img {
+            margin: 10px;
+            max-width: 100%;
+            height: auto;
+            border: 1px solid #ccc;
+            box-shadow: 2px 2px 12px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            box-shadow: 0 0 30px #FF00FF, 0 0 20px #00FFFF;
+        }
+
+        .image-container img:hover {
+            transform: scale(1.05);
+            box-shadow: 2px 2px 20px rgba(0,0,0,0.2);
+            box-shadow: 0 0 30px #FF00FF, 0 0 20px #00FFFF;
+        }
+
+        p {
+            text-align: center;
+            transition: all 0.3s ease;
+            color: #fff; /* text alb */
+        }
+
+        p:hover {
+            color: #ff5733; /* culoare text la hover */
+            transform: scale(1.1); /* orice alt efect dorit */
+        }
+
+        .fog {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 140px;
+            background: linear-gradient(to bottom, rgba(204, 204, 204, 0), rgba(204, 204, 204, 0.512));
+            pointer-events: none;
+            z-index: 0; /* Adăugat z-index pentru ceață */
+        }
+
+        #scrollButton {
+            position: fixed;
+            bottom: 10px;
+            right: 10px;
+            width: 50px; /* Ajustează dimensiunea */
+            height: 50px; /* Ajustează dimensiunea */
+            background-color: #ccff66;
+            box-shadow: 0 0 30px #ccff66;
+            color: rgb(61, 60, 60);
+            border: none;
+            cursor: pointer;
+            border-radius: 50%; /* Face butonul rotund */
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            font-size: 35px; /* Ajustează dimensiunea fontului */
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 2; /* Setat un z-index mai mare pentru buton */
+        }
+
+        #scrollButton:hover {
+            background-color: #61f5b0; /* Schimbă culoarea de fundal la hover */
+            
+            box-shadow: 0 0 30px #FF00FF, 0 0 20px #00FFFF;
+        }
+
+        #CVButton {
+            position: fixed; /* Fixează butonul într-o poziție fixă pe ecran */
+            bottom: 70px; /* Poziționează butonul la 70px de marginea de jos a ferestrei */
+            right: 10px;
+            width: 50px; /* Ajustează dimensiunea */
+            height: 50px; /* Ajustează dimensiunea */
+            background-color: #ccff66; /* Culoarea de fundal a butonului */
+            color: rgb(61, 60, 60); /* Culoarea textului */
+            border: none; /* Elimină conturul butonului */
+            cursor: pointer; /* Transformă cursorul în pointer la hover */
+            border-radius: 50%; /* Rotunjirea marginilor pentru a face butonul rotund */
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Umbră pentru buton */
+            font-size: 30px; /* Dimensiunea fontului */
+            font-weight: bold; /* Textul îngroșat */
+            display: flex; /* Flexibil pentru a centra conținutul */
+            align-items: center; /* Aliniază conținutul pe axa verticală */
+            justify-content: center; /* Aliniază conținutul pe axa orizontală */
+            z-index: 2; /* Stratul z pentru a plasa butonul deasupra altor elemente */
+            background-image: url('help/CV3.png'); /* Imaginea de fundal a butonului */
+            background-size: cover; /* Acoperă întreaga suprafață a butonului */
+            background-position: center; /* Poziționează imaginea în centru */
+            transition: background-color 0.3s ease, box-shadow 0.3s ease; /* Tranziții pentru culoarea de fundal și umbră */
+        }
+
+        #CVButton:hover {
+            background-color: #61f5b0; /* Schimbă culoarea de fundal la hover */
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* Umbră mai mare la hover */
+        }
+
+        /* CSS pentru butonul de meniu și meniu lateral */
+        #menu-btn {
+            font-size: 30px;
+            cursor: pointer;
+            background-color: transparent;
+            border: none;
+            color: #fff;
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 3;
+        }
+
+        #side-menu {
+            height: 100%;
+            width: 0;
+            position: fixed;
+            top: 0;
+            left: 0;
+            background-color: #333;
+            overflow-x: hidden;
+            transition: 0.5s;
+            padding-top: 60px;
+            z-index: 2;
+            overflow-y: auto;
+            overflow: auto;
+            box-sizing: border-box;
+        }
+
+        #side-menu ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        #side-menu ul li {
+            padding: 8px 8px 8px 32px;
+            text-align: left;
+        }
+
+        #side-menu ul li a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 25px;
+            display: block;
+            transition: 0.3s;
+        }
+
+        #side-menu ul li a:hover {
+            color: #ccff66;
+        }
+
+        body.menu-open #side-menu {
+            width: 280px;
+        }
+
+        body.menu-open .content {
+            transition: margin-left 0.5s;
+        }
+
+        @keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {
+        transform: translateY(0);
+    }
+    40% {
+        transform: translateY(-30px);
+    }
+    60% {
+        transform: translateY(-15px);
+    }
+}
+
+.animated-text {
+    text-align: center;
+    display: inline-block;
+    font-size: 2em; /* Ajustează dimensiunea textului după preferințe */
+    font-weight: bold;
+    color: #ccff66;
+    animation: bounce 2s ease infinite;
+}
+
+    .btn {
+        width: 9em;
+        height: 3em;
+        border-radius: 30em;
+        font-size: 15px;
+        font-family: inherit;
+        border: none;
+        position: relative;
+        cursor: pointer;
+        overflow: hidden;
+        z-index: 1;
+        box-shadow: 6px 6px 12px #c5c5c5, -6px -6px 12px #ffffff;
+    }
+    .btn::before {
+        content: '';
+        width: 0;
+        height: 3em;
+        border-radius: 30em;
+        position: absolute;
+        top: 0;
+        left: 0;
+        background-image: linear-gradient(to right, #0fd850 0%, #f9f047 100%);
+        transition: .5s ease;
+        display: block;
+        z-index: -1;
+    }
+    .btn:hover::before {
+    width: 9em;
+}
+
+#homeButton {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    width: 50px;
+    height: 50px;
+    background-color: #ccff66; /* Fundal portocaliu */
+    box-shadow: 0 0 30px #FF00FF, 0 0 20px #00FFFF;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    background-image: url('help/home.png'); /* Imaginea butonului */
+    background-size: cover;
+    background-position: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    z-index: 3;
+}
+
+#homeButton:hover {
+    transform: scale(1.1); /* Mărește butonul la hover */
+    box-shadow: 0 0 30px #FF00FF, 0 0 20px #00FFFF;
+    background-color: #61f5b0;
+}
+.content h3, .content p {
+        transition: display 0.3s ease;
+    }
+    .highlight {
+        background-color: rgb(255, 114, 98);
+        font-weight: bold;
+    }
+    
+    .search-container {
+    display: flex; /* Folosește flexbox pentru a alinia elementele pe orizontală */
+    align-items: center; /* Aliniază vertical elementele în centrul containerului */
+    position: relative;
+    width: 100%; /* Asigură că containerul ocupă lățimea dorită */
+    max-width: 400px; /* Ajustează lățimea maximă după cum e necesar */
+    background-color: #414141; /* Fundal gri deschis */
+    border-radius: 20px; /* Face colțurile containerului rotunjite */
+    padding: 5px; /* Adaugă un pic de padding pentru un aspect mai curat */
+    box-shadow: 0 0 30px #FF00FF, 0 0 20px #00FFFF;
+}
+
+#search-input {
+    flex: 1; /* Câmpul de căutare va ocupa tot spațiul disponibil */
+    padding: 8px 40px 8px 10px; /* Spațiu pentru butonul X */
+    font-size: 16px;
+    border: none; /* Elimină bordura implicită */
+    border-radius: 20px; /* Face colțurile input-ului rotunjite */
+    background-color: #414141; /* Fundal gri pentru input */
+    color: #00f7ff; /* Culoarea textului */
+    outline: none; /* Elimină conturul implicit */
+}
+
+
+    #clear-button {
+        border: none;
+        background: transparent;
+        cursor: pointer;
+        font-size: 16px;
+        color: #00ffe5;
+        padding: 0 10px; /* Spațiu pentru a face butonul mai ușor de apăsat */
+    }
+
+    #clear-button:hover {
+        color: #ffb300;
+    }
+
+    .contact-link {
+            display: inline-block;
+            background-color: #ccff66;
+            color: #121212;
+            padding: 10px 25px;
+            text-decoration: none;
+            font-size: 1.1em;
+            font-weight: bold;
+            border-radius: 8px;
+            margin: 20px auto;
+            text-align: center;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            box-shadow: 0 0 30px #ccff66;
+            cursor: pointer;
+        }
+        .contact-link:hover {
+            background-color: #61f5b0;
+            box-shadow: 0 0 30px #FF00FF, 0 0 20px #00FFFF;
+            transform: scale(1.05);
+        }
+
+        .bold-red {
+            color: red;
+            font-weight: bold;
+        }
+
+        .bold-green {
+            color: #66ff66;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div style="margin-bottom: 20px;margin-top: 5px;margin-left: 50px;text-align: center;position: fixed;/* left: auto; */">
+        <input type="text" id="search-input" placeholder="Search...">
+        <!-- <button id="clear-button" type="button" aria-label="Clear">X</button> -->
+        <button id="clear-button" class="clear-btn" aria-label="Clear search">X</button>
+    </div>
+    <br>
+    <br>
+    <br>
+    <!-- Textul animat -->
+    <h1>Multiapp Help</h1>
+    <button id="menu-btn" onclick="toggleMenu()">☰</button>
+    <button id="homeButton" onclick="window.location.href='home.html'"></button>
+    <div id="side-menu">
+        <ul>
+            <li><a href="#explorer-mode">Explorer Mode</a></li>
+            <li><a href="#aplicatie-copiere">Copy App</a></li>
+            <li><a href="#get-ip-mac">Get IP & Mac</a></li>
+            <li><a href="#port-scanner">Port scanner</a></li>
+            <li><a href="#ping-tool">Ping tool</a></li>
+            <li><a href="#find-replace">Find & Replace</a></li>
+            <li><a href="#screen-events">Screen Events</a></li>
+            <li><a href="#create-extract-zip">Create/Extract Zip</a></li>
+            <li><a href="#equipment-sheet">Open the Equipment Sheet</a></li>
+            <li><a href="#comparator">Comparator</a></li>
+            <li><a href="#text-editor">Text Editor</a></li>
+            <li><a href="#whiteboard">Whiteboard</a></li>
+            <li><a href="#pdf-to-word">PDF to Word</a></li>
+            <li><a href="#pdf-tools">PDF Tools</a></li>
+            <li><a href="#backup-utility">Backup Utility</a></li>
+            <li><a href="#rename-utility">Rename Utility</a></li>
+            <li><a href="#system-info">System Info</a></li>
+            <li><a href="#real-time-system-info">Real time System Information</a></li>
+            <li><a href="#network-console">Network Console</a></li>
+            <li><a href="#ai-chatbot">AI Chatbot</a></li>
+            <li><a href="#read-me-first">Read me first</a></li>
+            <li><a href="#copying-files">Copying files</a></li>
+            <li><a href="#terminal-emulator">Terminal Emulator</a></li>
+            <li><a href="#generating-passwords">Generating Passwords</a></li>
+            <li><a href="#network-bandwidth">Network Bandwidth Monitoring</a></li>
+            <li><a href="#file-encryption">File Encryption</a></li>
+            <li><a href="#testing">Testing</a></li>
+            <li><a href="#cracking-ZIP">Cracking ZIP Passwords</a></li>
+            <li><a href="#knowledge-base">Knowledge Base</a></li>
+            <li><a href="#password-manager">Password Manager</a></li>
+            <li><a href="#pause-manager">Pause Manager</a></li>
+            <li><a href="#task-manager">Task Manager</a></li>
+            <li><a href="#file-organizer">File Organizer</a></li>
+            <li><a href="#whiteboard-presentation">Whiteboard Presentation</a></li>
+            <li><a href="#contact-manager">Contact Manager</a></li>
+            <li><a href="#listener">Listener - Check Online/Offline Devices</a></li>
+        </ul>
+    </div>
+    <div class="content">
+        <p>Multiapp is a powerful tool designed for managing activities in an IT or IT support department. This guide explains each functionality of the application and how public accounts, saved in the 'Accounts.txt' file, can be used.</p>
+
+        <h2>Login</h2>
+        <p><strong>- Public accounts</strong>: Saved in 'Accounts.txt'.</p>
+        <p><strong><i>- The following accounts also exist, but they are used for developer mode and end users do not have access to them.</i></strong></p>
+
+        <div class="image-container">
+            <img src="help/image1.png" alt="Login">
+        </div>
+
+        <h2>Features</h2>
+        
+        <div class="image-container">
+            <img src="help/image2.png" alt="App">
+        </div>
+
+        <h3 id="explorer-mode">1. Explorer Mode</h3>
+        <p>It allows for the dynamic copying of folders/files locally, but not from a server or network location. Essentially, the user will save the local paths in the corresponding text files, and if they need the process to be automatic, the parser will know to search each path line by line, saving the user time for future uses. It's like navigating manually in File Explorer, but the paths chosen by the user will be saved for easier copying.</p>
+
+        <h3 id="aplicatie-copiere">2. Copy App</h3>
+        <p>Copy App: This is an application that manages paths already registered by the IT department for copying files from a network location (on a server). This process is useful for configuring a new computer. The first step after introducing the new PC into the domain is to copy the necessary programs to ensure proper operation and meet the requirements specified in the IT department's equipment sheet. The destination folder will be C:\KIT. There is a menu of buttons on the right that correlates with the equipment sheet: for example, if you are copying certain programs for a directory, the checkboxes for the programs to be copied will be automatically selected. There is also a button that opens a mini network console, useful for checking whether files are being copied from a network location or not. To configure this copy application from scratch, you need to edit the paths.txt and profiles.json files. Typically, when the application does not interact much with the internet, you will see 0.00 as values (we decided to have exactly 2 decimal places).</p>
+        
+        
+        <div class="image-container">
+            <img src="help/image3.png" alt="Copy App">
+        </div>
+        
+        <p>Compared to traditional copying, these two methods of copying are performed more efficiently (18.8% ~ 20%), as the locations are already precompiled and the bits are directly allocated to the destination file.</p>
+
+        <h3 id="get-ip-mac">3. Get IP & Mac</h3>
+        <p>Display the IP and MAC address of your PC. Additionally, display the MAC address of a device connected to the VLAN or LAN.</p>
+
+        <div class="image-container">
+            <img src="help/image4.png" alt="Get IP & Mac">
+        </div>
+
+        <h3 id="port-scanner">4. Port Scanner</h3>
+        <p>Display all open ports of any device on the network.</p>
+
+        <div class="image-container">
+            <img src="help/image5.png" alt="Port Scanner">
+        </div>
+
+        <h3 id="ping-tool">5. Ping Tool</h3>
+        <p>Execute a Ping command to certain devices and can display which ports are open.</p>
+
+        <div class="image-container">
+            <img src="help/image6.png" alt="Ping Tool">
+        </div>
+
+        <h3 id="find-replace">6. Find & Replace</h3>
+        <p>Search for a string of characters in your text and replace it with another string of characters.</p>
+
+        <div class="image-container">
+            <img src="help/image7.png" alt="Find & Replace">
+        </div>
+
+        <h3 id="screen-events">7. Screen Events</h3>
+        <p>Screen recording & screen shoot.</p>
+
+        <div class="image-container">
+            <img src="help/image8.png" alt="Screen Events">
+        </div>
+
+        <h3 id="create-extract-zip">8. Create/Extract Zip</h3>
+        <p>Create/extract an archive and can also extract just a selection from an archive. It works only with zip files.</p>
+
+        <div class="image-container">
+            <img src="help/image9.png" alt="Create/Extract Zip">
+        </div>
+
+        <h3 id="equipment-sheet">9. Open the Equipment Sheet</h3>
+        <p>It is assumed that the equipment sheet is an Excel file. This tool will help you open the sheet without needing Office installed on the new PC.</p>
+
+        <div class="image-container">
+            <img src="help/image10.png" alt="Equipment Sheet">
+        </div>
+
+        <h3 id="comparator">10. Comparator</h3>
+        <p>Compare 2 files or 2 folders to identify the differences.</p>
+
+        <div class="image-container">
+            <img src="help/image33.png" alt="Comparator">
+        </div>
+
+        <h3 id="text-editor">11. Text Editor</h3>
+        <p>It is a copy of the Notepad program, useful for quickly jotting down notes.</p>
+
+        <div class="image-container">
+            <img src="help/image11.png" alt="Text Editor">
+        </div>
+
+        <h3 id="whiteboard">12. Whiteboard</h3>
+        <p>A mini Paint for diagrams/drawing.</p>
+
+        <div class="image-container">
+            <img src="help/image12.png" alt="Whiteboard">
+        </div>
+
+        <h3 id="pdf-to-word">13. PDF to Word</h3>
+        <p>Convert a PDF file to Word and also save the images from that Word file separately.</p>
+
+        <div class="image-container">
+            <img src="help/image13.png" alt="PDF to Word">
+        </div>
+
+        <h3 id="pdf-tools">14. PDF Tools</h3>
+        <p>Provides various tools for manipulating a PDF file: encryption/password protection, image extraction, page rotation, splitting pages into multiple PDF files, and deleting pages from a PDF file.</p>
+
+        <div class="image-container">
+            <img src="help/image14.png" alt="PDF Tools">
+        </div>
+        
+        <h3 id="backup-utility">15. Backup Utility</h3>
+        <p>Provides the functionality to create a backup for sensitive data or certain data that is about to be modified and is quite important. The user decides when it is useful to use this utility.</p>
+
+        <div class="image-container">
+            <img src="help/image34.png" alt="Backup Utility">
+        </div>
+        
+        <h3 id="rename-utility">16. Rename Utility</h3>
+        <p>Rename specific files in a selected folder.</p>
+
+        <div class="image-container">
+            <img src="help/image35.png" alt="Rename Utility">
+        </div>
+
+        <h3 id="system-info">17. System Info</h3>
+        <p>Displays various system information and allows you to perform several tasks: open the power plan, join the PC to a domain, generate a battery report, open applications in the Control Panel, and even display the Windows license and service tag.</p>
+
+        <div class="image-container">
+            <img src="help/image15.png" alt="System Info">
+        </div>
+
+        <h3 id="real-time-system-info">18. Real time System Information</h3>
+        <p>Displays real-time information about your system.</p>
+
+        <div class="image-container">
+            <img src="help/image16.png" alt="Real time system information 1">
+            <img src="help/image17.png" alt="Real time system information 2">
+            <img src="help/image18.png" alt="Real time system information 3">
+            <img src="help/image19.png" alt="Real time system information 4">
+        </div>
+
+        <h3 id="network-console">19. Network Console</h3>
+        <p>Displays various information about your network: data packets sent or received, saved Wi-Fi passwords, who is connected to the LAN, and other network details.</p>
+
+        <div class="image-container">
+            <img src="help/image20.png" alt="Network Console 1">
+            <img src="help/image21.png" alt="Network Console 2">
+        </div>
+
+        <h3 id="ai-chatbot">20. AI Chatbot</h3>
+        <p>It is your virtual assistant for the application. It explains the necessary information for full operation, including network mappings.</p>
+
+        <div class="image-container">
+            <img src="help/image22.png" alt="AI Chatbot">
+        </div>
+
+        <h3 id="read-me-first">21. Read me first</h3>
+        <p>Provides a concise range of information to use the application correctly and to avoid potential errors.</p>
+
+        <h3 id="copying-files">22. Copying files</h3>
+        <p>If only file copying is needed, there is a special account: user/nopass.</p>
+        <div class="image-container">
+            <img src="help/image32.png" alt="Guest Account">
+        </div>
+
+        <h3 id="terminal-emulator">23. Terminal Emulator</h3>
+        <p>Simulates a normal CMD and even a Linux interface. Access is restricted according to security policies.</p>
+
+        <div class="image-container">
+            <img src="help/image23.png" alt="Terminal Emulator">
+        </div>
+
+        <h3 id="generating-passwords">24. Generating Passwords</h3>
+        <p>There are 2 accounts for generating passwords: passgen/passgen and passgenV2/passgenV2.</p>
+
+        <div class="image-container">
+            <img src="help/image24.png" alt="Generating Passwords 1">
+            <img src="help/image25.png" alt="Generating Passwords 2">
+        </div>
+
+        <h3 id="network-bandwidth">25. Network Bandwidth Monitoring</h3>
+        <p>This account generates a real-time graph of your network's behavior.</p>
+
+        <div class="image-container">
+            <img src="help/image27.png" alt="Network Bandwidth Monitoring">
+        </div>
+
+        <h3 id="file-encryption">26. File Encryption</h3>
+        <p>This application encrypts data using high-complexity algorithms.</p>
+
+        <div class="image-container">
+            <img src="help/image28.png" alt="File Encryption">
+        </div>
+
+        <h3 id="testing">27. Testing</h3>
+        <p>This application allows for creating tests with up to 4 answer options for each question.</p>
+
+        <div class="image-container">
+            <img src="help/image29.png" alt="Testing 1">
+            <img src="help/image30.png" alt="Testing 2">
+        </div>
+
+        <h3 id="cracking-ZIP">28. Cracking ZIP Passwords</h3>
+        <p>The account allows access to password-protected ZIP archives. The implemented algorithms crack the respective passwords.</p>
+
+        <div class="image-container">
+            <img src="help/image31.png" alt="Cracking ZIP Passwords">
+        </div>
+        
+        <h3 id="knowledge-base">29. Knowledge Base</h3>
+        <p>This is a local platform where various references or procedures can be saved. They are organized into different categories (Networking, Hardware, Linux, Printers, Apps, Programming, Others) for easier retrieval.</p>
+        
+        <div class="image-container">
+            <img src="help/image37.png" alt="KB">
+        </div>
+        
+        <h3 id="password-manager">30. Password Manager</h3>
+        <p>It is a utility that helps save passwords in an encrypted database.</p>
+        <p>First, a password must be created to access the database.</p>
+        
+        <div class="image-container">
+            <img src="help/image38.png" alt="password manager">
+        </div>
+        
+        <p>You can manage the saved passwords, either by deleting or changing them.</p>
+        
+        <div class="image-container">
+            <img src="help/image39.png" alt="password manager">
+        </div>
+        
+        <p>You can also generate a password randomly (using a strong algorithm) or by using only the characters entered in the first field.</p>
+        
+        <div class="image-container">
+            <img src="help/image40.png" alt="password manager">
+        </div>
+
+        <h3 id="pause-manager">31. Pause Manager</h3>
+        <p>This window helps you manage breaks within the IT team, especially if requests/tickets need to be allocated and you need to know who has returned from their break or not. You can create lists of people in the IT team using the JSON Generation menu. This file with a .json extension will be saved in the path specified in the 'ChooseLocationForPause.txt' file. We chose this method because if the file needs to be accessed on a server (so that all team members can view real-time break updates), for example, it is useful for the path to be variable (\192.....\files\ -> example of a path leading to a server).</p>
+
+        <div class="image-container">
+            <img src="help/image41.png" alt="pause manager">
+        </div>
+
+        <h3 id="task-manager">32. Task Manager</h3>
+        <p>This console is a simple task manager: it can terminate any running programs, display the percentage of memory usage, and show the percentage of data packets being transmitted/received over the network. There is also a diagram available.</p>
+
+        <div class="image-container">
+            <img src="help/image42.png" alt="Task Manager">
+        </div>
+
+        <div class="image-container">
+            <img src="help/image43.png" alt="Task Manager">
+        </div>
+
+        <h3 id="file-organizer">33. File Organizer</h3>
+        <p>It is a utility that helps you organize your folders into categories.</p>
+
+        <div class="image-container">
+            <img src="help/image47.png" alt="File Organizer">
+        </div>
+
+        <h3 id="whiteboard-presentation">34. Whiteboard Presentation</h3>
+        <p>This program is designed for those who create sketches or explanations using drawings or other images. You can import an image into this whiteboard, draw on it, and move it with the mouse by holding down the left click.</p>
+        <div class="image-container">
+            <img src="help/image48.png" alt="Whiteboard Presentation">
+        </div>
+        <div class="image-container">
+            <img src="help/image49.png" alt="Whiteboard Presentation">
+        </div>
+
+        <h3 id="contact-manager">35. Contact Manager</h3>
+        <p>This section is for recording the contact details of certain individuals. If you do not wish to complete a field, you can press the <b class="bold-black">SPACE</b>. To edit an entry, double-click on the entry, and a new menu will open allowing you to edit the selected entry.</p>
+        <div class="image-container">
+            <img src="help/image50.png" alt="Contact Manager">
+        </div>
+        <div class="image-container">
+            <img src="help/image51.png" alt="Contact Manager">
+        </div>
+
+        <h3 id="listener">36. Listener - Check Online/Offline Devices</h3>
+        <p>This application is developed to quickly check which devices are online and which are offline. These devices are clustered in a .json file and are grouped into specific categories (each grouping is determined by the user). Of course, that .json file can be created and also edited directly from the application. The refresh rate is 10 seconds.</p>
+        <div class="image-container">
+            <img src="help/image52.png" alt="Listener - Check Online/Offline Devices">
+        </div>
+
+        <br>
+        <p><b>These accounts are intended for public use, and access is restricted to prevent misuse of the application. End users do not have full access to all functionalities, including the Dev console, to avoid potential damage to the network, domain, or hardware.</b></p>
+        <!--  Alte lucruri ce poate face și utilizatorul final nu are acces: deblocare porturi în rețea folosind nmap și poți să creezi o instanță într-un VLAN anume, control avansat asupra rețelei, lucru cu regiștrii direct pe "hard", Terminal Emulator mult mai avansat care îți permite să faci mult mai multe lucruri atât în rețea, cât și în domeniu. (pentru curioși).-->
+        <br>
+        <br>
+        <br>
+        <p><b>I created a Launcher that facilitates running multiple accounts/applications simultaneously. For security reasons and to ensure that applications run more efficiently when executed separately, I decided that this Launcher would open multiple parallel sessions, which do not impact the application's performance. In other words, you can log in with multiple accounts in separate instances.</b></p>
+        
+    </div>
+
+    <br>
+    <div style="text-align: center; margin-top: 20px;">
+        <!-- <button class="btn" onclick="window.location.href='download.html'"> --> <!--  style="padding: 10px 20px; font-size: 16px; background-color: #ccff66; border: none; border-radius: 5px; cursor: pointer;" -->
+            <!-- Dwonload -->
+        <!-- </button> -->
+        <!-- <button class="btn" onclick="window.location.href='home.html'"> --> <!--  style="padding: 10px 20px; font-size: 16px; background-color: #ccff66; border: none; border-radius: 5px; cursor: pointer;" -->
+            <!-- Home -->
+        <!-- </button> -->
+    
+        <a class="contact-link" onclick="window.open('download.html', '_blank')">Download</a>
+        <a class="contact-link" onclick="window.open('home.html', '_blank')">Home</a>
+    </div>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <div class="content">
+    <p><i>It is recommended that for using the application, the screen zoom be set to 100%, especially for laptops. If the screen resolution is not set to 100%, you can follow these steps: right-click on the Multiapp.exe application -> Properties -> Change settings for all users -> Change high DPI settings -> and check the options in the last image. (Screenshots of the described procedure are provided below). The program will be intended for computers with a 64-bit architecture.</i></p>
+        <div class="image-container">
+            <img src="help/image44.png" alt="Resolution">
+        </div>
+        <div class="image-container">
+            <img src="help/image45.png" alt="Resolution">
+        </div>
+        <div class="image-container">
+            <img src="help/image46.png" alt="Resolution">
+        </div>
+        <br>
+        <p><i><b class="bold-red">!<b class="bold-black"><i>It is very important to read the terms and conditions when running the installer.</b><b class="bold-red">!</b></i></p>
+		<br>
+		<br>
+        <p><b class="bold-black">If the program's license key does not work in the validation field, you can use the <b class="bold-red">Check Serial Number</b> kit. If the license key is also not valid in that application, please contact me at <b class="bold-green">tudor.marmureanu@muap.ro</b>. If the license key is valid but you still cannot use it in the application, it is recommended to use the <b class="bold-red">repair</b> kit.</b></p>
+    </div>
+    <button id="scrollButton" onclick="scrollToBottom()">▼</button>
+    <!-- <button id="scrollButton" onclick="scrollToBottom()">↓</button> -->
+	<!-- <button id="CVButton" onclick="window.open('CV.html', '_blank')">CV</button> -->
+<div class="fog"></div> <!-- Div-ul pentru efectul de ceață -->
+
+<script>
+    function scrollToBottom() {
+        window.scrollTo({
+            top: document.body.scrollHeight,
+            behavior: 'smooth'
+        });
+    }
+
+    function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function toggleMenu() {
+        document.body.classList.toggle('menu-open');
+    }
+
+    document.getElementById('search-input').addEventListener('input', function(event) {
+    const searchTerm = event.target.value.toLowerCase();
+    const sections = document.querySelectorAll('.content h3, .content p, .content img');
+
+    sections.forEach(section => {
+        // Dacă nu există deja textul original salvat, salvează-l
+        if (!section.hasAttribute('data-original-text')) {
+            if (section.tagName === 'IMG') {
+                section.setAttribute('data-original-src', section.src);
+                section.setAttribute('data-original-alt', section.alt);
+            } else {
+                section.setAttribute('data-original-text', section.innerHTML);
+            }
+        }
+
+        if (section.tagName === 'IMG') {
+            // Gestionarea imaginilor
+            const originalAlt = section.getAttribute('data-original-alt').toLowerCase();
+            if (searchTerm && originalAlt.includes(searchTerm)) {
+                section.style.display = '';
+            } else {
+                section.style.display = 'none';
+            }
+        } else {
+            // Gestionarea textului
+            let originalText = section.getAttribute('data-original-text');
+            let text = originalText.toLowerCase();
+
+            if (searchTerm && text.includes(searchTerm)) {
+                section.style.display = '';
+
+                // Evidențierea textului
+                const highlightedText = originalText.replace(new RegExp(`(${searchTerm})`, 'gi'), '<span class="highlight">$1</span>');
+                section.innerHTML = highlightedText;
+
+                if (section.tagName === 'H3') {
+                    const nextP = section.nextElementSibling;
+                    if (nextP && nextP.tagName === 'P') {
+                        nextP.style.display = '';
+                    }
+                }
+            } else {
+                // Restaurare text original pentru secțiunile ascunse
+                section.style.display = 'none';
+
+                if (section.tagName === 'H3') {
+                    const nextP = section.nextElementSibling;
+                    if (nextP && nextP.tagName === 'P') {
+                        nextP.style.display = 'none';
+                    }
+                }
+
+                section.innerHTML = originalText;
+            }
+        }
+    });
+
+    // Restaurare text original și imagini când caseta de căutare este goală
+    if (!searchTerm) {
+        sections.forEach(section => {
+            if (section.tagName === 'IMG') {
+                section.style.display = '';
+                section.src = section.getAttribute('data-original-src');
+                section.alt = section.getAttribute('data-original-alt');
+            } else {
+                section.innerHTML = section.getAttribute('data-original-text');
+                section.style.display = '';
+
+                if (section.tagName === 'H3') {
+                    const nextP = section.nextElementSibling;
+                    if (nextP && nextP.tagName === 'P') {
+                        nextP.style.display = '';
+                    }
+                }
+            }
+        });
+    }
+});
+
+document.getElementById('clear-button').addEventListener('click', function() {
+    const searchInput = document.getElementById('search-input');
+    searchInput.value = '';
+    searchInput.dispatchEvent(new Event('input'));
+});
+</script>
+
+</body>
+</html>

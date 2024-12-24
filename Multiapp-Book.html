@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=1024">
+    <link rel="icon" type="image/png" href="help/logoKB.png">
+    <title>KB - Multiapp Help</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #181818;
+            color: #f5f5f5;
+            display: flex;
+            height: 100vh;
+            flex-direction: column;
+        }
+
+        header {
+            background-color: #222;
+            color: white;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header input[type="text"] {
+            padding: 10px;
+            border-radius: 5px;
+            border: none;
+            width: 300px;
+        }
+
+        .header .clear-btn {
+            background-color: #61dafb;
+            color: #000;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-left: 10px;
+        }
+
+        .header .clear-btn:hover {
+            background-color: #ffffff;
+        }
+
+        header .logo img {
+            height: 40px;
+        }
+
+        header .menu {
+            display: flex;
+            gap: 15px;
+        }
+
+        header .menu a {
+            color: #f5f5f5;
+            text-decoration: none;
+            font-size: 16px;
+        }
+
+        .container {
+            display: flex;
+            flex: 1;
+        }
+
+        .sidebar {
+            width: 20%;
+            background-color: #333;
+            padding: 20px;
+            overflow-y: auto;
+        }
+
+        .sidebar h3 {
+            margin-bottom: 20px;
+            color: #f5f5f5;
+        }
+
+        .sidebar ul {
+            list-style-type: none;
+        }
+
+        .sidebar ul li {
+            margin: 10px 0;
+        }
+
+        .sidebar ul li a {
+            text-decoration: none;
+            color: #66b2ff;
+            font-size: 16px;
+        }
+
+        .sidebar ul li a:hover {
+            color: #f5f5f5;
+        }
+
+        .content {
+            width: 60%;
+            padding: 20px;
+            background-color: #222;
+            overflow-y: auto;
+        }
+
+        .content h1 {
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: #06ccfd;
+        }
+
+        .content h2 {
+            font-size: 20px;
+            margin-bottom: 20px;
+            color: #06ccfd;
+        }
+
+        .content p {
+            font-size: 18px;
+            line-height: 1.6;
+            color: #f5f5f5;
+        }
+
+        .right-panel {
+            width: 20%;
+            background-color: #333;
+            padding: 20px;
+            overflow-y: auto;
+        }
+
+        .right-panel h4 {
+            font-size: 16px;
+            margin-bottom: 10px;
+            color: #f5f5f5;
+        }
+
+        .right-panel ul {
+            list-style-type: none;
+        }
+
+        .right-panel ul li {
+            margin: 10px 0;
+        }
+
+        /* Stilizare pentru link-urile dezactivate */
+        .right-panel ul li a.disabled {
+            color: #888;
+            pointer-events: none; /* Dezactivează click-ul */
+            cursor: not-allowed;
+        }
+
+        footer {
+            background-color: #222;
+            color: white;
+            text-align: center;
+            padding: 10px;
+        }
+
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo">
+            <img src="help/logoKB.png" alt="Logo">
+        </div>
+        <div class="header">
+            <input type="text" id="search-input" placeholder="Search...">
+            <button id="clear-button" class="clear-btn">Clear</button>
+        </div>
+        <div class="menu">
+            <a href="books.html">Books</a>
+            <a href="download.html">Download</a>
+            <a href="contact.html">Contact</a>
+            <a href="home.html">Home</a>
+        </div>
+    </header>
+
+    <div class="container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <h3>Multiapp.exe Help Book Navigation</h3>
+            <ul>
+                <li><a href="Multiapp-Book.html" style="color: aqua;">Multiapp Help</a></li>
+                <li><a href="Multiapp-Specifications.html">Multiapp System Requirements</a></li>
+                <li><a href="Multiapp-Screen-Resolution.html">Multiapp Screen Resolution</a></li>
+                <li><a href="Multiapp-Licensing-Products.html">Multiapp Licensing Products</a></li>
+                <li><a href="Multiapp-Refund-Policy.html">Multiapp Refund Policy</a></li>
+                <li><a href="Multiapp-Dev-Tag.html">Multiapp Dev Tag</a></li>
+                <li><a href="Multiapp-New-Accounts.html">Multiapp New Accounts</a></li>
+            </ul>
+        </div>
+
+        <!-- Content -->
+        <div class="content">
+            <h1>Multiapp.exe Help Section</h1>
+            <p><strong>Multiapp</strong> is a powerful tool designed for managing activities in an IT or IT support department. This guide explains each functionality of the application and how public accounts, saved in the <b><i>Accounts.txt</i></b> file, can be used.</p><br><br>
+
+        <h2>Login</h2>
+        <p><strong>- Public accounts</strong>: Saved in 'Accounts.txt'.</p>
+        <p><strong><i>- The following accounts also exist, but they are used for developer mode and end users do not have access to them.</i></strong></p><br>
+
+        <img src="help/image1.png" alt="Login" style="display: block; margin: 0 auto;"><br><br>
+
+        <h2>Features</h2>
+        
+        <img src="help/image2.png" alt="App" style="display: block; margin: 0 auto;"><br><br>
+
+        <h2 id="explorer-mode">1. Explorer Mode</h2>
+        <p>It allows for the dynamic copying of folders/files locally, but not from a server or network location. Essentially, the user will save the local paths in the corresponding text files, and if they need the process to be automatic, the parser will know to search each path line by line, saving the user time for future uses. It's like navigating manually in File Explorer, but the paths chosen by the user will be saved for easier copying.</p><br><br>
+
+        <h2 id="aplicatie-copiere">2. Copy App</h2>
+        <p>Copy App: This is an application that manages paths already registered by the IT department for copying files from a network location (on a server). This process is useful for configuring a new computer. The first step after introducing the new PC into the domain is to copy the necessary programs to ensure proper operation and meet the requirements specified in the IT department's equipment sheet. The destination folder will be C:\KIT. There is a menu of buttons on the right that correlates with the equipment sheet: for example, if you are copying certain programs for a directory, the checkboxes for the programs to be copied will be automatically selected. There is also a button that opens a mini network console, useful for checking whether files are being copied from a network location or not. To configure this copy application from scratch, you need to edit the paths.txt and profiles.json files. Typically, when the application does not interact much with the internet, you will see 0.00 as values (we decided to have exactly 2 decimal places).</p><br>
+        
+        <img src="help/image3.png" alt="Copy App" style="display: block; margin: 0 auto; width: 870px; height: 600px;"><br><br>
+        
+        <p>Compared to traditional copying, these two methods of copying are performed more efficiently (18.8% ~ 20%), as the locations are already precompiled and the bits are directly allocated to the destination file.</p><br><br>
+
+        <h2 id="get-ip-mac">3. Get IP & Mac</h2>
+        <p>Display the IP and MAC address of your PC. Additionally, display the MAC address of a device connected to the VLAN or LAN.</p><br>
+
+        <img src="help/image4.png" alt="Get IP & Mac" style="display: block; margin: 0 auto;"><br><br>
+
+        <h2 id="port-scanner">4. Port Scanner</h2>
+        <p>Display all open ports of any device on the network.</p><br>
+
+        <img src="help/image5.png" alt="Port Scanner" style="display: block; margin: 0 auto;"><br><br>
+
+        <h2 id="ping-tool">5. Ping Tool</h2>
+        <p>Execute a Ping command to certain devices and can display which ports are open.</p><br>
+
+        <img src="help/image6.png" alt="Ping Tool" style="display: block; margin: 0 auto; width: 870px; height: 600px;"><br><br>
+
+        <h2 id="find-replace">6. Find & Replace</h2>
+        <p>Search for a string of characters in your text and replace it with another string of characters.</p><br>
+
+        <img src="help/image7.png" alt="Find & Replace" style="display: block; margin: 0 auto; width: 870px; height: 600px;"><br><br>
+
+        <h2 id="screen-events">7. Screen Events</h2>
+        <p>Screen recording & screen shoot.</p><br>
+
+        <img src="help/image8.png" alt="Screen Events" style="display: block; margin: 0 auto;"><br><br>
+
+        <h2 id="create-extract-zip">8. Create/Extract Zip</h2>
+        <p>Create/extract an archive and can also extract just a selection from an archive. It works only with zip files.</p><br>
+
+        <img src="help/image9.png" alt="Create/Extract Zip" style="display: block; margin: 0 auto;"><br><br>
+
+        <h2 id="equipment-sheet">9. Open the Equipment Sheet</h2>
+        <p>It is assumed that the equipment sheet is an Excel file. This tool will help you open the sheet without needing Office installed on the new PC.</p><br>
+
+        <img src="help/image10.png" alt="Equipment Sheet" style="display: block; margin: 0 auto; width: 870px; height: 600px;"><br><br>
+
+        <h2 id="comparator">10. Comparator</h2>
+        <p>Compare 2 files or 2 folders to identify the differences.</p><br>
+
+        <img src="help/image33.png" alt="Comparator" style="display: block; margin: 0 auto; width: 870px; height: 600px;"><br><br>
+
+        <h2 id="text-editor">11. Text Editor</h2>
+        <p>It is a copy of the Notepad program, useful for quickly jotting down notes.</p><br>
+
+        <img src="help/image11.png" alt="Text Editor" style="display: block; margin: 0 auto;"><br><br>
+
+        <h2 id="whiteboard">12. Whiteboard</h2>
+        <p>A mini Paint for diagrams/drawing.</p><br>
+
+        <img src="help/image12.png" alt="Whiteboard" style="display: block; margin: 0 auto;"><br><br>
+
+        <h2 id="pdf-to-word">13. PDF to Word</h2>
+        <p>Convert a PDF file to Word and also save the images from that Word file separately.</p><br>
+
+        <img src="help/image13.png" alt="PDF to Word" style="display: block; margin: 0 auto;"><br><br>
+
+        <h2 id="pdf-tools">14. PDF Tools</h2>
+        <p>Provides various tools for manipulating a PDF file: encryption/password protection, image extraction, page rotation, splitting pages into multiple PDF files, and deleting pages from a PDF file.</p><br>
+
+        <img src="help/image14.png" alt="PDF Tools" style="display: block; margin: 0 auto;"><br><br>
+        
+        <h2 id="backup-utility">15. Backup Utility</h2>
+        <p>Provides the functionality to create a backup for sensitive data or certain data that is about to be modified and is quite important. The user decides when it is useful to use this utility.</p><br>
+
+        <img src="help/image34.png" alt="Backup Utility" style="display: block; margin: 0 auto;"><br><br>
+        
+        <h2 id="rename-utility">16. Rename Utility</h2>
+        <p>Rename specific files in a selected folder.</p><br>
+
+        <img src="help/image35.png" alt="Rename Utility" style="display: block; margin: 0 auto;"><br><br>
+
+        <h2 id="system-info">17. System Info</h2>
+        <p>Displays various system information and allows you to perform several tasks: open the power plan, join the PC to a domain, generate a battery report, open applications in the Control Panel, and even display the Windows license and service tag.</p><br>
+
+        <img src="help/image15.png" alt="System Info" style="display: block; margin: 0 auto; width: 870px; height: 600px;"><br><br>
+
+        <h2 id="real-time-system-info">18. Real time System Information</h2>
+        <p>Displays real-time information about your system.</p><br>
+
+        <img src="help/image16.png" alt="Real time system information 1" style="display: block; margin: 0 auto;"><br><br>
+        <img src="help/image17.png" alt="Real time system information 2" style="display: block; margin: 0 auto;"><br><br>
+        <img src="help/image18.png" alt="Real time system information 3" style="display: block; margin: 0 auto;"><br><br>
+        <img src="help/image19.png" alt="Real time system information 4" style="display: block; margin: 0 auto;"><br><br>
+
+        <h2 id="network-console">19. Network Console</h2>
+        <p>Displays various information about your network: data packets sent or received, saved Wi-Fi passwords, who is connected to the LAN, and other network details.</p><br>
+
+        <img src="help/image20.png" alt="Network Console 1" style="display: block; margin: 0 auto;"><br><br>
+        <img src="help/image21.png" alt="Network Console 2" style="display: block; margin: 0 auto;"><br><br>
+
+        <h2 id="ai-chatbot">20. AI Chatbot</h2>
+        <p>It is your virtual assistant for the application. It explains the necessary information for full operation, including network mappings.</p><br>
+
+        <img src="help/image22.png" alt="AI Chatbot" style="display: block; margin: 0 auto;"><br><br>
+
+        <h2 id="read-me-first">21. Read me first</h2>
+        <p>Provides a concise range of information to use the application correctly and to avoid potential errors.</p><br><br>
+
+        <h2 id="copying-files">22. Copying files</h2>
+        <p>If only file copying is needed, there is a special account: user/nopass.</p><br>
+
+        <img src="help/image32.png" alt="Guest Account" style="display: block; margin: 0 auto;"><br><br>
+
+        <h2 id="terminal-emulator">23. Terminal Emulator</h2>
+        <p>Simulates a normal CMD and even a Linux interface. Access is restricted according to security policies.</p>
+        <p>To use <b>Nmap</b>, you must have written permission from the networking department managers or the IT director/manager, and we will grant access.</p><br>
+
+        <img src="help/image23.png" alt="Terminal Emulator" style="display: block; margin: 0 auto;"><br><br>
+
+        <h2 id="generating-passwords">24. Generating Passwords</h2>
+        <p>There are 2 accounts for generating passwords: passgen/passgen and passgenV2/passgenV2.</p><br>
+
+        <img src="help/image24.png" alt="Generating Passwords 1" style="display: block; margin: 0 auto;"><br><br>
+        <img src="help/image25.png" alt="Generating Passwords 2" style="display: block; margin: 0 auto;"><br><br>
+
+        <h2 id="network-bandwidth">25. Network Bandwidth Monitoring</h2>
+        <p>This account generates a real-time graph of your network's behavior.</p><br>
+
+        <img src="help/image27.png" alt="Network Bandwidth Monitoring" style="display: block; margin: 0 auto;"><br><br>
+
+        <h2 id="file-encryption">26. File Encryption</h2>
+        <p>This application encrypts data using high-complexity algorithms.</p><br>
+
+        <img src="help/image28.png" alt="File Encryption" style="display: block; margin: 0 auto;"><br><br>
+
+        <h2 id="testing">27. Testing</h2>
+        <p>This application allows for creating tests with up to 4 answer options for each question.</p><br>
+
+        <img src="help/image29.png" alt="Testing 1" style="display: block; margin: 0 auto; width: 870px; height: 600px;"><br><br>
+        <img src="help/image30.png" alt="Testing 2" style="display: block; margin: 0 auto; width: 870px; height: 600px;"><br><br>
+
+        <h2 id="cracking-ZIP">28. Cracking ZIP Passwords</h2>
+        <p>The account allows access to password-protected ZIP archives. The implemented algorithms crack the respective passwords.</p><br>
+
+        <img src="help/image31.png" alt="Cracking ZIP Passwords" style="display: block; margin: 0 auto; width: 870px; height: 600px;"><br><br>
+        
+        <h2 id="knowledge-base">29. Knowledge Base</h2>
+        <p>This is a local platform where various references or procedures can be saved. They are organized into different categories (Networking, Hardware, Linux, Printers, Apps, Programming, Others) for easier retrieval.</p><br>
+        
+        <img src="help/image37.png" alt="KB" style="display: block; margin: 0 auto; width: 870px; height: 600px;"><br><br>
+        
+        <h2 id="password-manager">30. Password Manager</h2>
+        <p>It is a utility that helps save passwords in an encrypted database.</p>
+        <p>First, a password must be created to access the database.</p><br>
+        
+        <img src="help/image38.png" alt="password manager" style="display: block; margin: 0 auto;"><br><br>
+        
+        <p>You can manage the saved passwords, either by deleting or changing them.</p><br>
+        
+        <img src="help/image39.png" alt="password manager" style="display: block; margin: 0 auto;"><br><br>
+        
+        <p>You can also generate a password randomly (using a strong algorithm) or by using only the characters entered in the first field.</p><br>
+        
+        <img src="help/image40.png" alt="password manager" style="display: block; margin: 0 auto;"><br><br>
+
+        <h2 id="pause-manager">31. Pause Manager</h2>
+        <p>This window helps you manage breaks within the IT team, especially if requests/tickets need to be allocated and you need to know who has returned from their break or not. You can create lists of people in the IT team using the JSON Generation menu. This file with a .json extension will be saved in the path specified in the 'ChooseLocationForPause.txt' file. We chose this method because if the file needs to be accessed on a server (so that all team members can view real-time break updates), for example, it is useful for the path to be variable (\192.....\files\ -> example of a path leading to a server).</p><br>
+
+        <img src="help/image41.png" alt="pause manager" style="display: block; margin: 0 auto;"><br><br>
+
+        <h2 id="task-manager">32. Task Manager</h2>
+        <p>This console is a simple task manager: it can terminate any running programs, display the percentage of memory usage, and show the percentage of data packets being transmitted/received over the network. There is also a diagram available.</p>
+
+        <img src="help/image42.png" alt="Task Manager" style="display: block; margin: 0 auto;"><br><br>
+
+        <img src="help/image43.png" alt="Task Manager" style="display: block; margin: 0 auto;"><br><br>
+
+        <h2 id="file-organizer">33. File Organizer</h2>
+        <p>It is a utility that helps you organize your folders into categories.</p><br>
+
+        <img src="help/image47.png" alt="File Organizer" style="display: block; margin: 0 auto;"><br><br>
+
+        <h2 id="whiteboard-presentation">34. Whiteboard Presentation</h2>
+        <p>This program is designed for those who create sketches or explanations using drawings or other images. You can import an image into this whiteboard, draw on it, and move it with the mouse by holding down the left click.</p><br>
+        <img src="help/image48.png" alt="Whiteboard Presentation" style="display: block; margin: 0 auto; width: 870px; height: 600px;"><br><br>
+        <img src="help/image49.png" alt="Whiteboard Presentation" style="display: block; margin: 0 auto; width: 870px; height: 600px;"><br><br>
+
+        <h2 id="contact-manager">35. Contact Manager</h2>
+        <p>This section is for recording the contact details of certain individuals. If you do not wish to complete a field, you can press the <b class="bold-black">SPACE</b>. To edit an entry, double-click on the entry, and a new menu will open allowing you to edit the selected entry.</p><br>
+        <img src="help/image50.png" alt="Contact Manager" style="display: block; margin: 0 auto; width: 870px; height: 600px;"><br><br>
+        <img src="help/image51.png" alt="Contact Manager" style="display: block; margin: 0 auto;"><br><br>
+
+        <h2 id="listener">36. Listener - Check Online/Offline Devices</h2>
+        <p>This application is developed to quickly check which devices are online and which are offline. These devices are clustered in a .json file and are grouped into specific categories (each grouping is determined by the user). Of course, that .json file can be created and also edited directly from the application. The refresh rate is 10 seconds.</p><br>
+        <img src="help/image52.png" alt="Listener - Check Online/Offline Devices" style="display: block; margin: 0 auto; width: 870px; height: 600px;"><br><br>
+
+        <br>
+        
+</div>
+        <!-- Right Panel -->
+        <div class="right-panel">
+            <h4>Actions</h4>
+            <ul>
+                <li><a href="#" class="disabled">Edit</a></li>
+                <li><a href="#" class="disabled">Copy</a></li>
+                <li><a href="#" class="disabled">Move</a></li>
+                <li><a href="#" class="disabled">Delete</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <footer>
+        © 2024 Muap - Knowledge Base
+    </footer>
+    
+    <script>
+        document.getElementById('search-input').addEventListener('input', function(event) {
+            const searchTerm = event.target.value.toLowerCase();
+            const sections = document.querySelectorAll('.content h2, .content p, .content img');
+
+            sections.forEach(section => {
+                if (!section.hasAttribute('data-original-text')) {
+                    if (section.tagName === 'IMG') {
+                        section.setAttribute('data-original-src', section.src);
+                        section.setAttribute('data-original-alt', section.alt);
+                    } else {
+                        section.setAttribute('data-original-text', section.innerHTML);
+                    }
+                }
+
+                if (section.tagName === 'IMG') {
+                    const originalAlt = section.getAttribute('data-original-alt').toLowerCase();
+                    if (searchTerm && originalAlt.includes(searchTerm)) {
+                        section.style.display = '';
+                    } else {
+                        section.style.display = 'none';
+                    }
+                } else {
+                    let originalText = section.getAttribute('data-original-text');
+                    let text = originalText.toLowerCase();
+
+                    if (searchTerm && text.includes(searchTerm)) {
+                        section.style.display = '';
+                        const highlightedText = originalText.replace(new RegExp(`(${searchTerm})`, 'gi'), '<span class="highlight">$1</span>');
+                        section.innerHTML = highlightedText;
+
+                        if (section.tagName === 'H2') {
+                            const nextP = section.nextElementSibling;
+                            if (nextP && nextP.tagName === 'P') {
+                                nextP.style.display = '';
+                            }
+                        }
+                    } else {
+                        section.style.display = 'none';
+                        if (section.tagName === 'H2') {
+                            const nextP = section.nextElementSibling;
+                            if (nextP && nextP.tagName === 'P') {
+                                nextP.style.display = 'none';
+                            }
+                        }
+                        section.innerHTML = originalText;
+                    }
+                }
+            });
+
+            if (!searchTerm) {
+                sections.forEach(section => {
+                    if (section.tagName === 'IMG') {
+                        section.style.display = '';
+                        section.src = section.getAttribute('data-original-src');
+                        section.alt = section.getAttribute('data-original-alt');
+                    } else {
+                        section.innerHTML = section.getAttribute('data-original-text');
+                        section.style.display = '';
+
+                        if (section.tagName === 'H2') {
+                            const nextP = section.nextElementSibling;
+                            if (nextP && nextP.tagName === 'P') {
+                                nextP.style.display = '';
+                            }
+                        }
+                    }
+                });
+            }
+        });
+
+        function clearSearch() {
+            document.getElementById('search-input').value = '';
+            document.getElementById('search-input').dispatchEvent(new Event('input'));
+        }
+
+        document.getElementById('clear-button').addEventListener('click', clearSearch);
+    </script>
+</body>
+</html>

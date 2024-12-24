@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=1024">
+    <title>Pomodoro Timer</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: linear-gradient(to right, #00ffff, #ff00ff);
+            font-family: 'Arial', sans-serif;
+        }
+        .container {
+            text-align: center;
+            color: #fff;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+            position: relative;
+        }
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: #00ffff;
+            text-shadow: 0 0 10px #00ffff;
+        }
+        .timer {
+            font-size: 4rem;
+            margin: 20px 0;
+            color: #ff00ff;
+            text-shadow: 0 0 10px #ff00ff;
+        }
+        .status {
+            font-size: 1.5rem;
+            margin: 10px 0;
+            color: #fff;
+        }
+        button {
+            background: #00ffff;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            margin: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background 0.3s, transform 0.3s;
+        }
+        button:hover {
+            background: #ff00ff;
+            transform: scale(1.1);
+        }
+        button:active {
+            background: #00ffff;
+            transform: scale(1);
+        }
+        .animation {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, rgba(0, 255, 255, 0.3), rgba(255, 0, 255, 0.3));
+            pointer-events: none;
+            animation: pulse 2s infinite;
+            border-radius: 15px;
+            z-index: -1;
+        }
+        @keyframes pulse {
+            0% {
+                opacity: 0.2;
+            }
+            50% {
+                opacity: 0.5;
+            }
+            100% {
+                opacity: 0.2;
+            }
+        }
+        .settings {
+            margin: 20px 0;
+            color: #fff;
+        }
+        .settings label {
+            display: block;
+            margin-bottom: 10px;
+            font-size: 1rem;
+        }
+        .settings input {
+            width: 80px;
+            padding: 10px;
+            margin: 5px 0;
+            border: 2px solid #00ffff;
+            border-radius: 5px;
+            background: rgba(0, 0, 0, 0.5);
+            color: #fff;
+            font-size: 1rem;
+            text-align: center;
+            transition: border-color 0.3s, background-color 0.3s;
+        }
+        .settings input:focus {
+            border-color: #ff00ff;
+            background-color: rgba(0, 0, 0, 0.7);
+            outline: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Pomodoro Timer</h1>
+        <div class="settings">
+            <label for="work-time">Work Time (minutes):</label>
+            <input type="number" id="work-time" value="25" min="1" onchange="updateSettings()">
+            <label for="break-time">Break Time (minutes):</label>
+            <input type="number" id="break-time" value="5" min="1" onchange="updateSettings()">
+        </div>
+        <div class="status" id="status">Work Time: 25 minutes</div>
+        <div class="timer" id="timer">25:00</div>
+        <button onclick="startTimer()">Start</button>
+        <button onclick="resetTimer()">Reset</button>
+    </div>
+    <div class="animation"></div>
+
+    <script>
+        let timer;
+        let isRunning = false;
+        let isWorkSession = true;
+        let workTime = 25 * 60;
+        let breakTime = 5 * 60;
+        let timeLeft = workTime;
+
+        function updateTimer() {
+            const minutes = Math.floor(timeLeft / 60);
+            const seconds = timeLeft % 60;
+            document.getElementById('timer').textContent = `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+        }
+
+        function updateSettings() {
+            workTime = document.getElementById('work-time').value * 60;
+            breakTime = document.getElementById('break-time').value * 60;
+            if (!isRunning) {
+                timeLeft = isWorkSession ? workTime : breakTime;
+                updateTimer();
+                document.getElementById('status').textContent = isWorkSession 
+                    ? `Work Time: ${document.getElementById('work-time').value} minutes`
+                    : `Break Time: ${document.getElementById('break-time').value} minutes`;
+            }
+        }
+
+        function startTimer() {
+            if (isRunning) return;
+            updateSettings(); // Ensure settings are updated before starting
+            timeLeft = isWorkSession ? workTime : breakTime;
+            isRunning = true;
+            timer = setInterval(() => {
+                if (timeLeft <= 0) {
+                    clearInterval(timer);
+                    isRunning = false;
+                    isWorkSession = !isWorkSession;
+                    timeLeft = isWorkSession ? workTime : breakTime;
+                    updateTimer();
+                    document.getElementById('status').textContent = isWorkSession 
+                        ? `Work Time: ${document.getElementById('work-time').value} minutes`
+                        : `Break Time: ${document.getElementById('break-time').value} minutes`;
+                    alert(isWorkSession ? "Work session ended!" : "Break time ended!");
+                    return;
+                }
+                timeLeft--;
+                updateTimer();
+            }, 1000);
+        }
+
+        function resetTimer() {
+            clearInterval(timer);
+            isRunning = false;
+            updateSettings(); // Ensure settings are updated before resetting
+            timeLeft = workTime;
+            isWorkSession = true;
+            updateTimer();
+        }
+
+        updateTimer();
+    </script>
+</body>
+</html>

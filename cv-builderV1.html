@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <!-- <meta http-equiv="X-UA-Compatible" content="IE=edge" /> -->
+    <meta name="viewport" content="width=1024">
+    <title>CV Builder Theme 1</title>
+    <link rel="icon" type="image/png" href="help/CV.png">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-image: linear-gradient(rgb(30, 30, 30), rgb(80, 80, 80));
+            background-attachment: fixed;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        .resume-builder {
+            padding: 27px 100px;
+        }
+
+        .container {
+            padding: 10px 30px;
+            background: rgb(240, 240, 240);
+            border-radius: 10px;
+            height: auto;
+            width: 60%;
+            margin: auto;
+        }
+
+        .container h1 {
+            text-align: center;
+            background-color: rgb(50, 50, 50);
+            padding: 10px;
+            color: white;
+            margin-bottom: 20px;
+        }
+
+        input,
+        textarea {
+            background-color: transparent;
+            margin: 10px 0;
+            padding: 5px;
+            outline: none;
+            border: none;
+            border-bottom: 2px solid black;
+            display: block;
+            width: 100%;
+        }
+
+        button {
+            border: none;
+            background-color: white;
+            padding: 15px;
+            border-radius: 7px;
+            font-weight: bold;
+            cursor: pointer;
+            display: block;
+            margin: auto;
+            margin-bottom: 20px;
+        }
+
+        button:hover {
+            font-size: medium;
+        }
+
+        .output-container {
+            width: 60%;
+            margin: 10px auto;
+        }
+
+        .output {
+            background-color: white;
+            border: 2px solid white;
+            margin-bottom: 10px;
+        }
+
+        .heading {
+            padding: 20px;
+            text-align: center;
+            color: white;
+            background-color: rgb(50, 50, 50);
+            text-transform: uppercase;
+        }
+
+        .heading h4 {
+            color: rgb(200, 200, 200);
+        }
+
+        .info {
+            display: flex;
+            padding: 20px;
+        }
+
+        .left {
+            width: 40%;
+            border-right: 2px dashed black;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-evenly;
+        }
+
+        .right {
+            width: 60%;
+            padding-left: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-evenly;
+        }
+
+        .box {
+            margin: 10px 0;
+            padding: 5px 10px;
+            height: auto;
+            overflow-wrap: break-word;
+        }
+
+        .box h2,
+        .box p {
+            margin-bottom: 5px;
+        }
+
+        .tip {
+            font-size: small;
+            color: gray;
+            text-align: center;
+        }
+
+        .credit {
+            text-align: center;
+            font-weight: bold;
+            padding: 10px 3px;
+            color: rgb(80, 80, 80);
+        }
+
+        a {
+            color: black;
+        }
+
+        a:hover {
+            color: rgb(247, 28, 12);
+            font-weight: bold;
+        }
+
+        @media screen and (max-width: 920px) {
+            .container {
+                width: 100%;
+            }
+
+            .output-container {
+                width: 87%;
+            }
+        }
+
+        @media screen and (max-width: 600px) {
+            .resume-builder {
+                padding: 10px 30px;
+            }
+
+            h1 {
+                font-size: 160%;
+            }
+
+            .info {
+                flex-direction: column;
+            }
+
+            .left {
+                border-right: none;
+                width: 100%;
+            }
+
+            .right {
+                padding-left: 0;
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <section class="resume-builder">
+        <div class="container">
+            <h1>CV Builder</h1>
+            <div class="resume_container">
+                <form class="inputField">
+                    <input type="text" name="name" placeholder="Your Name" oninput="updateResume()" />
+                    <input type="text" name="title" placeholder="Title/Sub Heading" oninput="updateResume()" />
+                    <textarea name="work_experience" placeholder="Work Experience" cols="40" rows="3" oninput="updateResume()"></textarea>
+                    <textarea name="academic_details" placeholder="Academic Details" cols="40" rows="3" oninput="updateResume()"></textarea>
+                    <input type="text" placeholder="Objective" name="objective" oninput="updateResume()" />
+                    <textarea name="skills" placeholder="Skills" cols="40" rows="3" oninput="updateResume()"></textarea>
+                    <textarea name="projects" placeholder="Projects" cols="40" rows="3" oninput="updateResume()"></textarea>
+                    <textarea name="achievements" placeholder="Achievements" cols="40" rows="3" oninput="updateResume()"></textarea>
+                    <textarea name="contact" placeholder="Contact Information" cols="40" rows="3" oninput="updateResume()"></textarea>
+                </form>
+            </div>
+            <p class="credit">
+                Created by <b>Tudor Marmureanu</b>
+            </p>
+            <p class="tip">
+                **You can use markup in the text area for text decoration**
+            </p><br>
+
+            <button onclick="openPreview()">Preview CV in New Page</button>
+            <button onclick="generatePDF()">Generate PDF</button>
+        </div>
+    </section>
+
+    <div class="output-container" id="resumePreview">
+        <div class="output">
+            <div class="heading">
+                <h1 id="resumeName">Your Name</h1>
+                <h4 id="resumeTitle">Title/Sub Heading</h4>
+            </div>
+            <div class="info">
+                <div class="left">
+                    <div class="box">
+                        <h2>Objective</h2>
+                        <p id="resumeObjective">Objective</p>
+                    </div>
+                    <div class="box">
+                        <h2>Skills</h2>
+                        <p id="resumeSkills">Skills</p>
+                    </div>
+                    <div class="box">
+                        <h2>Academic Details</h2>
+                        <p id="resumeAcademicDetails">Academic Details</p>
+                    </div>
+                    <div class="box">
+                        <h2>Contact</h2>
+                        <p id="resumeContact">Contact Information</p>
+                    </div>
+                </div>
+                <div class="right">
+                    <div class="box">
+                        <h2>Work Experience</h2>
+                        <p id="resumeWorkExperience">Work Experience</p>
+                    </div>
+                    <div class="box">
+                        <h2>Achievements</h2>
+                        <p id="resumeAchievements">Achievements</p>
+                    </div>
+                    <div class="box">
+                        <h2>Projects</h2>
+                        <p id="resumeProjects">Projects</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="pdf_script.js"></script>
+
+    <script>
+        function updateResume() {
+            const inputField = document.querySelector(".inputField");
+
+            document.getElementById("resumeName").innerText = inputField["name"].value || "Your Name";
+            document.getElementById("resumeTitle").innerText = inputField["title"].value || "Title/Sub Heading";
+            document.getElementById("resumeObjective").innerText = inputField["objective"].value || "Objective";
+            document.getElementById("resumeSkills").innerText = inputField["skills"].value || "Skills";
+            document.getElementById("resumeAcademicDetails").innerText = inputField["academic_details"].value || "Academic Details";
+            document.getElementById("resumeContact").innerText = inputField["contact"].value || "Contact Information";
+            document.getElementById("resumeWorkExperience").innerText = inputField["work_experience"].value || "Work Experience";
+            document.getElementById("resumeAchievements").innerText = inputField["achievements"].value || "Achievements";
+            document.getElementById("resumeProjects").innerText = inputField["projects"].value || "Projects";
+        }
+
+        function openPreview() {
+            const outputHTML = document.querySelector('.output-container').innerHTML;
+            const previewWindow = window.open("", "Preview", "width=800,height=600");
+            previewWindow.document.open();
+            previewWindow.document.write(`
+                <!DOCTYPE html>
+                <html lang="en">
+                <head>
+                    <meta charset="UTF-8">
+                    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                    <title>CV Preview</title>
+                    <style>
+                        * {
+                            margin: 0;
+                            padding: 0;
+                            box-sizing: border-box;
+                        }
+                        body {
+                            font-family: Arial, Helvetica, sans-serif;
+                        }
+                        .output {
+                            background-color: white;
+                            border: 2px solid white;
+                            margin: 20px;
+                            padding: 20px;
+                        }
+                        .heading {
+                            padding: 20px;
+                            text-align: center;
+                            color: white;
+                            background-color: rgb(50, 50, 50);
+                            text-transform: uppercase;
+                        }
+                        .heading h4 {
+                            color: rgb(200, 200, 200);
+                        }
+                        .info {
+                            display: flex;
+                            padding: 20px;
+                        }
+                        .left {
+                            width: 40%;
+                            border-right: 2px dashed black;
+                            display: flex;
+                            flex-direction: column;
+                        }
+                        .right {
+                            width: 60%;
+                            padding-left: 20px;
+                            display: flex;
+                            flex-direction: column;
+                        }
+                        .box {
+                            margin: 10px 0;
+                            padding: 5px 10px;
+                        }
+                        .box h2,
+                        .box p {
+                            margin-bottom: 5px;
+                        }
+                    </style>
+                </head>
+                <body>
+                    ${outputHTML}
+                </body>
+                </html>
+            `);
+            previewWindow.document.close();
+        }
+
+        function generatePDF() {
+            const resumeElement = document.querySelector('.output-container');
+            const name = document.querySelector('input[name="name"]').value || 'Your Name';
+            const filename = `CV ${name}.pdf`;
+            const opt = {
+                margin: 1,
+                filename: filename,
+                image: { type: 'jpeg', quality: 0.98 },
+                html2canvas: { scale: 2 },
+                jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
+            };
+            html2pdf().set(opt).from(resumeElement).save();
+        }
+
+        // Initial update to ensure resume is shown on load
+        updateResume();
+    </script>
+</body>
+
+</html>

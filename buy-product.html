@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1024">
+    <title>Muap - Buy Page</title>
+    <link rel="icon" type="image/png" href="help/technology.png">
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            transition: background-color 0.5s ease, transform 0.3s ease;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #121212;
+            color: #e0e0e0;
+            overflow-x: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+        header {
+            background-color: #222;
+            color: #00FFFF;
+            padding: 30px 0;
+            text-align: center;
+            box-shadow: 0 0 30px #cb5bff;
+            transition: background-color 0.5s ease;
+            position: relative;
+        }
+
+        header:hover {
+            background-color: #1a1a1a;
+        }
+
+        .add {
+            position: absolute;
+            top: 100%;
+            right: 1rem;
+            background-color: #ccff66;
+            box-shadow: 0 0 30px #ccff66;
+            color: #121212;
+            border: none;
+            border-radius: 3px;
+            padding: 0.5rem 1rem;
+            cursor: pointer;
+            margin-top: 10px;
+            padding: 10px 25px;
+            text-decoration: none;
+            font-size: 1.1em;
+            font-weight: bold;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .add:hover {
+            background-color: #61f5b0;
+            box-shadow: 0 0 30px #00FFFF, 0 0 20px #FF00FF;
+            transform: scale(1.05);
+        }
+
+        .main-content {
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+        }
+
+        .notes-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            padding: 20px;
+        }
+
+        .note {
+            background-color: #000;
+            box-shadow: 0 0 30px #00FFFF, 0 0 20px #FF00FF;
+            height: 450px;
+            width: 400px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            overflow-y: auto;
+            overflow-x: hidden;
+            margin: 0;
+        }
+
+        .note .tools {
+            background-color: #444;
+            display: flex;
+            justify-content: space-between;
+            padding: 0.2rem;
+            align-items: center;
+            min-height: 40px;
+        }
+
+        .note .title-input {
+            flex-grow: 1;
+            margin-right: 5px;
+            font-size: 1rem;
+            font-weight: bold;
+            border: none;
+            padding: 5px;
+            background-color: #444;
+            color: #00FFFF;
+        }
+
+        .note .buttons {
+            display: flex;
+            gap: 5px;
+        }
+
+        .note .buttons button {
+            background-color: #444;
+            border: none;
+            color: #FF00FF;
+            cursor: pointer;
+            font-size: 1rem;
+            padding: 5px;
+        }
+
+        .note textarea {
+            outline: none;
+            font-family: inherit;
+            font-size: 1.2rem;
+            border: none;
+            width: 100%;
+            height: calc(100% - 40px);
+            padding: 10px;
+            resize: none;
+            box-sizing: border-box;
+            background-color: #222;
+            color: #ccff66;
+        }
+
+        .note .main {
+            padding: 10px;
+            box-sizing: border-box;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        /* Iconițe */
+        .icon-trash::before {
+            content: '\1F5D1';
+        }
+
+        .icon-plus::before {
+            content: '\2795';
+        }
+
+        .icon-send::before {
+            content: '\2709';
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .intro {
+            text-align: center;
+            margin: 60px 0;
+            animation: fadeIn 1s ease-out;
+        }
+
+        .intro h1 {
+            font-size: 3em;
+            margin-bottom: 15px;
+            color: #ccff66;
+            text-shadow: 3px 3px 15px rgba(0, 0, 0, 0.8);
+            transition: transform 0.3s ease-in-out, color 0.3s ease-in-out;
+        }
+
+        .intro h1:hover {
+            transform: scale(1.1);
+            color: #00FFFF;
+        }
+
+        .intro p {
+            font-size: 1.3em;
+            margin-bottom: 20px;
+            color: #e0e0e0;
+            text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.7);
+            max-width: 80%;
+            margin-left: auto;
+            margin-right: auto;
+            opacity: 0;
+            animation: fadeIn 1.5s ease-out 0.5s forwards;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .footer {
+            background-color: #222;
+            color: #f0f0f0;
+            text-align: center;
+            padding: 20px 0;
+            font-size: 0.9em;
+            transition: background-color 0.5s ease;
+        }
+
+        .footer:hover {
+            background-color: #1a1a1a;
+        }
+
+        /* CSS pentru notificare */
+        .notification {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #444;
+            color: #fff;
+            padding: 15px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            display: none;
+            z-index: 1000;
+            transition: opacity 0.5s ease-in-out;
+        }
+
+        .notification .close {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            background: none;
+            border: none;
+            color: #fff;
+            font-size: 18px;
+            cursor: pointer;
+        }
+
+        .note form {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .note form .form-group {
+            margin-bottom: 10px;
+            background-color: #222;
+        }
+
+        .note form .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #ccff66;
+        }
+
+        .note form .form-group input[type="text"],
+        .note form .form-group textarea {
+            width: 100%;
+            padding: 8px;
+            font-size: 1rem;
+        }
+
+        .note form .form-group input[type="radio"] {
+            margin-right: 5px;
+        }
+
+        .note form .form-group textarea {
+            height: 100px;
+            resize: vertical;
+        }
+    </style>
+    <title>Multiapp - Buy Product</title>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Buy this tool now!</h1>
+            <p style="font-size: 20px;">~ Standard | Premium | Enterprise ~</p>
+        </div>
+        <button class="add" id="add"><span class="icon-plus"></span> Pay</button>
+    </header>
+
+    <main class="main-content">
+        <div class="notes-container">
+        </div>
+    </main>
+
+    <footer class="footer">
+        <p>&copy; 2024 Muap. All rights reserved. | Designed for IT Professionals</p>
+    </footer>
+
+    <!-- Notificare -->
+    <div class="notification" id="notification">
+        <button class="close" id="notification-close">&times;</button>
+        <p>Save as .txt is set for systems without a default mail app.</p>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const notification = document.getElementById("notification");
+            const notificationCloseButton = document.getElementById("notification-close");
+
+            let notificationShown = false; // Flag pentru a controla afișarea notificării
+
+            const showNotification = () => {
+                if (!notificationShown) {
+                    setTimeout(() => {
+                        notification.style.display = "block";
+                        notification.style.opacity = 1;
+                        notificationShown = true; // Setează flagul după prima afișare
+                    }, 2000); // 2000 ms = 2 secunde
+                }
+            };
+
+            notificationCloseButton.addEventListener("click", () => {
+                notification.style.opacity = 0;
+                setTimeout(() => {
+                    notification.style.display = "none";
+                }, 500); // Așteaptă animarea de închidere
+            });
+
+            const addButton = document.getElementById("add");
+            const notes = JSON.parse(localStorage.getItem("notes")) || [];
+
+            const updateLocalStorage = () => {
+                const notesData = document.querySelectorAll(".note");
+                const notes = [];
+                notesData.forEach((note) => {
+                    const title = note.querySelector(".title-input").value;
+                    const content = note.querySelector("textarea").value;
+                    notes.push({ title, content });
+                });
+                localStorage.setItem("notes", JSON.stringify(notes));
+            };
+
+            const addNewNote = (noteData = { title: "", content: "" }) => {
+                const note = document.createElement("div");
+                note.classList.add("note");
+                note.innerHTML = `
+                    <form>
+                        <div class="form-group">
+                            <label>Version:</label>
+                            <label><input type="radio" name="note-type" value="Standard" checked> Standard</label>
+                            <label><input type="radio" name="note-type" value="Premium"> Premium</label>
+                            <label><input type="radio" name="note-type" value="Enterprise"> Enterprise</label>
+                        </div>
+                        <div class="form-group">
+                            <label>Subject:</label>
+                            <label><input type="radio" name="subject" value="doresc" checked> I would like a configuration for the copy application.</label>
+                            <label><input type="radio" name="subject" value="nu_doresc"> I do not want a configuration for the copy application.</label>
+                        </div>
+                        <div class="form-group">
+                            <label>Details:</label>
+                            <textarea placeholder="Complete the details here:">${noteData.content}</textarea>
+                        </div>
+                    </form>
+                    <div class="tools">
+                        <input type="text" class="title-input" placeholder="Buy Multiapp" value="${noteData.title}" disabled>
+                        <div class="buttons">
+                            <button class="send"><span class="icon-send"></span></button>
+                            <button class="delete"><span class="icon-trash"></span></button>
+                            <button class="save-txt"><span class="icon-save"></span> Save as .txt</button>
+                        </div>
+                    </div>
+                    <div class="main ${noteData.content ? "" : "hidden"}">${noteData.content}</div>
+                `;
+
+                const deleteButton = note.querySelector(".delete");
+                const sendButton = note.querySelector(".send");
+                const saveTxtButton = note.querySelector(".save-txt");
+                const form = note.querySelector("form");
+                const textArea = form.querySelector("textarea");
+                const titleInput = note.querySelector(".title-input");
+
+                deleteButton.addEventListener("click", () => {
+                    note.remove();
+                    updateLocalStorage();
+                });
+
+                sendButton.addEventListener("click", () => {
+                    const noteType = encodeURIComponent(form.querySelector('input[name="note-type"]:checked').nextSibling.textContent.trim());
+                    const subject = encodeURIComponent(form.querySelector('input[name="subject"]:checked').nextSibling.textContent.trim());
+                    const body = encodeURIComponent(textArea.value);
+                    const emailSubject = `Buy Multiapp - ${noteType} - ${subject}`;
+                    window.location.href = `mailto:suport@muap.ro?subject=${emailSubject}&body=${body}`;
+                });
+
+                saveTxtButton.addEventListener("click", () => {
+                    const noteType = form.querySelector('input[name="note-type"]:checked').nextSibling.textContent.trim();
+                    const subject = form.querySelector('input[name="subject"]:checked').nextSibling.textContent.trim();
+                    const title = titleInput.value || "Untitled";
+                    const content = textArea.value;
+                    const recipient = "suport@muap.ro";
+
+                    const textContent = `To: ${recipient}\nTitle: ${title}\nType: ${noteType}\nSubject: ${subject}\nContent:\n${content}`;
+
+                    const blob = new Blob([textContent], { type: 'text/plain' });
+                    const url = URL.createObjectURL(blob);
+                    const a = document.createElement("a");
+                    a.href = url;
+                    a.download = `${title}.txt`;
+                    a.click();
+                    URL.revokeObjectURL(url);
+                });
+
+                textArea.addEventListener("input", (e) => {
+                    const { value } = e.target;
+                    note.querySelector(".main").textContent = value;
+                    updateLocalStorage();
+                });
+
+                titleInput.addEventListener("input", () => {
+                    updateLocalStorage();
+                });
+
+                document.querySelector(".notes-container").appendChild(note);
+            };
+
+            addButton.addEventListener("click", () => {
+                addNewNote();
+                showNotification(); // Arată notificarea la prima adăugare a unei note
+            });
+
+            if (notes.length) {
+                notes.forEach((note) => addNewNote(note));
+            }
+        });
+    </script>
+</body>
+</html>

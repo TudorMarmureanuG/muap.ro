@@ -1,0 +1,49 @@
+-- Create the departments table
+CREATE TABLE IF NOT EXISTS departments (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    department_name TEXT
+);
+
+-- Create the projects table
+CREATE TABLE IF NOT EXISTS projects (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    project_name TEXT,
+    department_id INTEGER,
+    FOREIGN KEY(department_id) REFERENCES departments(id)
+);
+
+-- Create the employees table
+CREATE TABLE IF NOT EXISTS employees (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name TEXT,
+    department_id INTEGER,
+    project_id INTEGER,
+    FOREIGN KEY(department_id) REFERENCES departments(id),
+    FOREIGN KEY(project_id) REFERENCES projects(id)
+);
+
+-- Insert data into the departments table
+INSERT INTO departments (department_name) VALUES ('HR');
+INSERT INTO departments (department_name) VALUES ('IT');
+INSERT INTO departments (department_name) VALUES ('Sales');
+
+-- Insert data into the projects table
+INSERT INTO projects (project_name, department_id) VALUES ('Project A', 1);
+INSERT INTO projects (project_name, department_id) VALUES ('Project B', 2);
+INSERT INTO projects (project_name, department_id) VALUES ('Project C', 3);
+
+-- Insert data into the employees table
+INSERT INTO employees (name, department_id, project_id) VALUES ('Alice', 1, 1);
+INSERT INTO employees (name, department_id, project_id) VALUES ('Bob', 2, 2);
+INSERT INTO employees (name, department_id, project_id) VALUES ('Charlie', 3, 3);
+
+-- Query 1: Display employees along with their departments
+SELECT employees.name AS employee_name, departments.department_name
+FROM employees
+JOIN departments ON employees.department_id = departments.id;
+
+-- Query 2: Display employees along with their projects and departments
+SELECT employees.name AS employee_name, projects.project_name, departments.department_name
+FROM employees
+JOIN projects ON employees.project_id = projects.id
+JOIN departments ON employees.department_id = departments.id;

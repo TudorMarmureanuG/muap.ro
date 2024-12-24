@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=1024">
+    <title>Muap - Contact</title>
+    <link rel="icon" type="image/png" href="help/technology.png">
+    <style>
+        body {
+            background-image: url('help/wp.jpg');
+            background-size: cover;
+            background-position: center;
+            font-family: Arial, sans-serif;
+            color: white;
+            text-align: center;
+            padding: 50px;
+            display: flex;
+            flex-direction: column; /* Asigură-te că elementele sunt afișate într-o coloană */
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            overflow: hidden;
+            animation: fadeIn 2s ease-in-out forwards;
+        }
+
+        .contact-container {
+            background-color: rgba(0, 0, 0, 0.5);
+            padding: 20px;
+            border-radius: 10px;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: transform 1s ease-out, opacity 1s ease-out;
+            box-shadow: 0 0 30px #FF00FF, 0 0 20px #00FFFF;
+        }
+
+        body.loaded .contact-container {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        h1 {
+            font-size: 36px;
+            margin-bottom: 20px;
+            transform: translateY(-20px);
+            opacity: 0;
+            transition: opacity 1s ease-out 0.5s, transform 1s ease-out 0.5s;
+        }
+
+        body.loaded h1 {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        p {
+            font-size: 18px;
+            margin: 10px 0;
+            opacity: 0;
+            transition: opacity 1s ease-out 1s;
+        }
+
+        body.loaded p {
+            opacity: 1;
+        }
+
+        a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            position: relative;
+            transition: color 0.3s ease, transform 0.3s ease;
+        }
+
+        a::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -2px;
+            width: 0;
+            height: 2px;
+            background: white;
+            transition: width 0.3s ease;
+        }
+
+        a:hover::after {
+            width: 100%;
+        }
+
+        a:hover {
+            transform: scale(1.1);
+        }
+
+        .btn {
+            width: 9em;
+            height: 3em;
+            border-radius: 30em;
+            font-size: 15px;
+            font-family: inherit;
+            border: none;
+            position: relative;
+            cursor: pointer;
+            overflow: hidden;
+            z-index: 1;
+            box-shadow: 6px 6px 12px #c5c5c5, -6px -6px 12px #ffffff;
+            background-color: #ccff66; /* Culoarea de fundal a butonului */
+            color: black; /* Culoarea textului */
+            display: flex; /* Flexibil pentru a centra conținutul */
+            align-items: center; /* Aliniază conținutul pe axa verticală */
+            justify-content: center; /* Aliniază conținutul pe axa orizontală */
+            margin-top: 20px; /* Spațiu deasupra butonului */
+        }
+
+        .btn::before {
+            content: '';
+            width: 0;
+            height: 3em;
+            border-radius: 30em;
+            position: absolute;
+            top: 0;
+            left: 0;
+            background-image: linear-gradient(to right, #0fd850 0%, #f9f047 100%);
+            transition: .5s ease;
+            display: block;
+            z-index: -1;
+        }
+
+        .btn:hover::before {
+            width: 9em;
+        }
+
+        .fog {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 140px;
+            background: linear-gradient(to bottom, rgba(204, 204, 204, 0), rgba(204, 204, 204, 0.512));
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .cta {
+            background-color: #1c1c1c;
+            color: #f0f0f0;
+            text-align: center;
+            padding: 40px;
+            margin: 60px 0;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6);
+            transition: background-color 0.5s ease, transform 0.3s ease;
+        }
+        .cta:hover {
+            background-color: #333;
+            transform: scale(1.02);
+        }
+        .cta h2 {
+            font-size: 2.2em;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+        }
+        .cta a {
+            background-color: #ccff66;
+            color: #333;
+            padding: 15px 35px;
+            text-decoration: none;
+            font-size: 1.3em;
+            font-weight: bold;
+            border-radius: 8px;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            cursor: pointer;
+        }
+        .cta a:hover {
+            background-color: #61f5b0;
+            transform: scale(1.05);
+        }
+        /* Stilizarea specifică pentru link-ul de contact */
+        .contact-link {
+            display: inline-block;
+            background-color: #ccff66;
+            color: #121212;
+            padding: 10px 25px;
+            text-decoration: none;
+            font-size: 1.1em;
+            font-weight: bold;
+            border-radius: 40px;
+            margin: 20px auto;
+            text-align: center;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            cursor: pointer;
+            box-shadow: 0 0 30px #ccff66;
+        }
+        .contact-link:hover {
+            background-color: #61f5b0;
+            box-shadow: 0 0 30px #61f5b0;
+            transform: scale(1.05);
+        }
+        .bug-link {
+            display: inline-block;
+            background-color: #ccff66;
+            color: #121212;
+            padding: 10px 25px;
+            text-decoration: none;
+            font-size: 1.1em;
+            font-weight: bold;
+            border-radius: 8px;
+            margin: 20px auto;
+            text-align: center;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            float: right;
+            cursor: pointer;
+        }
+        .bug-link:hover {
+            background-color: #61f5b0;
+            transform: scale(1.05);
+        }
+        .footer {
+            background-color: #222;
+            color: #f0f0f0;
+            text-align: center;
+            padding: 20px 0;
+            margin-top: 40px;
+            font-size: 0.9em;
+            transition: background-color 0.5s ease;
+        }
+        .footer:hover {
+            background-color: #1a1a1a;
+        }
+        /* Animatii de pop-up */
+        .pop-up {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        .pop-up.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <div class="contact-container pop-up">
+        <h1>Contact</h1>
+        <p>Name: <a>Tudor Marmureanu</a></p>
+        <p>Email: <a href="mailto:tudor.marmureanu@muap.ro">tudor.marmureanu@muap.ro</a></p>
+        <p>Phone number: <a>+40 720 640 555</a></p>
+    </div>
+    
+    <!-- Butonul de CV sub secțiunea de contact -->
+    <a class="contact-link pop-up" onclick="window.open('CV.html', '_blank')">
+        <img src="help/CV.png" alt="Icon" width="20" height="20" style="margin-right: 10px;">
+        CV</a>
+
+    <!-- <div class="fog"></div> --> <!-- Div-ul pentru efectul de ceață -->
+    <script>
+        window.addEventListener('load', () => {
+            document.body.classList.add('loaded');
+        });
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const popUpElements = document.querySelectorAll('.pop-up');
+    
+            const observer = new IntersectionObserver(entries => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    } else {
+                        entry.target.classList.remove('visible');
+                    }
+                });
+            }, {
+                threshold: 0.1
+            });
+    
+            popUpElements.forEach(element => {
+                observer.observe(element);
+            });
+        });
+    </script>
+</body>
+</html>

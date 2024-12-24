@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=1024">
+    <title>SQL Playground</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #121212; /* Dark background */
+            color: #e0e0e0; /* Light text color */
+            margin: 20px;
+            overflow-y: auto; /* Allow vertical scrollbar if content overflows */
+            overflow-x: hidden; /* Hide horizontal scrollbar */
+        }
+        
+        .editor-container {
+            display: flex;
+            align-items: flex-start;
+            position: relative;
+            border: 1px solid #333; /* Border around the editor */
+            border-radius: 5px;
+            background-color: #1e1e1e; /* Dark gray background */
+            box-shadow: 0 0 30px #00FFFF, 0 0 20px #FF00FF; /* Box-shadow for the container */
+        }
+        
+        .line-numbers {
+            background-color: #2d2d2d; /* Slightly lighter dark gray */
+            color: #00ffe5; /* Light gray for line numbers */
+            border-radius: 5px 0 0 5px;
+            padding: 10px;
+            text-align: right;
+            user-select: none; /* Prevent selection of line numbers */
+            white-space: nowrap;
+            overflow: hidden;
+            width: 50px; /* Fixed width for line numbers */
+            font-size: 14px; /* Font size for line numbers */
+            line-height: 1.5; /* Line height for line numbers */
+            box-sizing: border-box; /* Include padding and border in element's total width and height */
+            font-family: 'Courier New', Courier, monospace; /* Consistent font */
+        }
+        
+        textarea {
+            width: calc(100% - 50px); /* Adjusted width to fit container */
+            min-height: 150px; /* Set a minimum height */
+            background-color: #1e1e1e; /* Dark gray background */
+            color: #e0e0e0; /* Light text color */
+            border: none; /* Remove border */
+            border-radius: 0 5px 5px 0; /* Rounded corners */
+            padding: 10px;
+            box-shadow: none; /* Remove shadow */
+            outline: none;
+            resize: none; /* Prevent resizing */
+            overflow-x: auto; /* Allow horizontal scrollbar */
+            overflow-y: hidden; /* Hide vertical scrollbar */
+            white-space: pre; /* Preserve white spaces and line breaks */
+            margin: 0; /* Reset margin */
+            font-size: 14px; /* Font size for code */
+            line-height: 1.5; /* Line height for code */
+            box-sizing: border-box; /* Include padding and border in element's total width and height */
+            font-family: 'Courier New', Courier, monospace; /* Consistent font */
+        }
+        
+        button {
+            background: linear-gradient(to right, #00ffe5, #FF00FF);
+            color: #000000;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.5);
+            transition: background 0.3s ease;
+        }
+        
+        button:hover {
+            background: linear-gradient(to right, #FF00FF, #00ffe5);
+        }
+        
+        #result {
+            margin-top: 20px;
+            padding: 20px;
+            background-color: #1e1e1e; /* Dark gray background */
+            color: #e0e0e0; /* Light text color */
+            border: 1px solid #333; /* Border around output */
+            border-radius: 5px;
+            box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.5);
+            min-height: 100px;
+            overflow: auto; /* Allow scrolling if content overflows */
+            white-space: nowrap; /* Prevent line breaks in the table */
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: #1e1e1e; /* Dark gray background for table */
+            color: #e0e0e0; /* Light text color for table */
+            box-shadow: 0 0 30px #FF00FF;
+        }
+        
+        th, td {
+            padding: 8px;
+            text-align: left;
+            border: 1px solid #333; /* Border around cells */
+        }
+        
+        th {
+            background-color: #333; /* Darker background for table headers */
+        }
+        
+        .error {
+            color: #ff6f6f; /* Light red for errors */
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h3 style="color: #e0e0e0;">SQL Playground</h3>
+    <div class="editor-container">
+        <div id="line-numbers" class="line-numbers"></div>
+        <textarea id="sql-editor" placeholder="Enter your SQL query here..." oninput="updateEditor()">-- Write any SQL query here and click "Run Query"
+-- Example:
+-- Create the departments table
+CREATE TABLE IF NOT EXISTS departments (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    department_name TEXT
+);
+
+-- Create the projects table
+CREATE TABLE IF NOT EXISTS projects (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    project_name TEXT,
+    department_id INTEGER,
+    FOREIGN KEY(department_id) REFERENCES departments(id)
+);
+
+-- Create the employees table
+CREATE TABLE IF NOT EXISTS employees (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name TEXT,
+    department_id INTEGER,
+    project_id INTEGER,
+    FOREIGN KEY(department_id) REFERENCES departments(id),
+    FOREIGN KEY(project_id) REFERENCES projects(id)
+);
+
+-- Insert data into the departments table
+INSERT INTO departments (department_name) VALUES ('HR');
+INSERT INTO departments (department_name) VALUES ('IT');
+INSERT INTO departments (department_name) VALUES ('Sales');
+
+-- Insert data into the projects table
+INSERT INTO projects (project_name, department_id) VALUES ('Project A', 1);
+INSERT INTO projects (project_name, department_id) VALUES ('Project B', 2);
+INSERT INTO projects (project_name, department_id) VALUES ('Project C', 3);
+
+-- Insert data into the employees table
+INSERT INTO employees (name, department_id, project_id) VALUES ('Alice', 1, 1);
+INSERT INTO employees (name, department_id, project_id) VALUES ('Bob', 2, 2);
+INSERT INTO employees (name, department_id, project_id) VALUES ('Charlie', 3, 3);
+
+-- Query 1: Display employees along with their departments
+SELECT employees.name AS employee_name, departments.department_name
+FROM employees
+JOIN departments ON employees.department_id = departments.id;
+
+-- Query 2: Display employees along with their projects and departments
+SELECT employees.name AS employee_name, projects.project_name, departments.department_name
+FROM employees
+JOIN projects ON employees.project_id = projects.id
+JOIN departments ON employees.department_id = departments.id;
+        </textarea>
+    </div>
+    <br>
+    <button onclick="runQuery()">Run Query</button><br><br><br>
+    <div id="result">Output will appear here:</div>
+
+    <script src="sql.js"></script> <!-- https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.8.0/sql-wasm.js -->
+    <script>
+        let db;
+
+        async function initDB() {
+            const SQL = await initSqlJs({ locateFile: file => `https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.8.0/${file}` });
+            db = new SQL.Database();
+        }
+
+        function updateEditor() {
+            const editor = document.getElementById('sql-editor');
+            const lineNumbers = document.getElementById('line-numbers');
+            const lines = editor.value.split('\n').length;
+
+            // Update line numbers
+            let lineNumberText = '';
+            for (let i = 1; i <= lines; i++) {
+                lineNumberText += i + '<br>';
+            }
+            lineNumbers.innerHTML = lineNumberText;
+
+            // Adjust the height of the line numbers div and textarea to match content
+            lineNumbers.style.height = editor.scrollHeight + 'px';
+            editor.style.height = 'auto'; // Reset height to auto for accurate calculation
+            editor.style.height = editor.scrollHeight + 'px'; // Set new height based on content
+        }
+
+        async function runQuery() {
+            if (!db) {
+                await initDB();
+            }
+
+            const query = document.getElementById('sql-editor').value.trim();
+            let result;
+            let message = '';
+
+            try {
+                result = db.exec(query);
+
+                if (result && result.length > 0 && result[0].values) {
+                    displayResult(result);
+                } else {
+                    message = "Query executed successfully: " + query;
+                    displayMessage(message);
+                }
+            } catch (e) {
+                displayError(e.message);
+            }
+        }
+
+        function displayResult(result) {
+            const resultDiv = document.getElementById('result');
+            let html = '<table><tr>';
+            for (const column of result[0].columns) {
+                html += `<th>${column}</th>`;
+            }
+            html += '</tr>';
+
+            for (const row of result[0].values) {
+                html += '<tr>';
+                for (const cell of row) {
+                    html += `<td>${cell}</td>`;
+                }
+                html += '</tr>';
+            }
+            html += '</table>';
+
+            resultDiv.innerHTML = html;
+        }
+
+        function displayMessage(message) {
+            const resultDiv = document.getElementById('result');
+            resultDiv.innerHTML = `<p>${message}</p>`;
+        }
+
+        function displayError(error) {
+            const resultDiv = document.getElementById('result');
+            resultDiv.innerHTML = `<p class="error">Error: ${error}</p>`;
+        }
+
+        document.getElementById('sql-editor').addEventListener('input', updateEditor);
+        document.getElementById('sql-editor').addEventListener('scroll', function() {
+            document.getElementById('line-numbers').scrollTop = this.scrollTop;
+        });
+
+        // Initial call to set line numbers and textarea height when page loads
+        updateEditor();
+    </script>
+</body>
+</html>

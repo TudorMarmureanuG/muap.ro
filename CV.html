@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=1024">
+    <title>CV - Mărmureanu Tudor</title>
+	<link rel="icon" type="image/png" href="help/CV3.png">
+</head>
+<style>
+    body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    background-color: #121212;
+    color: #ffffff;
+    margin: 0;
+    padding: 0;
+    opacity: 0;
+    animation: fadeIn 2s ease-in-out forwards;
+}
+
+@keyframes fadeIn {
+    to {
+        opacity: 1;
+    }
+}
+
+h3 {
+    color: #00ffff;
+}
+
+.container {
+    width: 80%;
+    margin: 20px auto;
+    background: #000108;
+    padding: 20px;
+    box-shadow: 0 0 30px #FF00FF, 0 0 20px #00FFFF;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid #ffb804;
+    padding-bottom: 10px;
+}
+
+header h1 {
+    margin: 0;
+}
+
+header p {
+    margin: 5px 0;
+}
+
+header img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+section {
+    margin: 20px 0;
+}
+
+h2 {
+    color: #ffb804;
+    border-bottom: 1px solid #ffb804;
+    padding-bottom: 5px;
+}
+
+ul {
+    list-style-type: disc;
+    margin-left: 20px;
+}
+
+ul li {
+    margin: 5px 0;
+}
+
+.progress-container {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.progress {
+    width: 90%;
+    background-color: #333;
+    border-radius: 5px;
+    overflow: hidden;
+    margin-right: 10px;
+}
+
+.progress-bar {
+    height: 7px;
+    background-color: #ffb804;
+}
+
+.progress-percentage {
+    color: #ffb804;
+    font-weight: bold;
+}
+        /* Animatii de pop-up */
+        .pop-up {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        .pop-up.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+</style>
+<body>
+    <div class="container">
+        <header>
+            <div class="header-left pop-up">
+                <h1>Mărmureanu Tudor-Nicolae</h1>
+                <p>Email: tudor.marmureanu@outlook.com</p>
+				<p>Telefon: +40 720 640 555</p>
+				<p>Data nașterii: 16.11.2000</p>
+				<p>Loc de naștere: Bacău</p>
+				<p>Sex: Masculin</p>
+				<p>Naționalitate: Român</p>
+				<p>Permis de conducere: Da</p>
+                <p>Stare civilă: Căsătorit</p>
+            </div>
+            <div class="header-right pop-up">
+                <!-- <img src="path_to_your_photo.jpg" alt="Profile Photo"> -->
+            </div>
+        </header>
+        
+        <section class="profile pop-up">
+            <h2>Profil</h2>
+            <p>Sunt o persoană pasionată de domeniul IT, mai exact de programare, rețelistică și hardware. Îmi place, de asemenea, și matematica, fizica, mecanica, șahul, fotografia, editarea photo și psihologia.</p>
+        </section>
+		
+		<section class="education pop-up">
+            <h2>Educație</h2>
+            <div class="school pop-up">
+                <h3>• Absolvent</h3>
+                <p>Colegiul Național "Ferdinand I" Bacău</p>
+                <p><em>septembrie 2015 - iulie 2019</em></p>
+            </div>
+			<div class="school pop-up">
+				<h3>• Studii de licență</h3>
+				<p>Facultatea de Informatică, Universitatea "Alexandru Ioan Cuza" din Iași</p>
+                <p><em>octombrie 2019 - martie 2020</em></p>
+			</div>
+			<div class="school pop-up">
+                <h3>• Licențiat</h3>
+                <p>Facultatea de Informatică, Universitatea "Vasile Alecsandri" din Bacău</p>
+                <p><em>octombrie 2020 - iulie 2023</em></p>
+            </div>
+            <div>
+                <h3>• Modul de profesionalizare didactică: Nivel I</h3>
+                <p>Facultatea de Informatică, Universitatea "Vasile Alecsandri" din Bacău</p>
+                <p><em>octombrie 2020 - iulie 2023</em></p>
+            </div>
+			<div class="school pop-up">
+                <h3>• Masterand</h3>
+                <p>Informatică aplicată în știință și tehnologie (IAST), Facultatea de Informatică, Universitatea "Vasile Alecsandri" din Bacău</p>
+                <p><em>octombrie 2023 - prezent</em></p>
+            </div>
+            <div>
+                <h3>• Modul de profesionalizare didactică: Nivel II</h3>
+                <p>Master Informatică aplicată în știință și tehnologie (IAST), Facultatea de Informatică, Universitatea "Vasile Alecsandri" din Bacău</p>
+                <p><em>octombrie 2023 - prezent</em></p>
+            </div>
+        </section>
+
+        <section class="experience pop-up">
+            <h2>Experiență Profesională</h2>
+            <div class="job pop-up">
+                <h3>• Profesor suplinitor</h3>
+                <p><em>Colegiul Național "Gheorghe Vrânceanu" din Bacău, Colegiul Național "Ferdinand I" din Bacău</em></p>
+                <p><em>februarie 2022 - aprilie 2022</em></p>
+
+                <h3>• Practică pedagogică</h3>
+                <p><em>Școala "Alexandru Ioan Cuza" din Bacău</em></p>
+                <p><em>2022</em></p>
+
+				<h3>• Practică de specialitate: Programator</h3>
+				<p>Pentalog, Iași</p>
+				<p><em>martie 2022 - iunie 2022</em></p>
+				<ul>
+					<p>Am făcut practică de specialitate în cadrul Universității "Vasile Alecsandri" din Bacău la această firmă. De asemenea, am recapitulat și am învățat multe noțiuni de C#, îmbinate cu SQL.</p>
+				</ul>
+
+                <h3>• Programator</h3>
+                <p>Continental Automotive, Iași</p>
+                <p><em>iunie 2022 - decembrie 2023</em></p>
+                <ul>
+					<p>Am lucrat pe proiectul ICAS1, care se ocupă cu mașinile electrice de la Volkswagen. Atribuțiile mele au fost să implementez cod în limbajul Python pentru diverse componente sau funcționalități de pe mașină și să testez ceea ce implementez. Am asigurat funcționarea următoarelor componente de pe mașină:</p>
+                    <li>Luminile exterioare</li>
+                    <li>Sistemul de închidere centralizată: Keyless entry (recunoașterea și învățarea cheilor pentru a fi recunoscute pe o distanță scurtă), Easy/Open close (detectare gesturi și recunoaștere facială pentru deblocare), Alcoollock (mașina nu pornește dacă îl detectează pe șofer ca fiind beat), sistemul clasic de închidere centralizată</li>
+                    <li>ECU State Server: studierea comportamentului unui ECU</li>
+					<li>Energy Management: high voltage, low voltage</li>
+					<li>BAP Handler: presetarea biților pentru setările șoferului pe funcționalitățile următoare: luminile interioare și exterioare, mirror folding</li>
+					<li>Sistemul de climatizare</li>
+					<li>Parking</li>
+                </ul>
+            
+				<h3>• Analist Junior</h3>
+				<p>Dedeman, Bacău</p>
+				<p><em>decembrie 2023 - prezent</em></p>
+				<ul>
+					<p>Ofer soluții pentru diverse probleme ce țin fie de hardware, fie de rețea sau pentru echipamentele din tot asamblul Dedeman (imprimante laser, de prețuri, fiscale, PDT-uri, calculatoare etc.). Desigur, sarcina mea este să rezolv și problemele ce țin de Windows, Office sau orice alt program folosit în cadrul companiei și să configurez calculatoare noi sau să identific problemele hardware ale acestora și nu numai.</p>
+				</ul>
+			</div>
+        </section>
+
+        <section class="projects pop-up">
+            <h2>Proiecte/Realizări</h2>
+            <div class="project pop-up">
+                <h3>• Multiapp</h3>
+                <p>Multiapp este un instrument puternic destinat gestionării activităților dintr-un departament IT sau suport IT. Pentru mai multe detalii, vizitați <a href="https://muap.ro/home.html" style="color: cyan;">https://muap.ro/home.html</a>.</p>
+            </div>
+			<div class="project pop-up">
+				<h3>• Operații cu vectori și matrici în C++ Graphics</h3>
+				<p>Acest program efectuează diverse operații cu vectorii și matricile: sortări, reprezentări grafice, operații de prelucrare a tablourilor.</p>
+			</div>
+			<div class="projects pop-up">
+				<h3>• Programe de gestiune folosind C#, Python și SQL</h3>
+				<p>Am implementat soluții de gestiune a datelor atât pentru proiectele de facultate, cât și pentru alți utilizatori.</p>
+			</div>
+			<div>
+				<h3>• Game development</h3>
+				<p>Am implementat diverse jocuri folosind animații, Pygame și Ursina (3D Python Engine). Câteva jocuri "mai complexe" implementate până acum au fost: Flappy Bird, jocuri 2D de tip Platformer, Minecraft minimalist, jocuri de actiune 2D, Story games.</p>
+			</div>
+			<div class="projets pop-up">
+				<h3>• Design de logo-uri în Photoshop și crearea unui blog pe Instagram cu content artistic</h3>
+				<p>Așa a început Freelancing-ul. Am plecat de la crearea/editarea de logo-uri pentru diverse companii din alte țări. Blogul de pe Instagram este inactiv de ani buni, însă am avut o pasiune destul de mare pentru Photoshop.</p>
+			</div>
+			<div class="projects pop-up">
+				<h3>• Calificare etapa națională la concursul Explor IT</h3>
+				<p>Datorită pasiunii mele față de Photoshop încă din liceu, m-am calificat la etapa națională a concursului Explor IT care a avut loc în Bacău.</p>
+			</div>
+        </section>
+
+        <section class="courses pop-up">
+            <h2>Cursuri</h2>
+            <div class="course pop-up">
+                <h3>• Python Programming 2023 Advanced</h3>
+                <p><em>Udemy</em></p>
+                <p>Am reactualizat cunoștințele despre limbajul Python și am învățat tehnici mai eficiente sau inovative de lucru.</p>
+            </div>
+            <div class="course pop-up">
+                <h3>• Windows 10 Troubleshooting</h3>
+                <p><em>Udemy</em></p>
+                <p>Am învățat câteva lucruri despre Group Policy, drepturile de administrator, rețele de calculatoare și comenzile de bază din CMD.</p>
+            </div>
+            <div class="course pop-up">
+                <h3>• Curs de mecanică teoretică</h3>
+                <p><em>Udemy</em></p>
+                <p>Am învățat principiile de bază ale mecanicii auto, am făcut studiu de caz, am învățat fizica aplicată în domeniul auto și am reușit, cu ajutorul cunoștințelor dobândite, să scriu o carte despre mecanică pe înțelesul tuturor. Această carte încă nu este publicată.</p>
+            </div>
+        </section>
+
+        <section class="skills pop-up">
+            <h2>Competențe</h2>
+            <ul>
+                <li>
+                    <span>C++: Nivel Expert</span>
+                    <div class="progress-container">
+                        <div class="progress">
+                            <div class="progress-bar" style="width: 90%;"></div>
+                        </div>
+                        <span class="progress-percentage">90%</span>
+                    </div>
+                </li>
+                <li>
+                    <span>Python: Nivel Expert</span>
+                    <div class="progress-container">
+                        <div class="progress">
+                            <div class="progress-bar" style="width: 90%;"></div>
+                        </div>
+                        <span class="progress-percentage">90%</span>
+                    </div>
+                </li>
+                <li>
+                    <span>C#: Nivel Intermediar</span>
+                    <div class="progress-container">
+                        <div class="progress">
+                            <div class="progress-bar" style="width: 70%;"></div>
+                        </div>
+                        <span class="progress-percentage">70%</span>
+                    </div>
+                </li>
+                <li>
+                    <span>Assembly: Nivel Începator</span>
+                    <div class="progress-container">
+                        <div class="progress">
+                            <div class="progress-bar" style="width: 30%;"></div>
+                        </div>
+                        <span class="progress-percentage">30%</span>
+                    </div>
+                </li>
+                <li>
+                    <span>SQL: Nivel Basic</span>
+                    <div class="progress-container">
+                        <div class="progress">
+                            <div class="progress-bar" style="width: 50%;"></div>
+                        </div>
+                        <span class="progress-percentage">50%</span>
+                    </div>
+                </li>
+                <li>
+                    <span>PL-SQL: Nivel Începator</span>
+                    <div class="progress-container">
+                        <div class="progress">
+                            <div class="progress-bar" style="width: 30%;"></div>
+                        </div>
+                        <span class="progress-percentage">30%</span>
+                    </div>
+                </li>
+                <li>
+                    <span>Java: Nivel Începător</span>
+                    <div class="progress-container">
+                        <div class="progress">
+                            <div class="progress-bar" style="width: 30%;"></div>
+                        </div>
+                        <span class="progress-percentage">30%</span>
+                    </div>
+                </li>
+                <li>
+                    <span>Gambas 3: Nivel Basic</span>
+                    <div class="progress-container">
+                        <div class="progress">
+                            <div class="progress-bar" style="width: 50%;"></div>
+                        </div>
+                        <span class="progress-percentage">50%</span>
+                    </div>
+                </li>
+                <li>
+                    <span>Java Script: Nivel Începător</span>
+                    <div class="progress-container">
+                        <div class="progress">
+                            <div class="progress-bar" style="width: 30%;"></div>
+                        </div>
+                        <span class="progress-percentage">30%</span>
+                    </div>
+                </li>
+                <li>
+                    <span>HTML & CSS: Nivel Intermediar</span>
+                    <div class="progress-container">
+                        <div class="progress">
+                            <div class="progress-bar" style="width: 70%;"></div>
+                        </div>
+                        <span class="progress-percentage">70%</span>
+                    </div>
+                </li>
+                <li>
+                    <span>Microsoft Word: Nivel Experimentat</span>
+                    <div class="progress-container">
+                        <div class="progress">
+                            <div class="progress-bar" style="width: 80%;"></div>
+                        </div>
+                        <span class="progress-percentage">80%</span>
+                    </div>
+                </li>
+                <li>
+                    <span>Microsoft Excel: Nivel Experimentat</span>
+                    <div class="progress-container">
+                        <div class="progress">
+                            <div class="progress-bar" style="width: 80%;"></div>
+                        </div>
+                        <span class="progress-percentage">80%</span>
+                    </div>
+                </li>
+                <li>
+                    <span>Microsoft Power Point: Nivel Experimentat</span>
+                    <div class="progress-container">
+                        <div class="progress">
+                            <div class="progress-bar" style="width: 80%;"></div>
+                        </div>
+                        <span class="progress-percentage">80%</span>
+                    </div>
+                </li>
+                <li>
+                    <span>CANoe Vector: Nivel Avansat</span>
+                    <div class="progress-container">
+                        <div class="progress">
+                            <div class="progress-bar" style="width: 85%;"></div>
+                        </div>
+                        <span class="progress-percentage">85%</span>
+                    </div>
+                </li>
+                <li>
+                    <span>Photoshop: Nivel Intermediar</span>
+                    <div class="progress-container">
+                        <div class="progress">
+                            <div class="progress-bar" style="width: 70%;"></div>
+                        </div>
+                        <span class="progress-percentage">70%</span>
+                    </div>
+                </li>
+            </ul>
+        </section>        
+
+        <section class="languages pop-up">
+            <h2>Limbi Străine</h2>
+            <ul>
+                <li>
+                    <span>Limba engleză: Nivel Avansat</span>
+                    <div class="progress-container">
+                        <div class="progress">
+                            <div class="progress-bar" style="width: 85%;"></div>
+                        </div>
+                        <span class="progress-percentage">85%</span>
+                    </div>
+                </li>
+                <li>
+                    <span>Limba spaniolă: Nivel Începător</span>
+                    <div class="progress-container">
+                        <div class="progress">
+                            <div class="progress-bar" style="width: 30%;"></div>
+                        </div>
+                        <span class="progress-percentage">30%</span>
+                    </div>
+                </li>
+                <li>
+                    <span>Limba germană: Nivel Elementar</span>
+                    <div class="progress-container">
+                        <div class="progress">
+                            <div class="progress-bar" style="width: 10%;"></div>
+                        </div>
+                        <span class="progress-percentage">10%</span>
+                    </div>
+                </li>
+                <li>
+                    <span>Limba franceză: Nivel Elementar</span>
+                    <div class="progress-container">
+                        <div class="progress">
+                            <div class="progress-bar" style="width: 10%;"></div>
+                        </div>
+                        <span class="progress-percentage">10%</span>
+                    </div>
+                </li>
+            </ul>
+        </section>
+        
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const popUpElements = document.querySelectorAll('.pop-up');
+    
+            const observer = new IntersectionObserver(entries => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    } else {
+                        entry.target.classList.remove('visible');
+                    }
+                });
+            }, {
+                threshold: 0.1
+            });
+    
+            popUpElements.forEach(element => {
+                observer.observe(element);
+            });
+        });
+    </script>
+</body>
+</html>

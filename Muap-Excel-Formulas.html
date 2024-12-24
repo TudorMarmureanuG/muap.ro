@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=1024">
+    <link rel="icon" type="image/png" href="help/logoKB.png">
+    <title>KB - Muap Excel Formulas</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #181818;
+            color: #f5f5f5;
+            display: flex;
+            height: 100vh;
+            flex-direction: column;
+        }
+
+        header {
+            background-color: #222;
+            color: white;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header input[type="text"] {
+            padding: 10px;
+            border-radius: 5px;
+            border: none;
+            width: 300px;
+        }
+
+        .header .clear-btn {
+            background-color: #61dafb;
+            color: #000;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-left: 10px;
+        }
+
+        .header .clear-btn:hover {
+            background-color: #ffffff;
+        }
+
+        header .logo img {
+            height: 40px;
+        }
+
+        header .menu {
+            display: flex;
+            gap: 15px;
+        }
+
+        header .menu a {
+            color: #f5f5f5;
+            text-decoration: none;
+            font-size: 16px;
+        }
+
+        .container {
+            display: flex;
+            flex: 1;
+        }
+
+        .sidebar {
+            width: 20%;
+            background-color: #333;
+            padding: 20px;
+            overflow-y: auto;
+        }
+
+        .sidebar h3 {
+            margin-bottom: 20px;
+            color: #f5f5f5;
+        }
+
+        .sidebar ul {
+            list-style-type: none;
+        }
+
+        .sidebar ul li {
+            margin: 10px 0;
+        }
+
+        .sidebar ul li a {
+            text-decoration: none;
+            color: #66b2ff;
+            font-size: 16px;
+        }
+
+        .sidebar ul li a:hover {
+            color: #f5f5f5;
+        }
+
+        .content {
+            width: 60%;
+            padding: 20px;
+            background-color: #222;
+            overflow-y: auto;
+        }
+
+        .content h1 {
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: #06ccfd;
+        }
+
+        .content h2 {
+            font-size: 20px;
+            margin-bottom: 20px;
+            color: #06ccfd;
+        }
+
+        .content p {
+            font-size: 18px;
+            line-height: 1.6;
+            color: #f5f5f5;
+        }
+
+        .right-panel {
+            width: 20%;
+            background-color: #333;
+            padding: 20px;
+            overflow-y: auto;
+        }
+
+        .right-panel h4 {
+            font-size: 16px;
+            margin-bottom: 10px;
+            color: #f5f5f5;
+        }
+
+        .right-panel ul {
+            list-style-type: none;
+        }
+
+        .right-panel ul li {
+            margin: 10px 0;
+        }
+
+        /* Stilizare pentru link-urile dezactivate */
+        .right-panel ul li a.disabled {
+            color: #888;
+            pointer-events: none; /* Dezactivează click-ul */
+            cursor: not-allowed;
+        }
+
+        footer {
+            background-color: #222;
+            color: white;
+            text-align: center;
+            padding: 10px;
+        }
+
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo">
+            <img src="help/logoKB.png" alt="Logo">
+        </div>
+        <div class="header">
+            <input type="text" id="search-input" placeholder="Search...">
+            <button id="clear-button" class="clear-btn">Clear</button>
+        </div>
+        <div class="menu">
+            <a href="books.html">Books</a>
+            <a href="download.html">Download</a>
+            <a href="contact.html">Contact</a>
+            <a href="home.html">Home</a>
+        </div>
+    </header>
+
+    <div class="container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <h3>Muap Mail Service Support Book Navigation</h3>
+            <ul>
+                <li><a href="Muap-Excel-Book.html">Muap Excel Support</a></li>
+                <li><a href="Muap-Excel-Formulas.html" style="color: aqua;"">Muap Excel Formulas</a></li>
+            </ul>
+        </div>
+
+        <!-- Content -->
+        <div class="content">
+            <h1>Muap Excel Formulas</h1><br>
+            <img src="help/muap-excel.png" alt="Logo Key" style="display: block; margin: 0 auto; width: 200px; height: 200px;"><br><br>
+            <p>The formulas you can use are found in the <b>formulas.txt</b> file.</p><br><br>
+            <p><i>Examples:</i></p><br>
+            <p><strong>1. SUM</strong><br>
+                Formula: =SUM(A1:C3) (sums the values from A1 to C3)<br>
+                Calculation: 1 + 2 + 3 + 4 + 5 + 6 + 7 + 8 + 9 = 45</p>
+                
+                <p><strong>2. AVERAGE</strong><br>
+                Formula: =AVERAGE(A1:C3) (calculates the average of values from A1 to C3)<br>
+                Calculation: 1 + 2 + 3 + 4 + 5 + 6 + 7 + 8 + 9 = 45<br>
+                9 values => 45 / 9 = 5</p>
+                
+                <p><strong>3. MIN</strong><br>
+                Formula: =MIN(A1:C3) (finds the minimum value from A1 to C3)<br>
+                Calculation: 1 (minimum value in the matrix)</p>
+                
+                <p><strong>4. MAX</strong><br>
+                Formula: =MAX(A1:C3) (finds the maximum value from A1 to C3)<br>
+                Calculation: 9 (maximum value in the matrix)</p>
+                
+                <p><strong>5. COUNT</strong><br>
+                Formula: =COUNT(A1:C3) (counts the number of non-empty cells from A1 to C3)<br>
+                Calculation: 9 (all cells contain values)</p>
+                
+                <p><strong>6. PRODUCT</strong><br>
+                Formula: =PRODUCT(A1:C3) (calculates the product of values from A1 to C3)<br>
+                Calculation: 1 × 2 × 3 × 4 × 5 × 6 × 7 × 8 × 9 = 362880</p>
+                
+                <p><strong>7. MEDIAN</strong><br>
+                Formula: =MEDIAN(A1:C3) (finds the median of values from A1 to C3)<br>
+                Calculation: Ordered values: 1, 2, 3, 4, 5, 6, 7, 8, 9<br>
+                Median: 5</p>
+                
+                <p><strong>8. CONCAT</strong><br>
+                Formula: =CONCAT(A1:B2) (concatenates the values from A1 to B2)<br>
+                Calculation: Values in A1 and B1 are 1 and 2, and in A2 and B2 are 4 and 5.<br>
+                Concatenation: 1 + 2 + 4 + 5 = 1245</p><br><br>
+                
+        </div>
+
+        <!-- Right Panel -->
+        <div class="right-panel">
+            <h4>Actions</h4>
+            <ul>
+                <li><a href="#" class="disabled">Edit</a></li>
+                <li><a href="#" class="disabled">Copy</a></li>
+                <li><a href="#" class="disabled">Move</a></li>
+                <li><a href="#" class="disabled">Delete</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <footer>
+        © 2024 Muap - Knowledge Base
+    </footer>
+    
+    <script>
+        document.getElementById('search-input').addEventListener('input', function(event) {
+            const searchTerm = event.target.value.toLowerCase();
+            const sections = document.querySelectorAll('.content h2, .content p, .content img');
+
+            sections.forEach(section => {
+                if (!section.hasAttribute('data-original-text')) {
+                    if (section.tagName === 'IMG') {
+                        section.setAttribute('data-original-src', section.src);
+                        section.setAttribute('data-original-alt', section.alt);
+                    } else {
+                        section.setAttribute('data-original-text', section.innerHTML);
+                    }
+                }
+
+                if (section.tagName === 'IMG') {
+                    const originalAlt = section.getAttribute('data-original-alt').toLowerCase();
+                    if (searchTerm && originalAlt.includes(searchTerm)) {
+                        section.style.display = '';
+                    } else {
+                        section.style.display = 'none';
+                    }
+                } else {
+                    let originalText = section.getAttribute('data-original-text');
+                    let text = originalText.toLowerCase();
+
+                    if (searchTerm && text.includes(searchTerm)) {
+                        section.style.display = '';
+                        const highlightedText = originalText.replace(new RegExp(`(${searchTerm})`, 'gi'), '<span class="highlight">$1</span>');
+                        section.innerHTML = highlightedText;
+
+                        if (section.tagName === 'H2') {
+                            const nextP = section.nextElementSibling;
+                            if (nextP && nextP.tagName === 'P') {
+                                nextP.style.display = '';
+                            }
+                        }
+                    } else {
+                        section.style.display = 'none';
+                        if (section.tagName === 'H2') {
+                            const nextP = section.nextElementSibling;
+                            if (nextP && nextP.tagName === 'P') {
+                                nextP.style.display = 'none';
+                            }
+                        }
+                        section.innerHTML = originalText;
+                    }
+                }
+            });
+
+            if (!searchTerm) {
+                sections.forEach(section => {
+                    if (section.tagName === 'IMG') {
+                        section.style.display = '';
+                        section.src = section.getAttribute('data-original-src');
+                        section.alt = section.getAttribute('data-original-alt');
+                    } else {
+                        section.innerHTML = section.getAttribute('data-original-text');
+                        section.style.display = '';
+
+                        if (section.tagName === 'H2') {
+                            const nextP = section.nextElementSibling;
+                            if (nextP && nextP.tagName === 'P') {
+                                nextP.style.display = '';
+                            }
+                        }
+                    }
+                });
+            }
+        });
+
+        function clearSearch() {
+            document.getElementById('search-input').value = '';
+            document.getElementById('search-input').dispatchEvent(new Event('input'));
+        }
+
+        document.getElementById('clear-button').addEventListener('click', clearSearch);
+    </script>
+</body>
+</html>
