@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=1024">
+	<title>Data Structure Visualization</title>
+	<link rel="icon" type="image/png" href="../help/technology.png">
+	<link rel="stylesheet" href="index.css" />
+</head>
+
+<body>
+	<div class="container">
+		<div class="bg-image">
+			<div class="titleBar"><img src="./IMAGES/DU_Logo.png" alt="logo not found">
+				<nav>
+					<ul>
+						<li id="home">Home</li>
+					</ul>
+				</nav>
+			</div>
+			<div class="info">
+				<div class="infoBox">
+					<div class="heading">Data Structure Visualization</div>
+					<div class="heading-data">
+						<p>In computer science, trees are employed for a variety of tasks, such as storing data, representing hierarchical structures and enabling efficient algorithms for operations like insertion, deletion and searching. Different data structures are tailored to specific applications, with some being highly specialized for particular tasks.</p>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="content">
+			<div class="allStructure">
+				<div><a href="./STACK/stack.html"><img src="./IMAGES/Stack.png" alt="image not found" /></a></div>
+				<div><a href="./QUEUE/queue.html"><img src="./IMAGES/queue.png" alt="image not found" /></a></div>
+				<div><a href="./LINK_LIST/link_list.html"><img src="./IMAGES/Link_List.png" alt="image not found" /></a></div>
+				<div><a href="./TREE/tree.html"><img src="./IMAGES/Tree.png" alt="image not found" /></a></div>
+				<div><a href="./SUM/sum_index.html"><img src="./IMAGES/Infic-Prefix-Postfix-removebg-preview.png"
+							alt="image not found" /></a></div>
+			</div>
+		</div>
+		<div class="footer">
+			<div class="icons">
+				<a href="https://www.twitter.com" class="fa fa-twitter"></a>
+				<a href="https://www.facebook.com" class="fa fa-facebook"></a>
+				<a href="https://www.github.com" class="fa fa-github"></a>
+				<a href="https://www.instagram.com" class="fa fa-instagram"></a>
+			</div>
+			<div class="about">
+				<div class="collabration">Developed by</div>
+				<div class="names">Tudor Marmureanu: <b>tudor.marmureanu@muap.ro</b></div>
+			</div>
+			<div class="copyrights">&#169;Copyrights 2024&nbsp;<u>Muap </u>- All Rights Reserved</div>
+		</div>
+	</div>
+	<button onclick="topFunction()" id="myBtn" title="Go to top"> &uarr; </button>
+</body>
+
+</html>
+<script>
+	let mybutton = document.getElementById("myBtn");
+
+	window.onscroll = function () { scrollFunction() };
+
+	function scrollFunction() {
+		if (document.body.scrollTop > 150 || document.documentElement.scrollTop > 150) {
+			mybutton.style.display = "block";
+		} else {
+			mybutton.style.display = "none";
+		}
+	}
+	function topFunction() {
+		document.body.scrollTop = 0;
+		document.documentElement.scrollTop = 0;
+	}
+	document.getElementById('aboutus').addEventListener('click', () => {
+		location.href = "about.html";
+	});
+	document.getElementById('home').addEventListener('click', () => {
+		location.href = "index.html";
+	});
+</script>
