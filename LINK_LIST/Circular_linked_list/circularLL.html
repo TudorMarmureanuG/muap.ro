@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=1024">
+    <title>Circular Linked List Data Structure</title>
+    <link rel="icon" href="../../IMAGES/doublyLinkedList.jpg" />
+    <link rel="stylesheet" href="./circularLL.css" />
+    <link rel="stylesheet" href="../../heading.css" />
+    <link rel="stylesheet" href="../../about.css" />
+    <link rel="stylesheet" href="../../titlebar.css" />
+    <link rel="stylesheet" href="../../popup.css" />
+</head>
+
+<body>
+    <div class="container">
+        <div class="titleBar">
+            <img src="../../IMAGES/DU_Logo.png" alt="logo not found" />
+            <nav>
+                <ul>
+                    <a href="../../muap-algo.html">
+                        <li>Home</li>
+                    </a>
+                </ul>
+            </nav>
+        </div>
+        <div style="float: left;width: 10%;display: flex;justify-content: start;align-items: center;background-color: #222;height: 10%;">
+            <a href="../link_list.html" style="color: aliceblue;margin-left: 70px; text-decoration: none; font-size: larger;">back</a>
+        </div>
+        <div class="heading">Circular Linked List</div>
+        <div class="sllbox">
+            <div class="inputBoxes">
+                <div><input type="number" placeholder="search" id="searchInput" />
+                    <p id="btnSearch"><img src="../../IMAGES/search.jpg" /></p>
+                </div>
+                <div><input type="number" placeholder="insert" id="insertInput" />
+                    <p id="btnInsert"><img src="../../IMAGES/insert.png" /></p>
+                </div>
+                <div><input type="number" placeholder="delete" id="deleteInput" />
+                    <p id="btnDelete"><img src="../../IMAGES/delete.png" /></p>
+                </div>
+            </div>
+            <div class="linked-list-container" id="linked-list-container">
+
+            </div>
+        </div>
+    </div>
+    <div class="popup" id="popup">
+        <div class="box">
+            <div><img id="status" src="../IMAGES/rightSymbol.jpg" /></div>
+            <div>
+                <p id="msg">Stack created Successfully !</p>
+            </div>
+            <div><button id="popup">OK</button></div>
+        </div>
+    </div>
+</body>
+
+</html>
+
+<script src="./circularLL.js"></script>
+<script src="../../popup.js"></script>

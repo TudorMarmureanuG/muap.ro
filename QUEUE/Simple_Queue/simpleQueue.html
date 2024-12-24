@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=1024">
+	<title>Simple Queue Data Structure</title>
+	<link rel="stylesheet" href="./simpleQueue.css" />
+	<link rel="stylesheet" href="../../heading.css" />
+	<link rel="stylesheet" href="../../about.css" />
+	<link rel="stylesheet" href="../../titlebar.css" />
+	<link rel="stylesheet" href="../../popup.css"/>
+</head>
+
+<body>
+	<div class="container">
+		<div class="titleBar">
+			<img src="../../IMAGES/DU_Logo.png" alt="logo not found" />
+			<nav>
+				<ul>
+					<a href="../../muap-algo.html">
+						<li>Home</li>
+					</a>
+				</ul>
+			</nav>
+		</div>
+		<div style="float: left;width: 10%;display: flex;justify-content: start;align-items: center;background-color: #222;height: 10%;">
+            <a href="../queue.html" style="color: aliceblue;margin-left: 70px; text-decoration: none; font-size: larger;">back</a>
+        </div>
+		<div class="heading">Simple Queue</div>
+		<div class="sqbox">
+			<div class="inputBoxes">
+				<div><input type="number" placeholder="Size" id="inputSize" /><button id="btnSize">&#9654;</button>
+				</div>
+				<div><input type="number" placeholder="Ex.4" id="inputEnq" /><button class="enq" id="btnEnq"></button>
+				</div>
+				<div><button class="deq" id="btnDeq"></button></div>
+			</div>
+			<div class="x">
+				<div class="queue">
+					<div class="queue1">
+						<div class="item item1" id="item1"></div>
+						<div class="item item2" id="item2"></div>
+						<div class="item item3" id="item3"></div>
+						<div class="item item4" id="item4"></div>
+						<div class="item item5" id="item5"></div>
+						<div class="item item6" id="item6"></div>
+						<div class="item item7" id="item7"></div>
+						<div class="item item8" id="item8"></div>
+						<div class="item item9" id="item9"></div>
+						<div class="item item10" id="item10"></div>
+					</div>
+					<div class="queue2">
+						<div class="item item11" id="item11"></div>
+						<div class="item item12" id="item12"></div>
+						<div class="item item13" id="item13"></div>
+						<div class="item item14" id="item14"></div>
+						<div class="item item15" id="item15"></div>
+						<div class="item item16" id="item16"></div>
+						<div class="item item17" id="item17"></div>
+						<div class="item item18" id="item18"></div>
+						<div class="item item19" id="item19"></div>
+						<div class="item item20" id="item20"></div>
+					</div>
+					<div class="queue3">
+						<div class="item item21" id="item21"></div>
+						<div class="item item22" id="item22"></div>
+						<div class="item item23" id="item23"></div>
+						<div class="item item24" id="item24"></div>
+						<div class="item item25" id="item25"></div>
+						<div class="item item26" id="item26"></div>
+						<div class="item item27" id="item27"></div>
+						<div class="item item28" id="item28"></div>
+						<div class="item item29" id="item29"></div>
+						<div class="item item30" id="item30"></div>
+					</div>
+					<div class="queue4">
+						<div class="item item31" id="item31"></div>
+						<div class="item item32" id="item32"></div>
+						<div class="item item33" id="item33"></div>
+						<div class="item item34" id="item34"></div>
+						<div class="item item35" id="item35"></div>
+						<div class="item item36" id="item36"></div>
+						<div class="item item37" id="item37"></div>
+						<div class="item item38" id="item38"></div>
+						<div class="item item39" id="item39"></div>
+						<div class="item item40" id="item40"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="popup" id="popup">
+		<div class="box">
+			<div><img id="status" src="../IMAGES/rightSymbol.jpg" /></div>
+			<div>
+				<p id="msg">Stack created Successfully !</p>
+			</div>
+			<div><button id="popup">OK</button></div>
+		</div>
+	</div>
+</body>
+
+</html>
+<script src="./simpleQueue.js"></script>
+<script src="../../popup.js"></script>

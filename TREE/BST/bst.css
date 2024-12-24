@@ -1,0 +1,215 @@
+.container {
+	width: 100%;
+	height: 105vh;
+	background-color: #121212;
+	position: fixed;
+}
+
+.contentDiv {
+	height: 79%;
+	width: 100%;
+	background-color: #222;
+	margin-top: 5px;
+	border-top: 5px solid black;
+}
+
+.contentDiv .inputMenus {
+	height: 12%;
+	width: 100%;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	padding: 2px;
+	margin-top: 5px;
+}
+
+.contentDiv .inputMenus>div {
+	height: 100%;
+}
+
+.contentDiv .inputMenus .maininputBox {
+	width: 46%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.contentDiv .inputMenus .inputBox {
+	width: 13.4%;
+	background-color: azure;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.contentDiv .inputMenus .myIcon {
+	width: 6%;
+	background-color: rgb(147, 139, 162);
+	margin-right: 8px;
+	height: 83%;
+}
+
+/*Inputs css*/
+input {
+	background-color: rgb(221, 230, 240);
+	font-size: 30px;
+	text-indent: 10px;
+}
+
+.contentDiv .inputMenus .maininputBox input {
+	width: 100%;
+	height: 75%;
+	border: 1px solid black;
+	border-radius: 25px 0 0 25px;
+	text-indent: 10px;
+}
+
+.contentDiv .inputMenus .inputBox input {
+	width: 100%;
+	height: 75%;
+	outline: none;
+	border: 1px solid black;
+	appearance: none;
+	border-radius: 25px 0 0 25px;
+}
+
+.inputMenus .inputBox input::-webkit-outer-spin-button,
+.inputMenus .inputBox input::-webkit-inner-spin-button {
+	-webkit-appearance: none;
+	margin: 0;
+}
+
+/*icons CSS*/
+.contentDiv .myIcon {
+	border: none;
+	justify-content: center;
+	align-items: center;
+	display: flex;
+	font-size: 30px;
+}
+
+.contentDiv .canvasDiv {
+	width: 99%;
+	height: 85%;
+	border: 2px solid black;
+	background-color: rgb(175, 202, 227);
+	overflow: scroll;
+}
+
+/*Traversal Division*/
+.bar:hover>.traversal {
+	top: 270px;
+	display: block;
+}
+
+.traversal {
+	display: none;
+	right: 1.1%;
+	top: 30.5%;
+	width: 21%;
+	height: 30%;
+	background-color: rgb(147, 139, 162);
+	position: absolute;
+	border: 1.5px solid black;
+}
+
+.traversal>div:not(:nth-child(1)) {
+	border-top: 2px solid black;
+}
+
+.traversal>div {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+	height: calc(100%/3);
+}
+
+.traversal .innerTraversal>button {
+	border: none;
+	background-color: rgb(147, 139, 162);
+	font-size: 25px;
+}
+
+@media only screen and (max-width: 600px) {
+	.contentDiv .inputMenus {
+		height: 6%;
+	}
+
+	.traversal .innerTraversal>button,
+	.contentDiv .myIcon,
+	input {
+		font-size: 15px;
+	}
+
+	.traversal {
+		height: 10%;
+		top: 21.6%;
+	}
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) {
+	.contentDiv .inputMenus {
+		height: 8%;
+	}
+
+	.traversal .innerTraversal>button,
+	.contentDiv .myIcon,
+	input {
+		font-size: 20px;
+	}
+
+	.contentDiv .inputMenus .myIcon {
+		height: 79%;
+	}
+
+	.traversal {
+		height: 14%;
+		top: 26%;
+	}
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+	.contentDiv .inputMenus {
+		height: 10%;
+	}
+
+	.traversal .innerTraversal>button,
+	.contentDiv .myIcon,
+	input {
+		font-size: 25px;
+	}
+
+	.contentDiv .inputMenus .myIcon {
+		height: 78%;
+	}
+
+	.traversal {
+		height: 20%;
+		top: 29.5%;
+	}
+}
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {
+	.contentDiv .inputMenus {
+		height: 12%;
+	}
+
+	.traversal .innerTraversal>button,
+	.contentDiv .myIcon,
+	input {
+		font-size: 30px;
+	}
+
+	.contentDiv .inputMenus .myIcon {
+		height: 78%;
+	}
+
+	.traversal {
+		height: 30%;
+		top: 31%;
+	}
+}

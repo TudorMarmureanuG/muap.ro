@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=1024">
+	<title>Evaluation by Stacks</title>
+	<link rel="stylesheet" href="../../titlebar.css"/>
+	<link rel="stylesheet" href="../../heading.css"/>
+	<link rel="stylesheet" href="./evalution.css"/>
+	<link rel="icon" href="../../IMAGES/Stack.png"/>
+</head>
+<body>
+	<div class="container">
+		<div class="titleBar">
+			<img src="../../IMAGES/DU_Logo.png" alt="logo not found" />
+			<nav>
+				<ul>
+					<a href="../../muap-algo.html">
+						<li>Home</li>
+					</a>
+				</ul>
+			</nav>
+		</div>
+		<div style="float: left;width: 10%;display: flex;justify-content: start;align-items: center;background-color: #222;height: 10%;">
+            <a href="../sum_index.html" style="color: aliceblue;margin-left: 70px; text-decoration: none; font-size: larger;">back</a>
+        </div>
+		<div class="heading" style="font-weight: 900;">Evalution Expression</div>
+		<div class="sumbox">
+			<div class="inputBox">
+				<div>
+					<div>
+						<input type="text" style="background-color: antiquewhite;" id="inputBox" placeholder="Enter Space Separated Expression..." autofocus="on" autocomplete="off" ondrop="return false;" onpaste="return false;" />
+					</div>
+					<div>
+						<select id="drpd" onclick="selection()">
+							<option value="Prefix">Prefix</option>
+							<option value="Postfix">Postfix</option>
+						</select>
+					</div>
+					<div>
+						<select id="drpd2">
+							<option value="Infix">Infix</option>
+						</select>
+					</div>
+					<div><button onclick="Convert()">E</button></div>
+				</div>
+			</div>
+			<div class="table">
+				<div style="overflow-x:auto;" id="tableDiv">
+					<table id="table"></table>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
+
+<script src="./evalution.js"></script>

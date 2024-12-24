@@ -1,0 +1,392 @@
+* {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+	font-family: 'Times New Roman', Times, serif;
+}
+
+.container {
+	height: 100%;
+	width: 100%;
+	background-color: #121212;
+	position: fixed;
+}
+
+html {
+	margin: 0;
+	padding: 0;
+}
+
+.sqbox {
+	height: 80%;
+	width: 100%;
+}
+
+.sqbox .inputBoxes {
+	width: 100%;
+	background-color: #222;
+	height: 13.8%;
+	display: flex;
+	margin-top: -1.5px;
+	justify-content: center;
+	align-items: center;
+	font-display: row;
+	overflow: hidden;
+}
+
+.sqbox .inputBoxes>div {
+	margin: 0px 4px 0px 7px;
+	height: 60%;
+	width: 15%;
+	background-color: red;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+	-webkit-appearance: none;
+	appearance: none;
+	margin: 0;
+}
+
+input::placeholder {
+	color: black;
+	text-align: left;
+}
+
+.inputBoxes>div>input,
+.inputBoxes>div>button {
+	border-radius: 0px;
+	width: 50%;
+	outline: none;
+	border: none;
+	float: left;
+	border-radius: 0px;
+	height: 100%;
+	font-weight: 700;
+	font-size: 21px;
+	text-align: center;
+}
+
+.inputBoxes>div>button {
+	background-color: aqua;
+	color: black;
+	overflow: hidden;
+}
+
+.inputBoxes>div>button:hover {
+	cursor: pointer;
+}
+
+.inputBoxes div:last-child button {
+	width: 100%;
+}
+
+.sqbox .x {
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+	background-color: rgb(178, 251, 251);
+}
+
+.x .queue {
+	margin: 1px;
+	padding: 10px 10px 10px 5px;
+	display: block;
+	justify-content: center;
+	background-image: none;
+	background-repeat: no-repeat;
+	mix-blend-mode: darken;
+	background-position: left;
+	background-size: 96%;
+}
+
+.x .queue>div {
+	width: 100%;
+	height: 100px;
+	display: flex;
+	align-items: center;
+	flex-direction: row;
+	margin: 2px;
+}
+.x .queue>div:nth-child(even)
+{
+	flex-direction: row-reverse;
+}
+.x .queue>div>.item {
+	position: relative;
+	display: none;
+	justify-content: center;
+	align-items: center;
+	margin-left: 15px;
+	margin-right: 15px;
+	font-size: 30px;
+	height: 80%;
+	width: 7.7%;
+	border-style: solid;
+	border-width: 1px;
+	border-radius: 8px;
+	border-color: transparent;
+	outline: none;
+}
+
+.x .queue>div>.item .position {
+	float: left;
+	background-color: rgb(47, 88, 119);
+	color: white;
+	height: 20px;
+	width: 60px;
+	font-size: 20px;
+	position: absolute;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	top: -22px;
+	z-index: 99;
+	animation-name: queue;
+	animation-duration: 1.3s;
+	animation-direction: normal;
+	animation-fill-mode: forwards;
+	border-radius: 10px 10px 0px 0px;
+}
+
+.x .queue>div>.item .both {
+	position: absolute;
+	background-color: rgb(47, 88, 119);
+	color: black;
+	border-radius: 10px 10px 0px 0px;
+	width: 89%;
+	z-index: 99;
+	height: 20px;
+	top: -22px;
+	animation-name: queue;
+	animation-duration: 1.3s;
+	animation-direction: normal;
+	animation-fill-mode: forwards;
+}
+
+.x .queue>div>.item .both .innerboth {
+	font-size: 15px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	float: left;
+	height: 100%;
+	width: 50%;
+}
+@keyframes queue {
+	from {
+		opacity: 0;
+	}
+
+	to {
+		opacity: 1;
+	}
+}
+
+/*Media query start*/
+
+@media only screen and (max-width: 600px) {
+
+	.sqbox .inputBoxes {
+		height: 8%;
+	}
+
+	.sqbox .inputBoxes>div {
+		height: 42%;
+	}
+
+	.sqbox .inputBoxes .enq::after {
+		content: "EnQ";
+	}
+
+	.inputBoxes>div>input,
+	.inputBoxes>div>button {
+		font-size: 11px;
+	}
+
+	.sqbox .inputBoxes .deq::after {
+		content: "DeQ";
+	}
+
+	.x .queue>div {
+		height: 120px;
+		width: 100%;
+	}
+
+	.x .queue>div>.item {
+		height: 40%;
+		width: 9.7%;
+		font-size: 15px;
+		margin-right: 2px;
+		margin-left: 2px;
+	}
+
+	.x .queue>div>.item .position {
+		width: 27px;
+		font-size: 13.3px;
+	}
+
+	.x .queue>div>.item .both .innerboth {
+		font-size: 6.5px;
+	}
+		.x .queue {
+			background-size: 98% 86%;
+		}
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) {
+	.sqbox .inputBoxes {
+		height: 10%;
+	}
+
+	.inputBoxes>div>input,
+	.inputBoxes>div>button {
+		font-size: 10px;
+	}
+
+	.sqbox .inputBoxes .enq::after {
+		content: "EnQueue";
+	}
+
+	.sqbox .inputBoxes .deq::after {
+		content: "DeQueue";
+	}
+
+	.sqbox .inputBoxes {
+		height: 6%;
+	}
+
+	.x .queue>div>.item {
+		height: 54%;
+		width: 10.7%;
+		margin-left: 8px;
+		margin-right: 8px;
+		font-size: 20px;
+	}
+	
+	.x .queue>div>.item .position {
+		width: 35px;
+		font-size: 15px;
+	}
+
+	.x .queue>div>.item .both .innerboth {
+		font-size: 10.5px;
+	}
+	.x .queue
+	{
+		background-size: 98% 83%;
+	}
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+
+	.inputBoxes>div>input,
+	.inputBoxes>div>button {
+		font-size: 14px;
+	}
+
+	.sqbox .inputBoxes .enq::after {
+		content: "EnQueue";
+	}
+
+	.sqbox .inputBoxes .deq::after {
+		content: "DeQueue";
+	}
+
+	.sqbox .inputBoxes {
+		height: 7.8%;
+	}
+
+	.x .queue>div>.item {
+		height: 65%;
+		width: 7.7%;
+		margin-left: 12px;
+		margin-right: 12px;
+		font-size: 25px;
+	}
+
+	.x .queue>div>.item .position {
+		width: 45px;
+		font-size: 20px;
+	}
+	
+	.x .queue>div>.item .both .innerboth {
+		font-size: 12px;
+	}
+	.x .queue
+	{
+		background-size: 98% 86%;
+	}
+}
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {
+
+	.inputBoxes>div>input,
+	.inputBoxes>div>button {
+		font-size: 18px;
+	}
+
+	.sqbox .inputBoxes .enq::after {
+		content: "EnQueue";
+	}
+
+	.sqbox .inputBoxes .deq::after {
+		content: "DeQueue";
+	}
+
+	.x .queue>div>.item {
+		height: 80%;
+		width: 10.7%;
+	}
+
+	.x .queue>div>.item .position {
+		width: 56px;
+		font-size: 21px;
+	}
+
+	.x .queue>div>.item .both .innerboth {
+		font-size: 15px;
+	}
+	.x .queue
+	{
+		background-size: 98% 83%;
+	}
+}
+
+@media only screen and (min-width: 1200px) {
+
+	.inputBoxes>div>input,
+	.inputBoxes>div>button {
+		font-size: 21.8px;
+	}
+
+	.sqbox .inputBoxes .enq::after {
+		content: "EnQueue";
+	}
+
+	.sqbox .inputBoxes .deq::after {
+		content: "DeQueue";
+	}
+
+	.x .queue>div>.item {
+		height: 80%;
+		width: 7.7%;
+		margin-left: 15px;
+		margin-right: 15px;
+		font-size: 30px;
+	}
+
+	.x .queue>div>.item .position {
+		width: 65px;
+		font-size: 25px;
+	}
+
+	.x .queue>div>.item .both .innerboth {
+		font-size: 17px;
+	}
+}
+
+/*Media query end*/

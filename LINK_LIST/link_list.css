@@ -1,0 +1,138 @@
+.container {
+	height: 100%;
+	width: 100%;
+	background-color: #121212;
+	position: fixed;
+}
+
+.boxes {
+	width: 100%;
+	height: 80%;
+	background-color: #121212;
+	position: relative;
+	display: flex;
+	flex-direction: column;
+}
+
+.boxes .box {
+	margin: 40px auto;
+	width: 50%;
+	height: 20%;
+	background-color: rgb(33, 46, 80);
+}
+
+.boxes .box img {
+	object-fit: scale-down;
+	height: 100%;
+	width: 25%;
+	float: left;
+}
+
+.boxes .box span {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 75%;
+	height: 100%;
+	float: left;
+	font-size: 30px;
+	color: white;
+}
+
+.boxes .box span a {
+	text-decoration: none;
+}
+
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+	.heading {
+		font-size: 33px;
+	}
+
+	.boxes .box span {
+		font-size: 16px;
+	}
+
+	.boxes .box {
+		width: 60%;
+		height: 13%;
+		margin: 30px auto;
+	}
+
+	.boxes .box:first-child {
+		margin-top: 70px;
+	}
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) {
+	.heading {
+		font-size: 37px;
+	}
+
+	.boxes .box span {
+		font-size: 26px;
+	}
+
+	.boxes .box {
+		width: 60%;
+		height: 13%;
+		margin: 40px auto 45px;
+	}
+
+	.boxes .box:first-child {
+		margin-top: 100px;
+	}
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+	.heading {
+		font-size: 42px;
+	}
+
+	.boxes .box span {
+		font-size: 29px;
+	}
+
+	.boxes .box {
+		margin: 44px auto;
+		height: 15%;
+	}
+}
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {
+	.heading {
+		font-size: 47px;
+	}
+
+	.boxes .box span {
+		font-size: 35px;
+	}
+
+	.boxes .box {
+		height: 17%;
+		margin: 40px auto;
+	}
+
+	.boxes .box:first-child {
+		margin-top: 40px;
+	}
+}
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {
+	.heading {
+		font-size: 50px;
+	}
+
+	.boxes .box span {
+		font-size: 40px;
+	}
+
+	.boxes .box {
+		height: 20%;
+	}
+}
