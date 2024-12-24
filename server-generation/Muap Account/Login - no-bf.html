@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=1024">
+    <link rel="icon" type="image/png" href="../..help/technology.png">
+    <title>Muap Account</title>
+    <style>
+        *, ::after, ::before {
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #212121;
+            color: #fff;
+            font-family: monospace, serif;
+            letter-spacing: 0.05em;
+        }
+
+        h1 {
+            font-size: 23px;
+        }
+
+        .form {
+            width: 300px;
+            padding: 64px 15px 24px;
+            margin: 0 auto;
+        }
+
+        .form .control {
+            margin: 0 0 24px;
+        }
+
+        .form .control input {
+            width: 100%;
+            padding: 14px 16px;
+            border: 0;
+            background: transparent;
+            color: #fff;
+            font-family: monospace, serif;
+            letter-spacing: 0.05em;
+            font-size: 16px;
+        }
+
+        .form .control input:hover, .form .control input:focus {
+            outline: none;
+            border: 0;
+        }
+
+        .form .btn {
+            width: 100%;
+            display: block;
+            padding: 14px 16px;
+            background: transparent;
+            outline: none;
+            border: 0;
+            color: #fff;
+            letter-spacing: 0.1em;
+            font-weight: bold;
+            font-family: monospace;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .block-cube {
+            position: relative;
+        }
+
+        .block-cube .bg-top {
+            position: absolute;
+            height: 10px;
+            background: #020024;
+            background: linear-gradient(90deg, #ccff66 0%, #00ffff 37%, #ff00ff 94%);
+            bottom: 100%;
+            left: 5px;
+            right: -5px;
+            transform: skew(-45deg, 0);
+            margin: 0;
+        }
+
+        .block-cube .bg-top .bg-inner {
+            bottom: 0;
+        }
+
+        .block-cube .bg {
+            position: absolute;
+            left: 0;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            background: #020024;
+            background: linear-gradient(90deg, #ccff66 0%, #00ffff 37%, #ff00ff 94%);
+        }
+
+        .block-cube .bg-right {
+            position: absolute;
+            background: #020024;
+            background: #ff00ff;
+            top: -5px;
+            z-index: 0;
+            bottom: 5px;
+            width: 10px;
+            left: 100%;
+            transform: skew(0, -45deg);
+        }
+
+        .block-cube .bg-right .bg-inner {
+            left: 0;
+        }
+
+        .block-cube .bg .bg-inner {
+            transition: all 0.2s ease-in-out;
+        }
+
+        .block-cube .bg-inner {
+            background: #212121;
+            position: absolute;
+            left: 2px;
+            top: 2px;
+            right: 2px;
+            bottom: 2px;
+        }
+
+        .block-cube .text {
+            position: relative;
+            z-index: 2;
+        }
+
+        .block-cube.block-input input {
+            position: relative;
+            z-index: 2;
+        }
+
+        .block-cube.block-input input:focus ~ .bg-right .bg-inner,
+        .block-cube.block-input input:focus ~ .bg-top .bg-inner,
+        .block-cube.block-input input:focus ~ .bg-inner .bg-inner {
+            top: 100%;
+            background: rgba(255, 255, 255, 0.5);
+        }
+
+        .block-cube.block-input .bg-top,
+        .block-cube.block-input .bg-right,
+        .block-cube.block-input .bg {
+            background: rgba(255, 255, 255, 0.5);
+            transition: background 0.2s ease-in-out;
+        }
+
+        .block-cube.block-input .bg-right .bg-inner,
+        .block-cube.block-input .bg-top .bg-inner {
+            transition: all 0.2s ease-in-out;
+        }
+
+        .block-cube.block-input:focus .bg-top,
+        .block-cube.block-input:focus .bg-right,
+        .block-cube.block-input:focus .bg,
+        .block-cube.block-input:hover .bg-top,
+        .block-cube.block-input:hover .bg-right,
+        .block-cube.block-input:hover .bg {
+            background: rgba(255, 255, 255, 0.8);
+        }
+
+        .block-cube.block-cube-hover:focus .bg .bg-inner,
+        .block-cube.block-cube-hover:hover .bg .bg-inner {
+            top: 100%;
+        }
+
+        .credits {
+            position: fixed;
+            left: 0;
+            bottom: 0;
+            padding: 15px 15px;
+            width: 100%;
+            z-index: 111;
+        }
+
+        .credits a {
+            opacity: 0.6;
+            color: #fff;
+            font-size: 11px;
+            text-decoration: none;
+        }
+
+        .credits a:hover {
+            opacity: 1;
+        }
+
+        /* Circle Diagram Styles */
+        .circle-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 300px;
+            margin-top: 20px;
+        }
+
+        .circle {
+            position: relative;
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .circle svg {
+            transform: rotate(-90deg);
+            overflow: visible;
+        }
+
+        .circle .circle-bg {
+            fill: none;
+            stroke: #444;
+            stroke-width: 10;
+        }
+
+        .circle .circle-progress {
+            fill: none;
+            stroke: #00d4ff;
+            stroke-width: 10;
+            stroke-linecap: round;
+            transition: stroke-dasharray 0.5s ease;
+        }
+
+        .circle .circle-text {
+            color: #fff;
+            text-align: center;
+            font-size: 14px;
+        }
+
+        .circle .circle-text .used {
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        /* Link Styles */
+        .dashboard-link {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .dashboard-link a {
+            color: #00d4ff;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+
+        .dashboard-link a:hover {
+            color: #ccff66;
+        }
+    </style>
+</head>
+<body>
+    <form autocomplete='off' class='form' id="loginForm">
+        <div class='control'>
+            <h1>Sign In</h1>
+        </div>
+        <div class='control block-cube block-input'>
+            <input id='username' name='username' placeholder='Username' type='text' required>
+            <div class='bg-top'>
+                <div class='bg-inner'></div>
+            </div>
+            <div class='bg-right'>
+                <div class='bg-inner'></div>
+            </div>
+            <div class='bg'>
+                <div class='bg-inner'></div>
+            </div>
+        </div>
+        <div class='control block-cube block-input'>
+            <input id='password' name='password' placeholder='Password' type='password' required>
+            <div class='bg-top'>
+                <div class='bg-inner'></div>
+            </div>
+            <div class='bg-right'>
+                <div class='bg-inner'></div>
+            </div>
+            <div class='bg'>
+                <div class='bg-inner'></div>
+            </div>
+        </div>
+        <button id="loginButton" class='btn block-cube block-cube-hover' type='button'>
+            <div class='bg-top'>
+                <div class='bg-inner'></div>
+            </div>
+            <div class='bg-right'>
+                <div class='bg-inner'></div>
+            </div>
+            <div class='bg'>
+                <div class='bg-inner'></div>
+            </div>
+            <div class='text'>Log In</div>
+        </button>
+    </form>
+
+    <div id="dashboard" style="display: none;">
+        <h2 id="diskUsageText">Space Usage: 0.00 GB of 2 GB</h2>
+        <div class="circle-container">
+            <div class="circle">
+                <svg width="150" height="150">
+                    <circle class="circle-bg" cx="75" cy="75" r="65"></circle>
+                    <circle id="circleProgress" class="circle-progress" cx="75" cy="75" r="65" stroke-dasharray="0 410"></circle>
+                </svg>
+                <div class="circle-text">
+                    <span id="usedAmount" class="used">0.00 GB</span><br>
+                    of 2 GB
+                </div>
+            </div>
+        </div>
+        <div class="dashboard-link">
+            <a href="#" id="userDashboardLink">Access Your Dashboard</a>
+        </div>
+    </div>
+
+    <script>
+        /*
+        document.addEventListener('DOMContentLoaded', function() {
+            const loginButton = document.getElementById('loginButton');
+            const dashboardLink = document.getElementById('userDashboardLink');
+
+            const userDashboards = {
+                'admin': '../admin/Tudor-Marmureanu/tudor-marmureanu-public-dashboard.html',
+                'user_1798': '../admin/user_1798/user-1798-dashboard.html',
+                'user_2365': '../admin/user_2365/user-2365-dashboard.html',
+                'user_6721': '../admin/user_6721/user-6721-dashboard.html',
+                'user_3145': '../admin/user_3145/user-3145-dashboard.html'
+            };
+
+            const validCredentials = {
+                'admin': '*****',
+                'user_1798': '1798',
+                'user_2365': '2365',
+                'user_6721': '6721',
+                'user_3145': '3145'
+            };
+
+            function login() {
+                const username = document.getElementById('username').value.trim();
+                const password = document.getElementById('password').value;
+
+                if (validCredentials[username] && password === validCredentials[username]) {
+                    document.querySelector('form').style.display = 'none';
+                    document.getElementById('dashboard').style.display = 'block';
+                    
+                    const usedGB = 0.00000362;
+                    const totalGB = 2;
+                    updateCircle(usedGB, totalGB);
+
+                    if (userDashboards[username]) {
+                        dashboardLink.href = userDashboards[username];
+                        dashboardLink.textContent = 'Access Your Dashboard';
+                    } else {
+                        dashboardLink.href = '#';
+                        dashboardLink.textContent = 'The dashboard for this user is not configured.';
+                        dashboardLink.style.pointerEvents = 'none';
+                        dashboardLink.style.color = '#888';
+                    }
+                } else {
+                    alert('Invalid login credentials');
+                }
+            }
+
+            loginButton.addEventListener('click', login);
+
+            document.addEventListener('keypress', function(event) {
+                if (event.key === 'Enter') {
+                    event.preventDefault();
+                    login();
+                }
+            });
+
+            function updateCircle(usedGB, totalGB) {
+                const circle = document.getElementById('circleProgress');
+                const usedText = document.getElementById('usedAmount');
+                const diskUsageText = document.getElementById('diskUsageText');
+                const radius = 65;
+                const circumference = 2 * Math.PI * radius;
+                const percentage = (usedGB / totalGB) * 100;
+                const offset = circumference - (percentage / 100 * circumference);
+                circle.style.strokeDasharray = `${circumference - offset} ${circumference}`;
+                usedText.textContent = `${usedGB} GB`;
+                diskUsageText.textContent = `Space Usage: ${usedGB} GB of ${totalGB} GB`;
+            }
+        });
+        */
+        document.addEventListener('DOMContentLoaded',function(){const b=document.getElementById('loginButton'),l=document.getElementById('userDashboardLink'),u={'admin':'../admin/Tudor-Marmureanu/tudor-marmureanu-public-dashboard.html','suport_it':'../admin/suport_it/suport-it-dashboard.html','user_1798':'../admin/user_1798/user-1798-dashboard.html','user_2365':'../admin/user_2365/user-2365-dashboard.html','user_6721':'../admin/user_6721/user-6721-dashboard.html','user_3145':'../admin/user_3145/user-3145-dashboard.html', 'Iuliana':'../admin/Iuliana/Iuliana-dashboard.html'},c={'admin':'*****','suport_it':'dedeman','user_1798':'1798','user_2365':'2365','user_6721':'6721','user_3145':'3145', 'Iuliana':'testoasa'},lgn=function(){const n=document.getElementById('username').value.trim(),p=document.getElementById('password').value;if(c[n]&&p===c[n]){document.querySelector('form').style.display='none';document.getElementById('dashboard').style.display='block';const uGB=0.0000362,tGB=2;uC(uGB,tGB);d(n)}else alert('Invalid login credentials');},d=function(n){if(u[n]){l.href=u[n];l.textContent='Access Your Dashboard';}else{l.href='#';l.textContent='The dashboard for this user is not configured.';l.style.pointerEvents='none';l.style.color='#888';}};b.addEventListener('click',lgn);document.addEventListener('keypress',function(e){if(e.key==='Enter'){e.preventDefault();lgn();}});const uC=function(uGB,tGB){const c=document.getElementById('circleProgress'),uA=document.getElementById('usedAmount'),dT=document.getElementById('diskUsageText'),r=65,x=2*Math.PI*r,p=(uGB/tGB)*100,o=x-(p/100*x);c.style.strokeDasharray=`${x-o} ${x}`;uA.textContent=`${uGB} GB`;dT.textContent=`Space Usage: ${uGB} GB of ${tGB} GB`;};});
+    </script>
+</body>
+</html>

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=1024">
+    <link rel="icon" type="image/png" href="help/technology.png">
+    <title>Space Usage - Muap Mail</title>
+    <style>
+        body {
+            background-color: #1e1e1e;
+            color: #fff;
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        h2 {
+            color: aqua;
+            margin-bottom: 20px;
+        }
+
+        .circle-container {
+            position: relative;
+            width: 150px;
+            height: 150px;
+        }
+
+        .circle {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: conic-gradient(aqua calc((0.00000263 / 2) * 360deg), #333 calc((0.00000263 / 2) * 360deg));
+            position: relative;
+        }
+
+        .circle-inner {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            width: 130px;
+            height: 130px;
+            background-color: #1e1e1e;
+            border-radius: 50%;
+            z-index: 1;
+        }
+
+        .circle-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: #fff;
+            font-size: 16px;
+            text-align: center;
+            z-index: 2;
+        }
+
+        .circle-text .used {
+            color: aqua;
+        }
+
+    </style>
+</head>
+<body>
+    <!-- Citeste din fisierul usage.{_NAME}.sql si actualizeaza div-ul folosind create_div_template.js -->
+    <h2>Space Usage: 0.00000263 GB of 2 GB</h2>
+    <div class="circle-container">
+        <div class="circle">
+            <div class="circle-inner"></div>
+            <div class="circle-text">
+                <span class="used">0.00000263 GB</span><br>
+                of 2 GB
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

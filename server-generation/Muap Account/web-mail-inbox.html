@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Webmail Interface</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+        }
+        /* Styles for login form */
+        .login-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+        }
+        .login-form {
+            background-color: #fff;
+            padding: 40px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            width: 300px;
+            text-align: center;
+        }
+        .login-form h2 {
+            margin-bottom: 20px;
+        }
+        .login-form input {
+            margin: 10px 0;
+            padding: 10px;
+            width: 100%;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        .login-form button {
+            padding: 10px;
+            width: 100%;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+        .login-form button:hover {
+            background-color: #0056b3;
+        }
+        #login-error {
+            color: red;
+            margin-top: 10px;
+        }
+        /* Webmail interface styles */
+        .webmail-container {
+            display: none; /* Hidden by default */
+            height: 100vh;
+            display: flex;
+        }
+        .left-frame, .right-frame {
+            flex: 1;
+            padding: 20px;
+            border-right: 1px solid #ccc;
+            background-color: #fff;
+        }
+        .right-frame {
+            border-right: none; /* Remove border for the right frame */
+        }
+        .email-title {
+            margin: 10px 0;
+            cursor: pointer;
+            padding: 10px;
+            border-bottom: 1px solid #ccc;
+        }
+        .email-title:hover {
+            background-color: #e0e0e0;
+        }
+        .email-preview {
+            border: 1px solid #ccc;
+            padding: 20px;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="login-container" id="login-container">
+    <div class="login-form">
+        <h2>Login</h2>
+        <input type="text" id="username" placeholder="Username" required>
+        <input type="password" id="password" placeholder="Password" required onkeypress="checkEnter(event)">
+        <button onclick="login()">Login</button>
+        <div id="login-error" style="display: none;"></div>
+    </div>
+</div>
+
+<div class="webmail-container" id="webmail-container">
+    <div class="left-frame" id="email-list-container">
+        <h2>Your Emails</h2>
+        <div id="email-list">
+            <!-- Email titles will be injected here by JavaScript -->
+        </div>
+    </div>
+    <div class="right-frame" id="email-preview-container">
+        <h2>Email Preview</h2>
+        <div id="email-preview" class="email-preview">
+            Select an email to preview
+        </div>
+    </div>
+</div>
+
+<script>
+    // User credentials
+    const users = {
+        'suport_it': 'dedeman',
+        'admin': '*****',
+        'user_1798': '1798',
+        'user_2365': '2365',
+        'user_3145': '3145',
+        'user_6721': '6721'
+    };
+
+    // Email data
+    const emails = [
+        {
+            title: 'Muap Mail',
+            content: 'Stay updated on our services and get the latest information quickly. Use Muap Mail to enjoy a useful and pleasant experience.'
+        },
+        {
+            title: "Why can't you send emails from the Muap Mail application?",
+            content: 'Because those emails come from the no-reply@muap.ro address and are for informational purposes only.'
+        },
+        {
+            title: 'E-Learning',
+            content: 'Our E-Learning platform is under development! Check our new platform here: <b><i>https://muap.ro/E-Learning/muap-e-learning.html</i></b>.'
+        },
+        {
+            title: 'Muap Vote',
+            content: 'We need your help! We want to improve our services and offer users the opportunity to enhance their performance and knowledge. Vote here: https://muap.ro/server-generation/muap-votes.html. Your vote matters! Campaign running from 08.10.2024 to 11.10.2024.'
+        },
+        {
+            title: 'Welcome, my teammates!',
+            content: 'Let\'s welcome the two new members of the Muap team: WickedKey_194 and Block_Chain. WickedKey_194 will be responsible for managing Multiapp application accounts and pulling scripts on the server to create accounts on the Muap platform, while Block_Chain will assist me with testing scripts on the server.'
+        },
+        {
+            title: 'Muap Excel just released!',
+            content: 'Do you want a simple and quick alternative to Excel? Use the Muap Excel application for simple table-related tasks.'
+        },
+        {
+            title: 'Validate your Product Key',
+            content: 'Product keys will no longer be sent via email! Once the purchase is made, a 6-digit code will be sent to you, which needs to be validated in the section below: https://muap.ro/claim-your-product-key/verify-code.html.'
+        },
+        {
+            title: 'Office Reader',
+            content: 'Office Reader is a useful application if you just want to open a <b>.docx</b> or <b>.xlsx</b> or <b>.pptx</b> document for reading the text from file. Additionally, with this tool, you can ensure that the files you want to open are not corrupted.'
+        },
+        {
+            title: 'Terminal Emulator',
+            content: 'Terminal Emulator is a program that provides full terminal functionalities. Just give it a try and enjoy an exceptional experience.'
+        },
+        {
+            title: 'Services have been restored! - September 10, 2024, 10:58 PM',
+            content: 'Causes: the two scripts that validate the product key were modified but not adequately tested.'
+        },
+        {
+            title: 'Server Down! - September 10, 2024, 9:34 PM',
+            content: 'The product key validation services and the services that ensure the software repair functionality are not working. Please check your email to verify the service status.'
+        },
+        {
+            title: 'Multiapp 0.8.4 will no longer receive technical support',
+            content: 'Versions older than 0.8.4 will no longer receive technical support starting from October 1, 2024; please download the latest version from the website.'
+        },
+        {
+            title: 'Multiapp is safe or not?',
+            content: 'Multiapp uses advanced data encryption technologies and communication with the domain is efficient and secure. In any case, the application stores data locally and uses the domain to analyze potential errors or conflicts and to repair itself.'
+        },
+        {
+            title: 'Fetcher',
+            content: 'Instead of reinstalling your program when something stops working correctly, it\'s better to use the repair kit.'
+        },
+        {
+            title: 'Check Serial Number',
+            content: 'Is your product key no longer valid? Verify the information with this program. If you purchased the product key and it was valid until now, but at some point, you can no longer use it in the application, then there is an issue with the validation services. If this program also indicates that the product key is invalid, please contact me in the Bug section.'
+        },
+        {
+            title: 'Launcher',
+            content: 'The application that creates multiple instances and also has control over accounts. There\'s no need to remember passwords anymore; simply double-click on the respective account, and the password will be copied to the clipboard.'
+        }
+    ];
+
+    // Handle login
+    function login() {
+        const username = document.getElementById('username').value;
+        const password = document.getElementById('password').value;
+        const errorDiv = document.getElementById('login-error');
+
+        if (users[username] && users[username] === password) {
+            document.getElementById('login-container').style.display = 'none';
+            document.getElementById('webmail-container').style.display = 'flex'; // Show webmail interface
+            populateEmailList();
+        } else {
+            errorDiv.style.display = 'block';
+            errorDiv.textContent = 'Invalid username or password';
+        }
+    }
+
+    // Check for Enter key press
+    function checkEnter(event) {
+        if (event.key === 'Enter') {
+            login();
+        }
+    }
+
+    // Populate email list
+    function populateEmailList() {
+        const emailListContainer = document.getElementById('email-list');
+        emailListContainer.innerHTML = ''; // Clear previous list
+
+        emails.forEach((email, index) => {
+            const emailTitle = document.createElement('div');
+            emailTitle.className = 'email-title';
+            emailTitle.textContent = email.title;
+            emailTitle.onclick = () => showEmailPreview(index);
+            emailListContainer.appendChild(emailTitle);
+        });
+    }
+
+    // Show email preview
+    function showEmailPreview(index) {
+        const emailPreviewContainer = document.getElementById('email-preview');
+        emailPreviewContainer.innerHTML = `<h3>${emails[index].title}</h3><p>${emails[index].content}</p>`;
+    }
+</script>
+
+</body>
+</html>
