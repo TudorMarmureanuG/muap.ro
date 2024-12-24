@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=1024">
+    <title>MUAP Request System</title>
+    <link rel="shortcut icon" href="./images/logo.png">
+    <style>
+        /* CSS Reset */
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* CSS Variables for Dark Theme */
+        :root {
+            --bg-color: #121212;
+            --secondary-bg: #1e1e1e;
+            --card-bg: #1f1f1f;
+            --text-color: #e0e0e0;
+            --accent-color: #bb86fc;
+            --button-bg: #bb86fc;
+            --button-hover-bg: #9b59b6;
+            --border-color: #333;
+            --input-bg: #2c2c2c;
+            --input-border: #444;
+            --scrollbar-bg: #2c2c2c;
+            --scrollbar-thumb: #444;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, #1f1f1f, #2c2c2c);
+            padding: 20px 40px;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            color: var(--accent-color);
+            letter-spacing: 2px;
+            animation: fadeInDown 1s ease-out;
+        }
+
+        /* Main Content */
+        main {
+            flex: 1;
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 20px;
+            padding: 20px 40px;
+        }
+
+        /* Form Container */
+        .form-container {
+            background-color: var(--secondary-bg);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.5);
+            display: flex;
+            flex-direction: column;
+            animation: slideInLeft 1s ease-out;
+        }
+
+        .form-container h2 {
+            margin-bottom: 20px;
+            color: var(--accent-color);
+            text-align: center;
+            font-size: 1.8rem;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group label {
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: var(--accent-color);
+        }
+
+        .form-group select, .form-group textarea {
+            background-color: var(--input-bg);
+            color: var(--text-color);
+            border: 1px solid var(--input-border);
+            padding: 10px 15px;
+            border-radius: 5px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group select:focus, .form-group textarea:focus {
+            outline: none;
+            border-color: var(--accent-color);
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        button {
+            background-color: var(--button-bg);
+            color: #ffffff;
+            padding: 12px 20px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            font-size: 1rem;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            align-self: center;
+            margin-top: 10px;
+            width: 50%;
+        }
+
+        button:hover {
+            background-color: var(--button-hover-bg);
+            transform: translateY(-2px);
+        }
+
+        /* Requests List */
+        .requests-list {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            overflow-y: auto;
+            max-height: 80vh;
+            padding-right: 10px;
+            animation: slideInRight 1s ease-out;
+        }
+
+        /* Custom Scrollbar */
+        .requests-list::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .requests-list::-webkit-scrollbar-track {
+            background: var(--scrollbar-bg);
+            border-radius: 4px;
+        }
+
+        .requests-list::-webkit-scrollbar-thumb {
+            background-color: var(--scrollbar-thumb);
+            border-radius: 4px;
+        }
+
+        .request-item {
+            background-color: var(--card-bg);
+            padding: 20px;
+            border-left: 5px solid var(--accent-color);
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.4);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .request-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.6);
+        }
+
+        .request-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .request-header h3 {
+            color: var(--accent-color);
+            font-size: 1.5rem;
+        }
+
+        .priority {
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            color: #fff;
+        }
+
+        .priority.Low {
+            background-color: #2ecc71;
+        }
+
+        .priority.Medium {
+            background-color: #f1c40f;
+        }
+
+        .priority.High {
+            background-color: #e74c3c;
+        }
+
+        .request-details p {
+            margin: 5px 0;
+            line-height: 1.5;
+        }
+
+        /* Animations */
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1000px) {
+            main {
+                grid-template-columns: 1fr;
+            }
+
+            .form-container, .requests-list {
+                max-width: 100%;
+            }
+        }
+
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Muap Request System</h1>
+    </header>
+
+    <main>
+        <div class="form-container">
+            <h2>Create a New Request</h2>
+            <form id="requestForm">
+                <div class="form-group">
+                    <label for="assignedTo">Assigned To:</label>
+                    <select id="assignedTo" required>
+                        <option value="" disabled selected>Select a name</option>
+                        <option value="Tudor Marmureanu">Tudor Marmureanu</option>
+                        <option value="WickedKey_194">WickedKey_194</option>
+                        <option value="Block_Chain">Block_Chain</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="classification">Classification:</label>
+                    <select id="classification" required>
+                        <option value="" disabled selected>Select classification</option>
+                        <option value="Information">Information</option>
+                        <option value="Assistance">Assistance</option>
+                        <option value="Others">Others</option>
+                        <option value="Suggestion">Suggestion</option>
+                        <option value="Multiapp">Multiapp</option>
+                        <option value="Muap Mail">Muap Mail</option>
+                        <option value="Muap Excel">Muap Excel</option>
+                        <option value="Office Reader">Office Reader</option>
+                        <option value="Connector">Connector</option>
+                        <option value="Copy App">Copy App</option>
+                        <option value="Launcher">Launcher</option>
+                        <option value="Terminal Emulator">Terminal Emulator</option>
+                        <option value="Check Serial Number">Check Serial Number</option>
+                        <option value="Validate product key">Validate product key</option>
+                        <option value="Product key">Product key</option>
+                        <option value="Claim product key">Claim product key</option>
+                        <option value="Fetcher">Fetcher</option>
+                        <option value="Web Apps">Web Apps</option>
+                        <option value="Muap services">Muap services</option>
+                        <option value="Muap Account">Muap Account</option>
+                        
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="priority">Priority:</label>
+                    <select id="priority" required>
+                        <option value="" disabled selected>Select priority</option>
+                        <option value="Low">Low</option>
+                        <option value="Medium">Medium</option>
+                        <option value="High">High</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="description">Description:</label>
+                    <textarea id="description" placeholder="Describe your request..." required></textarea>
+                </div>
+                <button type="submit">Add Request</button><br><br>
+                <p><i><small>Please do not disclose personal information/passwords, as your request will appear here.</small></i></p>
+            </form>
+        </div>
+
+        <div id="requestsContainer">
+
+        </div>
+    </main>
+
+    <script>
+document.addEventListener('DOMContentLoaded', function() {
+    const requestsList = document.createElement('div');
+    requestsList.classList.add('requests-list');
+    requestsList.id = 'requestsList';
+
+    const requestsContainer = document.getElementById('requestsContainer');
+    if (requestsContainer) {
+        requestsContainer.appendChild(requestsList);
+    } else {
+        console.error('The Div #requestsContainer do not exist.');
+    }
+
+    function createRequest(assignedTo, classification, priority, description) {
+        const requestItem = document.createElement('div');
+        requestItem.classList.add('request-item');
+
+        const requestHeader = document.createElement('div');
+        requestHeader.classList.add('request-header');
+
+        const requester = document.createElement('h3');
+        requester.textContent = assignedTo;
+
+        const priorityLabel = document.createElement('span');
+        priorityLabel.classList.add('priority', priority);
+        priorityLabel.textContent = priority;
+
+        requestHeader.appendChild(requester);
+        requestHeader.appendChild(priorityLabel);
+
+        const requestDetails = document.createElement('div');
+        requestDetails.classList.add('request-details');
+
+        const classificationPara = document.createElement('p');
+        classificationPara.innerHTML = `<strong>Classification:</strong> ${classification}`;
+
+        const descriptionPara = document.createElement('p');
+        descriptionPara.innerHTML = `<strong>Description:</strong> ${description}`;
+
+        requestDetails.appendChild(classificationPara);
+        requestDetails.appendChild(descriptionPara);
+
+        requestItem.appendChild(requestHeader);
+        requestItem.appendChild(requestDetails);
+
+        requestsList.prepend(requestItem);
+    }
+
+    createRequest(
+        'Tudor Marmureanu',
+        'Assistance',
+        'Low',
+        'I need help with accessing the new dashboard.'
+    );
+
+    createRequest(
+        'Tudor Marmureanu',
+        'Multiapp',
+        'Medium',
+        'Can you provide more details about the port scanner? Also, about the NMAP for Terminal Emulator?'
+    );
+
+    createRequest(
+        'Tudor Marmureanu',
+        'Information',
+        'Low',
+        'Hello, Tudor Marmureanu. I want to inform you that I will be changing my work laptop, and the Enterprise license is tied to that device. How should I proceed with the new laptop?'
+    );
+
+    createRequest(
+        'Tudor Marmureanu',
+        'Muap Mail',
+        'Medium',
+        'When will we be able to send emails from the application? It would make things much easier.'
+    );
+
+    createRequest(
+        'Tudor Marmureanu',
+        'Muap Excel',
+        'Low',
+        'Will you be adding more formulas in future updates?'
+    );
+
+    createRequest(
+        'Tudor Marmureanu',
+        'Suggestionl',
+        'Medium',
+        'I would suggest restructuring the website because not all the information is in one place.'
+    );
+
+    createRequest(
+        'Tudor Marmureanu',
+        'Muap Excel',
+        'Low',
+        'Will you be adding more formulas in future updates?'
+    );
+
+    createRequest(
+        'Tudor Marmureanu',
+        'Office Reader',
+        'Medium',
+        'To extract only the text from documents, there are even better tools available. However, you could still include images in the Rseader.'
+    );
+
+    createRequest(
+        'Tudor Marmureanu',
+        'Others',
+        'Medium',
+        'Bro, did you forget to reply to the email? I sent you the information about Multiapp there at 14:09.'
+    );
+
+    createRequest(
+        'Tudor Marmureanu',
+        'Muap Mail',
+        'High',
+        'So why cannot we send emails from the application?'
+    );
+
+    createRequest(
+        'Tudor Marmureanu',
+        'Multiapp',
+        'High',
+        'Please provide me with a response regarding Multiapp. It opens very slowly for me. I need it to run faster. How can I do that?'
+    );
+
+    createRequest(
+        'Tudor Marmureanu',
+        'Others',
+        'Low',
+        'Are we using the bug section or this request system?'
+    );
+
+    createRequest(
+        'Tudor Marmureanu',
+        'Others',
+        'Low',
+        'Salut. De ce cand dau refresh la pagina imi dispare solicitarea?'
+    );
+
+    createRequest(
+        'Tudor Marmureanu',
+        'Muap services',
+        'Low',
+        'Can I change my password?'
+    );
+
+    createRequest(
+        'Tudor Marmureanu',
+        'Multiapp',
+        'High',
+        'Te contactez din partea asociatiei Figo. Avem nevoie saptamana asta de un raspuns. Te rog sa ne trimiti un membru din echipa sa ne configureze contul Networking pentru calculatoarele noastre.'
+    );
+
+    createRequest(
+        'Tudor Marmureanu',
+        'Multiapp',
+        'Medium',
+        'What should I do if the license validation is not working? I followed the steps in the KNBASE section. Im making this request here.'
+    );
+
+createRequest(
+    'Tudor Marmureanu',
+    'Muap services',
+    'Low',
+    'Sall. Cu ce user trebuie sa ma loghez in cont? Cu cel din mail? Faci tu toate conturile?'
+);
+
+createRequest(
+    'Tudor Marmureanu',
+    'Multiapp',
+    'Low',
+    'Hello there. I dont know how to find the Launcher app. Can you help me guys?'
+);
+
+createRequest(
+    'Tudor Marmureanu',
+    'Multiapp',
+    'Low',
+    'Buna ziua. Va salut cu respect! As dori daca se poate sa configurez un alt cont pentru Multiapp. Am nevoie pentru a-mi desfasura activitatea pe interfata Plugin Activity. Ma ajutati daca va rog? Sau sa imi dati un raspuns pana la 8 seara, cand ajung acasa.'
+)
+
+createRequest(
+    'Tudor Marmureanu',
+    'Muap Mail',
+    'Low',
+    'hey guys. Listen up: I need to send the e-mail from Muap Mail. Can I?'
+)
+});
+
+    </script>
+
+    <script>
+        document.getElementById('requestForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const assignedTo = document.getElementById('assignedTo').value;
+            const classification = document.getElementById('classification').value;
+            const priority = document.getElementById('priority').value;
+            const description = document.getElementById('description').value;
+
+            const requestItem = document.createElement('div');
+            requestItem.classList.add('request-item');
+
+            const requestHeader = document.createElement('div');
+            requestHeader.classList.add('request-header');
+
+            const requester = document.createElement('h3');
+            requester.textContent = assignedTo;
+
+            const priorityLabel = document.createElement('span');
+            priorityLabel.classList.add('priority', priority);
+            priorityLabel.textContent = priority;
+
+            requestHeader.appendChild(requester);
+            requestHeader.appendChild(priorityLabel);
+
+            const requestDetails = document.createElement('div');
+            requestDetails.classList.add('request-details');
+
+            const classificationPara = document.createElement('p');
+            classificationPara.innerHTML = `<strong>Classification:</strong> ${classification}`;
+
+            const descriptionPara = document.createElement('p');
+            descriptionPara.innerHTML = `<strong>Description:</strong> ${description}`;
+
+            requestDetails.appendChild(classificationPara);
+            requestDetails.appendChild(descriptionPara);
+
+            requestItem.appendChild(requestHeader);
+            requestItem.appendChild(requestDetails);
+
+            document.getElementById('requestsList').prepend(requestItem);
+
+            document.getElementById('requestForm').reset();
+        });
+    </script>
+
+</body>
+</html>

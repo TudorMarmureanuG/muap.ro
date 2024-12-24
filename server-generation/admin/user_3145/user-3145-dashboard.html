@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!--<meta http-equiv="X-UA-Compatible" content="IE=edge">-->
+    <meta name="viewport" content="width=1400">
+    <title>user_3145's Public Dashboard</title>
+    <link rel="shortcut icon" href="./images/logo.png">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <?php include 'sql.php'; ?>
+    <header>
+        <div class="logo" title="University Management System">
+            <img src="./images/logo.png" alt="">
+            <h2>M<span class="danger">U</span>A<span class="danger">P</span></h2>
+        </div>
+        <div class="navbar">
+            <a href="../../../other-services.html"><h3><b>Other Services</b></h3></a>
+            <a href="../../../download.html"><h3><b>Download Multiapp</b></h3></a>
+            <a href="user-3145-dashboard.html" class="active">
+                <span class="material-icons-sharp">home</span>
+                <h3>Home</h3>
+            </a>
+            <a href="timetable.html" onclick="timeTableAll()">
+                <span class="material-icons-sharp">today</span>
+                <h3>Time Table</h3>
+            </a> 
+            <a href="tasks.html">
+                <span class="material-icons-sharp">tasks</span>
+                <h3>Tasks</h3>
+            </a>
+            <a href="password.html">
+                <span class="material-icons-sharp">password</span>
+                <h3>Change Password</h3>
+            </a>
+            <a href="../../../home.html">
+                <span class="material-icons-sharp" onclick="">logout</span>
+                <h3>Logout</h3>
+            </a>
+        </div>
+        <div id="profile-btn">
+            <span class="material-icons-sharp">person</span>
+        </div>
+        <div class="theme-toggler">
+            <span class="material-icons-sharp active">light_mode</span>
+            <span class="material-icons-sharp">dark_mode</span>
+        </div>
+        
+    </header>
+    <div class="container">
+        <aside>
+            <div class="profile">
+                <div class="top">
+                    <div class="profile-photo">
+                        <img src="./images/profile-1.jpg" alt="">
+                    </div>
+                    <div class="info">
+                        <p>Welcome, <b>user_3145</b> </p>
+                        <small class="text-muted"><b>ID:</b>000013</small><br>
+                        <small class="text-muted"><i>Read only mode</i></small>
+                    </div>
+                </div>
+                <div class="about">
+                    <h5>Personal Info</h5>
+                    <p>Muap Account | Enrolled</p>
+                    <h5>Server</h5>
+                    <p>DBserver02</p>
+                    <h5>Contact</h5>
+                    <p>--</p>
+                    <h5>Email</h5>
+                    <p>--</p>
+                    <h5>Ticket System</h5>
+                    <p><i><a href="support-ticket.html" style="color: rgb(112, 71, 235);" target="_blank">Make a request here!</a></i></p>
+                    <h5>Dev Tag</h5>
+                    <p>SD31Y5T</p>
+                    <p><i><a href="../../multiapp-drivers.html" style="color: rgb(112, 71, 235);" target="_blank">Check your Multiapp Drivers here</a></i></p>
+                </div>
+            </div>
+        </aside>
+
+        <main>
+            <!-- Calendar Section -->
+            <h1>Calendar</h1>
+            <div class="calendar"><br>
+                <div class="header">
+                    <button class="month-btn prev" style="margin-left: 20px; background-color: rgb(112, 71, 235); color: #fff; transition: 0.1s; cursor: pointer; box-shadow: inset 0px 0px 0px 1.5px rgb(112, 71, 235); border-radius: 15px; border: none; padding: 11px 13px; font-weight: 600; font-size: 0.9rem; margin-right: 1px;">Prev</button>
+                    <span class="current-month" style="margin-left: 20px; font-size: larger;"></span>
+                    <button class="month-btn next" style="margin-left: 20px; background-color: rgb(112, 71, 235); color: #fff; transition: 0.1s; cursor: pointer; box-shadow: inset 0px 0px 0px 1.5px rgb(112, 71, 235); border-radius: 15px; border: none; padding: 11px 13px; font-weight: 600; font-size: 0.9rem; margin-right: 1px;">Next</button>
+                </div><br>
+                <div class="weekdays">
+                    <div><p>Mon</p></div>
+                    <div><p>Tue</p></div>
+                    <div><p>Wed</p></div>
+                    <div><p>Thu</p></div>
+                    <div><p>Fri</p></div>
+                    <div><p>Sat</p></div>
+                    <div><p>Sun</p></div>
+                </div>                
+                <div class="calendar-days"></div>
+                <div class="buttons">
+                    <button class="btn today" style="margin-left: 20px; background-color: rgb(112, 71, 235); color: #fff; transition: 0.1s; cursor: pointer; box-shadow: inset 0px 0px 0px 1.5px rgb(112, 71, 235); border-radius: 15px; border: none; padding: 11px 13px; font-weight: 600; font-size: 0.9rem; margin-right: 1px;">Today</button>
+                    <button class="btn prev-year" style="margin-left: 20px; background-color: rgb(112, 71, 235); color: #fff; transition: 0.1s; cursor: pointer; box-shadow: inset 0px 0px 0px 1.5px rgb(112, 71, 235); border-radius: 15px; border: none; padding: 11px 13px; font-weight: 600; font-size: 0.9rem; margin-right: 1px;">Previous Year</button>
+                    <button class="btn next-year" style="margin-left: 20px; background-color: rgb(112, 71, 235); color: #fff; transition: 0.1s; cursor: pointer; box-shadow: inset 0px 0px 0px 1.5px rgb(112, 71, 235); border-radius: 15px; border: none; padding: 11px 13px; font-weight: 600; font-size: 0.9rem; margin-right: 1px;">Next Year</button>
+                </div><br>
+            </div>
+            
+            <br>
+            <h1>Activity Dashboard from server (Admin informations)</h1>
+            <div class="subjects">
+                <div class="eg">
+                    <span class="material-icons-sharp">architecture</span>
+                    <h3>Checking Stability</h3>
+                    <div class="progress">
+                        <small>Private</small>
+                        <small><i>Read Only Mode activated</i></small>
+                    </div>
+                    <small class="text-muted">Last 24 Hours</small>
+                </div>
+                <div class="mth">
+                    <span class="material-icons-sharp">functions</span>
+                    <h3>Testing</h3>
+                    <div class="progress">
+                        <small>Private</small>
+                        <small><i>Read Only Mode activated</i></small>
+                    </div>
+                    <small class="text-muted">Last 24 Hours</small>
+                </div>
+                <div class="cs">
+                    <span class="material-icons-sharp">computer</span>
+                    <h3>Online Admin Account Status</h3>
+                    <div class="progress">
+                        <small>Private</small>
+                        <small><i>Read Only Mode activated</i></small>
+                    </div>
+                    <small class="text-muted">Last 24 Hours</small>
+                </div>
+                <div class="cg">
+                    <span class="material-icons-sharp">dns</span>
+                    <h3>Database Management</h3>
+                    <div class="progress">
+                        <small>Private</small>
+                        <small><i>Read Only Mode activated</i></small>
+                    </div>
+                    <small class="text-muted">Last 24 Hours</small>
+                </div>
+                <div class="net">
+                    <span class="material-icons-sharp">router</span>
+                    <h3>Network Checking</h3>
+                    <div class="progress">
+                        <small>Private</small>
+                        <small><i>Read Only Mode activated</i></small>
+                    </div>
+                    <small class="text-muted">Last 24 Hours</small>
+                </div>
+            </div>
+
+            <div class="timetable" id="timetable">
+                <div>
+                    <span id="prevDay">&lt;</span>
+                    <h2>Today's Timetable</h2>
+                    <span id="nextDay">&gt;</span>
+                </div>
+                <span class="closeBtn" onclick="timeTableAll()">X</span>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Time</th>
+                            <th>Encrypted SFD</th>
+                            <th>Subject</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div><br><br>
+
+            <!-- Claim Product Key Modal -->
+<div id="claimModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeClaimModal()">&times;</span>
+        <h2>Claim Your Product Key</h2><br>
+        <form id="claimForm">
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" required style="background-color: azure; border-radius: 55px; color: #333; border-color: azure; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); gap: 20px; animation: fadeIn 1s ease-out; padding: 2px;"><br><br>
+
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required style="background-color: azure; border-radius: 55px; color: #333; border-color: azure; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); gap: 20px; animation: fadeIn 1s ease-out; padding: 2px;"><br><br>
+
+            <label for="code">6-Digit Code:</label>
+            <input type="text" id="code" name="code" pattern="\d{6}" title="Please enter a 6-digit code" required style="background-color: azure; border-radius: 55px; color: #333; border-color: azure; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); gap: 20px; animation: fadeIn 1s ease-out; padding: 2px;"><br><br>
+
+            <button style="font-size: larger; color: white; background-color: #4CAF50; border: none; border-radius: 8px; padding: 12px 24px; cursor: pointer; transition: background-color 0.3s, transform 0.2s; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);">
+                Claim Key
+              </button>
+              
+        </form>
+        <div id="claimMessage"></div>
+    </div>
+</div><br><br><br>
+<p style="font-size: larger;"><i>Read Only mode is activated (The platform does not allow users to communicate with Muap team members or make changes to the account.)</i></p>
+<p style="font-size: larger;"><i>Of course, you cannot change the account password at the moment (other updates will be coming soon).</i></p><br><br>
+
+        </main>
+
+        <div class="right">
+            <div class="announcements">
+                <h2>Announcements</h2>
+                <div class="updates">
+                    <div class="message">
+                        <p> <b>Shell Integrator</b> - You can use Shell Integrator for a manual repair in case Fetcher cannot assist you.</p>
+                        <small class="text-muted">October 25, 2024</small>
+                    </div>
+                    <div class="message">
+                        <p> <b>Hardware Monitor</b> - If, however, you do not have the Multiapp program, there is a free alternative solution through which you can view a hardware monitor for your device.</p>
+                        <small class="text-muted">October 24, 2024</small>
+                    </div>
+                    <div class="message">
+                        <p> <b>E-Learning</b> - Our E-Learning platform is under development! Check our new platform here: <b><i>https://muap.ro/E-Learning/muap-e-learning.html</i></b>.</p>
+                        <small class="text-muted">October 13, 2024</small>
+                    </div>
+                    <div class="message">
+                        <p> <b>Muap Vote</b> - We need your help! We want to improve our services and offer users the opportunity to enhance their performance and knowledge. Vote here: <b><i>https://muap.ro/server-generation/muap-votes.html</i></b>. Your vote matters! Campaign running from 08.10.2024 to 11.10.2024.</p>
+                        <small class="text-muted">October 07, 2024</small>
+                    </div>
+                    <div class="message">
+                        <p> <b>Welcome, my teammates!</b> Let's welcome the two new members of the Muap team: WickedKey_194 and Block_Chain. WickedKey_194 will be responsible for managing Multiapp application accounts and pulling scripts on the server to create accounts on the Muap platform, while Block_Chain will assist me with testing scripts on the server.</p>
+                        <small class="text-muted">October 02, 2024</small>
+                    </div>
+                    <div class="message">
+                        <p> <b>Product keys will no longer be sent via email!</b> Once the purchase is made, a 6-digit code will be sent to you, which needs to be validated in the section: <b><i>https://muap.ro/claim-your-product-key/verify-code.html</i></b></p>
+                        <small class="text-muted">September 29, 2024</small>
+                    </div>
+                    <div class="message">
+                        <p> <b>Muap Excel</b> - Do you want a simple and quick alternative to Excel? Use the Muap Excel application for simple table-related tasks.</p>
+                        <small class="text-muted">September 28, 2024</small>
+                    </div>
+                    <div class="message">
+                        <p> <b>Office Reader</b> - Is a useful application if you just want to open a <b>.docx</b> or <b>.xlsx</b> or <b>.pptx</b> document for reading the text from file. Additionally, with this tool, you can ensure that the files you want to open are not corrupted.</p>
+                        <small class="text-muted">September 25, 2024</small>
+                    </div>
+                    <div class="message">
+                        <p> <b>Terminal Emulator</b> - Terminal Emulator is a program that provides full terminal functionalities. Just give it a try and enjoy an exceptional experience.</p>
+                        <small class="text-muted">September 21, 2024</small>
+                    </div>
+                    <div class="message">
+                        <p> <b>Services have been restored</b> - Causes: the two scripts that validate the product key were modified but not adequately tested.</p>
+                        <small class="text-muted">September 10, 2024, 10:58 PM</small>
+                    </div>
+                    <div class="message">
+                        <p> <b>Server Down</b> - The product key validation services and the services that ensure the software repair functionality are not working. Please check your email to verify the service status.</p>
+                        <small class="text-muted">September 10, 2024, 9:34 PM</small>
+                    </div>
+                    <div class="message">
+                        <p> Versions older than <b>0.8.4</b> will no longer receive technical support starting from October 1, 2024. Please download the latest version from the website.</p>
+                        <small class="text-muted">Long Time Ago</small>
+                    </div>
+                    <div class="message">
+                        <p> <b>Fetcher</b> - Instead of reinstalling your program when something stops working correctly, it's better to use the repair kit.</p>
+                        <small class="text-muted">Long Time Ago</small>
+                    </div>
+                    <div class="message">
+                        <p> <b>Check Serial Number</b> - Is your product key no longer valid? Verify the information with this program. If you purchased the product key and it was valid until now, but at some point, you can no longer use it in the application, then there is an issue with the validation services. If this program also indicates that the product key is invalid, please contact me in the Bug section.</p>
+                        <small class="text-muted">Long Time Ago</small>
+                    </div>
+                    <div class="message">
+                        <p> <b>Muap Mail</b> - Stay updated on our services and get the latest information quickly. Use Muap Mail to enjoy a useful and pleasant experience.</p>
+                        <small class="text-muted">Long Time Ago</small>
+                    </div>
+                    <div class="message">
+                        <p> The Copy application is now available! If you only want to copy files/folders, then Copy App is the ideal solution.</p>
+                        <small class="text-muted">Long Time Ago</small>
+                    </div>
+                    <div class="message">
+                        <p> <b>Launcher</b> - The application that creates multiple instances and also has control over accounts. There's no need to remember passwords anymore; simply double-click on the respective account, and the password will be copied to the clipboard.</p>
+                        <small class="text-muted">Long Time Ago</small>
+                    </div>
+                </div>
+            </div>
+
+            <div class="leaves" id="team-status">
+                <h2>Muap Team Status</h2>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+    let currentMonth = document.querySelector(".current-month");
+    let calendarDays = document.querySelector(".calendar-days");
+    let today = new Date();
+    let date = new Date();
+
+    currentMonth.textContent = date.toLocaleDateString("en-US", { month: 'long', year: 'numeric' });
+    today.setHours(0, 0, 0, 0);
+    renderCalendar();
+
+    function renderCalendar() {
+        const prevLastDay = new Date(date.getFullYear(), date.getMonth(), 0).getDate();
+        const totalMonthDay = new Date(date.getFullYear(), date.getMonth() + 1, 0).getDate();
+        const startWeekDay = (new Date(date.getFullYear(), date.getMonth(), 1).getDay() + 6) % 7; // Ajustare pentru luni (luni = 0)
+
+        calendarDays.innerHTML = "";
+
+        let totalCalendarDay = 6 * 7; // 6 săptămâni
+        for (let i = 0; i < totalCalendarDay; i++) {
+            let day = i - startWeekDay + 1;
+
+            if (i < startWeekDay) {
+                // Zilele din luna anterioară
+                calendarDays.innerHTML += `<div class='padding-day'>${prevLastDay - (startWeekDay - i - 1)}</div>`;
+            } else if (day > 0 && day <= totalMonthDay) {
+                // Zilele din luna curentă
+                let currentDay = new Date(date.getFullYear(), date.getMonth(), day);
+                let dayClass = currentDay.getTime() === today.getTime() ? 'current-day' : 'month-day';
+                calendarDays.innerHTML += `<div class='${dayClass}'>${day}</div>`;
+            } else {
+                // Zilele din luna următoare
+                calendarDays.innerHTML += `<div class='padding-day'>${day - totalMonthDay}</div>`;
+            }
+        }
+    }
+
+    document.querySelectorAll(".month-btn").forEach(function (element) {
+        element.addEventListener("click", function () {
+            date.setMonth(date.getMonth() + (element.classList.contains("prev") ? -1 : 1));
+            currentMonth.textContent = date.toLocaleDateString("en-US", { month: 'long', year: 'numeric' });
+            renderCalendar();
+        });
+    });
+
+    document.querySelectorAll(".btn").forEach(function (element) {
+        element.addEventListener("click", function () {
+            let btnClass = element.classList;
+            if (btnClass.contains("today")) {
+                date = new Date();
+            } else if (btnClass.contains("prev-year")) {
+                date = new Date(date.getFullYear() - 1, date.getMonth(), 1);
+            } else {
+                date = new Date(date.getFullYear() + 1, date.getMonth(), 1);
+            }
+
+            currentMonth.textContent = date.toLocaleDateString("en-US", { month: 'long', year: 'numeric' });
+            renderCalendar();
+        });
+    });
+});
+
+    </script>
+
+    <script src="claim-connector.js"></script>
+
+    <script src="timeTable.js"></script>
+    <script src="app.js"></script>
+    <script src="teams.js"></script>
+</body>
+</html>
