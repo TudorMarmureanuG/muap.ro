@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=1024">
+    <title>Tic-Tac-Toe Game</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: linear-gradient(to right, #00ffff, #ff00ff);
+            font-family: 'Arial', sans-serif;
+        }
+        .container {
+            text-align: center;
+            color: #fff;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+        }
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: #00ffff;
+            text-shadow: 0 0 10px #00ffff;
+        }
+        .board {
+            display: grid;
+            grid-template-columns: repeat(3, 100px);
+            grid-template-rows: repeat(3, 100px);
+            gap: 5px;
+            justify-content: center;
+            margin: 0 auto;
+        }
+        .cell {
+            width: 100px;
+            height: 100px;
+            background: #000;
+            border: 2px solid #00ffff;
+            font-size: 2rem;
+            color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        .cell:hover {
+            background: rgba(255, 0, 255, 0.2);
+        }
+        .status {
+            font-size: 1.5rem;
+            margin-top: 20px;
+            color: #00ffff;
+        }
+        .status.winner {
+            color: #ff00ff;
+        }
+        .refresh-message {
+            margin-top: 10px;
+            color: #ff00ff;
+            font-size: 1.2rem;
+            display: none;
+        }
+        .ai-toggle {
+            margin-top: 20px;
+        }
+        .ai-toggle button {
+            padding: 10px 20px;
+            font-size: 1rem;
+            color: #fff;
+            background: #00ffff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        .ai-toggle button:hover {
+            background: #ff00ff;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Tic-Tac-Toe</h1>
+        <div class="board" id="board"></div>
+        <div class="status" id="status">Player X's turn</div>
+        <div class="refresh-message" id="refresh-message">Refreshing in 3 seconds...</div>
+        <div class="ai-toggle">
+            <button id="ai-toggle">Enable AI</button>
+        </div>
+    </div>
+
+    <script>
+        let board, currentPlayer, gameOver, aiEnabled;
+
+        const boardElement = document.getElementById('board');
+        const statusElement = document.getElementById('status');
+        const refreshMessageElement = document.getElementById('refresh-message');
+        const aiToggleButton = document.getElementById('ai-toggle');
+
+        function initGame() {
+            board = ['', '', '', '', '', '', '', '', ''];
+            currentPlayer = 'X';
+            gameOver = false;
+            aiEnabled = aiToggleButton.textContent === 'Disable AI';
+            createBoard();
+            statusElement.textContent = `Player ${currentPlayer}'s turn`;
+            refreshMessageElement.style.display = 'none';
+        }
+
+        function createBoard() {
+            boardElement.innerHTML = '';
+            board.forEach((cell, index) => {
+                const cellElement = document.createElement('div');
+                cellElement.className = 'cell';
+                cellElement.textContent = cell;
+                cellElement.addEventListener('click', () => makeMove(index));
+                boardElement.appendChild(cellElement);
+            });
+        }
+
+        function makeMove(index) {
+            if (board[index] === '' && !gameOver) {
+                board[index] = currentPlayer;
+                createBoard();
+                checkWinner();
+                if (!gameOver) {
+                    if (currentPlayer === 'X' && aiEnabled) {
+                        setTimeout(aiMove, 500);
+                    } else {
+                        currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
+                        statusElement.textContent = `Player ${currentPlayer}'s turn`;
+                    }
+                }
+            }
+        }
+
+        function checkWinner() {
+            const winningCombinations = [
+                [0, 1, 2], [3, 4, 5], [6, 7, 8], 
+                [0, 3, 6], [1, 4, 7], [2, 5, 8], 
+                [0, 4, 8], [2, 4, 6]
+            ];
+
+            winningCombinations.forEach(combination => {
+                const [a, b, c] = combination;
+                if (board[a] && board[a] === board[b] && board[a] === board[c]) {
+                    statusElement.textContent = `Player ${board[a]} wins!`;
+                    statusElement.classList.add('winner');
+                    gameOver = true;
+                    showRefreshMessage();
+                }
+            });
+
+            if (!board.includes('') && !gameOver) {
+                statusElement.textContent = "It's a draw!";
+                gameOver = true;
+                showRefreshMessage();
+            }
+        }
+
+        function showRefreshMessage() {
+            refreshMessageElement.style.display = 'block'; // Afișează mesajul
+            setTimeout(() => {
+                initGame();
+            }, 3000);
+        }
+
+        function aiMove() {
+            const bestMove = getBestMove();
+            board[bestMove] = 'O';
+            createBoard();
+            checkWinner();
+            if (!gameOver) {
+                currentPlayer = 'X';
+                statusElement.textContent = `Player ${currentPlayer}'s turn`;
+            }
+        }
+
+        function getBestMove() {
+            return minimax(board, 'O').index;
+        }
+
+        function minimax(newBoard, player) {
+            const availableMoves = newBoard.map((value, index) => value === '' ? index : -1).filter(index => index !== -1);
+            if (checkWin(newBoard, 'O')) return { score: 10 };
+            if (checkWin(newBoard, 'X')) return { score: -10 };
+            if (availableMoves.length === 0) return { score: 0 };
+
+            const moves = [];
+            availableMoves.forEach(move => {
+                const boardCopy = [...newBoard];
+                boardCopy[move] = player;
+                const result = minimax(boardCopy, player === 'O' ? 'X' : 'O');
+                moves.push({
+                    index: move,
+                    score: result.score
+                });
+            });
+
+            if (player === 'O') {
+                const bestMove = Math.max(...moves.map(move => move.score));
+                return moves.find(move => move.score === bestMove);
+            } else {
+                const bestMove = Math.min(...moves.map(move => move.score));
+                return moves.find(move => move.score === bestMove);
+            }
+        }
+
+        function checkWin(board, player) {
+            const winningCombinations = [
+                [0, 1, 2], [3, 4, 5], [6, 7, 8], 
+                [0, 3, 6], [1, 4, 7], [2, 5, 8], 
+                [0, 4, 8], [2, 4, 6]
+            ];
+
+            return winningCombinations.some(combination => {
+                const [a, b, c] = combination;
+                return board[a] === player && board[a] === board[b] && board[a] === board[c];
+            });
+        }
+
+        aiToggleButton.addEventListener('click', () => {
+            aiEnabled = !aiEnabled;
+            aiToggleButton.textContent = aiEnabled ? 'Disable AI' : 'Enable AI';
+            initGame();
+        });
+
+        initGame();
+    </script>
+</body>
+</html>

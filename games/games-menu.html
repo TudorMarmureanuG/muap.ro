@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=1024">
+    <title>Games Menu</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: linear-gradient(to right, #00ffff, #ff00ff);
+            font-family: 'Arial', sans-serif;
+        }
+        .menu-container {
+            text-align: center;
+            color: #fff;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+        }
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: #00ffff;
+            text-shadow: 0 0 10px #00ffff;
+        }
+        .button {
+            display: inherit-block;
+            padding: 15px 30px;
+            margin: 10px;
+            background: #00ffff;
+            border: none;
+            color: #000;
+            font-size: 1.5rem;
+            cursor: pointer;
+            text-shadow: 0 0 10px #00ffff;
+            transition: background 0.3s, color 0.3s;
+            border-radius: 10px;
+        }
+        .button:hover {
+            background: #ff00ff;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <div class="menu-container">
+        <h1>Games Menu</h1><br>
+        <p style="font-size: x-large;"><i><b>For Mobile/PC devices:</b></i></p>
+        <button class="button" onclick="window.open('snake.html', '_blank')">Play Snake</button>
+        <button class="button" onclick="window.open('minesweeper.html', '_blank')">Play Minesweeper</button>
+        <button class="button" onclick="window.open('cross-road.html', '_blank')">Play Crossy Road</button>
+        <button class="button" onclick="window.open('tic-tac-toe.html', '_blank')">Play Tic Tac Toe</button>
+        <button class="button" onclick="window.open('hangman.html', '_blank')">Play Hangman</button>
+        <button class="button" onclick="window.open('chess.html', '_blank')">Play Chess</button>
+        <button class="button" onclick="window.open('chess-ai/ai-chess.html', '_blank')">Play Chess with AI</button><br><br><br>
+        <p style="font-size: x-large;"><i><b>For Windows devices only:</b></i></p>
+        <button class="button" onclick="window.open('minesweeper-retro.html', '_blank')">Play Minesweeper Retro Mode</button>
+        <button class="button" onclick="window.open('2048.html', '_blank')">Play 2048</button>
+        <button class="button" onclick="window.open('breakout.html', '_blank')">Play Breakout</button>
+    </div>
+</body>
+</html>

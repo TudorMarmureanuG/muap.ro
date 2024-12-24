@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=1024">
+    <title>Minesweeper</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: linear-gradient(to right, #00ffff, #ff00ff);
+            font-family: 'Arial', sans-serif;
+        }
+        .container {
+            text-align: center;
+            color: #fff;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+        }
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: #00ffff;
+            text-shadow: 0 0 10px #00ffff;
+        }
+        .status {
+            font-size: 1.5rem;
+            margin: 20px 0;
+            color: #fff;
+        }
+        .board {
+            display: grid;
+            gap: 2px;
+            justify-content: center;
+            margin: 0 auto;
+        }
+        .cell {
+            width: 30px;
+            height: 30px;
+            background: #000;
+            border: 1px solid #00ffff;
+            color: #fff;
+            font-size: 1rem;
+            text-align: center;
+            line-height: 30px;
+            cursor: pointer;
+            transition: background 0.3s, transform 0.3s;
+        }
+        .cell:hover {
+            background: #ff00ff;
+            transform: scale(1.1);
+        }
+        .cell.revealed {
+            background: #333;
+            border: none;
+            cursor: default;
+        }
+        .cell.mine {
+            background: #ff00ff;
+        }
+        .cell.flagged {
+            background: #ffff00;
+        }
+        .level-select {
+            margin: 20px 0;
+        }
+        .level-select button {
+            background: #00ffff;
+            border: none;
+            color: #000;
+            padding: 10px 20px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background 0.3s, color 0.3s;
+        }
+        .level-select button:hover {
+            background: #ff00ff;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Minesweeper</h1>
+        <div class="status" id="status">Select a difficulty level</div>
+        <div class="level-select">
+            <button onclick="startGame('easy')">Easy</button>
+            <button onclick="startGame('medium')">Medium</button>
+            <button onclick="startGame('hard')">Hard</button>
+        </div>
+        <div class="board" id="board"></div>
+    </div>
+
+    <script>
+        const LEVELS = {
+            easy: { rows: 8, cols: 8, mines: 10 },
+            medium: { rows: 16, cols: 16, mines: 40 },
+            hard: { rows: 24, cols: 24, mines: 99 }
+        };
+
+        let currentLevel = LEVELS.easy;
+        let board = [];
+        let revealedCount = 0;
+        let gameOver = false;
+
+        function initBoard() {
+            const { rows, cols } = currentLevel;
+            board = Array.from({ length: rows }, () => Array.from({ length: cols }, () => ({
+                mine: false,
+                revealed: false,
+                adjacent: 0
+            })));
+
+            placeMines();
+            calculateAdjacency();
+            renderBoard();
+            gameOver = false;
+            document.getElementById('status').textContent = 'Click a cell to start';
+        }
+
+        function startGame(level) {
+            currentLevel = LEVELS[level];
+            initBoard();
+        }
+
+        function placeMines() {
+            const { rows, cols, mines } = currentLevel;
+            let minesPlaced = 0;
+            while (minesPlaced < mines) {
+                const row = Math.floor(Math.random() * rows);
+                const col = Math.floor(Math.random() * cols);
+                if (!board[row][col].mine) {
+                    board[row][col].mine = true;
+                    minesPlaced++;
+                }
+            }
+        }
+
+        function calculateAdjacency() {
+            const { rows, cols } = currentLevel;
+            for (let r = 0; r < rows; r++) {
+                for (let c = 0; c < cols; c++) {
+                    if (board[r][c].mine) {
+                        for (let dr = -1; dr <= 1; dr++) {
+                            for (let dc = -1; dc <= 1; dc++) {
+                                const nr = r + dr;
+                                const nc = c + dc;
+                                if (nr >= 0 && nr < rows && nc >= 0 && nc < cols && !board[nr][nc].mine) {
+                                    board[nr][nc].adjacent++;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        function revealCell(row, col) {
+            if (gameOver || row < 0 || row >= currentLevel.rows || col < 0 || col >= currentLevel.cols || board[row][col].revealed) return;
+
+            board[row][col].revealed = true;
+            revealedCount++;
+            const cellElement = document.getElementById(`cell-${row}-${col}`);
+
+            if (board[row][col].mine) {
+                cellElement.classList.add('mine');
+                document.getElementById('status').textContent = 'Game Over!';
+                gameOver = true;
+                revealAllMines();
+            } else {
+                cellElement.classList.add('revealed');
+                if (board[row][col].adjacent > 0) {
+                    cellElement.textContent = board[row][col].adjacent;
+                } else {
+                    // Reveal adjacent cells
+                    for (let dr = -1; dr <= 1; dr++) {
+                        for (let dc = -1; dc <= 1; dc++) {
+                            revealCell(row + dr, col + dc);
+                        }
+                    }
+                }
+            }
+
+            checkWin();
+        }
+
+        function revealAllMines() {
+            for (let r = 0; r < currentLevel.rows; r++) {
+                for (let c = 0; c < currentLevel.cols; c++) {
+                    if (board[r][c].mine) {
+                        const cellElement = document.getElementById(`cell-${r}-${c}`);
+                        cellElement.classList.add('mine');
+                    }
+                }
+            }
+        }
+
+        function checkWin() {
+            if (revealedCount === currentLevel.rows * currentLevel.cols - currentLevel.mines) {
+                document.getElementById('status').textContent = 'You Win!';
+                gameOver = true;
+            }
+        }
+
+        function renderBoard() {
+            const boardElement = document.getElementById('board');
+            boardElement.innerHTML = '';
+            const { rows, cols } = currentLevel;
+            boardElement.style.gridTemplateColumns = `repeat(${cols}, 30px)`;
+            for (let r = 0; r < rows; r++) {
+                for (let c = 0; c < cols; c++) {
+                    const cell = document.createElement('div');
+                    cell.className = 'cell';
+                    cell.id = `cell-${r}-${c}`;
+                    cell.addEventListener('click', () => revealCell(r, c));
+                    boardElement.appendChild(cell);
+                }
+            }
+        }
+    </script>
+</body>
+</html>

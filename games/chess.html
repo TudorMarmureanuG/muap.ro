@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=1024">
+    <style>
+
+:root {
+    --black: #DDD;
+    --white: white;
+    --first-color: #1e3d59;
+    --second-color: #ff6e40;
+    --third-color: #ffc13b;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: grid;
+    grid-template-columns: 300px auto;
+    height: 100vh;
+    width: 100%;
+    overflow: hidden;
+    color: var(--first-color);
+    font-family: 'Old Standard TT', serif;
+    background: linear-gradient(to right, #00ffff, #ff00ff);
+}
+
+p {
+    margin: 0.8rem 0;
+}
+
+header {
+    padding: 1.3rem;
+    background-color: white;
+    text-align: center;
+}
+main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#promo-modal, #message-modal, #start, #restart {
+    background-color: white;
+    font-size: 4vw;
+    text-align: center;
+}
+
+#promo-modal h2, #message-modal h2 {
+    font-size: 1rem;
+    line-height: 2rem;
+    padding: .3rem .8rem;
+    padding-top: .5rem;
+    background-color: rgba(255, 110, 64, .1);
+    color: rgb(255, 110, 64);
+    text-transform: uppercase;
+    border-radius: .4rem;
+    text-align: center;
+}
+
+#message-modal {
+    font-size: 1rem;
+}
+
+#hud {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    height: 100%;
+    flex: 1;
+    background: l#AAA;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+}
+
+#hud div {
+    margin: .4rem 0;
+}
+
+#timerhud {
+    font-size: 1.8rem;
+    color: var(--second-color);
+}
+
+#message {
+    font-size: 2rem;
+}
+
+
+#hud #logo {
+    
+}
+
+.container {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#chessboard {
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    grid-template-rows: repeat(8, 1fr);
+    height: 52vw;
+    width: 52vw;
+    max-width: 100vh;
+    max-height: 100vh;
+    background-color: white;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+}
+
+.black {
+    transition: .3s;
+    background-color: #EEE;
+}
+
+.tile {
+    font-size: 4vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: font-size 0s, background-color 0.5s linear;
+}
+
+.tile:hover {
+    transition: .3s;
+    font-size: 4.8vw;
+    cursor: pointer;
+    background-color: var(--second-color);
+}
+
+.origin {
+    background-color: var(--third-color);
+}
+
+.move {
+    transition: .3s;
+    background-color: rgba(0, 111, 0, .3) !important;
+}
+
+.move-black {
+    transition: .3s;
+    background-color: rgba(0, 111, 0, .4) !important;
+}
+
+.check {
+    text-transform: uppercase;
+    margin: 0;
+    background-color: rgba(222,49,99, 1);
+}
+
+.notif {
+    font-size: 1rem;
+    line-height: 2rem;
+    padding: .3rem .8rem;
+    padding-top: .5rem;
+    background-color: rgb(222,49,99, .1);
+    color: rgb(222,49,99) ;
+    margin: .8rem 0;
+    text-transform: uppercase;
+    border-radius: .4rem;
+    font-weight: bold;
+}
+
+#check {
+    display: none;
+    font-size: 1rem;
+    line-height: 2rem;
+    padding: .3rem .8rem;
+    padding-top: .5rem;
+    background-color: rgb(222,49,99, .1);
+    color: rgb(222,49,99) ;
+    margin: .8rem 0;
+    text-transform: uppercase;
+    border-radius: .4rem;
+    font-weight: bold;
+}
+
+#captured .bench {
+    font-size: 2.2vw;
+}
+
+#promo-modal, #message-modal, #start, #restart {
+    position: absolute;
+    top: calc(50% - 150px);
+    left: calc(50%);
+    width: 300px;
+    padding: 1rem;
+    box-shadow: 0px 0px 5px #AAA;
+    border-radius: .5rem;
+    transition: .3s;
+    visibility: hidden;
+}
+
+#start, #restart {
+    visibility: visible;
+    font-size: 1rem;
+    top: calc(50% - 75px);
+}
+
+#start a, #restart a {
+    padding: 1rem;
+    /* background-color: rgb(222,49,99, .1); */
+    color: white;
+    background-color: var(--second-color);
+    text-transform: uppercase;
+    border-radius: .4rem;
+    font-weight: bold;
+    border: 0;
+}
+
+#start a:hover, #restart a:hover {
+    background-color: var(--first-color);
+    transition: .3s;
+}
+
+#restart {
+    visibility: hidden;
+}
+
+#message-modal {
+    width: 400px;
+    left: calc(50% - 50px);
+}
+
+.hide {
+    transform: translateY(-20px);
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0s, opacity 0.5s linear;
+    z-index: -99;
+}
+
+.show {
+    transform: translateY(10px);
+    visibility: visible !important;
+    opacity: 1;
+}
+
+#promo-modal .promo-choices {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.promo-choice {
+    padding: 1rem;
+    margin-top: .5rem;
+}
+
+.promo-choice:hover {
+    border-radius: 3px;
+    cursor: pointer;
+    background-color: #EEE;
+}
+
+h3 {
+    font-size: 1.3rem;
+    margin: .5rem;
+}
+
+h4 {
+    font-size: 1.2rem;
+}
+
+#instructions {
+    align-self: flex-end !important;
+}
+
+a.btn {
+    text-decoration: none;
+    font-weight: bold;
+    color: var(--first-color);
+    display: block;
+    border-radius: 3px;
+    border: 2px solid var(--first-color);
+    padding: .5rem 1rem;
+    display: block;
+}
+
+a.btn:hover {
+    background-color: var(--first-color);
+    transition: .3s;
+    color: white;
+}
+
+@media (min-width: 1600px) {
+    .tile {
+        font-size: 4.4rem;
+    }
+
+    .tile:hover {
+        font-size: 4.8rem;
+        cursor: pointer;
+        background-color: var(--second-color);
+        transition: font-size 0s, background-color 0.5s linear;
+    }
+}
+    </style>
+    <title>Chess Game</title>
+</head>
+<body onload="init()">
+
+    <header>
+        <div id="hud">
+            <div><h1 id="logo">Chess Game ♜</h1></div>
+            
+            <div id="turn">
+                <div class="subtitle">TURN</div>
+                <div id="message"></div>
+                <div id="notif"></div>
+            </div>
+
+            <div id="check" class="check"></div>
+            
+            <div id="timerhud">
+                <i class='bx bx-timer'></i> <span id="timer">30:00</span>
+            </div>
+
+            <div id="captured">
+                <h3>Captures</h3>
+                <span>White</span>
+                <div id="white" class="bench"></div>
+                <span>Black</span>
+                <div id="black" class="bench"></div>
+            </div>
+
+            <div id="instructions">
+                <h4>Instructions</h4>
+                <p>To <b>move</b>, click on a piece. Then click on a tile to select or capture a piece.</p>
+                <p>Available moves will be marked in <span class="move">green</span>.</p>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+        </div>
+    </main>
+
+    <div id="promo-modal">
+        <h2>promotion</h2>
+        <div class="promo-choices">
+        </div>
+    </div>
+
+    <div id="message-modal">
+        <!-- <h2>Message</h2>
+        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Aspernatur nam illum esse, minima voluptas at labore assumenda, quia sit praesentium architecto velit laudantium asperiores. Laudantium quod corrupti repudiandae ipsam ducimus?</p> -->
+    </div>
+
+    <div id="start">
+        <h3>Play some Chess?</h3>
+        <a href="#" class="btn" onclick="start(event)">Start Game</a>
+    </div>
+
+    <div id="restart">
+        <h3>Play again?</h3>
+        <a href="#" class="btn" onclick="restart(event)">Restart</a>
+    </div>
+
+    <script src="chess-js/piece.js"></script>
+    <script src="chess-js/player.js"></script>
+    <script src="chess-js/board.js"></script>
+    <script src="chess-js/pawn.js"></script>
+    <script src="chess-js/rook.js"></script>
+    <script src="chess-js/bishop.js"></script>
+    <script src="chess-js/knight.js"></script>
+    <script src="chess-js/queen.js"></script>
+    <script src="chess-js/king.js"></script>
+    <script src="chess-js/game.js"></script>
+    
+
+    <script>
+
+        let game = null;
+
+        function init()
+        {
+            game = new Game();
+            game.init();
+        }
+
+        function start(event)
+        {
+            game.start();
+        }
+
+        function restart(event)
+        {
+            init();
+            start();
+            document.querySelector('#restart').setAttribute('class', 'hide');
+        }
+
+    </script>
+</body>
+</html>

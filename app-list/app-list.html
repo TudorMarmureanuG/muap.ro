@@ -1,0 +1,371 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=1024">
+    <title>Muap - Software list</title>
+    <link rel="icon" type="image/png" href="../help/technology.png">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #121212;
+            color: #e0e0e0;
+            overflow-x: hidden;
+        }
+        header {
+            background-color: #222;
+            color: #00FFFF;
+            padding: 30px 0;
+            text-align: center;
+            box-shadow: 0 0 30px #cb5bff;
+            transition: background-color 0.5s ease;
+        }
+        header:hover {
+            background-color: #1a1a1a;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .intro {
+            text-align: center;
+            margin: 60px 0;
+            animation: fadeIn 1s ease-out;
+        }
+        .intro h1 {
+            font-size: 3em;
+            margin-bottom: 15px;
+            color: #ccff66;
+            text-shadow: 3px 3px 15px rgba(0, 0, 0, 0.8);
+            transition: transform 0.3s ease-in-out, color 0.3s ease-in-out;
+        }
+        .intro h1:hover {
+            transform: scale(1.1);
+            color: #00FFFF;
+        }
+        .intro p {
+            font-size: 1.3em;
+            margin-bottom: 20px;
+            color: #e0e0e0;
+            text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.7);
+            max-width: 80%;
+            margin-left: auto;
+            margin-right: auto;
+            opacity: 0;
+            animation: fadeIn 1.5s ease-out 0.5s forwards;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        .features {
+            text-align: center;
+            margin: 60px 0;
+        }
+        .feature {
+            display: inline-block;
+            width: 300px;
+            margin: 0 20px;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            box-shadow: 0 0 30px #00FFFF, 0 0 20px #FF00FF;
+            transition: transform 0.5s ease, background-color 0.3s ease;
+            margin-top: 55px;
+        }
+        .feature:hover {
+            transform: translateY(-10px);
+            background: rgba(255, 255, 255, 0.2);
+        }
+        .feature img {
+            max-width: 100px;
+            height: auto;
+            margin-bottom: 15px;
+            transition: transform 0.4s ease;
+        }
+        .feature img:hover {
+            transform: rotate(360deg) scale(1.1);
+        }
+        .feature h3 {
+            font-size: 1.7em;
+            margin-bottom: 10px;
+            color: #FF00FF;
+            transition: color 0.3s ease;
+        }
+        .feature h3:hover {
+            color: #00ffff;
+        }
+        .feature p {
+            font-size: 1.1em;
+            line-height: 1.6;
+            color: #d0d0d0;
+        }
+        .cta {
+            background-color: #1c1c1c;
+            color: #f0f0f0;
+            text-align: center;
+            padding: 40px;
+            margin: 60px 0;
+            border-radius: 12px;
+            box-shadow: 0 0 30px #00FFFF;
+            transition: background-color 0.5s ease, transform 0.3s ease;
+        }
+        .cta:hover {
+            background-color: #333;
+            color: #61f5b0;
+            transform: scale(1.02);
+        }
+        .cta h2 {
+            font-size: 2.2em;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+        }
+        .cta a {
+            background-color: #ccff66;
+            box-shadow: 0 0 30px #ccff66;
+            color: #333;
+            padding: 15px 35px;
+            text-decoration: none;
+            font-size: 1.3em;
+            font-weight: bold;
+            border-radius: 8px;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            cursor: pointer;
+        }
+        .cta a:hover {
+            background-color: #FF00FF;
+            box-shadow: 0 0 30px #FF00FF, 0 0 20px #00FFFF;
+            text-decoration: none;
+            color: inherit; /* Setează culoarea textului conform stilului implicit */
+            transform: scale(1.05);
+        }
+        /* Stilizarea specifică pentru link-ul de contact */
+        .contact-link {
+            display: inline-block;
+            background-color: #ccff66;
+            box-shadow: 0 0 30px #ccff66;
+            color: #121212;
+            padding: 10px 25px;
+            text-decoration: none;
+            font-size: 1.1em;
+            font-weight: bold;
+            border-radius: 8px;
+            margin: 20px auto;
+            text-align: center;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            cursor: pointer;
+        }
+        .contact-link:hover {
+            background-color: #FF00FF;
+            box-shadow: 0 0 30px #FF00FF, 0 0 20px #00FFFF;
+            text-decoration: none;
+            color: inherit; /* Setează culoarea textului conform stilului implicit */
+            transform: scale(1.05);
+        }
+        .bug-link {
+            display: inline-block;
+            background-color: #ccff66;
+            box-shadow: 0 0 30px #ccff66;
+            color: #121212;
+            padding: 10px 25px;
+            text-decoration: none;
+            font-size: 1.1em;
+            font-weight: bold;
+            border-radius: 8px;
+            margin: 20px auto;
+            text-align: center;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            float: right;
+            cursor: pointer;
+        }
+        .bug-link:hover {
+            background-color: #61f5b0;
+            box-shadow: 0 0 30px #FF00FF, 0 0 20px #00FFFF;
+            transform: scale(1.05);
+        }
+        .footer {
+            background-color: #222;
+            color: #f0f0f0;
+            text-align: center;
+            padding: 20px 0;
+            margin-top: 40px;
+            font-size: 0.9em;
+            transition: background-color 0.5s ease;
+        }
+        .footer:hover {
+            background-color: #1a1a1a;
+        }
+
+        .button-with-icon {
+            display: flex;
+            align-items: center;
+            background-color: #ccff66;
+            box-shadow: 0 0 30px #ccff66;
+            border: none;
+            color: black;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+
+        .button-with-icon img {
+            margin-right: 8px;
+            margin-bottom: 0px;
+        }
+        .button-with-icon:hover {
+            box-shadow: 0 0 30px #FF00FF;
+            transform: scale(1.05);
+        }
+        .bold-red {
+            color: red;
+            font-weight: bold;
+        }
+
+        .bold-green {
+            color: #66ff66;
+            font-weight: bold;
+        }
+        /* Animatii de pop-up */
+        .pop-up {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        .pop-up.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+        <h1>Muap - Software List</h1>
+        </div>
+    </header>
+    
+        <section class="features">
+            <div class="feature pop-up">
+                <img src="../help/exe_img.png" alt="Multipp Standard Setup">
+                <h3>Standard Setup v.0.12.6</h3>
+                <p>Multiapp Standard version.</p><br><br>
+                <button class="button-with-icon" onclick="window.location.href='https://mega.nz/file/4NQljIKL#2hXE-jYBf4bu7ka8YP5OATJ5cYk8MSiznd7vsKHDzwM';"  style="display: block; margin: 10px auto; padding: 10px 20px; font-size: 16px; background-color: #ccff66; border: none; border-radius: 5px; cursor: pointer;"><img src="../help/exe_img.png" alt="Icon" width="20" height="20"><b>Download</b></button>
+            </div>
+            <div class="feature pop-up">
+                <img src="../help/exe_img.png" alt="Multiapp Premium Setup">
+                <h3>Premium Setup v.0.12.6</h3>
+                <p>Multiapp Premium version.</p><br><br>
+                <button class="button-with-icon" onclick="window.location.href='https://mega.nz/file/oFwhULKa#3qPF7uXRjxvHpSQ6n5qOlxduNjetmLAoHa9asqWpe6A';"  style="display: block; margin: 10px auto; padding: 10px 20px; font-size: 16px; background-color: #ccff66; border: none; border-radius: 5px; cursor: pointer;"><img src="../help/exe_img.png" alt="Icon" width="20" height="20"><b>Download</b></button>
+            </div>
+            <div class="feature pop-up">
+                <img src="../help/exe_img.png" alt="Multiapp Enterprise Setup">
+                <h3>Enterprise Setup v.0.12.6</h3>
+                <p>Multiapp Enterprise version.</p><br><br>
+                <button class="button-with-icon" onclick="window.location.href='https://mega.nz/file/EMAlDB4C#gVBgqc_QWoLCZsd9LlzL315x5T59DiirHYVqA_mBYO8';"  style="display: block; margin: 10px auto; padding: 10px 20px; font-size: 16px; background-color: #ccff66; border: none; border-radius: 5px; cursor: pointer;"><img src="../help/exe_img.png" alt="Icon" width="20" height="20"><b>Download</b></button>
+            </div>
+            <div class="feature pop-up">
+                <img src="../help/CopyApplogo.png" alt="Copy App">
+                <h3>Copy App</h3>
+                <p>Download this application and use it only if you want to copy files/folders.</p><br><br><br><br><br><br><br><br>
+                <button class="button-with-icon" onclick="window.location.href='https://mega.nz/file/oAomXbQA#Da9_MyO3W_hUxFrt-bnF2e_9ZK-5n5D2vffypDislb0';"   style="display: block; margin: 10px auto; padding: 10px 20px; font-size: 16px; background-color: #ccff66; border: none; border-radius: 5px; cursor: pointer;">
+                    <img src="../help/CopyApplogo.png" alt="Icon" width="20" height="20">
+                    <b>Download</b>
+                </button>
+            </div>
+            <div class="feature pop-up">
+                <img src="../help/reader.png" alt="Feature 2">
+                <h3>Office Reader</h3>
+                <p>Office Reader is a useful application if you just want to open a <b>.docx</b> or <b>.xlsx</b> or <b>.pptx</b> document for reading the text from file. Additionally, with this tool, you can ensure that the files you want to open are not corrupted.</p><br><br><br><br><br><br><br>
+                <button class="button-with-icon" onclick="window.location.href='https://mega.nz/file/VEhHjBhC#g8Adc4y7yKRqta01pg9aw4yVsqqsRWPr1Pzt0U4L-TY';"  style="display: block; margin: 10px auto; padding: 10px 20px; font-size: 16px; background-color: #ccff66; border: none; border-radius: 5px; cursor: pointer;">
+                    <img src="../help/reader.png" alt="Icon" width="20" height="20">
+                    <b>Download</b>
+                </button>
+            </div>
+            <div class="feature pop-up">
+                <img src="../help/muap-excel.png" alt="Feature 2">
+                <h3>Muap Excel</h3>
+                <p>Muap Excel offers you a wide range of options for processing <b>.xlsx</b> files. You can write formulas, open multiple worksheets, etc..</p><br><br><br><br><br><br><br>
+                <button class="button-with-icon" onclick="window.location.href='https://mega.nz/file/IZx2FazT#AJAuAwAG5ZKBtii-o759bwicFF2KEsZVagdtkBsiJF4';"  style="display: block; margin: 10px auto; padding: 10px 20px; font-size: 16px; background-color: #ccff66; border: none; border-radius: 5px; cursor: pointer;">
+                    <img src="../help/muap-excel.png" alt="Icon" width="20" height="20">
+                    <b>Download</b>
+                </button>
+            </div>
+            <div class="feature pop-up">
+                <img src="../help/app_icon.png" alt="Feature 2">
+                <h3>Terminal Emulator</h3>
+                <p>Terminal Emulator is a program that provides full terminal functionalities. Just give it a try and enjoy an exceptional experience.</p><br><br><br><br><br><br><br>
+                <button class="button-with-icon" onclick="window.location.href='https://mega.nz/file/NE4EESaT#XDJjMH6cO5hk0IlmMchx3Esq9VbF70LHHBeJBc_swps';"  style="display: block; margin: 10px auto; padding: 10px 20px; font-size: 16px; background-color: #ccff66; border: none; border-radius: 5px; cursor: pointer;">
+                    <img src="../help/app_icon.png" alt="Icon" width="20" height="20">
+                    <b>Download</b>
+                </button>
+            </div>
+            <div class="feature pop-up">
+                <img src="../help/keylogo.png" alt="Feature 3">
+                <h3>Check Serial Number</h3>
+                <p>The software checks the product key in case it cannot be validated within the application. If that product key was purchased and cannot be validated in any way, please contact me in the Report Bug section.</p><br><br>
+                <button class="button-with-icon" onclick="window.location.href='https://mega.nz/file/xJ4HVbaA#5SwB0bEqqARJGysKq_x_B4turytlTEYVL_37SwIoQ4g';"   style="display: block; margin: 10px auto; padding: 10px 20px; font-size: 16px; background-color: #ccff66; border: none; border-radius: 5px; cursor: pointer;">
+                    <img src="../help/keylogo.png" alt="Icon" width="20" height="20">
+                    <b>Download</b>
+                </button>
+            </div>
+            <div class="feature pop-up">
+                <img src="../help/email.png" alt="Muap Mail">
+                <h3>Muap Mail</h3>
+                <p>Stay updated on our services and get the latest information quickly. Use Muap Mail to enjoy a useful and pleasant experience. After downloading Multiapp, you will receive an email containing your login credentials for Muap Mail.</p><br><br><br><br><br><br><br><br>
+                <button class="button-with-icon" onclick="window.location.href='https://mega.nz/file/8IwSyTgT#11llwNiui2wTSnUfX8MNYTfkCfXKMtP3M5e8csjlJnk';"   style="display: block; margin: 10px auto; padding: 10px 20px; font-size: 16px; background-color: #ccff66; border: none; border-radius: 5px; cursor: pointer;">
+                    <img src="../help/email.png" alt="Icon" width="20" height="20">
+                    <b>Download</b>
+                </button>
+            </div>
+            <div class="feature pop-up">
+                <img src="../help/microchip.png" alt="Muap Hardware Monitor">
+                <h3>Muap Hardware Monitor</h3>
+                <p>If, however, you do not have the Multiapp program, there is a free alternative solution through which you can view a hardware monitor for your device.</p><br><br><br><br><br><br><br><br>
+                <button class="button-with-icon" onclick="window.location.href='https://mega.nz/file/VQBgwTDA#lg6WKakqooZch_v4BDK4dsIArnhG1v8J-g9mrPibhX8';"   style="display: block; margin: 10px auto; padding: 10px 20px; font-size: 16px; background-color: #ccff66; border: none; border-radius: 5px; cursor: pointer;">
+                    <img src="../help/microchip.png" alt="Icon" width="20" height="20">
+                    <b>Download</b>
+                </button>
+            </div>
+        </section>
+        <br>
+        <br>
+</div>
+
+    <footer class="footer">
+        <p>&copy; 2024 Muap. All rights reserved. | Designed for IT Professionals</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const popUpElements = document.querySelectorAll('.pop-up');
+    
+            const observer = new IntersectionObserver(entries => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    } else {
+                        entry.target.classList.remove('visible');
+                    }
+                });
+            }, {
+                threshold: 0.1
+            });
+    
+            popUpElements.forEach(element => {
+                observer.observe(element);
+            });
+        });
+    </script>
+
+</body>
+</html>

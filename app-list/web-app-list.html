@@ -1,0 +1,426 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=1024">
+    <title>Muap - Software list</title>
+    <link rel="icon" type="image/png" href="../help/technology.png">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #121212;
+            color: #e0e0e0;
+            overflow-x: hidden;
+        }
+        header {
+            background-color: #222;
+            color: #00FFFF;
+            padding: 30px 0;
+            text-align: center;
+            box-shadow: 0 0 30px #cb5bff;
+            transition: background-color 0.5s ease;
+        }
+        header:hover {
+            background-color: #1a1a1a;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .intro {
+            text-align: center;
+            margin: 60px 0;
+            animation: fadeIn 1s ease-out;
+        }
+        .intro h1 {
+            font-size: 3em;
+            margin-bottom: 15px;
+            color: #ccff66;
+            text-shadow: 3px 3px 15px rgba(0, 0, 0, 0.8);
+            transition: transform 0.3s ease-in-out, color 0.3s ease-in-out;
+        }
+        .intro h1:hover {
+            transform: scale(1.1);
+            color: #00FFFF;
+        }
+        .intro p {
+            font-size: 1.3em;
+            margin-bottom: 20px;
+            color: #e0e0e0;
+            text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.7);
+            max-width: 80%;
+            margin-left: auto;
+            margin-right: auto;
+            opacity: 0;
+            animation: fadeIn 1.5s ease-out 0.5s forwards;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        .features {
+            text-align: center;
+            margin: 60px 0;
+        }
+        .feature {
+            display: inline-block;
+            width: 300px;
+            margin: 0 20px;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            box-shadow: 0 0 30px #00FFFF, 0 0 20px #FF00FF;
+            transition: transform 0.5s ease, background-color 0.3s ease;
+            margin-top: 55px;
+        }
+        .feature:hover {
+            transform: translateY(-10px);
+            background: rgba(255, 255, 255, 0.2);
+        }
+        .feature img {
+            max-width: 100px;
+            height: auto;
+            margin-bottom: 15px;
+            transition: transform 0.4s ease;
+        }
+        .feature img:hover {
+            transform: rotate(360deg) scale(1.1);
+        }
+        .feature h3 {
+            font-size: 1.7em;
+            margin-bottom: 10px;
+            color: #FF00FF;
+            transition: color 0.3s ease;
+        }
+        .feature h3:hover {
+            color: #00ffff;
+        }
+        .feature p {
+            font-size: 1.1em;
+            line-height: 1.6;
+            color: #d0d0d0;
+        }
+        .cta {
+            background-color: #1c1c1c;
+            color: #f0f0f0;
+            text-align: center;
+            padding: 40px;
+            margin: 60px 0;
+            border-radius: 12px;
+            box-shadow: 0 0 30px #00FFFF;
+            transition: background-color 0.5s ease, transform 0.3s ease;
+        }
+        .cta:hover {
+            background-color: #333;
+            color: #61f5b0;
+            transform: scale(1.02);
+        }
+        .cta h2 {
+            font-size: 2.2em;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+        }
+        .cta a {
+            background-color: #ccff66;
+            box-shadow: 0 0 30px #ccff66;
+            color: #333;
+            padding: 15px 35px;
+            text-decoration: none;
+            font-size: 1.3em;
+            font-weight: bold;
+            border-radius: 8px;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            cursor: pointer;
+        }
+        .cta a:hover {
+            background-color: #FF00FF;
+            box-shadow: 0 0 30px #FF00FF, 0 0 20px #00FFFF;
+            text-decoration: none;
+            color: inherit; /* Setează culoarea textului conform stilului implicit */
+            transform: scale(1.05);
+        }
+        /* Stilizarea specifică pentru link-ul de contact */
+        .contact-link {
+            display: inline-block;
+            background-color: #ccff66;
+            box-shadow: 0 0 30px #ccff66;
+            color: #121212;
+            padding: 10px 25px;
+            text-decoration: none;
+            font-size: 1.1em;
+            font-weight: bold;
+            border-radius: 8px;
+            margin: 20px auto;
+            text-align: center;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            cursor: pointer;
+        }
+        .contact-link:hover {
+            background-color: #FF00FF;
+            box-shadow: 0 0 30px #FF00FF, 0 0 20px #00FFFF;
+            text-decoration: none;
+            color: inherit; /* Setează culoarea textului conform stilului implicit */
+            transform: scale(1.05);
+        }
+        .bug-link {
+            display: inline-block;
+            background-color: #ccff66;
+            box-shadow: 0 0 30px #ccff66;
+            color: #121212;
+            padding: 10px 25px;
+            text-decoration: none;
+            font-size: 1.1em;
+            font-weight: bold;
+            border-radius: 8px;
+            margin: 20px auto;
+            text-align: center;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            float: right;
+            cursor: pointer;
+        }
+        .bug-link:hover {
+            background-color: #61f5b0;
+            box-shadow: 0 0 30px #FF00FF, 0 0 20px #00FFFF;
+            transform: scale(1.05);
+        }
+        .footer {
+            background-color: #222;
+            color: #f0f0f0;
+            text-align: center;
+            padding: 20px 0;
+            margin-top: 40px;
+            font-size: 0.9em;
+            transition: background-color 0.5s ease;
+        }
+        .footer:hover {
+            background-color: #1a1a1a;
+        }
+
+        .button-with-icon {
+            display: flex;
+            align-items: center;
+            background-color: #ccff66;
+            box-shadow: 0 0 30px #ccff66;
+            border: none;
+            color: black;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+
+        .button-with-icon img {
+            margin-right: 8px;
+            margin-bottom: 0px;
+        }
+        .button-with-icon:hover {
+            box-shadow: 0 0 30px #FF00FF;
+            transform: scale(1.05);
+        }
+        .bold-red {
+            color: red;
+            font-weight: bold;
+        }
+
+        .bold-green {
+            color: #66ff66;
+            font-weight: bold;
+        }
+        /* Animatii de pop-up */
+        .pop-up {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        .pop-up.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+        <h1>Muap - Web App List</h1>
+        </div>
+    </header>
+    
+        <section class="features">
+            <div class="feature pop-up">
+                <h3 style="font-size: 40px;">C++</h3>
+                <p>Online C++ Compiler powered by <b>jDoodle.com</b>.</p><br>
+                <p>Check the solution now!</p>
+                <br>
+                <a class="contact-link pop-up" onclick="window.open('../cpp.html', '_blank')">Check</a>
+            </div>
+            <div class="feature pop-up">
+                <h3 style="font-size: 40px;">Python 3</h3>
+                <p>Online Python 3.X.X Compiler powered by <b>Brython</b>.</p><br>
+                <p>Check the solution now!</p>
+                <br>
+                <a class="contact-link pop-up" onclick="window.open('../python.html', '_blank')">Check</a>
+            </div>
+            <div class="feature pop-up">
+                <h3 style="font-size: 40px;">JavaScript</h3>
+                <p>Online JavaScript Compiler.</p><br>
+                <p>Check the solution now!</p>
+                <br>
+                <a class="contact-link pop-up" onclick="window.open('../java-script.html', '_blank')">Check</a>
+            </div>
+            <div class="feature pop-up">
+                <h3 style="font-size: 40px;">HTML, CSS & JS Playground</h3>
+                <p>This section creates an online editor for HTML, CSS, and JavaScript with real-time preview.</p><br>
+                <p>Check the solution now!</p>
+                <br>
+                <a class="contact-link pop-up" onclick="window.open('../html-creator.html', '_blank')">Check</a>
+            </div>
+            <div class="feature pop-up">
+                <h3 style="font-size: 40px;">Gradient Color Picker</h3>
+                <p>This section helps you get an idea of the color gradient and allows you to visualize all the changes in real-time.</p><br>
+                <p>Check the solution now!</p>
+                <br>
+                <a class="contact-link pop-up" onclick="window.open('../gradient-color-picker.html', '_blank')">Check</a>
+            </div>
+            <div class="feature pop-up">
+                <h3 style="font-size: 40px;">SQL</h3>
+                <p>Online SQL Playground powered by <b>Cloudflare</b>.</p><br>
+                <p>Check the solution now!</p>
+                <br>
+                <a class="contact-link pop-up" onclick="window.open('../sql-playground.html', '_blank')">Check</a>
+            </div>
+            <div class="feature pop-up">
+                <h3 style="font-size: 40px;">Promodoro App</h3>
+                <p>The Pomodoro application is a time management tool based on the Pomodoro technique. This method helps users improve productivity by breaking time into short work intervals, usually 25 minutes, followed by short breaks.</p><br>
+                <p>Check the solution now!</p>
+                <br>
+                <a class="contact-link pop-up" onclick="window.open('../promodoro-app.html', '_blank')">Check</a>
+            </div>
+            <div class="feature pop-up">
+                <h3 style="font-size: 40px;">ToDo App</h3>
+                <p>The ToDo App gives you the ability to organize your tasks and shape them in a dynamic way.</p><br>
+                <p>Check the solution now!</p>
+                <br>
+                <a class="contact-link pop-up" onclick="window.open('../ToDo.html', '_blank')">Check</a>
+            </div>
+            <div class="feature pop-up">
+                <h3 style="font-size: 40px;">Sticky Notes App</h3>
+                <p>Sticky Notes App is an application that allows you to create and manage quick notes on your desktop. You can easily add, edit, and delete notes, and they remain visible to help you remember important tasks or ideas. The app is simple and efficient, making it ideal for jotting down essentials without the need for complex agendas or documents.</p><br>
+                <p>Check the solution now!</p>
+                <br>
+                <a class="contact-link pop-up" onclick="window.open('../sticky-notes.html', '_blank')">Check</a>
+            </div>
+            <div class="feature pop-up">
+                <h3 style="font-size: 40px;">Digital Clock App</h3>
+                <p>The Digital Clock App is ideal for those who use 2 monitors. Besides being a simple application that shows you the hours, minutes, and seconds, the format is dynamic and helps you manage your time more efficiently.</p><br>
+                <p>Check the solution now!</p>
+                <br>
+                <a class="contact-link pop-up" onclick="window.open('../digital-clock.html', '_blank')">Check</a>
+                <br>
+                <a class="contact-link pop-up" onclick="window.open('../digital-classic-clock.html', '_blank')">Check classic theme</a>
+            </div>
+            <div class="feature pop-up">
+                <h3 style="font-size: 40px;">Timer App</h3>
+                <p>Timer App is a simple and efficient tool for time management. It allows you to set custom timers for various activities, helping you better organize your day and stay focused on tasks.</p><br>
+                <p>Check the solution now!</p>
+                <br>
+                <a class="contact-link pop-up" onclick="window.open('../timer.html', '_blank')">Check</a>
+                <br>
+            </div>
+            <div class="feature pop-up">
+                <h3 style="font-size: 40px;">CV Builder</h3>
+                <p>This section will help you create your ideal CV directly from your browser and save it in PDF format.</p><br>
+                <p>Check the solution now!</p>
+                <br>
+                <a class="contact-link pop-up" onclick="window.open('../cv-builderV1.html', '_blank')">Check Theme 1</a>
+                <a class="contact-link pop-up" onclick="window.open('../cv-builderV2.html', '_blank')">Check Theme 2</a>
+            </div>
+            <div class="feature pop-up">
+                <h3 style="font-size: 40px;">Whiteboard Online</h3>
+                <p>Sketch your ideas with a minimalist whiteboard.</p><br>
+                <p>Check the solution now!</p>
+                <br>
+                <a class="contact-link pop-up" onclick="window.open('../whiteboard.html', '_blank')">Check</a>
+            </div>
+            <div class="feature pop-up">
+                <h3 style="font-size: 40px;">Random choice picker</h3>
+                <p>Maybe you want a team member to complete a certain task, but you don't know how to choose.</p><br>
+                <p>Check the solution now!</p>
+                <br>
+                <a class="contact-link pop-up" onclick="window.open('../random-choice-picker.html', '_blank')">Check</a>
+            </div>
+            <div class="feature pop-up">
+                <h3 style="font-size: 40px;">Image Filter</h3>
+                <p>This section helps you customize your image with specific filters and color/contrast shades.</p><br>
+                <p>Check the solution now!</p>
+                <br>
+                <a class="contact-link pop-up" onclick="window.open('../image-filter.html', '_blank')">Check</a>
+            </div>
+            <div class="feature pop-up">
+                <h3 style="font-size: 40px;">Image to ICO Converter</h3>
+                <p>If you want to convert an image into an icon, this section is ideal. You can also customize its dimensions.</p><br>
+                <p>Check the solution now!</p>
+                <br>
+                <a class="contact-link pop-up" onclick="window.open('../ico-Converter.html', '_blank')">Check</a>
+            </div>
+            <div class="feature pop-up">
+                <h3 style="font-size: 40px;">Time Table</h3>
+                <p>If you want to organize your time for a week, <b>Time Table</b> is the perfect tool for you.</p><br>
+                <p>Check the solution now!</p>
+                <br>
+                <a class="contact-link pop-up" onclick="window.open('../time-table.html', '_blank')">Check</a>
+            </div>
+            <div class="feature pop-up">
+                <h3 style="font-size: 40px;">Calendar Widget</h3>
+                <p>If you want to view a specific period in the calendar in a simplified manner, this widget can help you.</p><br>
+                <p>Check the solution now!</p>
+                <br>
+                <a class="contact-link pop-up" onclick="window.open('../calendar-widget.html', '_blank')">Check</a>
+            </div><br><br>
+            <div class="feature pop-up">
+                <h3 style="font-size: 40px;"><i>Take a break anytime!</i></h3>
+                <p><i>Explore our mini-games to take a break from work.</i></p><br>
+                <br>
+                <a class="contact-link pop-up" onclick="window.open('../games/games-menu.html', '_blank')">Check</a>
+            </div>
+        </section>
+        <br>
+        <br>
+</div>
+
+    <footer class="footer">
+        <p>&copy; 2024 Muap. All rights reserved. | Designed for IT Professionals</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const popUpElements = document.querySelectorAll('.pop-up');
+    
+            const observer = new IntersectionObserver(entries => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    } else {
+                        entry.target.classList.remove('visible');
+                    }
+                });
+            }, {
+                threshold: 0.1
+            });
+    
+            popUpElements.forEach(element => {
+                observer.observe(element);
+            });
+        });
+    </script>
+
+</body>
+</html>

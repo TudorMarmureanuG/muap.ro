@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=1024">
+    <title>Hangman</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: linear-gradient(to right, #00ffff, #ff00ff);
+            font-family: 'Arial', sans-serif;
+        }
+        .container {
+            text-align: center;
+            color: #fff;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+        }
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: #00ffff;
+            text-shadow: 0 0 10px #00ffff;
+        }
+        .word {
+            font-size: 2rem;
+            margin: 20px 0;
+            letter-spacing: 10px;
+            color: #fff;
+        }
+        .letters {
+            margin: 20px 0;
+        }
+        .letters {
+    display: grid;
+    grid-template-columns: repeat(13, 50px); /* Ajustează numărul de coloane conform dorinței */
+    gap: 5px; /* Spațiu între pătrate */
+    justify-content: center;
+    margin: 20px 0;
+}
+
+.letters button {
+    background: #00ffff;
+    border: none;
+    color: #000;
+    padding: 15px;
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: background 0.3s, color 0.3s, transform 0.3s;
+    border-radius: 5px;
+    width: 50px; /* Lățimea pătratelor */
+    height: 50px; /* Înălțimea pătratelor */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+        .status {
+            font-size: 1.5rem;
+            margin: 20px 0;
+            color: #ff0000;
+        }
+        .hangman-figure {
+            font-size: 1.5rem;
+            color: #fff;
+            margin-top: 30px;
+        }
+        .language-switch {
+            margin: 20px;
+            font-size: 1.2rem;
+            color: black;
+            cursor: pointer;
+            background: #00ffff;
+            border: none;
+            padding: 10px;
+            border-radius: 5px;
+            transition: background 0.3s, color 0.3s;
+        }
+        .language-switch:hover {
+            background: #ff00ff;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Hangman</h1>
+        <button class="language-switch" onclick="switchLanguage()">Switch Language (Current: English)</button>
+        <div class="word" id="word"></div>
+        <div class="letters" id="letters"></div>
+        <div class="status" id="status"></div>
+        <div class="hangman-figure" id="hangman-figure"></div>
+    </div>
+
+    <script>
+        const words = {
+            en: [
+                'CAR', 'COMPUTER', 'PHONE', 'LAPTOP', 'TELEVISION', 'FRIDGE', 'BUS', 'TRAM',
+                'POTATO', 'APPLES', 'PEARS', 'MONTANA', 'MATHEMATICS', 'BIOLOGY', 'ENGINEER',
+                'LAWYER', 'DOCTOR', 'FLOWER', 'OVEN', 'FOOTBALL', 'TENNIS', 'BICYCLE', 'NETWORK',
+                'PROGRAMMER', 'IRON', 'GRAVE', 'STONE', 'MOUNTAIN', 'ANIMAL', 'LEAVES', 'LIFE',
+                'BALL', 'SUN', 'RAIN', 'CLOUD', 'MAPLE', 'LAKE', 'BOARD', 'AIR', 'TREE', 'HOUSE',
+                'PIANO', 'MUSIC', 'PEN', 'PAPER', 'CIRCUS', 'ZEBRA', 'TIGER', 'TRAIN', 'SUBWAY',
+                'SUPERCALIFRAGILISTIC', 'HYPERKALEMIA', 'CONSTITUTIONALITY', 'UNCONVENTIONAL',
+                'TELEPORTATION', 'MICROBIOLOGY', 'BIOENGINEERING', 'INTERDISCIPLINARY',
+                'UNIMAGINABLE', 'UNPREDICTABLE', 'METAMORPHOSIS', 'ELECTROMAGNETISM', 'MICROSCOPY',
+                'ULTRASONIC', 'NEBULA', 'GALAXY', 'PLANET', 'COSMOS', 'HYBRIDIZATION',
+                'EXPERIMENTAL', 'PHENOMENOLOGY', 'INCONGRUITY', 'SUPERFICIALITY', 'ELECTROSTATICS',
+                'UNDERESTIMATION', 'UNLIKEABLE', 'PHENOMENAL', 'THERMOELECTRIC', 'NEUTRINO',
+                'ATMOSPHERIC', 'FREEZING', 'EVAPORATION', 'INTEGRITY', 'ALGORITHM',
+                'PROCRASTINATION', 'AESTHETIC', 'TEACHER', 'LITHOGRAPHY', 'PHOSPHORESCENT',
+                'MONUMENTAL', 'PERSPECTIVE', 'CONSTELLATION', 'PARALLELEPIPED', 'EXTROVERT',
+                'NEUTRALITY', 'CONTINUITY', 'DISTORTION', 'RECHARGING', 'PHOTOCONDUCTOR',
+                'BIODEGRADABLE', 'TRANSFIGURATION', 'FRAGMENTATION', 'SOLIDIFICATION', 'PSEUDONYM',
+                'PHILOSOPHY', 'INVENTIVENESS', 'THERMOLUMINESCENCE', 'OCTAGONAL', 'INFRASTRUCTURE',
+                'AMPLIFIER', 'CULTURE', 'UNKNOWN', 'SENSORY', 'ACOUSTICS', 'DEMOCRACY',
+                'REGENERATIVE', 'PARADOXICAL', 'ANTIMATTER', 'TELEKINETIC', 'BIOLUMINESCENCE',
+                'SPECTROSCOPY', 'QUANTIFICATION', 'HETEROGENEOUS', 'ECOSYSTEM', 'ELECTROENCEPHALOGRAPH',
+                'SUPERSONIC', 'MICROORGANISM', 'PLANNING', 'TRANSLUCENT', 'ANTHROPOMORPHISM',
+                'ELECTROENCEPHALOGRAPHY', 'NEUROBIOLOGY', 'PHOTOCHROMIC', 'WATERPROOF',
+                'CONSTITUTIVE', 'FERROMAGNETISM', 'GIGANTOMANIA', 'TRIGONOMETRY', 'ASTRONOMY',
+                'CHARACTERISTIC', 'IMMUNODEFICIENCY', 'CRYSTALLIZATION', 'DISINTEGRATION',
+                'GEOLOGY', 'NEUROTRANSMITTER', 'VOLUMETRIC', 'CREATIVITY', 'PERSUASION',
+                'INTERFERENCE', 'PNEUMONIA', 'SUPERCONDUCTOR', 'MECHATRONICS', 'MICROSTRUCTURE',
+                'EXTRATERRESTRIAL', 'DIGITALIZATION', 'PHOTOCATALYST', 'THERMODYNAMICS',
+                'RADIOACTIVITY', 'CONVERGENCE', 'MANIPULATION', 'QUASAR', 'NECROPOLIS',
+                'MEDITATION', 'DEVIATION', 'HOMOGENIZATION', 'ANTIBODY', 'SINGULARITY',
+                'THERMOREGULATOR', 'OMNIPOTENT', 'SPELEOLOGY', 'HIBERNATION', 'PHOTOTHERAPY',
+                'CLAIRVOYANCE', 'INFLATABLE', 'REVOLUTION', 'SUSTAINABILITY', 'NEUROPLASTICITY',
+                'FLAMMABLE'
+            ],
+            ro: [
+                'MASINA', 'CALCULATOR', 'TELEFON', 'LAPTOP', 'TELEVIZOR', 'FRIGIDER', 'AUTOBUZ',
+                'TRAMVAI', 'CARTOF', 'MERE', 'PERE', 'MONTANA', 'MATEMATICA', 'BIOLOGIE', 'INGINER',
+                'AVOCAT', 'DOCTOR', 'FLOARE', 'CUPTOR', 'FOTBAL', 'TENIS', 'BICICLETA', 'RETEA',
+                'PROGRAMATOR', 'FIER', 'MORMANT', 'PIATRA', 'MUNTE', 'ANIMAL', 'FRUNZE', 'VIATA',
+                'MINGE', 'SOARE', 'PLUA', 'NOR', 'ARTAR', 'LAC', 'PLACA', 'AER', 'COPAC', 'CASA',
+                'PIAN', 'MUZICA', 'STILOU', 'HARTIE', 'CIRC', 'ZEBRA', 'TIGRU', 'TREN', 'METROU',
+                'SUPERCALIFRAGILISTIC', 'HIPERPOTASIOSEMIE', 'CONSTITUTIONALITATE', 'NECONVENTIONAL',
+                'TELEPORTARE', 'MICROBIOLOGIE', 'BIOINGINERIE', 'INTERDISCIPLINAR',
+                'NEIMAGINABIL', 'NEPREVIZIBIL', 'METAMORFOZA', 'ELECTROMAGNETISM', 'MICROSCOPIE',
+                'ULTRASONIC', 'NEBULOASA', 'GALAXIE', 'PLANETA', 'COSMOS', 'HIBRIDIZARE',
+                'EXPERIMENTAL', 'FENOMENOLOGIE', 'INCONGRUITATE', 'SUPERFICIALITATE', 'ELECTROSTATICA',
+                'SUBESTIMARE', 'NEPLACUT', 'FENOMENAL', 'TERMOELECTRIC', 'NEUTRINO',
+                'ATMOSFERIC', 'CONGELARE', 'EVAPORARE', 'INTEGRITATE', 'ALGORITM',
+                'PROCRASTINARE', 'ESTETIC', 'INVATATOR', 'LITHOGRAFIE', 'FOSFORESCENT',
+                'MONUMENTAL', 'PERSPECTIVA', 'CONSTELATIE', 'PARALELEPIPED', 'EXTROVERTIT',
+                'NEUTRALITATE', 'CONTINUITATE', 'DISTORSIONARE', 'REINCARCARE', 'FOTOCONDUCTOR',
+                'BIODEGRADABIL', 'TRANSFIGURARE', 'FRAGMENTARE', 'SOLIDIFICARE', 'PSEUDONIM',
+                'FILOSOFIE', 'INVENTIVITATE', 'TERMOLUMINESCENTA', 'OCTAGONAL', 'INFRASTRUCTURA',
+                'AMPLIFICATOR', 'CULTURA', 'NECUNOSCUT', 'SENSORIAL', 'ACUSTICA', 'DEMOCARIE',
+                'REGENERARE', 'PARADOXAL', 'ANTIMATERIE', 'TELEKINEZIS', 'BIOLUMINESCENTA',
+                'SPECTROSCOPIE', 'QUANTIFICARE', 'HETEROGEN', 'ECOSISTEM', 'ELECTROENCEFALOGRAF',
+                'SUPERSONIC', 'MICROORGANISM', 'PLANIFICARE', 'TRANSLUCID', 'ANTROPOMORFISM',
+                'ELECTROENCEFALOGRAFIE', 'NEUROBIOLOGIE', 'FOTOCROMIC', 'IMPENETRABIL',
+                'CONSTITUTIV', 'FERROMAGNETISM', 'GIGANTOMANIE', 'TRIGONOMETRIE', 'ASTRONOMIE',
+                'CARACTERISTIC', 'DEFICIENTAIMUNITARA', 'CRISTALIZARE', 'DEZINTEGRARE',
+                'GEOLOGIE', 'NEUROTRANSMISOR', 'VOLUMETRIC', 'CREATIVITATE', 'PERSUASIUNE',
+                'INTERFERENTA', 'PNEUMONIE', 'SUPERCONDUCTOR', 'MECHATRONICA', 'MICROSTRUCTURA',
+                'EXTRATERESTRIAL', 'DIGITALIZARE', 'FOTOCATALIZATOR', 'TERMODINAMICA',
+                'RADIOACTIVITATE', 'CONVERGENTA', 'MANIPULARE', 'QUASAR', 'NECROPOLIS',
+                'MEDITATIE', 'DEVIARE', 'HOMOGENIZARE', 'ANTICORP', 'SINGULARITATE',
+                'TERMOREGULATOR', 'OMNIPOTENT', 'SPELEOLOGIE', 'HIBERNARE', 'FOTOTERAPIE',
+                'CLAIRVOYANCE', 'INFLATABIL', 'REVOLUTIE', 'SUSTENABILITATE', 'NEUROPLASTICITATE',
+                'INFLAMABIL'
+            ]
+        };
+
+        let wordsList = words.en; // Default language
+        let selectedLanguage = 'en';
+        let selectedWord;
+        let guessedLetters = [];
+        let wrongGuesses = 0;
+
+        function getHintLetters(word, numHints) {
+            const uniqueLetters = Array.from(new Set(word)).filter(letter => letter !== ' ');
+            const hintLetters = [];
+            while (hintLetters.length < numHints && uniqueLetters.length > 0) {
+                const randomIndex = Math.floor(Math.random() * uniqueLetters.length);
+                const letter = uniqueLetters.splice(randomIndex, 1)[0];
+                hintLetters.push(letter);
+            }
+            return hintLetters;
+        }
+
+        function startGame() {
+            guessedLetters = [];
+            wrongGuesses = 0;
+            selectedWord = wordsList[Math.floor(Math.random() * wordsList.length)];
+            
+            // Determine the number of hint letters (2-3 letters based on the length of the word)
+            const numHints = Math.min(3, Math.floor(selectedWord.length / 3));
+            const hintLetters = getHintLetters(selectedWord, numHints);
+            
+            // Show hint letters in the displayed word
+            guessedLetters = [...new Set(guessedLetters.concat(hintLetters))];
+            
+            displayWord();
+            createLetters();
+            updateHangman();
+            document.getElementById('status').textContent = '';
+        }
+
+        function displayWord() {
+            const wordContainer = document.getElementById('word');
+            wordContainer.innerHTML = selectedWord.split('').map(letter => guessedLetters.includes(letter) ? letter : '_').join(' ');
+        }
+
+        function createLetters() {
+    const lettersContainer = document.getElementById('letters');
+    lettersContainer.innerHTML = '';
+    const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
+    
+    // Adaugă fiecare literă ca un buton în container
+    alphabet.forEach(letter => {
+        const button = document.createElement('button');
+        button.textContent = letter;
+        button.onclick = () => guessLetter(letter);
+        lettersContainer.appendChild(button);
+    });
+}
+
+
+        function guessLetter(letter) {
+            if (selectedWord.includes(letter)) {
+                guessedLetters.push(letter);
+            } else {
+                wrongGuesses++;
+            }
+            displayWord();
+            updateHangman();
+            checkGameStatus();
+        }
+
+        function updateHangman() {
+            const hangmanFigure = document.getElementById('hangman-figure');
+            hangmanFigure.textContent = 'Wrong guesses: ' + wrongGuesses + '/6';
+            // Update hangman figure based on the number of wrong guesses
+        }
+
+        function checkGameStatus() {
+            if (selectedWord.split('').every(letter => guessedLetters.includes(letter))) {
+                document.getElementById('status').textContent = 'You win!';
+                setTimeout(() => {
+                    startGame();
+                }, 3000); // Refresh the page after 3 seconds
+            } else if (wrongGuesses >= 6) {
+                document.getElementById('status').textContent = 'You lose! The word was ' + selectedWord;
+                setTimeout(() => {
+                    startGame();
+                }, 3000); // Refresh the page after 3 seconds
+            }
+        }
+
+        function switchLanguage() {
+            selectedLanguage = selectedLanguage === 'en' ? 'ro' : 'en';
+            wordsList = words[selectedLanguage];
+            document.querySelector('.language-switch').textContent = 'Switch Language (Current: ' + (selectedLanguage === 'en' ? 'English' : 'Romanian') + ')';
+            startGame();
+        }
+
+        startGame();
+    </script>
+</body>
+</html>

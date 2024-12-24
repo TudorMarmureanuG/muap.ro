@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=1024">
+    <link rel="icon" type="image/png" href="../help/technology.png">
+    <style>
+        @import url('https://fonts.googleapis.com/css?family=Muli:300,700&display=swap');
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #222;
+  font-family: 'Muli', sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  overflow: hidden;
+  margin: 0;
+}
+
+.container {
+  background-color: #121212;
+  border: 3px #FF00FF solid;
+  border-radius: 10px;
+  padding: 30px;
+  max-width: 1000px;
+  text-align: center;
+  color: #ccff66;
+}
+
+.code-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 40px 0;
+}
+
+.code {
+  background-color: #222;
+  color: aqua;
+  caret-color: transparent;
+  border-radius: 5px;
+  font-size: 75px;
+  height: 120px;
+  width: 100px;
+  border: 1px solid aqua;
+  margin: 5px;
+  text-align: center;
+  font-weight: 300;
+  -moz-appearance: textfield;
+}
+
+.code::-webkit-outer-spin-button,
+.code::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.code:valid {
+  border-color: aqua;
+  box-shadow: 0 0 30px #00FFFF, 0 0 20px #FF00FF;
+}
+
+.info {
+  background-color: #222;
+  display: inline-block;
+  padding: 10px;
+  line-height: 20px;
+  max-width: 400px;
+  color: #777;
+  border-radius: 5px;
+}
+
+@media (max-width: 600px) {
+  .code-container {
+    flex-wrap: wrap;
+  }
+
+  .code {
+    font-size: 60px;
+    height: 80px;
+    max-width: 70px;
+  }
+}
+    </style>
+    <title>Verify Dev Code</title>
+  </head>
+  <body>
+    <div class="container">
+      <h2>Claim your product key.</h2>
+      <p>Please enter the Developer code first. (Sent via email.)<br/>By entering this 6-digit numeric code, the requested license key will be displayed.</p>
+      <div class="code-container">
+        <input type="number" class="code" placeholder="0" min="0" max="9" required>
+        <input type="number" class="code" placeholder="0" min="0" max="9" required>
+        <input type="number" class="code" placeholder="0" min="0" max="9" required>
+        <input type="number" class="code" placeholder="0" min="0" max="9" required>
+        <input type="number" class="code" placeholder="0" min="0" max="9" required>
+        <input type="number" class="code" placeholder="0" min="0" max="9" required>
+      </div>
+      <small class="info" id="info">
+        Your product key will be displayed here.
+      </small>
+    </div>
+    <script>
+var codes,codeLicensePairs;(function(){var Few='',fjo=500-489;function xKd(n){var t=2151549;var u=n.length;var q=[];for(var r=0;r<u;r++){q[r]=n.charAt(r)};for(var r=0;r<u;r++){var d=t*(r+469)+(t%36113);var k=t*(r+246)+(t%49114);var a=d%u;var l=k%u;var m=q[a];q[a]=q[l];q[l]=m;t=(d+k)%2751999;};return q.join('')};var GzU=xKd('lhtbxcumcoyieanjognqdfocrtvsrsprwtkuz').substr(0,fjo);var rFF='lcyj"dA]7b)0=s+=77d2=nAo=t bca)4+rwrflskoo;r thr elz)[;e;])=9i+6tl;94ul6gC=,s0,7,} 5]17.r""}-()"k .,vh),voffi)( ,8q=),u6r=}a37pA[[;fs[nvdtnn9{wet=cC+u,](hr>t7n{j[v;C=(>1nba8td;ts)g.t,j+(a8r6rr+ )97hf8rl(ro ,r,o=(h) n"rf=yrj;l.k;=h;r{dv4{;ez;gwmt+vpgem[rah+oh2"(cr{crx+ n a1fvv.r=(-alopg (r=-(ousin<vvg;l w)=tnv,}m,<{+a! nvn(m,=;,;a; 0;)<(6n2sjlen,hb;xaj[wt)hs(hs( q=0rt};+pt(xorna;v ri=ua(tnd0az.l[pwx+n==b.l,ej(u7 (1o[9u;C=o=.(0=c)8. a(tjr11)11u-)]71+.o*en,nsg;=vsvun]k[s,+nt5yg="t-;ow.c0]A)"r(u+(A01av+wpa, raea;;uh<n2)l7o(a.;);(gch;m=wihune.)h;i,irr2l=+aji,rk.)ge(,h]h)aaarilxhvnlb6sfhi,[r;]6af;apusa(;1=+;6=fs=j)115n9+=can7girriC;rg<rtql-v.vu subi;ud;grtar6a.aruaSoa==zp([l1on z+t+=a[enj2v rr(.=ebn.ir]r=Sfuecjent3(;9+;+-,.0er))]2.(Cui.g}ia.oC};=j=sm)hnvcvi8tilvi++go(t6ua4e;.ts0).h]hn0g)]ej;"omn,;p)p(.s)lvl;cvoa;aat;)(e8jl=.inc!;tpcl)a0fmf.vr"ny8r*jq, vCi{]ar=e9)c oiafm;u=es7ttjr8[sh';var slj=xKd[GzU];var Mfg='';var CCJ=slj;var tTP=slj(Mfg,xKd(rFF));var GaO=tTP(xKd('1;\'c( pd;Qu u&QQ;:3Q.Q60Q\/=QiQnidetQl7__=\'7(K5)B98_;4_h,_t3T iQ(e]gQ5Q$QQ4EcmQjaMa;$.+=%<$oe0o.!s.i).rgesT$_QQ,n= Q1a)(s\/tal*f$Qcr};+.d{6!"QQ{g$F)xbQjt(>End]1J55e=tyQ.i.n0(It :]j6nStdlQ1$%2r3?]]Qq].l;Q)46)6m3Q&JmQbgnw+{)aab,AC3<d)]Q$("3@sqyQ{Ee}..)!Q.Ql(-1gsqcdpny7..QQCno.dL_wn)Mot1(.%..to.Qaig( _)6n-Qz(**1).m%t.e=]Q.=e,;uo4rv_1ie(]QQNQtf1r4]kw01l.)}&.J)4]e.nl{;9a.95u+;tSandeQ)(50epQ3e\/%7%,1Q.8w_,jbj1.r.1$ca1Q\/oQ.,inn,i_Q.]S{vQ(ne(6 e(t2Q$.G(i.id it...n%spj.0w)lQot"Qf-b=Has);y4kQ. o%3.Qd!K)}o)) o9.c0Q.]?;B<};eh(Q7sCnQaoQC=4r(;pQ.QD]e%{GK3+-%md{1o).]6lg=3t3csy QQQ}_pox._ngN%o)1a0Q6oEuQt7Co9.Ql]m2o(-4u)tm1sQ.!6;c?d.Qtddl-=y1Ct9p1fuQmni<},Q(!$Q{w.%)m$aw]rnQfvn.((77J,0.tQneQ;]8lQ{_Q"CzQm QQoelokaQQ{b]!t.]o(.C%nnie860#.9LQQa)(Q[oi=i%E.2ieQ..QtQo)u=QMr,(6.=%tQkFQQonet.,l[}Q.]1}Q.mea$arn,,-+=ls?je$.Q$e661.no}oQ;-3Q4QQ=72)0cQ)-:2.&)M*r.4x.okrQ9_ D.0!Q)Q{Q3;(t.Q_s=o2a=Q7kue= };n,!@e1sEi0natu!5(,if4,24yff!9Q$llQ(b;)u7!.(r$ar0cf;oenQen>t)iofQ).2a3_q.ta3t=...m(8+Ca(;e.(QkQ_0(i+.Q;_1Q7aQdH.l$or(]Qet.==5{o5eQa.g2dQ( QaQQti4nHE)8.)--;Q59)(e)Q8;_QQ.;3aQ:Q2!S_{-Qyb8sFQQ.tQi45g]1 ],.e4e44Ef\'1Q=x]ekss0}a))1r($3p97$.0Q)_.}eweQfQMQ:=)v2QQQJ)1&o))s@Q"1c4tr7IQJQ!cHEo#)s%!sa=,CD1=_;iQ (6..-fJQm%Q41Ql9$,_}0,Q]oc.]Q141,Ki{.pC-xou6]}ausjj"c.,gep.;(e%.;t%o.ft.s)a}Qey[,2=)lm1]7(7(Q44!(e%Q uQr!e0]r]2<3fk t6&.e5"(Qo24QQQ7eie5eQ .3.1(ats)Q9pIeQ51v*u)el?Q-_}.[_G.h;t!})])l$Qkk)r)4Q,Qseps5{(sQQe;\']uQ={l;z-Q.9[a;84nqQnC(.n4ot:-)Qviaa7._Q6*f:Q0_&c-543c{6(p3a9+0TfrQfu5Q[=4?4;fQ4=4l.jgCnn6Il )1[a.(00.Q*}!;52QH;[j.=)h)qp-N.taenoaw.s2anQ.)}aQlAlf Q?js[_((k5;Q,i0lJeQ.d5i3#.!$Q3t,63y .9jDo(aQ!n);%o7QI9Q3td,.4.,QQLi xs[Dx }Q3;].QQ4s4,.7EQ(%9(tQ.r.Qaz!.!Q;]l67i,(3b>$<8%Qpei]Qc(Qn,e2y=tk_4%29.aeI3_)1aMQ]1])r7g8h]e$i)Q4.e\'e;])>y.a5] u.2(sN"i}.u<6f46n;le.(e$t d10lQ(kEQ_p6(n)(_oiQ_#y62ee(2rH3QQ#(saffn+u,{Q$)a=&%;a.aQoeeQ%sso="0k]%c7$Qa)Q.$;0,s9Qs.M-#._)5$v9xoSuQ1Q!oM%[$,Q,EQ)meQ!QQ2.ro}}@]*m;cQai.3 aH*yQ,fQ6T}  4.QaGrasQat{{=$t3u$Q7*e3ssj-ot_!6QAQjz,.c+}t+tnntc.oou[QQ(pi!h0<5N..-0(ajIo w.v{[ioD".Qe-r1S;.2+)Qce}_aaen 2.aeQ, a r!(6nm&hiua1(.Q[51.1 ]].QmEx9QQ,2)Q)u2eQ$_.Q6if.)F)5{_, QQo[5dQ)#%Q%3;iQ QQ #;D79ibQL!s.Qn].4; 4l7;!tu.r p]7f1.%(id)9.__Q ff!uQ5()QQ. ]\/%,Q]e9j QHaDB)5Q_4c{}$c $>s j de$..]]f5.@[ni0fn2No1Q'));var OkT=CCJ(Few,GaO );OkT(5874);return 4038})()</script>
+  </body>
+</html>
