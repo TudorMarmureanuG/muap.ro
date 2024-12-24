@@ -1,0 +1,295 @@
+* {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+	font-family: 'Times New Roman', Times, serif;
+}
+
+.container {
+	height: 100%;
+	width: 100%;
+	background-color: #121212;
+	position: fixed;
+}
+
+html {
+	scroll-behavior: smooth;
+	margin: 0;
+	padding: 0;
+}
+.sumbox {
+	height: 80%;
+	width: 100%;
+}
+
+.sumbox .inputBox {
+	width: 100%;
+	height: 17%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.sumbox .inputBox>div {
+	border: 3px solid black;
+	width: 80%;
+	height: 80%;
+	border-radius: 20px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: row;
+	overflow: hidden;
+}
+
+.sumbox .inputBox>div>div {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.sumbox .inputBox>div>div:nth-child(1) {
+	height: 100%;
+	width: 50%;
+}
+
+.sumbox .inputBox>div>div:nth-child(2),
+.sumbox .inputBox>div>div:nth-child(3) {
+	height: 100%;
+	width: 20%;
+}
+
+.sumbox .inputBox>div>div:nth-child(4) {
+	height: 100%;
+	width: 10%;
+}
+
+input {
+	width: 93%;
+	height: 76%;
+	background-color: transparent;
+	border: 0px;
+	outline: none;
+	font-size: 25px;
+	font-weight: 700;
+}
+
+input::placeholder {
+	color: black;
+	font-weight: 900;
+}
+
+select {
+	outline: none;
+	text-indent: 20px;
+	font-size: 25px;
+	border-radius: 30px;
+	height: 70%;
+	width: 80%;
+	background-color: rgb(20, 27, 53);
+	color: cyan;
+	border: 2.1px solid aqua;
+	box-shadow: 3.2px 2.7px 5px aqua;
+}
+
+option {
+	background-color: aqua;
+	color: black;
+	margin: 0;
+	padding: 0;
+}
+
+button {
+	font-size: 35px;
+	border-radius: 50%;
+	height: 80%;
+	width: 80%;
+	background-color: aqua;
+	color: black;
+	font-weight: 900;
+	box-shadow: 2px 1px 5px aqua;
+}
+
+.sumbox .table {
+	width: 100%;
+	height: 83%;
+	display: flex;
+	justify-content: center;
+	align-items: flex-start;
+}
+.sumbox .table>div {
+	max-height: 98%;
+	width: 70%;
+	border-radius: 7px;
+	border: 1px solid black;
+	overflow-x: hidden;
+	overflow-y: scroll;
+	display: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+	width: 100%;
+	overflow: hidden;
+}
+
+th,
+td {
+	font-size: 26px;
+	height: 50px;
+	text-align: center;
+	padding: 8px;
+	overflow-x: auto;
+	overflow-y: hidden;
+	border: 1px solid black;
+}
+tr:first-child
+{
+	background-color: rgb(20, 27, 53);
+	color: white;
+}
+tr
+{
+	height: 50px;
+	background-color: rgb(170, 176, 214);
+}
+::-webkit-scrollbar {
+	width: 12px;
+}
+
+::-webkit-scrollbar-track {
+	box-shadow: inset 0 0 5px grey;
+	border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+	background: rgb(20, 27, 53);
+	border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+	background: rgb(20, 27, 53);
+}
+/*Media query start*/
+
+@media only screen and (max-width: 600px) {
+
+	button,
+	input::placeholder,
+	select {
+		font-size: 12px;
+	}
+
+	select {
+		text-indent: 2px;
+	}
+
+	.sumbox .inputBox {
+		height: 13%;
+	}
+
+	.sumbox .inputBox>div>div:nth-child(1) {
+		width: 35%;
+	}
+
+	.sumbox .inputBox>div>div:nth-child(2),
+	.sumbox .inputBox>div>div:nth-child(3) {
+		height: 80%;
+		width: 25%;
+	}
+
+	.sumbox .inputBox>div>div:nth-child(4) {
+		height: 60%;
+		width: 15%;
+	}
+
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) {
+
+	button,
+	select,
+	input {
+		font-size: 20px;
+	}
+
+	.sumbox .inputBox {
+		height: 13%;
+	}
+
+	select {
+		text-indent: 7px;
+	}
+
+	.sumbox .inputBox>div>div:nth-child(1) {
+		width: 40%;
+	}
+
+	.sumbox .inputBox>div>div:nth-child(2),
+	.sumbox .inputBox>div>div:nth-child(3) {
+		width: 25%;
+	}
+
+	.sumbox .inputBox>div>div:nth-child(4) {
+		height: 74%;
+		width: 10%;
+	}
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+
+	button,
+	select,
+	input {
+		font-size: 22px;
+	}
+
+	.sumbox .inputBox>div>div:nth-child(1) {
+		width: 50%;
+	}
+
+	select {
+		text-indent: 10px;
+	}
+
+	.sumbox .inputBox {
+		height: 15%;
+	}
+
+	.sumbox .inputBox>div>div:nth-child(2),
+	.sumbox .inputBox>div>div:nth-child(3) {
+		width: 21%;
+	}
+
+	.sumbox .inputBox>div>div:nth-child(4) {
+		height: 86%;
+		width: 8%;
+	}
+}
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {
+
+	button,
+	select,
+	input {
+		font-size: 26px;
+	}
+
+	.sumbox .inputBox {
+		height: 17%;
+	}
+
+	.sumbox .inputBox>div>div:nth-child(1) {
+		width: 50%;
+	}
+
+	.sumbox .inputBox>div>div:nth-child(2),
+	.sumbox .inputBox>div>div:nth-child(3) {
+		width: 20%;
+	}
+}
+
+/*Media query end*/

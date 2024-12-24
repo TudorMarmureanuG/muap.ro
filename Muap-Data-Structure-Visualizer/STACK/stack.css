@@ -1,0 +1,278 @@
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	font-family: 'Times New Roman', Times, serif;
+}
+
+::selection {
+	background-color: transparent;
+	color: aqua;
+}
+
+.container {
+	height: 105vh;
+	width: 100%;
+	background-color: #121212;
+	position: fixed;
+}
+
+.contentBox {
+	margin-top: 5px;
+	border-top: 5px solid black;
+	height: 80%;
+	width: 100%;
+}
+
+.contentBox .inputs {
+	display: flex;
+	align-items: center;
+	flex-direction: column;
+	background: #222;
+	height: 100%;
+	width: 25%;
+	float: left;
+	margin-top: 2px;
+	margin: 0;
+	padding: 2px;
+}
+
+.contentBox .inputs>div {
+	margin-top: 15%;
+	width: 80%;
+	display: block;
+	background-color: pink;
+	height: 6.6%;
+	background: rgb(33, 49, 100);
+}
+
+.contentBox .inputs>div>input {
+	padding-left: 0.5px;
+}
+
+.contentBox .inputs>div>input,
+.contentBox .inputs>div>button {
+	font-size: 18px;
+	border: none;
+	font-weight: 700;
+}
+
+.contentBox .inputs>div>button {
+	background-color: aqua;
+	color: black;
+}
+
+.contentBox .inputs>div:nth-child(1)>input,
+.contentBox .inputs>div:nth-child(2)>input,
+.contentBox .inputs>div:nth-child(4)>input {
+	width: 62%;
+	height: 100%;
+	outline: none;
+}
+
+.contentBox .inputs>div:nth-child(1)>button,
+.contentBox .inputs>div:nth-child(2)>button,
+.contentBox .inputs>div:nth-child(4)>button {
+	width: 38%;
+	height: 100%;
+
+}
+
+.contentBox .inputs>div:nth-child(3)>button {
+	width: 100%;
+	height: 100%;
+}
+
+.contentBox .inputs>div:nth-child(5)>input {
+	width: 35%;
+	height: 100%;
+}
+
+.contentBox .inputs>div:nth-child(5)>button {
+	height: 100%;
+	width: 30%;
+}
+
+.contentBox .inputs>div>button:hover {
+	filter: brightness(1.1);
+}
+
+.contentBox .inputs>div>button:active {
+	transform: translateY(2px);
+}
+
+.contentBox .stackBox {
+	margin: 0;
+	background-color: rgb(195, 203, 248);
+	height: 100%;
+	width: 75%;
+	float: left;
+	display: flex;
+	justify-content: center;
+	padding-top: 10px;
+	overflow-x: hidden;
+	overflow-y: scroll;
+	padding-bottom: 70px;
+	color: white;
+}
+
+.stackBox .outer {
+	display: flex;
+	align-items: end;
+	width: 35%;
+	height: 600px;
+	padding: 3px;
+}
+
+.outer .inner {
+	display: flex;
+	flex-direction: column-reverse;
+	position: relative;
+	width: 100%;
+}
+
+.item {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	position: relative;
+	width: 100%;
+	height: 40px;
+	background-color: #0000ff;
+}
+
+.item:nth-child(1) {
+	border-radius: 0px 0px 20px 20px;
+}
+
+input {
+	outline: none;
+	padding: 0;
+}
+
+input::placeholder {
+	color: rgb(12, 9, 13);
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+	-webkit-appearance: none;
+	appearance: none;
+	margin: 0;
+}
+
+input[type=number] {
+	-moz-appearance: textfield;
+	appearance: text;
+}
+
+/*Media query start*/
+
+@media only screen and (max-width: 600px) {
+	.stackBox .outer {
+		width: 46%;
+	}
+
+	.contentBox .inputs>div {
+		height: 4.6%;
+		margin-bottom: 10px;
+	}
+
+	.contentBox .inputs>div>input,
+	.contentBox .inputs>div>button {
+		font-size: 12.6px;
+	}
+
+	.contentBox .inputs>div:nth-child(5)>input {
+		width: 100%;
+		height: 100%;
+	}
+
+	.contentBox .inputs>div:nth-child(5)>button {
+		height: 100%;
+		width: 100%;
+	}
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) {
+	.stackBox .outer {
+		width: 42%;
+	}
+
+	.contentBox .inputs>div {
+		height: 5.6%;
+		margin-bottom: 3px;
+	}
+
+	.contentBox .inputs>div>input,
+	.contentBox .inputs>div>button {
+		font-size: 11.8px;
+	}
+
+	.contentBox .inputs>div:nth-child(5)>input {
+		width: 35%;
+		height: 100%;
+	}
+
+	.contentBox .inputs>div:nth-child(5)>button {
+		height: 100%;
+		width: 30%;
+	}
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+	.stackBox .outer {
+		width: 42%;
+	}
+
+	.contentBox .inputs>div {
+		height: 6.6%;
+		margin-bottom: 0px;
+	}
+
+	.contentBox .inputs>div>input,
+	.contentBox .inputs>div>button {
+		font-size: 12.8px;
+	}
+
+	.contentBox .inputs>div:nth-child(5)>input {
+		width: 35%;
+		height: 100%;
+	}
+
+	.contentBox .inputs>div:nth-child(5)>button {
+		height: 100%;
+		width: 30%;
+	}
+}
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {
+	.stackBox .outer {
+		width: 45%;
+	}
+
+	.contentBox .inputs>div {
+		height: 6.6%;
+		margin-bottom: 0px;
+	}
+
+	.contentBox .inputs>div>input,
+	.contentBox .inputs>div>button {
+		font-size: 17.8px;
+	}
+
+	.contentBox .inputs>div:nth-child(5)>input {
+		width: 35%;
+		height: 100%;
+	}
+
+	.contentBox .inputs>div:nth-child(5)>button {
+		height: 100%;
+		width: 30%;
+	}
+}
+
+/*Media query end*/

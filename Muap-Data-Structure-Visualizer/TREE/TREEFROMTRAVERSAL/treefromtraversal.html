@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=1024">
+	<title>Tree From Traversal</title>
+	<link rel="icon" type="image/png" href="help/technology.png">
+	<link rel="stylesheet" href="../../heading.css" />
+	<link rel="stylesheet" href="../../titlebar.css" />
+	<link rel="stylesheet" href="./treefromtraversal.css" />
+</head>
+
+<body>
+	<div class="container">
+		<div class="titleBar">
+			<img src="../../IMAGES/DU_Logo.png" alt="logo not found">
+			<nav>
+				<ul>
+					<a href="../../muap-algo.html">
+						<li>Home</li>
+					</a>
+				</ul>
+			</nav>
+		</div>
+		<div style="float: left;width: 10%;display: flex;justify-content: start;align-items: center;background-color: #222;height: 10%;">
+            <a href="../tree.html" style="color: aliceblue;margin-left: 70px; text-decoration: none; font-size: larger;">back</a>
+        </div>
+		<div class="heading">Tree From Traversal</div>
+		<div class="contentDiv">
+			<div class="inputs">
+				<div class="left">
+					<div class="order"><span>Inorder</span><input type="text" placeholder="Enter Array"
+							id="inOrderInput" /></div>
+					<div class="order"><span><select name="selectOrder" id="selectOrder">
+								<option value="Preorder">Preorder</option>
+								<option value="Postorder">Postorder</option>
+							</select></span><input type="text" placeholder="Enter Array" id="otherInput" /></div>
+				</div>
+				<div class="right">
+					<div class="toggle">
+						<div class="btnbtn" id="toggBST">BST</div>
+					</div>
+				</div>
+			</div>
+			<div class="canvasDiv">
+				<canvas id="myBstCanvas" height="20000" width="6000"></canvas>
+			</div>
+		</div>
+	</div>
+</body>
+
+</html>
+<!-- <script src="./toggle.js"></script> -->
+<script src="./treefromtraversal.js"></script>
+<script src="../printTree.js"></script>
+<script src="../filter.js"></script>
