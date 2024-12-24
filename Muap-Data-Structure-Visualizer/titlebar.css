@@ -1,0 +1,118 @@
+.titleBar {
+	width: 100%;
+	height: 10%;
+	background-color: rgb(20, 27, 53);
+	position: sticky;
+}
+
+.titleBar img {
+	height: 100%;
+	margin: 0px 0px 0px 5px;
+	width: 13%;
+	padding-left: 6px;
+	image-rendering: optimizeQuality;
+	object-fit: contain;
+	float: left;
+}
+
+.titleBar nav {
+	width: 70%;
+	height: 100%;
+	float: right;
+	display: flex;
+	align-items: center;
+	justify-content: right;
+}
+
+.titleBar nav ul {
+	list-style-type: none;
+}
+.titleBar nav ul a{
+	text-decoration: none;
+}
+.titleBar nav li {
+	color: white;
+	padding-top: 5px;
+	padding-right: 50px;
+	font-size: xx-large;
+	float: left;
+}
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+	.titleBar
+	{
+		height: 7.7%;
+	}
+	.titleBar img {
+		width: 103px;
+	}
+	.titleBar nav
+	{
+		width: 65%;
+	}
+	.titleBar nav li {
+		padding-right: 27px;
+		font-size: 20px;
+	}
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) {
+	.titleBar
+	{
+		height: 9%;
+	}
+	.titleBar img {
+		width: 110px;
+	}
+
+	.titleBar nav li {
+		padding-right: 35px;
+		font-size: 25px;
+	}
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+	.titleBar {
+			height: 10%;
+		}
+	.titleBar img {
+		width: 130px;
+	}
+
+	.titleBar nav li {
+		padding-right: 40px;
+		font-size: 32px;
+	}
+}
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {
+	.titleBar {
+			height: 10%;
+		}
+	.titleBar img {
+		width: 150px;
+	}
+
+	.titleBar nav li {
+		padding-right: 45px;
+		font-size: 32px;
+	}
+}
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {
+	.titleBar {
+			height: 10%;
+		}
+	.titleBar img {
+		width: 160px;
+	}
+
+	.titleBar nav li {
+		padding-right: 50px;
+		font-size: 40px;
+	}
+}
