@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Display Word Document with Images</title>
+    <script src="marmoth.js"></script> <!--https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.4.2/mammoth.browser.min.js-->
+    <script src="jszip.js"></script> <!--https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js-->
+</head>
+
+<body>
+    <h1>Display Word Document with Images</h1>
+    <input type="file" id="upload" accept=".docx" />
+    <div id="output"></div>
+
+    <script>
+        document.getElementById('upload').addEventListener('change', async function (event) {
+            const file = event.target.files[0];
+            if (!file) return;
+
+            const reader = new FileReader();
+            reader.onload = async function (event) {
+                const arrayBuffer = event.target.result;
+
+                // Extract text with Mammoth.js
+                let textOutput = "";
+                try {
+                    const result = await mammoth.convertToHtml({ arrayBuffer });
+                    textOutput = result.value;
+                } catch (err) {
+                    console.error("Error extracting text:", err);
+                }
+
+                // Extract images with JSZip
+                const zip = await JSZip.loadAsync(arrayBuffer);
+                const imageFiles = Object.keys(zip.files).filter(fileName =>
+                    fileName.startsWith("word/media/")
+                );
+
+                const imageElements = [];
+                for (let imageFile of imageFiles) {
+                    const blob = await zip.files[imageFile].async("blob");
+                    const imageURL = URL.createObjectURL(blob);
+                    imageElements.push(`<img src="${imageURL}" alt="${imageFile}" style="max-width:100%;"/>`);
+                }
+
+                // Combine text and images
+                const outputDiv = document.getElementById("output");
+                outputDiv.innerHTML = textOutput + imageElements.join("<br>");
+            };
+
+            reader.readAsArrayBuffer(file);
+        });
+    </script>
+</body>
+
+</html>
