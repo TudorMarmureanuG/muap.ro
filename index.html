@@ -1,211 +1,1030 @@
-
 <!DOCTYPE html>
 <html lang="en">
+
   <head>
-    <meta charset="UTF-8" />
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=1024">
     <link rel="icon" type="image/png" href="help/technology.png">
+    <title>Muap Dashboard Index</title>
     <style>
+      @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;700;800&display=swap');
 
-:root {
-  --left-bg-color: rgba(43, 43, 40, 0.2);
-  --right-bg-color: rgba(43, 43, 43, 0.8);
-  --left-btn-hover-color: rgba(28, 122, 28, 1);
-  --right-btn-hover-color: rgba(28, 122, 28, 1);
-  --hover-width: 75%;
-  --other-width: 25%;
-  --speed: 1000ms;
-}
-
-* {
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
   box-sizing: border-box;
 }
 
+html {
+  font-size: 62.5%;
+}
+
 body {
-  font-family: 'Roboto', sans-serif;
-  height: 100vh;
-  overflow: hidden;
-  margin: 0;
+  display: grid;
+  place-content: center;
+  color: hsl(270, 10%, 80%);
+  font-family: 'Open Sans', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(to top right, hsl(270, 50%, 50%), hsl(290, 60%, 70%));
+  min-height: 100vh;
+  padding: 3rem;
+  overflow-x: hidden;
 }
 
-h1 {
-  font-size: 4rem;
-  color: #fff;
-  position: absolute;
-  left: 50%;
-  top: 10%;
-  transform: translateX(-50%);
-  white-space: nowrap;
+button {
+  font-size: inherit;
+  font-family: inherit;
 }
 
-p {
-  font-size: 2rem;
-  color: #fff;
-  position: absolute;
-  left: 50%;
-  top: 25%;
-  transform: translateX(-50%);
-  white-space: nowrap;
-  text-align: center;
+button:hover,
+button:focus {
+  outline: none;
 }
 
-.btn {
-  position: absolute;
+a,
+a:hover,
+a:focus {
+  outline: none;
+  text-decoration: none;
+}
+
+.dash {
+  background: hsl(270, 50%, 10%);
+  display: flex;
+  flex-direction: column;
+  border-radius: 8px;
+  box-shadow: 4px 4px 30px hsla(270, 30%, 10%, .4);
+  max-width: 1266px;
+}
+
+.dash * {
+  transition: all .1s;
+}
+
+.header {
+  height: 5rem;
   display: flex;
   align-items: center;
+  z-index: 2;
+  box-shadow: 0 4px 12px hsla(270, 30%, 3%, .2);
+}
+
+.header__heading {
+  width: 6rem;
+  display: flex;
   justify-content: center;
-  left: 50%;
-  top: 75%;
-  transform: translateX(-50%);
-  text-decoration: none;
-  color: #fff;
-  border: #fff solid 0.2rem;
-  font-size: 1rem;
+  align-items: center;
+}
+
+.header__heading>a {
   font-weight: bold;
+  letter-spacing: 2px;
+  color: hsl(270, 50%, 10%);
+  background: hsl(220, 60%, 60%);
+  padding: .2rem .7rem;
+  font-size: 1.5rem;
+  border-radius: 4px;
+}
+
+.header__heading>a:hover {
+  background: hsl(220, 80%, 64%);
+}
+
+.header__search {
+  flex-grow: 1;
+  padding: 0 8.6rem;
+}
+
+.header__search-icon {
+  width: 3.8rem;
+  height: 3.8rem;
+  border-radius: 3.8rem;
+  background: hsl(270, 32%, 17%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.header__search-icon:hover {
+  background: hsl(270, 32%, 20%);
+}
+
+.header__search-icon>svg {
+  height: 1.6rem;
+  opacity: .4;
+}
+
+.header__search-icon:hover>svg {
+  opacity: .7;
+}
+
+.header__options {
+  padding-right: 2.8rem;
+}
+
+.header__pro {
+  color: #eef0ff;
+  background: linear-gradient(to top right, #546FFF, #8A9CFF);
+  border: 0;
+  margin-right: 5rem;
+  font-size: 1.2rem;
+  padding: .7rem 1.8rem;
+  border-radius: 6px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.header__link {
+  font-size: 1.4rem;
+  opacity: .8;
+  color: inherit;
+}
+
+.header__link:first-of-type:hover {
+  opacity: 1;
+}
+
+.header__link:not(:first-of-type) {
+  margin-left: 2rem;
+  opacity: 1;
+}
+
+.body {
+  flex-grow: 2;
+  display: flex;
+}
+
+.sidebar {
+  width: 8rem;
+  box-shadow: 2px 0 12px hsla(270, 30%, 10%, .2);
+}
+
+.sidebar__icon {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  margin-top: 4rem;
+  cursor: pointer;
+}
+
+.sidebar__icon:first-of-type {
+  margin-top: 5rem;
+}
+
+.sidebar__icon:not(:first-of-type) {
+  opacity: .3;
+}
+
+.sidebar__icon:not(:first-of-type):hover {
+  opacity: 1;
+}
+
+.sidebar__icon:last-child {
+  margin-top: 10rem;
+}
+
+.sidebar__icon>svg {
+  height: 2.2rem;
+}
+
+.ss-heading {
+  font-weight: 400;
   text-transform: uppercase;
-  width: 15rem;
-  padding: 1.5rem;
+  font-size: 1.4rem;
+  letter-spacing: 3px;
+  color: hsl(235, 5%, 70%);
 }
 
-.split.left .btn:hover {
-  background-color: var(--left-btn-hover-color);
-  border-color: var(--left-btn-hover-color);
+.ss-show {
+  color: hsl(210, 60%, 60%);
+  font-size: 1.2rem;
 }
 
-.btn1 {
-  position: absolute;
+.ss-show:hover {
+  color: hsl(210, 70%, 70%);
+}
+
+.ss-dots {
+  display: flex;
+}
+
+.ss-dots>span {
+  width: 6px;
+  height: 6px;
+  border: 1px solid currentColor;
+  border-radius: 6px;
+  margin-right: 2px;
+  opacity: .6;
+  cursor: pointer;
+}
+
+.ss-dots>span:hover {
+  opacity: 1;
+}
+
+.main {
+  flex-grow: 2;
+  background: linear-gradient(to right top, hsla(270, 50%, 8%, .5), hsla(270, 50%, 8%, .6) 20%, hsla(270, 50%, 8%, .1)), linear-gradient(to right bottom, hsl(270, 50%, 8%), transparent 66%), linear-gradient(to bottom, transparent, hsl(270, 50%, 8%) 56%), url("help/coins2.png") no-repeat;
+  background-size: auto 500px;
+  padding: 4rem 0 0 8rem;
+  display: flex;
+  border-bottom-right-radius: 8px;
+}
+
+.main__col-1 {
+  width: 30%;
+}
+
+.main__heading {
+  font-size: 3rem;
+  font-weight: 300;
   display: flex;
   align-items: center;
+}
+
+.main__heading>span {
+  width: 4rem;
+  height: 4rem;
+  display: flex;
   justify-content: center;
-  left: 50%;
-  top: 88%;
-  transform: translateX(-50%);
-  text-decoration: none;
-  color: #fff;
-  border: #fff solid 0.2rem;
+  align-items: center;
+  border-radius: 12px;
+  margin-right: 1.6rem;
+  margin-bottom: -2px;
+}
+
+.main__heading svg {
+  height: .7em;
+}
+
+.main__desc {
+  margin: 1.5rem 0 1rem;
+  font-size: 1.4rem;
+  opacity: .6
+}
+
+.main__sub {
+  font-size: 1.2rem;
+}
+
+.main__sub span:first-of-type {
+  opacity: .4;
+}
+
+.main__list-heading-wrap {
+  display: flex;
+  align-items: center;
   font-size: 1rem;
-  font-weight: bold;
-  text-transform: uppercase;
-  width: 15rem;
-  padding: 1.5rem;
+  margin: 8rem 0 5rem;
 }
 
-.split.left .btn1:hover {
-  background-color: var(--left-btn-hover-color);
-  border-color: var(--left-btn-hover-color);
+.main__list-heading {
+  flex-grow: 2;
 }
 
-.split.right .btn:hover {
-  background-color: var(--right-btn-hover-color);
-  border-color: var(--right-btn-hover-color);
-}
-
-.container {
+.main__list {
+  list-style: none;
   position: relative;
-  width: 100%;
-  height: 100%;
-  background: #333;
 }
 
-.split {
+.main__list::before {
+  content: "MUAP";
   position: absolute;
-  width: 50%;
+  bottom: 17%;
+  left: -18%;
+  opacity: .03;
+  font-size: 18rem;
+  font-weight: bold;
+}
+
+.main__list-item {
+  padding: 0 0 5.7rem 2rem;
+  border-left: 2px solid hsla(0, 0%, 50%, .2);
+  position: relative;
+  display: flex;
+  color: #9D9DAC;
+}
+
+.main__list-item:first-of-type .main__list-content {
+  color: hsl(240, 8%, 90%);
+}
+
+.main__list-item::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 8px;
+  width: 4px;
+  height: 4px;
+  border-radius: 4px;
+  background: hsl(210, 70%, 70%);
+  transform: translateX(-3px);
+}
+
+.main__list-item:first-of-type::before {
+  top: 0;
+}
+
+.main__list-item:first-of-type .main__list-content {
+  line-height: .3;
+}
+
+.main__list-item:last-of-type {
+  padding-bottom: 2.6rem;
+}
+
+.main__list-item-image {
+  width: 4rem;
+  height: 4rem;
+  border-radius: 1px;
+  margin-right: 1rem;
+  box-shadow: 0 2px 10px hsla(270, 30%, 2%, .6);
+}
+
+.main__list-item-image img {
+  border-radius: inherit;
+}
+
+.main__list-content {
+  font-size: 1.4rem;
+  cursor: pointer;
+}
+
+.main__list-content:hover {
+  color: hsl(240, 8%, 90%);
+}
+
+.main__list-sub {
+  margin-top: .4rem;
+  font-size: 1.1rem;
+  opacity: .6;
+}
+
+.main__col-2 {
+  width: 70%;
+  padding-left: 6rem;
+}
+
+.main__cards-container {
+  width: 70%;
+  border-radius: 8px;
+  padding: 3rem;
+  background: hsl(270, 50%, 11%);
+  box-shadow: 0 6px 16px 0 hsla(270, 30%, 3%, .4);
+  margin-left: auto;
+  transform: translateX(4rem)
+}
+
+.main__cards-container-heading-wrap {
+  display: flex;
+  align-items: center;
+  padding: 1rem 0;
+}
+
+.main__cards-container-heading {
+  flex-grow: 2;
+}
+
+.main__cards {
+  list-style: none;
+  padding: 2.6rem 0 2rem;
+  display: flex;
+}
+
+.main__card {
+  color: hsla(0, 0%, 100%, .8);
+  transform: translateX(-15rem);
+  flex-shrink: 0;
+  margin-left: 1.5rem;
+  width: 21rem;
+  border-radius: 8px;
+  text-align: right;
+  padding: 2.2rem;
+  box-shadow: 0 2px 12px hsla(var(--hue), 50%, 60%, .2), 0 4px 32px hsla(var(--hue), 50%, 60%, .2);
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.main__card-image-container {
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: -1;
+}
+
+.main__card-image-container::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
   height: 100%;
+  background-image: linear-gradient(to right, hsla(var(--hue), 60%, 60%, .3), 40%, hsl(var(--hue), 70%, 60%));
+}
+
+.main__card-heading {
+  font-size: 2rem;
+  font-weight: normal;
+}
+
+.main__card-heading-sub {
+  margin-top: .4rem;
+  font-size: 1.2rem;
+}
+
+.main__card-heading-type {
+  margin-top: 2.8rem;
+}
+
+.main__cards-pagination {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.main__cards-buttons>button {
+  color: inherit;
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+}
+
+.main__cards-buttons>button:hover {
+  opacity: 1 !important;
+}
+
+.main__cards-buttons svg {
+  height: 1.6rem;
+}
+
+.main__crossing-container {
+  width: 88%;
+  background-color: hsl(270, 50%, 11%);
+  background-image: linear-gradient(120deg, hsla(286, 80%, 50%, 0.5), 10%, hsl(270, 50%, 11%) 60%), url("help/wp.jpg");
+  box-shadow: 0 6px 16px 0 hsla(270, 30%, 3%, .4);
+  border-radius: 8px;
+  padding: 2rem 3.6rem;
+  display: flex;
+  align-items: center;
+  transform: translate(-2rem, 2.4rem);
+  position: relative;
+  z-index: 2;
+}
+
+.main__crossing-image {
+  border: 3px solid hsl(182, 98%, 51%);
+  border-right-color: transparent;
+  box-shadow: 0 0 12px hsla(270, 30%, 10%, .4);
+  transform: rotate(-45deg);
+  width: 5.4rem;
+  height: 5.4rem;
+  border-radius: 5.4rem;
   overflow: hidden;
 }
 
-.split.left {
-  left: 0;
-  background: url('help/coins2.png');
-  background-repeat: no-repeat;
-  background-size: cover;
+.main__crossing-image>img {
+  width: 5.4rem;
+  transform: translate(-3px, -3px) rotate(45deg);
+  border-radius: 5.4rem;
+  border: 6px solid transparent;
 }
 
-.split.left::before {
-  content: '';
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  background-color: var(--left-bg-color);
+.main__crossing-current {
+  flex-grow: 2;
+  margin-left: 3rem;
 }
 
-.split.right {
-  right: 0;
-  background: url('help/database5.png');
-  background-repeat: no-repeat;
-  background-size: cover;
+.main__crossing-upper {
+  text-transform: uppercase;
+  margin-bottom: .6rem;
+  letter-spacing: 2px;
 }
 
-.split.right::before {
-  content: '';
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  background-color: var(--right-bg-color);
+.main__crossing-heading {
+  font-weight: normal;
+  font-size: 1.6rem;
 }
 
-.split.right,
-.split.left,
-.split.right::before,
-.split.left::before {
-  transition: all var(--speed) ease-in-out;
+.main__discover {
+  width: 88%;
+  background-color: hsl(270, 50%, 11%);
+  box-shadow: 0 8px 12px 0 hsla(270, 30%, 5%, .2);
+  border-radius: 8px;
+  padding: 8rem 3.6rem 2rem;
+  margin-left: auto;
+  transform: translate(1.4rem, -2.1rem);
 }
 
-.hover-left .left {
-  width: var(--hover-width);
+.main__discover-heading-container {
+  display: flex;
+  align-items: center;
 }
 
-.hover-left .right {
-  width: var(--other-width);
+.main__discover-heading {
+  flex-grow: 2;
 }
 
-.hover-right .right {
-  width: var(--hover-width);
+.main__discover-places {
+  padding: 4rem 0 1rem;
+  list-style: none;
+  display: flex;
+  align-items: center;
 }
 
-.hover-right .left {
-  width: var(--other-width);
+.main__discover-place {
+  flex-shrink: 0;
+  margin-right: 1.4rem;
+  background: hsl(270, 50%, 15%);
+  transform: translateX(-8rem);
+  padding: 1.6rem;
+  width: 24%;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px 0 hsla(270, 30%, 7%, .2);
+  cursor: pointer;
 }
 
-@media (max-width: 800px) {
-  h1 {
-    font-size: 2rem;
-    top: 30%;
-  }
+.main__discover-place:hover {
+  background: hsl(270, 50%, 17%);
+}
 
-  .btn {
-    padding: 1.2rem;
-    width: 12rem;
-  }
+.main__discover-place-heading {
+  font-size: 1.4rem;
+  font-weight: normal;
+  margin-bottom: 6px;
+}
+
+.main__discover-place-sub {
+  font-size: 1rem;
+  opacity: .4;
+}
+
+.main__discover__more {
+  margin-top: 3.6rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.main__discover__more-svg {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 8px;
+}
+
+.main__discover__more svg {
+  height: 2.6rem;
+  transform: translate(2.4px, 1.6px);
+}
+
+.main__discover-right {
+  opacity: .6;
+  margin-left: -45px;
+  cursor: pointer;
+}
+
+.main__discover-right:hover {
+  opacity: 1;
+}
+
+.main__discover-right>svg {
+  height: 1.6rem;
+}
+
+.main__footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: .2rem 0 2.3rem 10rem;
+}
+
+.main__footer-more svg {
+  height: 1em;
+  vertical-align: middle;
+}
+
+.main__info {
+  display: flex;
+  align-items: center;
+}
+
+.main__info-link {
+  color: inherit;
+  font-size: 1.4rem;
+}
+
+.main__info-link:hover {
+  color: #fff;
+}
+
+.main__info-link:hover svg {
+  opacity: .7;
+}
+
+.main__info-link svg {
+  height: 1.4em;
+  transform: translateY(1px);
+  opacity: .4;
+}
+
+.main__info-link+.main__info-link {
+  margin-left: .6rem;
+}
+
+.main__cp {
+  margin: 0 1rem 0 2.6rem;
+}
+
+.main__cr {
+  opacity: .4;
+  margin-right: 5rem;
+}
+
+.main__cr:hover {
+  opacity: .7;
 }
     </style>
-    <title>Welcome to muap.ro</title>
   </head>
+
   <body>
-    <div class="container">
-      <div class="split left">
-        <h1>Multiapp Solution</h1>
-        <p>With Multiapp,<br>your IT department<br>can manage tasks more<br>quickly and efficiently.<br>The integrated automation<br>transforms daily challenges<br>into simple solutions.</p>
-        <a href="home.html" class="btn">Buy Now</a>
-        <a href="multiapp-short.html" class="btn1" target="_blank">Short intro</a>
+
+    <div class="dash">
+
+      <!-- HEADER -->
+      <header class="header">
+        <h1 class="header__heading"><a href="CV.html" target="_blank" rel="noreferrer noopener">TM</a></h1>
+        <div class="header__search">
+          <div class="header__search-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+            </svg>
+          </div>
+        </div>
+        <div class="header__options">
+          <button class="header__pro"><a href="buy-product.html" style="color: aliceblue;">BUY</a></button>
+          <a href="server-generation/Muap Account/Login.html" class="header__link">Log in</a>
+          <a href="view-specifications.html" class="header__link">Sign up</a>
+        </div>
+      </header>
+
+      <!-- BODY -->
+      <div class="body">
+
+        <!-- SIDEBAR -->
+        <div class="sidebar">
+
+          <div class="sidebar__icon">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+            </svg>
+          </div>
+          
+          <div class="sidebar__icon">
+            <!--<a href="server-generation/admin/admin-panel.html">-->
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+            </svg>
+            <a href="server-generation/admin/admin-panel.html" style="color: aliceblue;">.</a>
+          </div>
+
+          <div class="sidebar__icon">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 4v12l-4-2-4 2V4M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+            </svg>
+            <a href="server-generation/admin/admin-panel.html" style="color: aliceblue;">.</a>
+          </div>
+
+          <div class="sidebar__icon">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+            </svg>
+            <a href="server-generation/admin/admin-panel.html" style="color: aliceblue;">.</a>
+          </div>
+
+          <div class="sidebar__icon">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" />
+            </svg>
+            <a href="server-generation/admin/admin-panel.html" style="color: aliceblue;">.</a>
+          </div>
+
+          <div class="sidebar__icon">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+            </svg>
+            <a href="server-generation/admin/admin-panel.html" style="color: aliceblue;">.</a>
+          </div>
+
+        </div>
+
+        <!-- MAIN -->
+        <main class="main">
+
+          <!-- COL-1 -->
+          <div class="main__col-1">
+
+            <!-- HEADING -->
+            <div>
+              <h2 class="main__heading"><span style="background: linear-gradient(to bottom, hsl(247, 88%, 70%), hsl(282, 82%, 51%)); box-shadow: 0 2px 12px hsla(247, 88%, 70%, .3)">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="#fff">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+                  </svg>
+                </span> Multiapp - The top IT solution</h2>
+              <p class="main__desc">With Multiapp, your IT department can manage tasks more quickly and efficiently. The integrated automation transforms daily challenges into simple solutions.</p>
+              <p class="main__sub"><span>Collaborators:</span> <span>WickedKey_194 & Block_Chain</span></p>
+            </div>
+
+            <!-- LIST -->
+            <div class="main__list-heading-wrap">
+              <h2 class="main__list-heading ss-heading">Most Visited</h2>
+              <a href="home.html" class="ss-show">show all</a>
+            </div>
+
+            <ul class="main__list">
+
+              <li class="main__list-item">
+                <div class="main__list-item-image">
+                  <img src="help/technology.png" alt="" style="height: 40px;">
+                </div>
+                <div class="main__list-content-wrap">
+                  <a href="home.html"><p class="main__list-content" style="color: aliceblue;">Home</p></a>
+                  <p class="main__list-sub">Favorites</p>
+                </div>
+              </li>
+
+              <li class="main__list-item">
+                <div class="main__list-content-wrap">
+                  <a href="download.html"><p class="main__list-content" style="color: aliceblue;">Download</p></a>
+                  <p class="main__list-sub">Favorites</p>
+                </div>
+              </li>
+
+              <li class="main__list-item">
+                <div class="main__list-item-image">
+                  <img src="help/logoKB.png" alt="" style="height: 40px;">
+                </div>
+                <div class="main__list-content-wrap">
+                  <a href="books.html"><p class="main__list-content" style="color: aliceblue;">Knowledge Base</p></a>
+                  <p class="main__list-sub">Favorites</p>
+                </div>
+              </li>
+
+              <li class="main__list-item">
+                <div class="main__list-content-wrap">
+                  <a href="other-services.html"><p class="main__list-content" style="color: aliceblue;">Other Services</p></a>
+                  <p class="main__list-sub">At Last</p>
+                </div>
+              </li>
+
+            </ul>
+
+          </div>
+
+          <!-- COL-2 -->
+          <div class="main__col-2">
+
+            <!-- CARDS -->
+            <div class="main__cards-container">
+
+              <div class="main__cards-container-heading-wrap">
+                <h2 class="main__cards-container-heading ss-heading">View Pricing Plans</h2>
+                <a href="view-specifications.html" class="ss-show">show all</a>
+              </div>
+
+              <ul class="main__cards">
+                <li class="main__card" style="--hue: 25">
+                  <div class="main__card-image-container">
+                    <img src="help/FetcherICO2.png" alt="" class="main__card-image">
+                  </div>
+                  <h3 class="main__card-heading"><b><i>Standard</i></b></h3>
+                  <p class="main__card-heading-sub"><b>50 RON</b></p>
+                  <a href="buy-product.html" style="color: aliceblue; font-size: 12px;"><p class="main__card-heading-type">Visit</p></a>
+                </li>
+
+                <li class="main__card" style="--hue: 250">
+                  <div class="main__card-image-container">
+                    <img src="help/FetcherICO2.png" alt="" class="main__card-image">
+                  </div>
+                  <h3 class="main__card-heading"><b><i>Premium</i></b></h3>
+                  <p class="main__card-heading-sub"><b>70 RON</b></p>
+                  <a href="buy-product.html" style="color: aliceblue; font-size: 12px;"><p class="main__card-heading-type">Visit</p></a>
+                </li>
+
+                <li class="main__card" style="--hue: 231;">
+                  <div class="main__card-image-container">
+                    <img src="help/FetcherICO2.png" alt="" class="main__card-image">
+                  </div>
+                  <h3 class="main__card-heading"><b><i>Enterprise</i></b></h3>
+                  <p class="main__card-heading-sub"><b>150 RON</b></p>
+                  <a href="buy-product.html" style="color: aliceblue; font-size: 12px;"><p class="main__card-heading-type">Visit</p></a>
+                </li>
+              </ul>
+
+              <div class="main__cards-pagination">
+                <span class="ss-dots">
+                  <span></span>
+                  <span></span>
+                  <span></span>
+                </span>
+                <div class="main__cards-buttons">
+                  <button style="opacity: .4">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+                    </svg>
+                  </button>
+                  <button>
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                    </svg>
+                  </button>
+                </div>
+              </div>
+
+            </div>
+
+            <!-- CROSSING -->
+            <div class="main__crossing-container">
+              <div class="main__crossing-image">
+                <img src="help/MuapGhpLogo.png" alt="">
+              </div>
+              <div class="main__crossing-current">
+                <p class="main__crossing-upper">
+                  Our E-Learning Platform
+                </p>
+                <a href="E-Learning/muap-e-learning.html" style="color: aliceblue;">
+                <h3 class="main__crossing-heading">
+                  Center Point
+                </h3>
+                </a>
+              </div>
+            </div>
+
+            <!-- DISCOVER -->
+            <div class="main__discover">
+
+              <div class="main__discover-heading-container">
+                <h3 class="main__discover-heading ss-heading">Discover More Services</h3>
+                <a href="other-services.html" class="ss-show">show all</a>
+              </div>
+
+              <ul class="main__discover-places">
+
+                <li class="main__discover-place">
+                  <h4 class="main__discover-place-heading">Online Compilers</h4>
+                  <p class="main__discover-place-sub">Python, C++, SQL, HTML, CSS, JS, Gradient Color Picker</p>
+                  <div class="main__discover__more">
+                    <div class="main__discover__more-svg" style="background: linear-gradient(20deg, hsla(0, 60%, 50%, .2), hsla(20, 60%, 50%, .3));">
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <defs>
+                          <linearGradient id="myGradient1" gradientTransform="rotate(20)">
+                            <stop offset="0%" stop-color="hsl(0, 60%, 50%)" />
+                            <stop offset="50%" stop-color="hsl(20, 60%, 50%)" />
+                          </linearGradient>
+                        </defs>
+                        <path d="M11 17a1 1 0 001.447.894l4-2A1 1 0 0017 15V9.236a1 1 0 00-1.447-.894l-4 2a1 1 0 00-.553.894V17zM15.211 6.276a1 1 0 000-1.788l-4.764-2.382a1 1 0 00-.894 0L4.789 4.488a1 1 0 000 1.788l4.764 2.382a1 1 0 00.894 0l4.764-2.382zM4.447 8.342A1 1 0 003 9.236V15a1 1 0 00.553.894l4 2A1 1 0 009 17v-5.764a1 1 0 00-.553-.894l-4-2z" fill="url(#myGradient1)" />
+                      </svg>
+                    </div>
+                    <span class="ss-dots">
+                      <span></span>
+                      <span></span>
+                      <span></span>
+                    </span>
+                  </div>
+                </li>
+
+                <li class=" main__discover-place">
+                  <h4 class="main__discover-place-heading">Productivity Apps #1</h4>
+                  <p class="main__discover-place-sub">Promodoro, ToDo, Sticky Notes, CV Builder, Docx reader, Time Table, ICO Converter</p>
+                  <div class="main__discover__more">
+                    <div class="main__discover__more-svg" style="background: linear-gradient(20deg, hsla(280, 60%, 50%, .2), hsla(300, 60%, 50%, .3));">
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <defs>
+                          <linearGradient id="myGradient2" gradientTransform="rotate(20)">
+                            <stop offset="0%" stop-color="hsl(280, 60%, 50%)" />
+                            <stop offset="50%" stop-color="hsl(300, 60%, 50%)" />
+                          </linearGradient>
+                        </defs>
+                        <path d="M11 17a1 1 0 001.447.894l4-2A1 1 0 0017 15V9.236a1 1 0 00-1.447-.894l-4 2a1 1 0 00-.553.894V17zM15.211 6.276a1 1 0 000-1.788l-4.764-2.382a1 1 0 00-.894 0L4.789 4.488a1 1 0 000 1.788l4.764 2.382a1 1 0 00.894 0l4.764-2.382zM4.447 8.342A1 1 0 003 9.236V15a1 1 0 00.553.894l4 2A1 1 0 009 17v-5.764a1 1 0 00-.553-.894l-4-2z" fill="url(#myGradient2)" />
+                      </svg>
+                    </div>
+                    <span class="ss-dots">
+                      <span></span>
+                      <span></span>
+                      <span></span>
+                    </span>
+                  </div>
+                </li>
+
+                <li class="main__discover-place">
+                  <h4 class="main__discover-place-heading">Productivity Apps #2</h4>
+                  <p class="main__discover-place-sub">Calendar Widget, Image Filter, Whiteboard, Random choice picker, Timer App, Digital Clock</p>
+                  <div class="main__discover__more">
+                    <div class="main__discover__more-svg" style="background: linear-gradient(20deg, hsla(210, 60%, 50%, .2), hsla(230, 60%, 50%, .3));">
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <defs>
+                          <linearGradient id="myGradient3" gradientTransform="rotate(20)">
+                            <stop offset="0%" stop-color="hsl(210, 60%, 50%)" />
+                            <stop offset="50%" stop-color="hsl(230, 60%, 50%)" />
+                          </linearGradient>
+                        </defs>
+                        <path d="M11 17a1 1 0 001.447.894l4-2A1 1 0 0017 15V9.236a1 1 0 00-1.447-.894l-4 2a1 1 0 00-.553.894V17zM15.211 6.276a1 1 0 000-1.788l-4.764-2.382a1 1 0 00-.894 0L4.789 4.488a1 1 0 000 1.788l4.764 2.382a1 1 0 00.894 0l4.764-2.382zM4.447 8.342A1 1 0 003 9.236V15a1 1 0 00.553.894l4 2A1 1 0 009 17v-5.764a1 1 0 00-.553-.894l-4-2z" fill="url(#myGradient3)" />
+                      </svg>
+                    </div>
+                    <span class="ss-dots">
+                      <span></span>
+                      <span></span>
+                      <span></span>
+                    </span>
+                  </div>
+                </li>
+
+                <li class="main__discover-place">
+                  <h4 class="main__discover-place-heading">Mini Games</h4>
+                  <p class="main__discover-place-sub">Take a break anytime!</p>
+                  <div class="main__discover__more">
+                    <div class="main__discover__more-svg" style="background: linear-gradient(20deg, hsla(120, 60%, 50%, .2), hsla(140, 60%, 50%, .3));">
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <defs>
+                          <linearGradient id="myGradient4" gradientTransform="rotate(20)">
+                            <stop offset="0%" stop-color="hsl(120, 60%, 50%)" />
+                            <stop offset="50%" stop-color="hsl(140, 60%, 50%)" />
+                          </linearGradient>
+                        </defs>
+                        <path d="M11 17a1 1 0 001.447.894l4-2A1 1 0 0017 15V9.236a1 1 0 00-1.447-.894l-4 2a1 1 0 00-.553.894V17zM15.211 6.276a1 1 0 000-1.788l-4.764-2.382a1 1 0 00-.894 0L4.789 4.488a1 1 0 000 1.788l4.764 2.382a1 1 0 00.894 0l4.764-2.382zM4.447 8.342A1 1 0 003 9.236V15a1 1 0 00.553.894l4 2A1 1 0 009 17v-5.764a1 1 0 00-.553-.894l-4-2z" fill="url(#myGradient4)" />
+                      </svg>
+                    </div>
+                    <span class="ss-dots">
+                      <span></span>
+                      <span></span>
+                      <span></span>
+                    </span>
+                  </div>
+                </li>
+
+                <div class="main__discover-right">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                  </svg>
+                </div>
+
+              </ul>
+
+            </div>
+
+            <!-- FOOTER -->
+            <footer class="main__footer">
+
+              <a href="home.html" class="main__footer-more ss-show">...more <span>
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                  </svg>
+                </span></a>
+
+              <div class="main__info">
+                <a href="https://twitter.com/" target="_blank" rel="noreferrer noopener" class="main__info-link">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-twitter">
+                    <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path>
+                  </svg>
+                </a>
+                <a href="https://github.com/TudorMarmureanuG" target="_blank" rel="noreferrer noopener" class="main__info-link">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-github">
+                    <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+                  </svg>
+                </a>
+                <a href="CV.html" target="_blank" rel="noreferrer noopener" class="main__info-link">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-dribbble">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <path d="M8.56 2.75c4.37 6.03 6.02 9.42 8.03 17.72m2.54-15.38c-3.72 4.35-8.94 5.66-16.88 5.85m19.5 1.9c-3.5-.93-6.63-.82-8.94 0-2.58.92-5.01 2.86-7.44 6.32"></path>
+                  </svg>
+                </a>
+
+                <p class="main__cp" style="font-size: 1.4rem; text-align: center; ">
+                  Copyright &copy; <a href="https://github.com/TudorMarmureanuG" target="_blank" rel="noreferrer noopener" class="main__info-link" style="border-bottom: 1px solid  hsla(270, 10%, 50%, .4);">Tudor Marmureanu</a>
+                </p>
+
+                <p class="main__cr">
+                  <a href="#" target="_blank" rel="noreferrer noopener">
+                    <img src="help/muap_logo.jpg" alt="" height="50rem">
+                  </a>
+                </p>
+              </div>
+
+            </footer>
+
+          </div>
+
+        </main>
+
       </div>
-      <div class="split right">
-        <h1>Other Solutions</h1>
-        <p>Discover the services<br>that could come<br>to your help at a<br>given moment!</p>
-        <a href="other-services.html" class="btn">View</a>
-      </div>
+
     </div>
 
-    <script>
-        const left = document.querySelector('.left')
-const right = document.querySelector('.right')
-const container = document.querySelector('.container')
-
-left.addEventListener('mouseenter', () => container.classList.add('hover-left'))
-left.addEventListener('mouseleave', () => container.classList.remove('hover-left'))
-
-right.addEventListener('mouseenter', () => container.classList.add('hover-right'))
-right.addEventListener('mouseleave', () => container.classList.remove('hover-right'))
-    </script>
   </body>
+
 </html>
