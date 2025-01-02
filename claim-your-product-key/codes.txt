@@ -1,4 +1,0 @@
-{ code: '794551', license: 'NO67B-REG4W-A26PR-LS1F1-DRM67' },
-        { code: '444136', license: 'AF67B-JHYWJ-QG90R-LD3FG-KM6Q1' },
-        { code: '582091', license: 'TP0KB-RE34R-ADR7P-OJ9LS-F7KHY' },
-        { code: '137110', license: 'R46BX-JHR2J-PG7ER-24QFG-MWKVR' }
