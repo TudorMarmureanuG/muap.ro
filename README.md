@@ -1,6 +1,6 @@
 # Multiapp.exe - IT Management Tool Suite
 
-![Multiapp Logo](help/logoKB.png)
+![Multiapp Logo](/Multiapp-Logo.png)
 
 ## Overview
 
