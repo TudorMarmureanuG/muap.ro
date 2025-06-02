@@ -1,144 +1,173 @@
-# Multiapp.exe - IT Management Tool Suite
+# Multiapp 95 Professional - IT Management Tool Suite
 
 ![Multiapp Logo](/Multiapp-Logo.png)
 
-## Overview
+## 🚀 Overview
 
-**Multiapp** is a comprehensive IT management tool designed specifically for IT support departments. This powerful application combines 51 different utilities into a single executable file, streamlining various IT tasks from system monitoring to file management, network diagnostics, and more.
+**Multiapp 95 Professional** is the ultimate productivity and efficiency suite designed specifically for IT support departments. This revolutionary software combines over 50+ professional tools into a single, powerful executable file, streamlining various IT tasks from system monitoring to file management, network diagnostics, development tools, and advanced AI-powered productivity features.
 
-## Technology Stack
+**Why Choose Multiapp Professional?**
+- All-in-one solution with no additional installations required
+- Advanced security features built-in
+- Intuitive interface with modern design
+- Regular updates and continuous improvement
+- Portable application - runs from anywhere
+
+## 💻 Technology Stack & Architecture
 
 - **Programming Languages**: Python and C++
 - **Deployment**: Precompiled into a single executable file
-- **Architecture**: 64-bit Windows applications
+- **Architecture**: x64 (64-bit) Windows applications only
+- **Distribution**: Single executable file - no installer needed
+- **Installation**: Portable application with one-time setup
 
-## System Requirements
+## ⚙️ System Requirements
+
+### ⚠️ Important Notice
+**This software is designed exclusively for x64 (64-bit) systems**
 
 ### Minimum Requirements
-- **Operating System**: Windows 10 (x64)
-- **Processor**: 1-2 GHz
-- **RAM**: 4 GB
-- **Disk Space**: 300 MB free space for installation and operation
-- **Internet Connection**: Recommended for network functionalities
+- **Architecture**: x64 (64-bit processor required - between 1-2 GHz)
+- **Operating System**: Windows 10 (build 1903+) or Windows 11
+- **Processor**: Intel i3 or AMD equivalent (1-2 GHz)
+- **RAM**: 4GB minimum
+- **Storage**: 500MB free disk space
+- **Permissions**: Administrator privileges for full functionality
+- **Network**: Internet connection for AI features and updates
+- **Display**: 100% zoom recommended (especially for laptops)
 
-### Display Requirements
-- **Screen Resolution**: 100% zoom recommended (especially for laptops)
-- For optimal display, configure DPI settings: Right-click Multiapp.exe → Properties → Change settings for all users → Change high DPI settings
+### Recommended Specifications
+- **Processor**: Intel Core i5 or AMD Ryzen 5 (or equivalent)
+- **RAM**: 8GB recommended or 16GB for heavy development work
+- **Storage**: SSD for faster file operations
+- **Display**: 1920x1080 or higher resolution
 
-## Authentication System
+### Built-in Compatibility Check
+Multiapp 95 Professional includes an integrated system compatibility checker that verifies your hardware and software configuration automatically - no need to worry about compatibility!
+
+## 🔐 Authentication System
 
 ### Public Accounts
 - Stored in `Accounts.txt` file
 - Special accounts available:
   - **user/nopass**: For file copying operations only
-  - **passgen/passgen** & **passgenV2/passgenV2**: Password generation utilities
 
 ### Developer Accounts
 - Reserved for development purposes
 - Not accessible to end users
 
-## Core Features
+## 🛠️ Comprehensive Feature Set
 
-### 1. File Management Tools
-- **Explorer Mode**: Dynamic local file/folder copying with path saving
-- **Copy App**: Network file copying from servers to `C:\KIT` directory
-- **Create/Extract Zip**: Archive management with selective extraction
-- **File Organizer**: Automatic file categorization
-- **Rename Utility**: Batch file renaming operations
-- **Backup Utility**: Data backup for sensitive information
+### 🔧 System & Diagnostics
+- **System compatibility testing** - Built-in hardware verification
+- **Hardware diagnostics & monitoring** - Real-time system performance
+- **Network troubleshooting tools** - Complete network analysis suite
+- **Support IT process automation** - Streamlined workflow management
+- **Advanced terminal emulator** - CMD and Linux interface simulation
+- **Performance optimization** - System tuning and enhancement
+- **Alert monitor** - System alerts based on usage thresholds
+- **Event viewer** - System log analysis (errors, warnings, information)
+- **Manual & automatic repair tool** - Self-healing capabilities for Multiapp
 
-### 2. Network & System Diagnostics
-- **Get IP & MAC**: Display network adapter information
-- **Port Scanner**: Scan open ports on network devices
-- **Ping Tool**: Network connectivity testing with port discovery
-- **Network Console**: Comprehensive network monitoring and Wi-Fi password recovery
-- **Network Bandwidth Monitoring**: Real-time network usage graphs
-- **Listener**: Monitor online/offline status of network devices
+### 📁 File Management Pro
+- **Smart backup tool** - Intelligent data backup for sensitive information
+- **Advanced files & folders comparator** - Deep comparison algorithms
+- **ZIP password recovery & maker** - Archive security management
+- **Intelligent file organizer** - Automatic file categorization
+- **Explorer Mode** - Dynamic local file/folder copying with path saving
+- **Copy App** - Network file copying from servers to `C:\KIT` directory
+- **Rename Utility** - Batch file renaming operations
 
-### 3. System Monitoring & Information
-- **System Info**: Comprehensive system information with domain joining capabilities
-- **Real-time System Information**: Live system performance monitoring
-- **Hardware Monitor Lite**: CPU, RAM, disk, and GPU monitoring
-- **Task Manager**: Process management with memory and network usage
-- **Alert Monitor**: System alerts based on usage thresholds
-- **Event Viewer**: System log analysis (errors, warnings, information)
-- **Process Viewer**: CPU and GPU usage by core
+### 🔐 Security Suite
+- **Military-grade file encryption** - High-complexity encryption algorithms
+- **Advanced password manager & generation tool** - Encrypted password database
+- **Multi-level authentication system** - Secure access control
+- **Terminal access restrictions** - Security policy-based controls
 
-### 4. Development & Productivity Tools
-- **Advanced Notepad**: Notepad++ clone for quick note-taking
-- **Python IDE**: Full Python development environment
-- **SQL Explorer**: SQLite database editor and query executor
-- **XML Editor**: Configuration file editing
-- **Text Editor**: Advanced text editing capabilities
-- **Find & Replace**: Advanced text search and replacement
+### 💼 Office Suite Lite
+- **Word, PowerPoint & Excel file reader** - View Office documents without installation
+- **Spreadsheet editor (Excel-compatible)** - Full formula support
+- **Document conversion tools** - Multi-format support
+- **PDF tools** - Encryption, image extraction, page manipulation
+- **Advanced text editor** - Notepad++ functionality
+- **Paint app & whiteboard** - Digital drawing and diagramming
+- **Find & replace text tool** - Advanced search and replacement
+- **Contacts manager** - Contact information database
 
-### 5. Office & Document Tools
-- **PDF to Word**: Convert PDF files with image extraction
-- **PDF Tools**: Encryption, image extraction, page manipulation
-- **Excel Lite**: Spreadsheet application with formula support
-- **Office Reader**: View .docx, .xlsx, .pptx files
-- **Equipment Sheet**: Excel file viewer without Office installation
+### 💻 Development Tools
+- **Full-featured Python IDE** - Complete development environment
+- **SQLite editor & reader** - Database management with syntax highlighting
+- **XML Editor** - Configuration file editing capabilities
 
-### 6. Security & Privacy Tools
-- **File Encryption**: High-complexity encryption algorithms
-- **Password Manager**: Encrypted password database
-- **Cracking ZIP Passwords**: Password recovery for ZIP archives
-- **Password Generation**: Secure password creation utilities
+### 🤖 AI & Productivity
+- **AI Chatbot** - Virtual assistant (95% Romanian language support)
+- **Smart calendar & scheduling** - Event management system
+- **Task management system** - Comprehensive project tracking
+- **Knowledge base system** - Built-in documentation platform
+- **Account launcher & manager** - Unified account management
+- **Workflow automation** - Process optimization tools
+- **Q&A platform** - Interactive help system
+- **Pause manager for teams** - Break management system
+- **Screen recorder app** - Capture and recording tools
+- **Launcher app** - Multiapp account management
+- **Total Commander tool** - File management utility
+- **Calendar app** - Advanced scheduling features
+- **Visual diagram creator** - Professional diagram tools
 
-### 7. Multimedia & Graphics
-- **Screen Events**: Screen recording and screenshot capabilities
-- **Whiteboard**: Digital drawing and diagramming tool
-- **Whiteboard Presentation**: Interactive presentation tool with image import
-- **Diagram Editor**: Professional diagram creation
+### 🌐 Network & Connectivity Features
+- **Get IP & MAC** - Network adapter information display
+- **Port Scanner** - Open port detection on network devices
+- **Ping Tool** - Connectivity testing with port discovery
+- **Network Console** - Comprehensive monitoring and Wi-Fi password recovery
+- **Network Bandwidth Monitoring** - Real-time usage graphs with VLAN and LAN support
+- **Listener** - Device online/offline status tracking
+- **Network packet analysis** - Deep packet inspection capabilities
 
-### 8. Utilities & Miscellaneous
-- **Comparator**: File and folder comparison tool
-- **Testing**: Quiz creation with multiple-choice questions
-- **Contact Manager**: Contact information database
-- **Calendar**: Event scheduling and management
-- **Pause Manager**: Team break management system
-- **Terminal Emulator**: CMD and Linux interface simulation
-- **Retro Commander**: Total Commander clone
-- **AI Chatbot**: Virtual assistant (99% Romanian language support)
+### 📊 System Monitoring & Information
+- **System Info** - Comprehensive system information with domain joining
+- **Real-time System Information** - Live performance monitoring
+- **Hardware Monitor Lite** - CPU, RAM, disk, and GPU monitoring
+- **Task Manager** - Process management with memory and network usage
+- **Process Viewer** - CPU and GPU usage by core analysis
 
-## Installation & Setup
+### 🎨 Multimedia & Graphics
+- **Screen Events** - Screenshot and recording capabilities
+- **Whiteboard** - Interactive drawing tool
+- **Whiteboard Presentation** - Presentation tool with image import
+- **Diagram Editor** - Professional diagram creation
 
+## 📦 Installation & Setup
+
+### What You Get
+- Single executable file - no installer needed
+- Portable application - run from anywhere
+- All features unlocked immediately
+- No additional dependencies required
+- Automatic updates when available
+
+### Setup Process
 1. Download the `Multiapp.exe` file
-2. Ensure your system meets the minimum requirements
+2. Ensure your system meets the minimum requirements (built-in checker will verify)
 3. Configure display settings for optimal viewing
 4. Run the application and log in using provided accounts
+5. For optimal display on laptops: Right-click Multiapp.exe → Properties → Change settings for all users → Change high DPI settings
 
-## Configuration Files
+## 📁 Configuration Files & Structure
 
-- **Accounts.txt**: User account information
-- **paths.txt**: Network paths for Copy App
-- **profiles.json**: Equipment profiles for Copy App
-- **ChooseLocationForPause.txt**: Pause Manager file location
-- **Config folder**: XML configuration files
+- **Accounts.txt** - User account information
+- **paths.txt** - Network paths for Copy App
+- **profiles.json** - Equipment profiles for Copy App
+- **ChooseLocationForPause.txt** - Pause Manager file location
+- **Config folder** - XML configuration files for various modules
 
-## Performance Benefits
+## ⚡ Performance Benefits
 
 - **Efficiency**: 18.8% ~ 20% faster copying compared to traditional methods
 - **Optimization**: Precompiled paths and direct bit allocation
 - **Integration**: All tools unified in a single application
+- **Resource Management**: Optimized memory usage and CPU allocation
 
-## Network Features
-
-- VLAN and LAN device monitoring
-- Network packet analysis
-- Wi-Fi password recovery
-- Real-time bandwidth monitoring
-- Device connectivity status tracking
-
-## Security Features
-
-- Multi-level authentication system
-- Encrypted password storage
-- Secure file encryption
-- Access control for sensitive operations
-- Terminal access restrictions based on security policies
-
-## Repair & Maintenance
+## 🛠️ Repair & Maintenance
 
 ### Automatic Repair (Fetcher)
 Use the **Fetcher - Repair Setup** feature for automatic error correction and file restoration.
@@ -158,19 +187,45 @@ Execute the following commands in sequence:
 11. `cfg,0/0/1` (use `init` for Windows 10 if this fails)
 12. `launch_multiapp`
 
-## Support & Documentation
+## 📧 Support & Documentation
 
+- **Developer**: Tudor Marmureanu
+- **Support Email**: support@muap.ro
 - **Knowledge Base**: Built-in local documentation platform
 - **AI Chatbot**: Integrated virtual assistant
 - **Read Me First**: Essential usage information
 - **Equipment Sheets**: Hardware configuration templates
 
-## Licensing
+## 📥 Download Information
 
-© 2024 Muap - Knowledge Base
+**Ready to revolutionize your workflow?**
+
+Download Multiapp 95 Professional and unlock the full potential of your productivity workflow.
+
+[Download the latest version from the official source]
+
+*File size: ~500MB | Single executable | Portable application*
+
+## 🏢 Professional Use Cases
+
+- **IT Support Departments** - Comprehensive diagnostic and repair tools
+- **System Administrators** - Advanced monitoring and management capabilities
+- **Developers** - Full IDE and database management tools
+- **Office Professionals** - Complete office suite and productivity tools
+- **Network Engineers** - Advanced network analysis and monitoring
+- **Security Teams** - Encryption and security management tools
+
+## 📋 Licensing & Legal
+
+© 2024 Muap - Knowledge Base  
+**Developer**: Tudor Marmureanu
 
 ---
 
 **Note**: This application is designed for professional IT environments and includes advanced network and system management capabilities. Some features may require administrative privileges or specific network permissions.
 
-For technical support or additional configuration assistance, consult the built-in Knowledge Base or contact your IT administrator.
+For technical support, feature requests, or additional configuration assistance, consult the built-in Knowledge Base, use the integrated AI Chatbot, or contact support@muap.ro.
+
+---
+
+*Multiapp 95 Professional - The ultimate all-in-one productivity and IT management solution*
