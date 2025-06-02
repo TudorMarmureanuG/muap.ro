@@ -1,0 +1,745 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multiapp Professional</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 50%, #16213e 100%);
+            color: #e4e4e7;
+            margin: 0;
+            padding: 20px;
+            min-height: 100vh;
+            font-size: 14px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: rgba(24, 24, 27, 0.95);
+            border-radius: 16px;
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(39, 39, 42, 0.8);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #18181b 0%, #27272a 100%);
+            padding: 24px 32px;
+            border-bottom: 1px solid rgba(39, 39, 42, 0.8);
+        }
+        
+        .header-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .app-info {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        
+        .app-icon {
+            width: 64px;
+            height: 64px;
+            background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: white;
+            font-size: 24px;
+            box-shadow: 0 8px 25px rgba(59, 130, 246, 0.3);
+        }
+        
+        .app-details h1 {
+            color: #f4f4f5;
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+        
+        .app-details p {
+            color: #a1a1aa;
+            font-size: 16px;
+        }
+        
+        .window-controls {
+            display: flex;
+            gap: 8px;
+        }
+        
+        .control-btn {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        
+        .control-btn.close { background: #ef4444; }
+        .control-btn.minimize { background: #f59e0b; }
+        .control-btn.maximize { background: #10b981; }
+        
+        .control-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+        }
+        
+        .navigation {
+            background: rgba(24, 24, 27, 0.8);
+            padding: 0 32px;
+            border-bottom: 1px solid rgba(39, 39, 42, 0.6);
+        }
+        
+        .nav-tabs {
+            display: flex;
+            gap: 0;
+        }
+        
+        .nav-tab {
+            padding: 16px 24px;
+            cursor: pointer;
+            color: #a1a1aa;
+            font-weight: 500;
+            border-bottom: 3px solid transparent;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .nav-tab:hover {
+            color: #e4e4e7;
+            background: rgba(39, 39, 42, 0.5);
+        }
+        
+        .nav-tab.active {
+            color: #3b82f6;
+            border-bottom-color: #3b82f6;
+            background: rgba(59, 130, 246, 0.1);
+        }
+        
+        .content {
+            padding: 32px;
+            min-height: 500px;
+        }
+        
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.3s ease-in-out;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .hero-section {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 40px 0;
+        }
+        
+        .hero-section h2 {
+            color: #f4f4f5;
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 16px;
+        }
+        
+        .hero-section p {
+            color: #a1a1aa;
+            font-size: 18px;
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+        
+        .highlight-card {
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(139, 92, 246, 0.1) 100%);
+            border: 1px solid rgba(59, 130, 246, 0.3);
+            border-radius: 12px;
+            padding: 24px;
+            margin: 24px 0;
+            text-align: center;
+        }
+        
+        .highlight-card h3 {
+            color: #3b82f6;
+            font-size: 20px;
+            margin-bottom: 12px;
+        }
+        
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 20px;
+            margin: 32px 0;
+        }
+        
+        .feature-card {
+            background: rgba(39, 39, 42, 0.5);
+            border: 1px solid rgba(63, 63, 70, 0.8);
+            border-radius: 12px;
+            padding: 24px;
+            transition: all 0.3s ease;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.3);
+            border-color: rgba(59, 130, 246, 0.5);
+        }
+        
+        .feature-card h4 {
+            color: #f4f4f5;
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .feature-list {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .feature-list li {
+            padding: 8px 0;
+            color: #d4d4d8;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 14px;
+        }
+        
+        .feature-list li:before {
+            content: "✓";
+            color: #10b981;
+            font-weight: bold;
+            width: 16px;
+            height: 16px;
+            background: rgba(16, 185, 129, 0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 10px;
+        }
+        
+        .info-section {
+            background: rgba(39, 39, 42, 0.3);
+            border-radius: 12px;
+            padding: 24px;
+            margin: 24px 0;
+        }
+        
+        .info-section h3 {
+            color: #f4f4f5;
+            font-size: 20px;
+            margin-bottom: 16px;
+        }
+        
+        .info-list {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .info-list li {
+            padding: 8px 0;
+            color: #d4d4d8;
+            border-bottom: 1px solid rgba(63, 63, 70, 0.3);
+        }
+        
+        .info-list li:last-child {
+            border-bottom: none;
+        }
+        
+        .info-list strong {
+            color: #3b82f6;
+            display: inline-block;
+            width: 120px;
+        }
+        
+        .warning-box {
+            background: rgba(239, 68, 68, 0.1);
+            border: 1px solid rgba(239, 68, 68, 0.3);
+            border-radius: 12px;
+            padding: 16px;
+            margin: 16px 0;
+            color: #fca5a5;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .warning-box:before {
+            content: "⚠️";
+            font-size: 20px;
+        }
+        
+        .download-section {
+            text-align: center;
+            background: rgba(39, 39, 42, 0.3);
+            border-radius: 12px;
+            padding: 32px;
+            margin: 24px 0;
+        }
+        
+        .download-section h3 {
+            color: #f4f4f5;
+            font-size: 24px;
+            margin-bottom: 16px;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+            color: white;
+            border: none;
+            padding: 16px 32px;
+            font-size: 16px;
+            font-weight: 600;
+            border-radius: 12px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 14px rgba(59, 130, 246, 0.3);
+            margin: 8px;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(59, 130, 246, 0.4);
+        }
+        
+        .btn-secondary {
+            background: rgba(63, 63, 70, 0.8);
+            color: #e4e4e7;
+            border: 1px solid rgba(82, 82, 91, 0.8);
+            padding: 12px 24px;
+            font-size: 14px;
+            font-weight: 500;
+            border-radius: 8px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+            margin: 4px;
+        }
+        
+        .btn-secondary:hover {
+            background: rgba(82, 82, 91, 0.8);
+            border-color: rgba(113, 113, 122, 0.8);
+        }
+        
+        .footer {
+            background: rgba(24, 24, 27, 0.8);
+            padding: 20px 32px;
+            border-top: 1px solid rgba(39, 39, 42, 0.8);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .developer-info {
+            color: #a1a1aa;
+            font-size: 14px;
+        }
+        
+        .developer-info strong {
+            color: #3b82f6;
+        }
+        
+        .status-indicator {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #10b981;
+            font-size: 14px;
+        }
+        
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            background: #10b981;
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+        
+        .tech-badges {
+            display: flex;
+            gap: 8px;
+            margin: 16px 0;
+            flex-wrap: wrap;
+        }
+        
+        .tech-badge {
+            background: rgba(59, 130, 246, 0.2);
+            color: #93c5fd;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                margin: 10px;
+                border-radius: 12px;
+            }
+            
+            .header {
+                padding: 20px;
+            }
+            
+            .header-content {
+                flex-direction: column;
+                gap: 16px;
+                text-align: center;
+            }
+            
+            .content {
+                padding: 20px;
+            }
+            
+            .feature-grid {
+                grid-template-columns: 1fr;
+                gap: 16px;
+            }
+            
+            .nav-tabs {
+                overflow-x: auto;
+                padding-bottom: 4px;
+            }
+            
+            .nav-tab {
+                padding: 12px 16px;
+                white-space: nowrap;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="header-content">
+                <div class="app-info">
+                    <div class="app-icon">95</div>
+                    <div class="app-details">
+                        <h1>Multiapp Professional</h1>
+                        <p>The ultimate productivity and efficiency suite</p>
+                    </div>
+                </div>
+                <div class="window-controls">
+                    <div class="control-btn minimize"></div>
+                    <div class="control-btn maximize"></div>
+                    <div class="control-btn close"></div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="navigation">
+            <div class="nav-tabs">
+                <div class="nav-tab active" onclick="showTab('overview')">Overview</div>
+                <div class="nav-tab" onclick="showTab('features')">Features</div>
+                <div class="nav-tab" onclick="showTab('system')">System Requirements</div>
+                <div class="nav-tab" onclick="showTab('download')">Download</div>
+            </div>
+        </div>
+        
+        <div class="content">
+            <div id="overview" class="tab-content active">
+                <div class="hero-section">
+                    <h2>Revolutionize Your Workflow</h2>
+                    <p>A comprehensive software suite that combines dozens of professional tools into a single, powerful application. Built with modern technologies for maximum performance and reliability.</p>
+                </div>
+                
+                <div class="highlight-card">
+                    <h3>🚀 Why Choose Multiapp Professional?</h3>
+                    <p>All-in-one solution • No additional installations • Advanced security • Intuitive interface • Regular updates</p>
+                </div>
+                
+                <div class="info-section">
+                    <h3>Technical Details</h3>
+                    <div class="tech-badges">
+                        <span class="tech-badge">Python</span>
+                        <span class="tech-badge">C++</span>
+                        <span class="tech-badge">x64 Architecture</span>
+                        <span class="tech-badge">Single Executable</span>
+                        <span class="tech-badge">Portable</span>
+                    </div>
+                    <ul class="info-list">
+                        <li><strong>Developer:</strong> Tudor Marmureanu</li>
+                        <li><strong>Languages:</strong> This software was written in Python and C++ and precompiled into a single file.</li>
+                        <li><strong>Architecture:</strong> x64 Only (Windows 10 or 11)</li>
+                        <li><strong>Distribution:</strong> Single executable file</li>
+                        <li><strong>Installation:</strong> Portable - One setup required</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div id="features" class="tab-content">
+                <div class="hero-section">
+                    <h2>Comprehensive Feature Set</h2>
+                    <p>Over 20+ professional tools organized into intuitive categories</p>
+                </div>
+                
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <h4>🔧 System & Diagnostics</h4>
+                        <ul class="feature-list">
+							<li>System compatibility testing</li>
+                            <li>Hardware diagnostics & monitoring</li>
+                            <li>Network troubleshooting tools</li>
+                            <li>Support IT process automation</li>
+                            <li>Advanced terminal emulator</li>
+                            <li>Performance optimization</li>
+							<li>Alert monitor</li>
+							<li>Event viewer</li>
+							<li>Manual & automatic repair tool for Multiapp</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <h4>📁 File Management Pro</h4>
+                        <ul class="feature-list">
+                            <li>Smart backup tool</li>
+                            <li>Advanced files & folders comparator</li>
+                            <li>ZIP password recovery & maker</li>
+                            <li>Intelligent file organizer</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <h4>🔐 Security Suite</h4>
+                        <ul class="feature-list">
+                            <li>Military-grade file encryption</li>
+                            <li>Advanced password manager & generation tool</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <h4>💼 Office Suite Lite</h4>
+                        <ul class="feature-list">
+							<li>Word, Power Point & Excel file reader</li>
+                            <li>Spreadsheet editor (Excel-compatible)</li>
+                            <li>Document conversion tools</li>
+                            <li>PDF tools</li>
+							<li>Advanced text editor</li>
+							<li>Paint app & whiteboard</li>
+							<li>Find & replace text tool</li>
+							<li>Contacts manager</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <h4>💻 Development Tools</h4>
+                        <ul class="feature-list">
+                            <li>Full-featured Python IDE</li>
+                            <li>SQLlite editor & reader with syntax highlighting</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <h4>🤖 AI & Productivity</h4>
+                        <ul class="feature-list">
+                            <li>AI Chatbot (95% Romanian support)</li>
+                            <li>Smart calendar & scheduling</li>
+                            <li>Task management system</li>
+                            <li>Knowledge base system</li>
+                            <li>Account launcher & manager</li>
+                            <li>Workflow automation</li>
+							<li>Q&A platform</li>
+							<li>Pause manager for teams</li>
+							<li>Screen recorder app</li>
+							<li>Launcher app for Multiapp accounts</li>
+							<li>Total Commander tool</li>
+							<li>Calendar app</li>
+							<li>Visual diagram creator</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div id="system" class="tab-content">
+                <div class="hero-section">
+                    <h2>System Requirements</h2>
+                    <p>Ensure your system meets these requirements for optimal performance</p>
+                </div>
+                
+                <div class="warning-box">
+                    <strong>Important: This software is designed exclusively for x64 (64-bit) systems</strong>
+                </div>
+                
+                <div class="info-section">
+                    <h3>Minimum Requirements</h3>
+                    <ul class="info-list">
+                        <li><strong>Architecture:</strong> x64 (i3 64-bit processor required - between 1 și 2 GHz)</li>
+                        <li><strong>OS:</strong> Windows 10 (build 1903+) or Windows 11</li>
+                        <li><strong>RAM:</strong> 4GB minimum</li>
+                        <li><strong>Storage:</strong> 500MB free disk space</li>
+                        <li><strong>Permissions:</strong> Administrator privileges for full functionality</li>
+                        <li><strong>Network:</strong> Internet connection for AI features and updates</li>
+                    </ul>
+                </div>
+                
+                <div class="info-section">
+                    <h3>Recommended Specifications</h3>
+                    <ul class="info-list">
+                        <li><strong>Processor:</strong> Intel Core i5 or AMD Ryzen 5 (or equivalent)</li>
+                        <li><strong>RAM:</strong> 8GB recommended or 16GB for heavy development work</li>
+                        <li><strong>Storage:</strong> SSD for faster file operations</li>
+                        <li><strong>Display:</strong> 1920x1080 or higher resolution</li>
+                    </ul>
+                </div>
+                
+                <div class="highlight-card">
+                    <h3>🔍 Built-in Compatibility Check</h3>
+                    <p>No need to worry about compatibility! Multiapp 95 Professional includes an integrated system compatibility checker that verifies your hardware and software configuration automatically.</p>
+                </div>
+            </div>
+            
+            <div id="download" class="tab-content">
+                <div class="download-section">
+                    <h3>🚀 Ready to Get Started?</h3>
+                    <p>Download Multiapp 95 Professional and unlock the full potential of your productivity workflow.</p>
+                    
+                    <div class="highlight-card">
+                        <h3>📦 What You Get</h3>
+                        <ul class="feature-list" style="text-align: left; max-width: 400px; margin: 0 auto;">
+                            <li>Single executable file - no installer needed</li>
+                            <li>Portable application - run from anywhere</li>
+                            <li>All features unlocked immediately</li>
+                            <li>No additional dependencies required</li>
+                            <li>Automatic updates when available</li>
+                        </ul>
+                    </div>
+                    
+                    <div style="margin: 32px 0;">
+                        <a href="https://mega.nz/file/BBZlFI6a#TWoRF8f9mNf7CjyuN2MceNAobzlCiNF2JjPyGOfYweY" class="btn-primary">
+                            📥 Download Now
+                        </a>
+                    </div>
+                    
+                    <div style="display: flex; justify-content: center; gap: 16px; flex-wrap: wrap; margin-top: 20px;">
+                        <button class="btn-secondary" onclick="showTab('features')">🔍 View Features</button>
+                        <button class="btn-secondary" onclick="showTab('system')">⚙️ Check Requirements</button>
+                        <button class="btn-secondary" onclick="window.open('mailto:support@muap.ro')">📧 Contact Support</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <div class="developer-info">
+                <strong style="color: cyan">Developer:</strong> <i>Tudor Marmureanu</i> | 
+                <strong>Support:</strong> <i>support@muap.ro</i>
+            </div>
+            <div class="status-indicator">
+                <div class="status-dot"></div>
+                System Ready
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        function showTab(tabName) {
+            // Hide all tab contents
+            const contents = document.querySelectorAll('.tab-content');
+            contents.forEach(content => content.classList.remove('active'));
+            
+            // Remove active class from all tabs
+            const tabs = document.querySelectorAll('.nav-tab');
+            tabs.forEach(tab => tab.classList.remove('active'));
+            
+            // Show selected tab content
+            document.getElementById(tabName).classList.add('active');
+            
+            // Add active class to clicked tab
+            event.target.classList.add('active');
+        }
+        
+        // Window controls functionality
+        document.querySelector('.close').addEventListener('click', function() {
+            if (confirm('Are you sure you want to close this application?')) {
+                window.close();
+            }
+        });
+        
+        document.querySelector('.minimize').addEventListener('click', function() {
+            // Minimize effect
+            document.querySelector('.container').style.transform = 'scale(0.1)';
+            setTimeout(() => {
+                document.querySelector('.container').style.transform = 'scale(1)';
+            }, 500);
+        });
+        
+        document.querySelector('.maximize').addEventListener('click', function() {
+            const container = document.querySelector('.container');
+            container.style.maxWidth = container.style.maxWidth === '95vw' ? '1200px' : '95vw';
+        });
+        
+        // Add smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+        
+        // Add loading animation for download button
+        document.querySelector('.btn-primary').addEventListener('click', function(e) {
+            const originalText = this.innerHTML;
+            this.innerHTML = '⏳ Preparing download...';
+            this.style.pointerEvents = 'none';
+            
+            setTimeout(() => {
+                this.innerHTML = originalText;
+                this.style.pointerEvents = 'auto';
+            }, 2000);
+        });
+        
+        // Add parallax effect to background
+        document.addEventListener('mousemove', function(e) {
+            const x = e.clientX / window.innerWidth;
+            const y = e.clientY / window.innerHeight;
+            
+            document.body.style.background = `
+                linear-gradient(${135 + x * 10}deg, 
+                    hsl(${240 + x * 20}, 70%, ${8 + y * 3}%) 0%, 
+                    hsl(${245 + x * 15}, 60%, ${12 + y * 4}%) 50%, 
+                    hsl(${220 + x * 25}, 65%, ${15 + y * 5}%) 100%)
+            `;
+        });
+    </script>
+</body>
+</html>
