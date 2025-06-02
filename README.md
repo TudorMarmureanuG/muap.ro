@@ -211,7 +211,7 @@ Download Multiapp 95 Professional and unlock the full potential of your producti
 - **IT Support Departments** - Comprehensive diagnostic and repair tools
 - **System Administrators** - Advanced monitoring and management capabilities
 - **Developers** - Full IDE and database management tools
-- **Office Professionals** - Complete office suite and productivity tools
+- **Office Professionals** - Office Lite suite and productivity tools
 - **Network Engineers** - Advanced network analysis and monitoring
 - **Security Teams** - Encryption and security management tools
 
