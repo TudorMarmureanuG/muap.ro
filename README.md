@@ -1,4 +1,5 @@
 # Multiapp 95 Professional - IT Management Tool Suite
+# muap.ro (Retro Computing Division)
 
 ![Multiapp Logo](/Multiapp-Logo.png)
 
@@ -51,6 +52,53 @@ Multiapp 95 Professional includes an integrated system compatibility checker tha
 - Stored in `Accounts.txt` file
 - Special accounts available:
   - **user/nopass**: For file copying operations only
+  - **it/copy**: user++ functionality
+  - **chatbot/aichatbot**: AI chatbot
+  - **alert/monitor**: aler monitor for ypur hardware
+  - **backupmanager/backupmngr**: backup manager for files
+  - **calendar/calendar**: display a calendar & event planning
+  - **check/devices**: check online devices
+  - **comparator/comparator**: file comparison tool
+  - **contact/manager**: contact management system
+  - **diagram/canvas**: diagram creation and editing
+  - **cryptoV2/security**: file encryption and security tools
+  - **eventviewer/eventviewer**: system event monitoring
+  - **excel/lite**: lightweight spreadsheet editor
+  - **fetcher/repair**: Multiapp auto repair utility
+  - **shell/integrator**: Multiapp manual repair utility
+  - **history/files**: file history tools
+  - **hardware/lite**: hardware monitoring live kit
+  - **junk/manager**: junk file management
+  - **kbmanager/knowladgebase**: knowledge base management
+  - **kbretro/kbretro**: retro knowledge base manage
+  - **launcher/launcher**: application launcher
+  - **md/mdviewer**: markdown file viewer and editor
+  - **bandmonitoring/networking**: network bandwidth monitoring
+  - **notepad/notepad**: text editor
+  - **reader/office**: office document reader
+  - **paint/paint**: drawing tool
+  - **passgen/passgen**: password generator utility
+  - **passgenV2/passgenV2**: advanced password generator
+  - **password/manager**: password storage and management
+  - **pausemanager/pauze**: break manager
+  - **convertorpdf/toword**: PDF to Word document converter
+  - **pdftools/enjoyit**: comprehensive PDF manipulation tools
+  - **process/viewer**: CPU and GPU process monitoring
+  - **ide/pycharm**: Python integrated development environment
+  - **quizmaker/quizmaker**: quiz creation and editing tool
+  - **quiz/test**: quiz testing and evaluation system
+  - **renamemanager/renamer**: file renaming utility
+  - **screenrec/screenrec**: screen recording application
+  - **sql/editor**: SQLite database editor and query tool
+  - **system/realtime**: real-time system resource monitoring
+  - **taskmanager/terminator**: task managemer
+  - **terminal/terminal**: command line terminal interface
+  - **textreplace/textfind**: text search and replace utility
+  - **commander/total**: total commander file manager
+  - **whiteboard/presentation**: whiteboard & images tools
+  - **xml/editor**: XML file editor and validator for Config
+  - **zipmanager/zipmngr**: archive compression and management
+  - **zippass/wordsmith**: ZIP password recovery tool
 
 ### Developer Accounts
 - Reserved for development purposes
@@ -97,12 +145,14 @@ Multiapp 95 Professional includes an integrated system compatibility checker tha
 ### 💻 Development Tools
 - **Full-featured Python IDE** - Complete development environment
 - **SQLite editor & reader** - Database management with syntax highlighting
-- **XML Editor** - Configuration file editing capabilities
+- **MD viewer** - Markdown file viewer and editor
+- **File archeologist** - File history tools
+
 
 ### 🤖 AI & Productivity
 - **AI Chatbot** - Virtual assistant (95% Romanian language support)
 - **Smart calendar & scheduling** - Event management system
-- **Task management system** - Comprehensive project tracking
+- **Task manager system** - Task manager
 - **Knowledge base system** - Built-in documentation platform
 - **Account launcher & manager** - Unified account management
 - **Workflow automation** - Process optimization tools
@@ -113,6 +163,7 @@ Multiapp 95 Professional includes an integrated system compatibility checker tha
 - **Total Commander tool** - File management utility
 - **Calendar app** - Advanced scheduling features
 - **Visual diagram creator** - Professional diagram tools
+- **XML Editor** - Configuration file editing capabilities
 
 ### 🌐 Network & Connectivity Features
 - **Get IP & MAC** - Network adapter information display
@@ -208,16 +259,16 @@ Download Multiapp 95 Professional and unlock the full potential of your producti
 
 ## 🏢 Professional Use Cases
 
-- **IT Support Departments** - Comprehensive diagnostic and repair tools
+- **IT Support Departments** - Comprehensive diagnostic and automate the tasks
 - **System Administrators** - Advanced monitoring and management capabilities
-- **Developers** - Full IDE and database management tools
+- **Developers** - Python IDE and database management tools
 - **Office Professionals** - Office Lite suite and productivity tools
 - **Network Engineers** - Advanced network analysis and monitoring
 - **Security Teams** - Encryption and security management tools
 
 ## 📋 Licensing & Legal
 
-© 2024 Muap - Knowledge Base  
+© 2024 Muap - Retro Computing Division 
 **Developer**: Tudor Marmureanu
 
 ---
