@@ -1,5 +1,4 @@
 # Multiapp 95 Professional - IT Management Tool Suite
-# muap.ro (Retro Computing Division)
 
 ![Multiapp Logo](/Multiapp-Logo.png)
 
@@ -269,6 +268,7 @@ Download Multiapp 95 Professional and unlock the full potential of your producti
 ## 📋 Licensing & Legal
 
 © 2024 Muap - Retro Computing Division 
+
 **Developer**: Tudor Marmureanu
 
 ---
