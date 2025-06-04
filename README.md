@@ -147,7 +147,6 @@ Multiapp 95 Professional includes an integrated system compatibility checker tha
 - **Full-featured Python IDE** - Complete development environment
 - **SQLite editor & reader** - Database management with syntax highlighting
 - **MD viewer** - Markdown file viewer and editor
-- **File archeologist** - File history tools
 - **Script runner** - Script runner for daily tasks
 
 
@@ -166,6 +165,7 @@ Multiapp 95 Professional includes an integrated system compatibility checker tha
 - **Calendar app** - Advanced scheduling features
 - **Visual diagram creator** - Professional diagram tools
 - **XML Editor** - Configuration file editing capabilities
+- **File archeologist** - File history tools
 - **Expense Tracker** - Expense tracker with diagrams
 
 ### 🌐 Network & Connectivity Features
