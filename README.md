@@ -63,6 +63,7 @@ Multiapp 95 Professional includes an integrated system compatibility checker tha
   - **cryptoV2/security**: file encryption and security tools
   - **eventviewer/eventviewer**: system event monitoring
   - **excel/lite**: lightweight spreadsheet editor
+  - **expense/tracker**: expense tracker with diagrams
   - **fetcher/repair**: Multiapp auto repair utility
   - **shell/integrator**: Multiapp manual repair utility
   - **history/files**: file history tools
@@ -88,6 +89,7 @@ Multiapp 95 Professional includes an integrated system compatibility checker tha
   - **quiz/test**: quiz testing and evaluation system
   - **renamemanager/renamer**: file renaming utility
   - **screenrec/screenrec**: screen recording application
+  - **script/runner**: script runner for daily tasks
   - **sql/editor**: SQLite database editor and query tool
   - **system/realtime**: real-time system resource monitoring
   - **taskmanager/terminator**: task managemer
@@ -146,6 +148,7 @@ Multiapp 95 Professional includes an integrated system compatibility checker tha
 - **SQLite editor & reader** - Database management with syntax highlighting
 - **MD viewer** - Markdown file viewer and editor
 - **File archeologist** - File history tools
+- **Script runner** - Script runner for daily tasks
 
 
 ### 🤖 AI & Productivity
@@ -163,6 +166,7 @@ Multiapp 95 Professional includes an integrated system compatibility checker tha
 - **Calendar app** - Advanced scheduling features
 - **Visual diagram creator** - Professional diagram tools
 - **XML Editor** - Configuration file editing capabilities
+- **Expense Tracker** - Expense tracker with diagrams
 
 ### 🌐 Network & Connectivity Features
 - **Get IP & MAC** - Network adapter information display
