@@ -89,7 +89,7 @@ Multiapp 95 Professional includes an integrated system compatibility checker tha
   - **quiz/test**: quiz testing and evaluation system
   - **renamemanager/renamer**: file renaming utility
   - **screenrec/screenrec**: screen recording application
-  - **script/runner**: script runner for daily tasks
+  - **script/agent**: script runner for daily tasks
   - **sql/editor**: SQLite database editor and query tool
   - **system/realtime**: real-time system resource monitoring
   - **taskmanager/terminator**: task managemer
@@ -147,7 +147,7 @@ Multiapp 95 Professional includes an integrated system compatibility checker tha
 - **Full-featured Python IDE** - Complete development environment
 - **SQLite editor & reader** - Database management with syntax highlighting
 - **MD viewer** - Markdown file viewer and editor
-- **Script runner** - Script runner for daily tasks
+- **Script agent** - Script runner for daily tasks
 
 
 ### 🤖 AI & Productivity
