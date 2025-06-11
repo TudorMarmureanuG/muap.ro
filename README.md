@@ -155,7 +155,7 @@ For optimal display on laptops:
 - **Q&A Platform** - Interactive help system with contextual assistance
 - **Pause Manager for Teams** - Break management system for productivity (pausemanager/pauze)
 - **Screen Recorder App** - Capture and recording tools for training and documentation (screenrec/screenrec)
-- **Visual Diagram Creator** - Professional diagram tools for flowcharts and process mapping (diagram/canvas)
+- **Visual Diagram Creator** - Professional diagram tools for flowcharts and process mapping (diagram/beta or mindmap/diagram)
 - **Expense Tracker** - Financial tracking with visual diagrams and reporting (expense/tracker)
 - **Quiz Creation and Testing**:
   - Quiz Maker for content creation (quizmaker/quizmaker)
@@ -197,7 +197,8 @@ Multiapp 95 Professional uses a comprehensive authentication system with predefi
 - **check/devices** - Online device checker
 - **comparator/comparator** - File comparison tool
 - **contact/manager** - Contact management system
-- **diagram/canvas** - Diagram creation and editing
+- **diagram/beta** - Diagram creation and editing (beta version)
+- **mindmap/diagram** - Diagram creation and editing
 - **cryptoV2/security** - File encryption and security tools
 - **eventviewer/eventviewer** - System event monitoring
 - **excel/lite** - Lightweight spreadsheet editor
