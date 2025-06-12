@@ -137,7 +137,7 @@ For optimal display on laptops:
 - **Markdown Viewer** - View and edit Markdown files (md/mdviewer)
 - **SQLite Editor & Reader** - Database management with syntax highlighting and query tools
 - **Script Agent** - Script runner for daily tasks and automation
-- **XML Editor and Validator** - Configuration file editing for various formats
+- **Multi File Editor** - Configuration file editing for various formats
 - **Development Environment Features**:
   - Syntax highlighting for multiple languages
   - Project management capabilities
@@ -213,6 +213,7 @@ Multiapp 95 Professional uses a comprehensive authentication system with predefi
 - **kbretro/kbretro** - Retro knowledge base manager
 - **launcher/launcher** - Application launcher interface
 - **md/mdviewer** - Markdown file viewer and editor
+- **multifile/editor** - Configuration file editing for various formats
 - **bandmonitoring/networking** - Network bandwidth monitoring
 - **notepad/notepad** - Advanced text editor
 - **reader/office** - Office document reader
