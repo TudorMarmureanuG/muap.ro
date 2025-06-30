@@ -114,6 +114,7 @@ For optimal display on laptops:
 - **Password Storage and Management** - Secure password vault with encryption (password/manager)
 - **File Encryption and Security Tools** - Advanced cryptographic tools (cryptoV2/security)
 - **ZIP Password Recovery** - Specialized tools for archive password recovery (zippass/wordsmith)
+- **Safety Tool** - Designed for avoiding vulnerabilities on your system (safe/checker)
 
 ### 💼 Office Suite Lite Tools
 
@@ -230,6 +231,7 @@ Multiapp 95 Professional uses a comprehensive authentication system with predefi
 - **quiz/test** - Quiz testing and evaluation system
 - **recovery/tunnel** - Advanced file recovery tool
 - **renamemanager/renamer** - File renaming utility
+- **safe/checker** - Safety tool for avoiding vulnerabilities on your system
 - **screenrec/screenrec** - Screen recording application
 - **script/agent** - Script runner for daily tasks
 - **sql/editor** - SQLite database editor and query tool
@@ -401,7 +403,8 @@ Use shell/integrator account and execute commands in sequence:
 
 ### Application Details
 - **Name**: Multiapp 95 Professional
-- **Version**: IT Management Tool Suite
+- **Version**: 0.95.0
+- **Application Type**: IT Management Tool Suite
 - **Architecture**: x64 (64-bit) Windows applications only
 - **File Size**: ~500MB
 - **Distribution**: Single executable file
