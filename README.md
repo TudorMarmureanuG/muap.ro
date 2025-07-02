@@ -167,11 +167,13 @@ For optimal display on laptops:
 ### 🌐 Network & Connectivity Tools
 
 - **Network Information Display** - Get IP & MAC address information for all network adapters
+- **Network Monitoring** - 
 - **Port Scanner** - Open port detection on network devices with service identification
 - **Ping Tool** - Connectivity testing with port discovery and latency analysis
 - **Network Console** - Comprehensive monitoring and Wi-Fi password recovery capabilities
 - **Network Bandwidth Monitoring** - Real-time usage graphs with VLAN and LAN support (bandmonitoring/networking)
 - **Device Status Listener** - Track online/offline status of network devices (check/devices)
+- **Network Traffic Monitoring** - (traffic/network)
 - **Advanced Network Diagnostics**:
   - Connection quality testing
   - Network performance optimization
@@ -239,6 +241,7 @@ Multiapp 95 Professional uses a comprehensive authentication system with predefi
 - **taskmanager/terminator** - Advanced task manager
 - **terminal/terminal** - Command line terminal interface
 - **textreplace/textfind** - Text search and replace utility
+- **traffic/network** - Network traffic monitoring
 - **commander/total** - Total commander file manager
 - **whiteboard/presentation** - Whiteboard & presentation tools
 - **xml/editor** - XML file editor and validator for Config
