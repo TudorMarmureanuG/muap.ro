@@ -133,7 +133,7 @@ For optimal display on laptops:
 
 ### 💻 Development Tools
 
-- **Full-featured Python IDE** - Complete development environment with debugging support (ide/pycharm)
+- **Full-featured Python IDE** - Complete development environment with debugging support (ide/pycharm or ide/vscode)
 - **Advanced Text Editor** - Notepad++ functionality with syntax highlighting
 - **Markdown Viewer** - View and edit Markdown files (md/mdviewer)
 - **SQLite Editor & Reader** - Database management with syntax highlighting and query tools
