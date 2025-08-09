@@ -127,6 +127,7 @@ For optimal display on laptops:
   - Page manipulation tools
   - PDF to Word conversion (convertorpdf/toword)
   - Comprehensive PDF manipulation (pdftools/enjoyit)
+  - PDF viewer (pdfviewer/pdfviewer)
 - **Paint App & Whiteboard** - Digital drawing and diagramming tools
 - **Find & Replace Text Tool** - Advanced search and replacement with regex support
 - **Contacts Manager** - Contact information database with search capabilities
@@ -227,6 +228,7 @@ Multiapp 95 Professional uses a comprehensive authentication system with predefi
 - **pausemanager/pauze** - Team break manager
 - **convertorpdf/toword** - PDF to Word document converter
 - **pdftools/enjoyit** - Comprehensive PDF manipulation tools
+- **pdfviewer/pdfviewer** - Simple PDF viewer
 - **process/viewer** - CPU and GPU process monitoring
 - **ide/pycharm** - Python integrated development environment
 - **quizmaker/quizmaker** - Quiz creation and editing tool
