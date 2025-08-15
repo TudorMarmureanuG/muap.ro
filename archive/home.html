@@ -3,2102 +3,840 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Multiapp 95 Professional - IT Management Tool Suite</title>
+    <title>Multiapp 95 Professional - Complete IT Management Tool Suite | 50+ Tools in One</title>
     <style>
-        :root {
-            /* Dark Theme (Default) */
-            --bg-primary: #0a0e1a;
-            --bg-secondary: #0f1419;
-            --bg-tertiary: #1a1f2e;
-            --bg-quaternary: #2d3748;
-            --text-primary: #ffffff;
-            --text-secondary: #e5e7eb;
-            --text-tertiary: #9ca3af;
-            --text-quaternary: #6b7280;
-            --accent-primary: #7c3aed;
-            --accent-secondary: #a855f7;
-            --border-color: #1a1f2e;
-            --item-hover: #1a1f2e;
-            --badge-bg: rgba(124, 58, 237, 0.2);
-            --card-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
-
-        /* Light Theme (Anthropic-inspired) */
-        .light-theme {
-            --bg-primary: #ffffff;
-            --bg-secondary: #f9fafb;
-            --bg-tertiary: #f3f4f6;
-            --bg-quaternary: #e5e7eb;
-            --text-primary: #111827;
-            --text-secondary: #374151;
-            --text-tertiary: #4b5563;
-            --text-quaternary: #6b7280;
-            --accent-primary: #7c3aed;
-            --accent-secondary: #8b5cf6;
-            --border-color: #e5e7eb;
-            --item-hover: #f3f4f6;
-            --badge-bg: rgba(124, 58, 237, 0.1);
-            --card-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-        }
-
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            transition: background-color 0.3s, color 0.3s, border-color 0.3s;
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: var(--bg-primary);
-            color: var(--text-primary);
-            overflow-x: hidden;
-        }
-
-        .container {
-            display: flex;
-            min-height: 100vh;
-        }
-
-        /* Sidebar */
-        .sidebar {
-            width: 280px;
-            background: var(--bg-secondary);
-            border-right: 1px solid var(--border-color);
-            padding: 20px 0;
-            position: fixed;
-            height: 100vh;
-            overflow-y: auto;
-            z-index: 10;
-        }
-
-        .logo {
-            padding: 0 20px 30px 20px;
-            border-bottom: 1px solid var(--border-color);
-            margin-bottom: 20px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .logo h1 {
-            color: var(--text-primary);
-            font-size: 20px;
-            font-weight: 600;
-        }
-
-        .logo img {
-            width: 32px;
-            height: 32px;
-        }
-
-        .nav-section {
-            margin-bottom: 30px;
-        }
-
-        .nav-title {
-            color: var(--text-quaternary);
-            font-size: 12px;
-            font-weight: 600;
-            text-transform: uppercase;
-            padding: 0 20px 10px 20px;
-            letter-spacing: 0.5px;
-        }
-
-        .nav-item {
-            display: flex;
-            align-items: center;
-            padding: 12px 20px;
-            color: var(--text-tertiary);
-            text-decoration: none;
-            transition: all 0.2s;
-            border-left: 3px solid transparent;
-        }
-
-        .nav-item:hover {
-            background: var(--item-hover);
-            color: var(--text-primary);
-        }
-
-        .nav-item.active {
-            background: var(--accent-primary);
-            color: #ffffff;
-            border-left-color: var(--accent-secondary);
-        }
-
-        .nav-icon {
-            width: 18px;
-            height: 18px;
-            margin-right: 12px;
-            opacity: 0.7;
-        }
-
-        /* Main Content */
-        .main-content {
-            margin-left: 280px;
-            flex: 1;
-            background: var(--bg-primary);
-            min-height: 100vh;
-        }
-
-        /* Header */
-        .header {
-            background: var(--bg-secondary);
-            border-bottom: 1px solid var(--border-color);
-            padding: 20px 30px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
-
-        .header-left {
-            flex: 1;
-        }
-
-        .header-title {
-            font-size: 24px;
-            font-weight: 600;
-            color: var(--text-primary);
-            margin-bottom: 5px;
-        }
-
-        .header-subtitle {
-            color: var(--text-tertiary);
-            font-size: 14px;
-        }
-
-        .header-right {
-            display: flex;
-            align-items: center;
-            gap: 20px;
-        }
-
-        .system-info {
-            background: linear-gradient(135deg, var(--accent-primary) 0%, var(--accent-secondary) 100%);
-            padding: 8px 16px;
-            border-radius: 8px;
-            font-weight: 600;
-            font-size: 14px;
-            color: white;
-        }
-
-        .theme-switch {
-            background: var(--bg-tertiary);
-            border: 1px solid var(--border-color);
-            color: var(--text-tertiary);
-            padding: 8px 16px;
-            border-radius: 8px;
-            cursor: pointer;
-            font-weight: 600;
-            font-size: 14px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            transition: all 0.2s;
-        }
-
-        .theme-switch:hover {
-            background: var(--bg-quaternary);
-            color: var(--text-secondary);
-        }
-
-        .user-info {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .user-avatar {
-            width: 32px;
-            height: 32px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, var(--accent-primary) 0%, var(--accent-secondary) 100%);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 600;
-            font-size: 14px;
-            color: white;
-        }
-
-        /* Content */
-        .content {
-            padding: 30px;
-        }
-
-        .toolbar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 30px;
-        }
-
-        .search-box {
-            background: var(--bg-tertiary);
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            padding: 12px 16px;
-            width: 300px;
-            color: var(--text-primary);
-            font-size: 14px;
-        }
-
-        .search-box::placeholder {
-            color: var(--text-quaternary);
-        }
-
-        .btn-primary {
-            background: linear-gradient(135deg, var(--accent-primary) 0%, var(--accent-secondary) 100%);
-            color: #ffffff;
-            border: none;
-            padding: 12px 24px;
-            border-radius: 8px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.2s;
-            font-size: 14px;
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-1px);
-            box-shadow: 0 4px 12px rgba(124, 58, 237, 0.4);
-        }
-
-        /* Dashboard Widgets */
-        .widgets-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 20px;
-            margin-bottom: 30px;
-        }
-
-        .widget {
-            background: var(--bg-secondary);
-            border-radius: 12px;
-            border: 1px solid var(--border-color);
-            padding: 20px;
-            box-shadow: var(--card-shadow);
-        }
-
-        .widget-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 15px;
-        }
-
-        .widget-title {
-            font-size: 16px;
-            font-weight: 600;
-            color: var(--text-primary);
-        }
-
-        .widget-icon {
-            width: 32px;
-            height: 32px;
-            border-radius: 8px;
-            background: var(--bg-tertiary);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 18px;
-        }
-
-        .widget-value {
-            font-size: 28px;
-            font-weight: 700;
-            color: var(--text-primary);
-            margin-bottom: 5px;
-        }
-
-        .widget-description {
-            font-size: 14px;
-            color: var(--text-tertiary);
-        }
-
-        /* Table */
-        .table-container {
-            background: var(--bg-secondary);
-            border-radius: 12px;
-            border: 1px solid var(--border-color);
-            overflow: hidden;
-            margin-bottom: 30px;
-            box-shadow: var(--card-shadow);
-        }
-
-        .table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-
-        .table th {
-            background: var(--bg-tertiary);
-            color: var(--text-tertiary);
-            font-weight: 600;
-            font-size: 12px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            padding: 16px;
-            text-align: left;
-            border-bottom: 1px solid var(--border-color);
-        }
-
-        .table td {
-            padding: 16px;
-            border-bottom: 1px solid var(--border-color);
-            color: var(--text-secondary);
-            vertical-align: middle;
-        }
-
-        .table tbody tr:hover {
-            background: var(--item-hover);
-        }
-
-        .tool-name {
-            color: var(--accent-primary);
-            font-weight: 600;
-            cursor: pointer;
-        }
-
-        .tool-name:hover {
-            text-decoration: underline;
-        }
-
-        .status-badge {
-            padding: 4px 12px;
-            border-radius: 20px;
-            font-size: 12px;
-            font-weight: 600;
-            text-transform: uppercase;
-            display: inline-block;
-        }
-
-        .status-active {
-            background: rgba(34, 197, 94, 0.2);
-            color: #22c55e;
-        }
-
-        .status-inactive {
-            background: rgba(239, 68, 68, 0.2);
-            color: #ef4444;
-        }
-
-        .category-badge {
-            background: var(--badge-bg);
-            color: var(--accent-primary);
-            padding: 4px 8px;
-            border-radius: 4px;
-            font-size: 12px;
-            font-weight: 600;
-            display: inline-flex;
-            align-items: center;
-            gap: 4px;
-        }
-
-        .actions {
-            display: flex;
-            gap: 8px;
-        }
-
-        .btn-icon {
-            background: var(--bg-tertiary);
-            border: 1px solid var(--border-color);
-            color: var(--text-tertiary);
-            width: 32px;
-            height: 32px;
-            border-radius: 6px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.2s;
-        }
-
-        .btn-icon:hover {
-            background: var(--bg-quaternary);
-            color: var(--text-primary);
-        }
-
-        .pagination {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 20px;
-            border-top: 1px solid var(--border-color);
-            color: var(--text-tertiary);
-            font-size: 14px;
-        }
-
-        .pagination-controls {
-            display: flex;
-            gap: 8px;
-        }
-
-        /* Modal */
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.8);
-            z-index: 1000;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .modal-content {
-            background: var(--bg-secondary);
-            border-radius: 12px;
-            border: 1px solid var(--border-color);
-            padding: 30px;
-            width: 90%;
-            max-width: 500px;
-        }
-
-        .modal-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-        }
-
-        .modal-title {
-            font-size: 20px;
-            font-weight: 600;
-            color: var(--text-primary);
-        }
-
-        .close-btn {
-            background: none;
-            border: none;
-            color: var(--text-tertiary);
-            font-size: 24px;
-            cursor: pointer;
-        }
-
-        .form-group {
-            margin-bottom: 20px;
-        }
-
-        .form-label {
-            display: block;
-            color: var(--text-secondary);
-            font-weight: 600;
-            margin-bottom: 8px;
-        }
-
-        .form-input, .form-select {
-            width: 100%;
-            background: var(--bg-tertiary);
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            padding: 12px;
-            color: var(--text-primary);
-            font-size: 14px;
-        }
-
-        .modal-actions {
-            display: flex;
-            gap: 12px;
-            justify-content: flex-end;
-        }
-
-        .btn-secondary {
-            background: var(--bg-tertiary);
-            color: var(--text-secondary);
-            border: 1px solid var(--border-color);
-            padding: 12px 24px;
-            border-radius: 8px;
-            cursor: pointer;
-            font-weight: 600;
-        }
-
-        /* System Requirements Section */
-        .system-requirements {
-            background: var(--bg-secondary);
-            border-radius: 12px;
-            border: 1px solid var(--border-color);
-            padding: 20px;
-            margin-bottom: 30px;
-            box-shadow: var(--card-shadow);
-        }
-
-        .requirements-title {
-            font-size: 18px;
-            font-weight: 600;
-            color: var(--text-primary);
-            margin-bottom: 15px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .requirements-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-            gap: 15px;
-        }
-
-        .requirement-item {
-            background: var(--bg-tertiary);
-            border-radius: 8px;
-            padding: 15px;
-            border: 1px solid var(--border-color);
-        }
-
-        .requirement-label {
-            font-size: 12px;
-            font-weight: 600;
-            color: var(--text-quaternary);
-            margin-bottom: 5px;
-            text-transform: uppercase;
-        }
-
-        .requirement-value {
-            font-size: 14px;
-            font-weight: 600;
-            color: var(--text-primary);
-        }
-
-        /* Notification */
-        .notification {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            background: var(--accent-primary);
-            color: white;
-            padding: 16px 24px;
-            border-radius: 8px;
-            font-weight: 600;
-            z-index: 10000;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-            transform: translateX(100%);
-            transition: transform 0.3s ease;
-        }
-
-        /* New sections for README content */
-        .section-container {
-            background: var(--bg-secondary);
-            border-radius: 12px;
-            border: 1px solid var(--border-color);
-            padding: 30px;
-            margin-bottom: 30px;
-            box-shadow: var(--card-shadow);
-        }
-
-        .section-title {
-            font-size: 20px;
-            font-weight: 600;
-            color: var(--text-primary);
-            margin-bottom: 20px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .section-content {
-            color: var(--text-secondary);
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: #121212;
+            color: #e0e0e0;
             line-height: 1.6;
         }
 
-        .feature-list {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 15px;
-            margin-top: 20px;
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
         }
 
-        .feature-item {
-            background: var(--bg-tertiary);
-            border-radius: 8px;
-            padding: 15px;
-            border: 1px solid var(--border-color);
-        }
-
-        .feature-title {
-            font-size: 16px;
-            font-weight: 600;
-            color: var(--text-primary);
-            margin-bottom: 8px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .feature-description {
-            font-size: 14px;
-            color: var(--text-tertiary);
-        }
-
-        .two-column {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 20px;
-        }
-
-        .checklist {
-            list-style: none;
-            margin-top: 15px;
-        }
-
-        .checklist li {
-            margin-bottom: 10px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .checklist li::before {
-            content: "✓";
-            color: var(--accent-primary);
-            font-weight: bold;
-        }
-
-        .step-list {
-            list-style: none;
-            counter-reset: step-counter;
-            margin-top: 15px;
-        }
-
-        .step-list li {
-            margin-bottom: 15px;
-            counter-increment: step-counter;
-            display: flex;
-            gap: 10px;
-        }
-
-        .step-list li::before {
-            content: counter(step-counter);
-            background: var(--accent-primary);
-            color: white;
-            width: 24px;
-            height: 24px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 12px;
-            font-weight: bold;
-            flex-shrink: 0;
-        }
-
-        .benefits-list {
-            margin-top: 15px;
-        }
-
-        .benefits-list li {
-            margin-bottom: 10px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .account-table {
-            margin-top: 20px;
+        /* Header */
+        header {
+            background: #1a1a1a;
+            position: fixed;
             width: 100%;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid #333;
         }
 
-        .tech-stack {
+        nav {
             display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #fff;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: #e0e0e0;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: #fff;
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 150px 0 100px;
+            text-align: center;
+            background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: #fff;
+            font-weight: 700;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            color: #aaa;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 15px 35px;
+            background: #333;
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .cta-button:hover {
+            background: #444;
+            transform: translateY(-2px);
+        }
+
+        /* Sections */
+        .features, .use-cases, .installation, .maintenance {
+            padding: 80px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: #fff;
+            font-weight: 700;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .feature-card {
+            background: #1a1a1a;
+            border: 1px solid #333;
+            padding: 2rem;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover {
+            border-color: #555;
+            transform: translateY(-5px);
+        }
+
+        .feature-card h3 {
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+            color: #fff;
+            font-weight: 600;
+        }
+
+        .feature-card p {
+            color: #aaa;
+            line-height: 1.7;
+        }
+
+        .feature-card ul {
+            list-style: none;
+            color: #aaa;
+            line-height: 1.7;
+        }
+
+        .feature-card ul li {
+            margin-bottom: 0.5rem;
+            position: relative;
+            padding-left: 1.2rem;
+        }
+
+        .feature-card ul li::before {
+            content: '•';
+            position: absolute;
+            left: 0;
+            color: #4ade80;
+            font-weight: bold;
+        }
+
+        /* Stats Section */
+        .stats {
+            padding: 80px 0;
+            background: #1a1a1a;
+            text-align: center;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .stat-item {
+            padding: 1.5rem;
+            background: #121212;
+            border-radius: 8px;
+            border: 1px solid #333;
+        }
+
+        .stat-number {
+            font-size: 2.8rem;
+            font-weight: bold;
+            color: #fff;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            color: #aaa;
+            font-size: 1rem;
+            font-weight: 500;
+        }
+
+        /* Tech Stack */
+        .tech-stack {
+            padding: 80px 0;
+            background: #0f0f0f;
+        }
+
+        .tech-items {
+            display: flex;
+            justify-content: center;
             flex-wrap: wrap;
-            gap: 10px;
-            margin-top: 15px;
+            gap: 1.5rem;
+            margin-top: 2rem;
         }
 
         .tech-item {
-            background: var(--bg-tertiary);
-            color: var(--text-primary);
-            padding: 6px 12px;
-            border-radius: 20px;
-            font-size: 12px;
+            background: #1a1a1a;
+            border: 1px solid #333;
+            padding: 1rem 2rem;
+            border-radius: 6px;
+            color: #e0e0e0;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .tech-item:hover {
+            background: #2a2a2a;
+            border-color: #555;
+        }
+
+        /* Requirements */
+        .requirements {
+            padding: 80px 0;
+            background: #1a1a1a;
+        }
+
+        .warning-box {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding: 2rem;
+            background: #2a1a1a;
+            border: 2px solid #ff4444;
+            border-radius: 8px;
+        }
+
+        .warning-box h3 {
+            color: #ff4444;
+            margin-bottom: 0.5rem;
+            font-size: 1.3rem;
+        }
+
+        .warning-box p {
+            color: #ffdddd;
+            font-weight: bold;
+        }
+
+        .req-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .req-card {
+            background: #121212;
+            border: 1px solid #333;
+            padding: 2rem;
+            border-radius: 8px;
+        }
+
+        .req-card h4 {
+            color: #fff;
+            margin-bottom: 1.5rem;
+            font-size: 1.3rem;
             font-weight: 600;
         }
 
-        .command-list {
-            background: var(--bg-tertiary);
+        .req-list {
+            list-style: none;
+        }
+
+        .req-list li {
+            margin-bottom: 0.7rem;
+            color: #aaa;
+            position: relative;
+            padding-left: 1.5rem;
+            line-height: 1.6;
+        }
+
+        .req-list li::before {
+            content: '•';
+            position: absolute;
+            left: 0;
+            color: #4ade80;
+            font-weight: bold;
+        }
+
+        /* Installation Section */
+        .installation {
+            background: #0f0f0f;
+        }
+
+        .what-you-get {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .what-you-get-box {
+            display: inline-block;
+            background: #1a1a1a;
+            border: 1px solid #333;
+            padding: 2rem;
             border-radius: 8px;
-            padding: 15px;
-            margin-top: 15px;
-            font-family: monospace;
-            color: var(--text-secondary);
+            max-width: 600px;
         }
 
-        .command-list code {
+        .what-you-get h3 {
+            color: #fff;
+            margin-bottom: 1.5rem;
+            font-size: 1.4rem;
+        }
+
+        .what-you-get-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            text-align: left;
+        }
+
+        .checkmark {
+            color: #4ade80;
+            font-weight: bold;
+        }
+
+        /* Footer */
+        footer {
+            background: #1a1a1a;
+            padding: 60px 0 30px;
+            border-top: 1px solid #333;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 3rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h4 {
+            color: #fff;
+            margin-bottom: 1.5rem;
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+
+        .footer-section p,
+        .footer-section a {
+            color: #aaa;
+            text-decoration: none;
+            margin-bottom: 0.8rem;
             display: block;
-            margin-bottom: 5px;
-            color: var(--accent-primary);
+            line-height: 1.6;
         }
 
+        .footer-section a:hover {
+            color: #fff;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid #333;
+            color: #777;
+        }
+
+        .footer-bottom p {
+            margin-bottom: 0.5rem;
+        }
+
+        .highlight {
+            color: #4ade80;
+            font-weight: 600;
+        }
+
+        /* Mobile Responsive */
         @media (max-width: 768px) {
-            .sidebar {
-                width: 0;
-                transform: translateX(-100%);
+            .nav-links {
+                display: none;
             }
-            .main-content {
-                margin-left: 0;
+            
+            .hero h1 {
+                font-size: 2.2rem;
             }
-            .widgets-container {
+            
+            .hero p {
+                font-size: 1.1rem;
+            }
+            
+            .features-grid {
                 grid-template-columns: 1fr;
             }
-            .two-column {
+            
+            .req-grid {
                 grid-template-columns: 1fr;
+            }
+            
+            .container {
+                padding: 0 15px;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .what-you-get-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero {
+                padding: 120px 0 80px;
+            }
+
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .tech-items {
+                gap: 1rem;
+            }
+
+            .tech-item {
+                padding: 0.8rem 1.5rem;
+                font-size: 0.9rem;
             }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <!-- Sidebar -->
-        <nav class="sidebar">
-            <div class="logo">
-                <h1>🚀 Multiapp 95</h1>
-            </div>
-            
-            <div class="nav-section">
-                <a href="#" class="nav-item active">
-                    <span class="nav-icon">📊</span>
-                    Dashboard
-                </a><br><!--
-				<div class="nav-title">System Tools</div>
-                <a href="#" class="nav-item">
-                    <span class="nav-icon">🖥️</span>
-                    System Diagnostics
-                </a>
-                <a href="#" class="nav-item">
-                    <span class="nav-icon">📈</span>
-                    Performance Monitor
-                </a>
-                <a href="#" class="nav-item">
-                    <span class="nav-icon">🔔</span>
-                    Alert Monitor
-                </a>
-                <a href="#" class="nav-item">
-                    <span class="nav-icon">📝</span>
-                    Event Viewer
-                </a>-->
-            </div>
-
-            <div class="nav-section">
-                <div class="nav-title"># File Management #</div><!--
-                <a href="#" class="nav-item">
-                    <span class="nav-icon">📁</span>
-                    Explorer Mode
-                </a>
-                <a href="#" class="nav-item">
-                    <span class="nav-icon">📋</span>
-                    Copy App
-                </a>
-                <a href="#" class="nav-item">
-                    <span class="nav-icon">🔄</span>
-                    Backup Tool
-                </a>
-                <a href="#" class="nav-item">
-                    <span class="nav-icon">🔍</span>
-                    File Comparator
-                </a>
-                <a href="#" class="nav-item">
-                    <span class="nav-icon">🔎</span>
-                    File Fisher
-                </a>-->
-            </div>
-
-            <div class="nav-section">
-                <div class="nav-title"># Security Suite #</div><!--
-                <a href="#" class="nav-item">
-                    <span class="nav-icon">🔐</span>
-                    File Encryption
-                </a>
-                <a href="#" class="nav-item">
-                    <span class="nav-icon">🔑</span>
-                    Password Manager
-                </a>
-                <a href="#" class="nav-item">
-                    <span class="nav-icon">🔒</span>
-                    Security Checker
-                </a>
-                <a href="#" class="nav-item">
-                    <span class="nav-icon">📦</span>
-                    ZIP Tools
-                </a>-->
-            </div>
-
-            <div class="nav-section">
-                <div class="nav-title"># Office Suite #</div><!--
-                <a href="#" class="nav-item">
-                    <span class="nav-icon">📄</span>
-                    Document Reader
-                </a>
-                <a href="#" class="nav-item">
-                    <span class="nav-icon">📊</span>
-                    Spreadsheet Editor
-                </a>
-                <a href="#" class="nav-item">
-                    <span class="nav-icon">📑</span>
-                    PDF Tools
-                </a>
-                <a href="#" class="nav-item">
-                    <span class="nav-icon">🎨</span>
-                    Paint App
-                </a>-->
-            </div>
-
-            <div class="nav-section">
-                <div class="nav-title"># Development #</div><!--
-                <a href="#" class="nav-item">
-                    <span class="nav-icon">💻</span>
-                    Python IDE
-                </a>
-                <a href="#" class="nav-item">
-                    <span class="nav-icon">📝</span>
-                    Text Editor
-                </a>
-                <a href="#" class="nav-item">
-                    <span class="nav-icon">📊</span>
-                    SQLite Editor
-                </a>
-                <a href="#" class="nav-item">
-                    <span class="nav-icon">📜</span>
-                    Script Agent
-                </a>-->
-            </div>
-
-            <div class="nav-section">
-                <div class="nav-title"># Network Tools #</div><!--
-                <a href="#" class="nav-item">
-                    <span class="nav-icon">🌐</span>
-                    Network Info
-                </a>
-                <a href="#" class="nav-item">
-                    <span class="nav-icon">📶</span>
-                    Ping Tool
-                </a>
-                <a href="#" class="nav-item">
-                    <span class="nav-icon">📊</span>
-                    Bandwidth Monitor
-                </a>
-                <a href="#" class="nav-item">
-                    <span class="nav-icon">🔌</span>
-                    Port Scanner
-                </a>-->
-            </div>
-
-            <div class="nav-section">
-                <div class="nav-title"># AI & Productivity #</div><!--
-                <a href="#" class="nav-item">
-                    <span class="nav-icon">🤖</span>
-                    AI Chatbot
-                </a>
-                <a href="#" class="nav-item">
-                    <span class="nav-icon">📅</span>
-                    Smart Calendar
-                </a>
-                <a href="#" class="nav-item">
-                    <span class="nav-icon">✅</span>
-                    Task Manager
-                </a>
-                <a href="#" class="nav-item">
-                    <span class="nav-icon">📚</span>
-                    Knowledge Base
-                </a>-->
-            </div>
+    <!-- Header -->
+    <header>
+        <nav class="container">
+            <div class="logo">Multiapp 95 Professional</div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#features">Features</a></li>
+                <li><a href="#tech">Technology</a></li>
+                <li><a href="#requirements">Requirements</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
         </nav>
+    </header>
 
-        <!-- Main Content -->
-        <main class="main-content">
-            <!-- Header -->
-            <header class="header">
-                <div class="header-left">
-                    <h1 class="header-title">Multiapp 95 Professional</h1>
-                    <div class="header-subtitle">The ultimate IT management tool suite</div>
-                </div>
-                <div class="header-right">
-                    <div class="system-info">Version 0.95.0</div>
-                    <button id="themeToggle" class="theme-switch">
-                        <span id="themeIcon">🌙</span>
-                        <span id="themeText">Switch Theme</span>
-                    </button>
-                    <div class="user-info">
-                        <div class="user-avatar">T</div>
-                        <span>Tudor</span>
-                    </div>
-                </div>
-            </header>
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="container">
+            <h1>Multiapp 95 Professional</h1>
+            <p>The ultimate productivity and efficiency suite designed specifically for IT support departments. Revolutionary software combining over 50+ professional tools into a single, powerful executable file, streamlining various IT tasks from system monitoring to file management, network diagnostics, development tools, and advanced AI-powered productivity features.</p>
+            <a href="#features" class="cta-button">Discover Features</a>
+        </div>
+    </section>
 
-            <!-- Content -->
-            <div class="content">
-                <!-- Overview Section -->
-                <div class="section-container">
-                    <h2 class="section-title">
-                        <span>🚀</span>
-                        Overview
-                    </h2>
-                    <div class="section-content">
-                        <p>
-                            <strong>Multiapp 95 Professional</strong> is the ultimate productivity and efficiency suite designed specifically for IT support departments. This revolutionary software combines over 50+ professional tools into a single, powerful executable file, streamlining various IT tasks from system monitoring to file management, network diagnostics, development tools, and advanced AI-powered productivity features.
-                        </p>
-                        <div class="checklist">
-                            <li>All-in-one solution with no additional installations required</li>
-                            <li>Advanced security features built-in</li>
-                            <li>Intuitive interface with retro & modern design</li>
-                            <li>Regular updates and continuous improvement</li>
-                            <li>Portable application - runs from anywhere</li>
-                        </div>
-                    </div>
+    <!-- Stats -->
+    <section class="stats">
+        <div class="container">
+            <h2 class="section-title">Performance Benefits & Advantages</h2>
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <div class="stat-number">50+</div>
+                    <div class="stat-label">Professional Tools</div>
                 </div>
-
-                <!-- Technology Stack Section -->
-                <div class="section-container">
-                    <h2 class="section-title">
-                        <span>💻</span>
-                        Technology Stack & Architecture
-                    </h2>
-                    <div class="tech-stack">
-                        <div class="tech-item">Python</div>
-                        <div class="tech-item">C++</div>
-                        <div class="tech-item">x64 Architecture</div>
-                        <div class="tech-item">Precompiled Executable</div>
-                        <div class="tech-item">Windows 10/11</div>
-                        <div class="tech-item">Portable Application</div>
-                    </div>
+                <div class="stat-item">
+                    <div class="stat-number">20%</div>
+                    <div class="stat-label">Faster File Operations</div>
                 </div>
-
-                <!-- System Status Overview -->
-                <div class="widgets-container">
-                    <div class="widget">
-                        <div class="widget-header">
-                            <div class="widget-title">CPU Usage</div>
-                            <div class="widget-icon">📊</div>
-                        </div>
-                        <div class="widget-value"></div>
-                        <div class="widget-description">Not implemented</div>
-                    </div>
-                    
-                    <div class="widget">
-                        <div class="widget-header">
-                            <div class="widget-title">Memory Usage</div>
-                            <div class="widget-icon">💾</div>
-                        </div>
-                        <div class="widget-value"><span style="font-size: 18px;"></span></div>
-                        <div class="widget-description">Not implemented</div>
-                    </div>
-                    
-                    <div class="widget">
-                        <div class="widget-header">
-                            <div class="widget-title">Disk Space</div>
-                            <div class="widget-icon">💿</div>
-                        </div>
-                        <div class="widget-value"><span style="font-size: 18px;"></span></div>
-                        <div class="widget-description">Not implemented</div>
-                    </div>
-                    
-                    <div class="widget">
-                        <div class="widget-header">
-                            <div class="widget-title">Network</div>
-                            <div class="widget-icon">🌐</div>
-                        </div>
-                        <div class="widget-value"><span style="font-size: 18px;"></span></div>
-                        <div class="widget-description">Not implemented</div>
-                    </div>
+                <div class="stat-item">
+                    <div class="stat-number">500MB</div>
+                    <div class="stat-label">Single File Size</div>
                 </div>
-
-                <!-- System Requirements -->
-                <div class="system-requirements">
-                    <h2 class="requirements-title">
-                        <span>⚙️</span>
-                        System Requirements
-                    </h2>
-                    <p class="widget-description" style="margin-bottom: 20px;">
-                        <strong>⚠️ Important Notice:</strong> This software is designed exclusively for x64 (64-bit) systems
-                    </p>
-                    <div class="two-column">
-                        <div>
-                            <h3 style="margin-bottom: 10px; color: var(--text-primary);">Minimum Requirements</h3>
-                            <div class="requirements-grid">
-                                <div class="requirement-item">
-                                    <div class="requirement-label">Architecture</div>
-                                    <div class="requirement-value">x64 (64-bit required)</div>
-                                </div>
-                                <div class="requirement-item">
-                                    <div class="requirement-label">Operating System</div>
-                                    <div class="requirement-value">Windows 10 (build 1903+) or Windows 11</div>
-                                </div>
-                                <div class="requirement-item">
-                                    <div class="requirement-label">Processor</div>
-                                    <div class="requirement-value">Intel i3 or AMD equivalent (1-2 GHz)</div>
-                                </div>
-                                <div class="requirement-item">
-                                    <div class="requirement-label">RAM</div>
-                                    <div class="requirement-value">4GB minimum</div>
-                                </div>
-                                <div class="requirement-item">
-                                    <div class="requirement-label">Storage</div>
-                                    <div class="requirement-value">500MB free disk space</div>
-                                </div>
-                                <div class="requirement-item">
-                                    <div class="requirement-label">Permissions</div>
-                                    <div class="requirement-value">Administrator privileges</div>
-                                </div>
-                                <div class="requirement-item">
-                                    <div class="requirement-label">Network</div>
-                                    <div class="requirement-value">Internet connection for AI features</div>
-                                </div>
-                                <div class="requirement-item">
-                                    <div class="requirement-label">Display</div>
-                                    <div class="requirement-value">100% zoom recommended</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div>
-                            <h3 style="margin-bottom: 10px; color: var(--text-primary);">Recommended Specifications</h3>
-                            <div class="requirements-grid">
-                                <div class="requirement-item">
-                                    <div class="requirement-label">Processor</div>
-                                    <div class="requirement-value">Intel Core i5 or AMD Ryzen 5</div>
-                                </div>
-                                <div class="requirement-item">
-                                    <div class="requirement-label">RAM</div>
-                                    <div class="requirement-value">8GB (16GB for development)</div>
-                                </div>
-                                <div class="requirement-item">
-                                    <div class="requirement-label">Storage</div>
-                                    <div class="requirement-value">SSD for faster operations</div>
-                                </div>
-                                <div class="requirement-item">
-                                    <div class="requirement-label">Display</div>
-                                    <div class="requirement-value">1920x1080 or higher</div>
-                                </div>
-                            </div>
-                        </div>
-						
-                    </div>
-					
+                <div class="stat-item">
+                    <div class="stat-number">0</div>
+                    <div class="stat-label">Required Installations</div>
                 </div>
-				<div class="section-container">
-					<div>
-						<div style="margin-top: 20px;">
-							<h3 style="margin-bottom: 10px; color: var(--text-primary);">Display Optimization</h3>
-							<p style="color: var(--text-tertiary); margin-bottom: 10px;">For optimal display on laptops:</p>
-							<ol class="step-list">
-								<li>Right-click Multiapp.exe</li>
-								<li>Select Properties</li>
-								<li>Choose "Change settings for all users"</li>
-								<li>Click "Change high DPI settings"</li>
-								<li>Configure scaling settings as needed</li>
-							</ol>
-						</div>
-					</div>
-				</div>
+                <div class="stat-item">
+                    <div class="stat-number">95%</div>
+                    <div class="stat-label">Romanian AI Support</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">x64</div>
+                    <div class="stat-label">Architecture Only</div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-                <!-- Performance Benefits -->
-                <div class="section-container">
-                    <h2 class="section-title">
-                        <span>⚡</span>
-                        Performance Benefits
-                    </h2>
-                    <ul class="benefits-list">
-                        <li><strong>Efficiency:</strong> 18.8% ~ 20% faster copying compared to traditional methods</li>
-                        <li><strong>Optimization:</strong> Precompiled paths and direct bit allocation</li>
-                        <li><strong>Integration:</strong> All tools unified in a single application</li>
-                        <li><strong>Resource Management:</strong> Optimized memory usage and CPU allocation</li>
+    <!-- Professional Use Cases -->
+    <section class="use-cases">
+        <div class="container">
+            <h2 class="section-title">Professional Use Cases</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <h3>IT Support Departments</h3>
+                    <p>Comprehensive diagnostic and task automation tools for efficient support operations and system maintenance. Perfect for help desk teams and technical support professionals.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>System Administrators</h3>
+                    <p>Advanced monitoring and management capabilities for server infrastructure and network administration. Complete tools for system oversight and maintenance.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Developers</h3>
+                    <p>Complete Python IDE, database management tools, and development environment with debugging support. Everything needed for professional software development.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Office Professionals</h3>
+                    <p>Office Lite suite with document reading, spreadsheet editing, and comprehensive productivity tools for daily business operations.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Network Engineers</h3>
+                    <p>Advanced network analysis, monitoring, port scanning, and traffic analysis for network optimization and troubleshooting.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Security Teams</h3>
+                    <p>Military-grade encryption, password management, and comprehensive security tools for data protection and system security.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features -->
+    <section id="features" class="features">
+        <div class="container">
+            <h2 class="section-title">Comprehensive Feature Set</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <h3>System & Diagnostic Tools</h3>
+                    <p>Complete system management suite including system compatibility testing, hardware diagnostics & monitoring, network troubleshooting, IT process automation, advanced terminal emulator, performance optimization, alert monitor, event viewer, manual & automatic repair tool for Multiapp, XML editor for Config, real-time system information, task manager, process viewer, and Multiapp dashboard for essential information.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>File Management Pro Tools</h3>
+                    <p>Professional file management capabilities with smart backup tool, advanced files & folders comparator, ZIP password recovery & maker, intelligent file organizer, Explorer mode, Copy App with network file copying, rename utility, file archeologist, archive management, file history tools, File Fisher searching, and Recovery Tunnel for advanced file recovery.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Security Suite</h3>
+                    <p>Enterprise-grade security tools featuring military-grade file encryption, advanced password manager & generation tools, multi-level authentication system, terminal access restrictions, multiple password generators (Basic & Advanced V2), password storage and management, file encryption and security tools, ZIP password recovery, and safety tool for vulnerability avoidance.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Office Suite Lite</h3>
+                    <p>Comprehensive office productivity suite with Office document reader for Word, PowerPoint & Excel, spreadsheet editor with formula support (SUM, AVERAGE, MIN, MAX, COUNT, PRODUCT, MEDIAN, CONCAT), PDF tools suite with encryption, image extraction, page manipulation, PDF to Word conversion, PDF viewer, paint app & whiteboard, and find & replace text tool.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Development Tools</h3>
+                    <p>Complete development environment featuring full-featured Python IDE, advanced text editor with syntax highlighting, Markdown viewer, SQLite editor & reader with query tools, script agent for automation, multi file editor for configurations, project management capabilities, and syntax highlighting for multiple programming languages.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>AI & Productivity</h3>
+                    <p>Advanced AI-powered productivity suite with AI chatbot (95% Romanian language support), smart calendar & scheduling, task manager system, knowledge base system (Standard & Retro), account launcher & manager, workflow automation, pause manager for teams, screen recorder app, visual diagram creator, expense tracker with reporting, quiz creation and testing, and contacts manager.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Network & Connectivity Tools</h3>
+                    <p>Professional networking suite including network information display, network monitoring, port scanner, ping tool, network console with Wi-Fi password recovery, bandwidth monitoring with real-time graphs, device status listener, network traffic monitoring, and connection quality testing.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Portable Application</h3>
+                    <p>Revolutionary deployment model with single executable requiring no installation, runs from anywhere (USB, network), automatic compatibility check, all features unlocked immediately, no external dependencies, optimized architecture with precompiled paths, direct bit allocation, and 18.8% - 20% faster copying files performance compared to traditional methods.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tech Stack -->
+    <section id="tech" class="tech-stack">
+        <div class="container">
+            <h2 class="section-title">Technology Stack & Architecture</h2>
+            <div class="tech-items">
+                <div class="tech-item">Python</div>
+                <div class="tech-item">C++</div>
+				<div class="tech-item">Assembly</div>
+                <div class="tech-item">Windows x64 Only</div>
+                <div class="tech-item">Single executable</div>
+                <div class="tech-item">Precompiled paths</div>
+                <div class="tech-item">Direct bit allocation</div>
+                <div class="tech-item">Optimized architecture</div>
+                <div class="tech-item">No installer needed</div>
+                <div class="tech-item">Portable deployment</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Requirements -->
+    <section id="requirements" class="requirements">
+        <div class="container">
+            <h2 class="section-title">System Requirements</h2>
+            <div class="warning-box">
+                <h3>Important Notice</h3>
+                <p>This software is designed exclusively for x64 (64-bit) systems</p>
+            </div>
+            <div class="req-grid">
+                <div class="req-card">
+                    <h4>Minimum Requirements</h4>
+                    <ul class="req-list">
+                        <li>x64 (64-bit) Processor 1-2 GHz (Required)</li>
+                        <li>Windows 10 (build 1903+) or Windows 11</li>
+                        <li>Intel i3 or AMD equivalent</li>
+                        <li>4GB RAM minimum</li>
+                        <li>500MB free disk space</li>
+                        <li>Administrator privileges for full functionality</li>
+                        <li>Internet connection for AI features and updates</li>
+                        <li>100% zoom recommended (especially for laptops)</li>
                     </ul>
                 </div>
-
-                <!-- Installation & Setup Guide -->
-                <div class="section-container">
-                    <h2 class="section-title">
-                        <span>📦</span>
-                        Installation & Setup Guide
-                    </h2>
-					<div style="margin: 32px 0;">
-                        <a href="https://mega.nz/file/lEhR0A6B#N2Yudl1BMlR-jwE7eEKspTQI7SJLvN-ycf_7AUR0B5g" class="btn-primary">
-                            📥 Download Now
-                        </a>
-                    </div>
-                    <div class="section-content">
-                        <h3 style="margin-bottom: 15px; color: var(--text-primary);">What You Get</h3>
-                        <ul class="checklist">
-                            <li>Single executable file - no installer needed</li>
-                            <li>Portable application - run from anywhere</li>
-                            <li>All features unlocked immediately</li>
-                            <li>No additional dependencies required</li>
-                        </ul>
-                        
-                        <h3 style="margin: 20px 0 15px; color: var(--text-primary);">Simple Setup Process</h3>
-                        <ol class="step-list">
-                            <li>
-                                <strong>Download</strong><br>
-                                • Download the Multiapp.exe file (~500MB)
-                            </li>
-                            <li>
-                                <strong>System Check</strong><br>
-                                • Ensure your system meets minimum requirements. Built-in compatibility checker will verify automatically.
-                            </li>
-                            <li>
-                                <strong>Display Configuration</strong><br>
-                                • Configure display settings for optimal viewing. Set zoom to 100% for best experience.
-                            </li>
-                            <li>
-                                <strong>First Run</strong><br>
-                                • Run the application as Administrator. Log in using provided accounts from the account list.
-                            </li>
-                            <li>
-                                <strong>Optimization (Optional)</strong><br>
-                                • Configure high DPI settings if needed, especially on laptops.
-                            </li>
-                        </ol>
-                        
-                        <h3 style="margin: 20px 0 15px; color: var(--text-primary);">Configuration Files & Structure</h3>
-                        <ul style="list-style: none; color: var(--text-tertiary);">
-                            <li>• <strong>Accounts.txt</strong> - User account information</li>
-                            <li>• <strong>paths.txt</strong> - Network or local paths for Copy App</li>
-                            <li>• <strong>profiles.json</strong> - Equipment profiles for Copy App</li>
-                            <li>• <strong>ChooseLocationForPause.txt</strong> - Pause Manager file location</li>
-                            <li>• <strong>Config folder</strong> - XML configuration files for various modules</li>
-                        </ul>
-                        
-                        <h3 style="margin: 20px 0 15px; color: var(--text-primary);">First-Time Setup Checklist</h3>
-                        <div class="checklist">
-                            <li>Verify system requirements</li>
-                            <li>Run compatibility check</li>
-                            <li>Configure display settings</li>
-                            <li>Preset the config.xml file in Config folder</li>
-                            <li>Test login with basic account (user/nopass)</li>
-                            <li>Explore main features using launcher/launcher account</li>
-                            <li>Configure network paths if needed</li>
-                            <li>Set up backup locations if using backup features</li>
-                        </div>
-                    </div>
+                <div class="req-card">
+                    <h4>Recommended Specifications</h4>
+                    <ul class="req-list">
+                        <li>Intel Core i5 or AMD Ryzen 5 (or equivalent)</li>
+                        <li>8GB-16GB RAM (16GB for heavy development)</li>
+                        <li>SSD for faster file operations</li>
+                        <li>1920x1080+ resolution</li>
+                        <li>Proper network permissions for file copying</li>
+                        <li>Updated graphics drivers</li>
+                    </ul>
                 </div>
-
-                <!-- Repair & Maintenance -->
-                <div class="section-container">
-                    <h2 class="section-title">
-                        <span>🛠️</span>
-                        Repair & Maintenance
-                    </h2>
-                    <div class="section-content">
-                        <h3 style="margin-bottom: 15px; color: var(--text-primary);">Automatic Repair (Fetcher)</h3>
-                        <p style="color: var(--text-tertiary); margin-bottom: 20px;">
-                            Use the <strong>Fetcher - Repair Setup</strong> feature (fetcher/repair) for automatic error correction and file restoration.
-                        </p>
-                        
-                        <h3 style="margin-bottom: 15px; color: var(--text-primary);">Manual Repair (Shell Integrator)</h3>
-                        <p style="color: var(--text-tertiary); margin-bottom: 10px;">
-                            Use shell/integrator account and execute commands in sequence:
-                        </p>
-                        <div class="command-list">
-                            <code>init</code>
-                            <code>powercli Multiapp.exe -t</code>
-                            <code>getscan register mov eax, eay: shell True</code>
-                            <code>1/0,12</code>
-                            <code>0/0,8</code>
-                            <code>start,1/0/0</code>
-                            <code>restart_service</code>
-                            <code>X/1,0</code>
-                            <code>X/1,1</code>
-                            <code>CLI/1/0/0,t</code>
-                            <code>cfg,0/0/1</code>
-                            <code>launch_multiapp</code>
-                        </div>
-                        
-                        <h3 style="margin: 20px 0 15px; color: var(--text-primary);">Common Solutions</h3>
-                        <div class="two-column">
-                            <div>
-                                <h4 style="margin-bottom: 10px; color: var(--text-secondary);">Display Issues</h4>
-                                <ul style="list-style: none; color: var(--text-tertiary);">
-                                    <li>• Adjust DPI settings for high-resolution displays</li>
-                                    <li>• Set zoom to 100% in Windows display settings</li>
-                                    <li>• Update graphics drivers</li>
-                                </ul>
-                            </div>
-                            <div>
-                                <h4 style="margin-bottom: 10px; color: var(--text-secondary);">Performance Issues</h4>
-                                <ul style="list-style: none; color: var(--text-tertiary);">
-                                    <li>• Run as Administrator for full functionality</li>
-                                    <li>• Close unnecessary background applications</li>
-                                    <li>• Ensure minimum system requirements are met</li>
-                                </ul>
-                            </div>
-                            <div>
-                                <h4 style="margin-bottom: 10px; color: var(--text-secondary);">Network Connectivity</h4>
-                                <ul style="list-style: none; color: var(--text-tertiary);">
-                                    <li>• Check internet connection for AI chatbot functionality</li>
-                                    <li>• Verify firewall settings for network tools</li>
-                                    <li>• Ensure proper network permissions for file copying</li>
-                                </ul>
-                            </div>
-                            <div>
-                                <h4 style="margin-bottom: 10px; color: var(--text-secondary);">File Access Issues</h4>
-                                <ul style="list-style: none; color: var(--text-tertiary);">
-                                    <li>• Verify administrator privileges</li>
-                                    <li>• Check file permissions and ownership</li>
-                                    <li>• Ensure adequate disk space for operations</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Tools Search & Filter -->
-                <div class="toolbar">
-                    <input type="text" class="search-box" placeholder="Search for a tool or feature" id="searchInput">
-                    <button class="btn-primary" onclick="openModal()">Launch New Tool</button>
-                </div>
-
-                <!-- Tools Table -->
-                <div class="table-container">
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th>TOOL NAME</th>
-                                <th>CATEGORY</th>
-                                <th>USERNAME/PASSWORD</th>
-                                <th>DESCRIPTION</th>
-                                <th>STATUS</th>
-                                <th>ACTIONS</th>
-                            </tr>
-                        </thead>
-                        <tbody id="toolsTableBody">
-                            <!-- Tools will be populated by JavaScript -->
-                        </tbody>
-                    </table>
-
-                    <div class="pagination">
-                        <div>Showing <span id="visibleItems">0</span> of <span id="totalItems">0</span> tools</div>
-                        <div class="pagination-controls">
-                            <button class="btn-icon" id="prevPage" title="Previous page">‹</button>
-                            <button class="btn-icon" id="nextPage" title="Next page">›</button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Support & Documentation -->
-                <div class="section-container">
-                    <h2 class="section-title">
-                        <span>📧</span>
-                        Support & Documentation
-                    </h2>
-                    <div class="section-content">
-                        <div class="two-column">
-                            <div>
-                                <h3 style="margin-bottom: 15px; color: var(--text-primary);">Built-in Help Resources</h3>
-                                <ul style="list-style: none; color: var(--text-tertiary);">
-                                    <li>• <strong>Knowledge Base:</strong> Built-in local documentation platform</li>
-                                    <li>• <strong>AI Chatbot:</strong> Integrated virtual assistant (chatbot/aichatbot)</li>
-                                    <li>• <strong>Read Me First:</strong> Essential usage information</li>
-                                    <li>• <strong>Equipment Sheets:</strong> Software configuration templates</li>
-                                    <li>• <strong>Multiapp Dashboard:</strong> For essential information</li>
-                                </ul>
-                            </div>
-                            <div>
-                                <h3 style="margin-bottom: 15px; color: var(--text-primary);">Official Support Channels</h3>
-                                <ul style="list-style: none; color: var(--text-tertiary);">
-                                    <li>• <strong>Developer:</strong> Tudor Marmureanu</li>
-                                    <li>• <strong>Support Email:</strong> support@muap.ro</li>
-                                    <li>• <strong>Company:</strong> Muap - Retro Computing Division</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- About Multiapp -->
-                <div class="section-container">
-                    <h2 class="section-title">
-                        <span>📋</span>
-                        About Multiapp 95 Professional
-                    </h2>
-                    <div class="section-content">
-                        <div class="two-column">
-                            <div>
-                                <h3 style="margin-bottom: 15px; color: var(--text-primary);">Company Information</h3>
-                                <ul style="list-style: none; color: var(--text-tertiary); margin-bottom: 20px;">
-                                    <li>• <strong>Developer:</strong> Tudor Marmureanu</li>
-                                    <li>• <strong>Company:</strong> Muap - Retro Computing Division</li>
-                                    <li>• <strong>Support Email:</strong> support@muap.ro</li>
-                                    <li>• <strong>Copyright:</strong> © 2024 Muap - Retro Computing Division</li>
-                                </ul>
-                                
-                                <h3 style="margin-bottom: 15px; color: var(--text-primary);">Application Details</h3>
-                                <ul style="list-style: none; color: var(--text-tertiary);">
-                                    <li>• <strong>Name:</strong> Multiapp 95 Professional</li>
-                                    <li>• <strong>Version:</strong> 0.95.0</li>
-                                    <li>• <strong>Application Type:</strong> IT Management Tool Suite</li>
-                                    <li>• <strong>Architecture:</strong> x64 (64-bit) Windows applications only</li>
-                                    <li>• <strong>File Size:</strong> ~500MB</li>
-                                    <li>• <strong>Distribution:</strong> Single executable file</li>
-                                    <li>• <strong>License:</strong> Professional IT environments</li>
-                                </ul>
-                            </div>
-                            <div>
-                                <h3 style="margin-bottom: 15px; color: var(--text-primary);">Mission Statement</h3>
-                                <p style="color: var(--text-tertiary); margin-bottom: 20px;">
-                                    Multiapp 95 Professional is designed to revolutionize IT workflow management by combining over 50+ professional tools into a single, powerful executable. Our mission is to provide IT support departments, system administrators, developers, and office professionals with an all-in-one solution that enhances productivity and streamlines operations.
-                                </p>
-                                
-                                <h3 style="margin-bottom: 15px; color: var(--text-primary);">⭐ Key Achievements</h3>
-                                <ul style="list-style: none; color: var(--text-tertiary);">
-                                    <li>• 50+ integrated professional tools</li>
-                                    <li>• 18.8% ~ 20% faster file operations</li>
-                                    <li>• Zero installation requirements</li>
-                                    <li>• Military-grade security features</li>
-                                    <li>• 95% Romanian language support for AI chatbot</li>
-                                    <li>• Comprehensive network analysis capabilities</li>
-                                    <li>• Advanced development environment</li>
-                                    <li>• Real-time system monitoring</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
+                <div class="req-card">
+                    <h4>Built-in Features</h4>
+                    <ul class="req-list">
+                        <li>Automatic compatibility checker</li>
+                        <li>No installation required</li>
+                        <li>Fully portable application</li>
+                        <li>All features unlocked immediately</li>
+                        <li>No external dependencies</li>
+                        <li>Self-healing repair capabilities</li>
+                        <li>Display optimization for laptops</li>
+                    </ul>
                 </div>
             </div>
-        </main>
-    </div>
-
-    <!-- Launch Tool Modal -->
-    <div class="modal" id="launchModal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2 class="modal-title">Launch Tool</h2>
-                <button class="close-btn" onclick="closeModal()">&times;</button>
-            </div>
-            
-            <form id="launchForm">
-                <div class="form-group">
-                    <label class="form-label">Tool Name</label>
-                    <select class="form-select" id="toolSelect" required>
-                        <option value="">Select a tool</option>
-                        <!-- Options will be populated by JavaScript -->
-                    </select>
-                </div>
-                
-                <div class="form-group">
-                    <label class="form-label">Username</label>
-                    <input type="text" class="form-input" id="toolUsername" readonly>
-                </div>
-                
-                <div class="form-group">
-                    <label class="form-label">Password</label>
-                    <input type="text" class="form-input" id="toolPassword" readonly>
-                </div>
-                
-                <div class="modal-actions">
-                    <button type="button" class="btn-secondary" onclick="closeModal()">Cancel</button>
-                    <button type="submit" class="btn-primary">Launch Tool</button>
-                </div>
-            </form>
         </div>
-    </div>
+    </section>
+
+    <!-- Installation & Setup Guide -->
+    <section class="installation">
+        <div class="container">
+            <h2 class="section-title">Installation & Setup Guide</h2>
+            
+            <div class="what-you-get">
+                <div class="what-you-get-box">
+                    <h3>What You Get</h3>
+                    <div class="what-you-get-grid">
+                        <div><span class="checkmark">✓</span> Single executable file - no installer needed</div>
+                        <div><span class="checkmark">✓</span> Portable application - run from anywhere</div>
+                        <div><span class="checkmark">✓</span> All features unlocked immediately</div>
+                        <div><span class="checkmark">✓</span> No additional dependencies required</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="features-grid">
+                <div class="feature-card">
+                    <h3>1. Download</h3>
+                    <ul>
+                        <li>Download the MP95 x64.exe file (<a href="https://mega.nz/file/lEhR0A6B#N2Yudl1BMlR-jwE7eEKspTQI7SJLvN-ycf_7AUR0B5g" class="btn-primary">Download Now</a>)</li>
+                        <li>File size: ~500MB</li>
+                        <li>Single executable file</li>
+                    </ul>
+                </div>
+                <div class="feature-card">
+                    <h3>2. System Check</h3>
+                    <ul>
+                        <li>Ensure x64 (64-bit) system</li>
+                        <li>Built-in compatibility checker</li>
+                        <li>Verify minimum requirements</li>
+                    </ul>
+                </div>
+                <div class="feature-card">
+                    <h3>3. Display Configuration</h3>
+                    <ul>
+                        <li>Set zoom to 100% for best experience</li>
+                        <li>Adjust high DPI settings for laptops</li>
+                        <li>Configure scaling as needed</li>
+                    </ul>
+                </div>
+                <div class="feature-card">
+                    <h3>4. First Run</h3>
+                    <ul>
+                        <li>Run as Administrator (recommended)</li>
+                        <li>Built-in authentication system</li>
+                        <li>Explore features immediately</li>
+                    </ul>
+                </div>
+                <div class="feature-card">
+                    <h3>5. Configuration Files</h3>
+                    <ul>
+                        <li>Accounts.txt - User account information</li>
+                        <li>paths.txt - Network or local paths for Copy App</li>
+                        <li>profiles.json - Equipment profiles for Copy App</li>
+                        <li>Config folder - XML configurations</li>
+                    </ul>
+                </div>
+                <div class="feature-card">
+                    <h3>6. Quick Start Tips</h3>
+                    <ul>
+                        <li>Use built-in help system</li>
+                        <li>AI chatbot can assist with questions</li>
+                        <li>Administrator privileges recommended</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Repair & Maintenance -->
+    <section class="maintenance">
+        <div class="container">
+            <h2 class="section-title">Repair & Maintenance</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <h3>Automatic Repair (Fetcher)</h3>
+                    <p>Use the Fetcher - Repair Setup feature for automatic error correction and file restoration with comprehensive diagnostics. This tool can automatically detect and fix common issues.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Manual Repair (Shell Integrator)</h3>
+                    <p>Complete manual repair process with step-by-step commands for advanced troubleshooting and system restoration. Includes detailed command sequence for expert users.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Display Issues</h3>
+                    <p>Adjust DPI settings for high-resolution displays, set zoom to 100%, and update graphics drivers for optimal performance. Configure high DPI settings for laptops.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Performance Issues</h3>
+                    <p>Run as Administrator, close unnecessary applications, and ensure minimum system requirements are met. Monitor system resources for optimal performance.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Network Connectivity</h3>
+                    <p>Check internet connection for AI features, verify firewall settings, and ensure proper network permissions for file operations and network tools.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>File Access Issues</h3>
+                    <p>Verify administrator privileges, check file permissions and ownership, ensure adequate disk space for operations and proper security settings.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>Multiapp 95 Professional</h4>
+                    <p>The ultimate productivity and efficiency suite designed specifically for IT support departments. Revolutionary software combining over 50+ professional tools into a single, powerful executable file.</p>
+                    <p><strong>Version 0.95.0</strong></p>
+                    <p class="highlight">Mission: Revolutionize IT workflow management by providing an all-in-one solution that enhances productivity and streamlines operations.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact & Support</h4>
+                    <p><strong>Developer:</strong> Tudor Marmureanu</p>
+                    <p><strong>Company:</strong> Muap - Retro Computing Division</p>
+                    <a href="mailto:suport@muap.ro">suport@muap.ro</a>
+                    <br><br>
+                    <h4>Built-in Help Resources</h4>
+                    <p>Knowledge Base: Local documentation platform</p>
+                    <p>AI Chatbot: Integrated virtual assistant</p>
+                    <p>Read Me First: Essential usage information</p>
+                    <p>Multiapp Dashboard: Essential information</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Technical Information</h4>
+                    <p><strong>Architecture:</strong> x64 (64-bit) only</p>
+                    <p><strong>Size:</strong> ~500MB</p>
+                    <p><strong>Distribution:</strong> Single executable file</p>
+                    <p><strong>License:</strong> Professional IT Environments</p>
+                    <p><strong>Languages:</strong> Python and C++</p>
+                    <p><strong>Performance:</strong> 18.8% - 20% faster file copy operations and more</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Key Achievements</h4>
+                    <p>50+ integrated professional tools</p>
+                    <p>Zero installation requirements</p>
+                    <p>Military-grade security features</p>
+                    <p>95% Romanian language AI support</p>
+                    <p>Comprehensive network and hardware analysis</p>
+                    <p>Advanced development environment</p>
+                    <p>Real-time system monitoring</p>
+                    <p>Self-healing repair capabilities</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Muap - Retro Computing Division. All rights reserved.</p>
+                <p>Designed for professional IT environments with advanced network and system management capabilities. Some features may require administrative privileges or specific network permissions.</p>
+            </div>
+        </div>
+    </footer>
 
     <script>
-        // Tool data from README.md
-        const tools = [
-            // System & Diagnostics Tools
-            { 
-                name: "System Compatibility Testing", 
-                category: "System & Diagnostics", 
-                username: "fetcher", 
-                password: "repair", 
-                description: "Built-in hardware verification to ensure optimal performance",
-                status: "Active"
-            },
-            { 
-                name: "Hardware Diagnostics & Monitoring", 
-                category: "System & Diagnostics", 
-                username: "hardware", 
-                password: "lite", 
-                description: "Real-time system performance tracking and analysis",
-                status: "Active"
-            },
-            { 
-                name: "Network Troubleshooting", 
-                category: "System & Diagnostics", 
-                username: "traffic", 
-                password: "network", 
-                description: "Complete network analysis suite for connectivity issues",
-                status: "Active"
-            },
-            { 
-                name: "Advanced Terminal Emulator", 
-                category: "System & Diagnostics", 
-                username: "terminal", 
-                password: "terminal", 
-                description: "CMD and Linux (WSL) interface simulation",
-                status: "Active"
-            },
-            { 
-                name: "Alert Monitor", 
-                category: "System & Diagnostics", 
-                username: "alert", 
-                password: "monitor", 
-                description: "System alerts based on usage thresholds and performance metrics",
-                status: "Active"
-            },
-            { 
-                name: "Event Viewer", 
-                category: "System & Diagnostics", 
-                username: "eventviewer", 
-                password: "eventviewer", 
-                description: "System log analysis (errors, warnings, information)",
-                status: "Active"
-            },
-            { 
-                name: "Manual Repair Tool", 
-                category: "System & Diagnostics", 
-                username: "shell", 
-                password: "integrator", 
-                description: "Multiapp manual repair utility",
-                status: "Active"
-            },
-            { 
-                name: "System Information", 
-                category: "System & Diagnostics", 
-                username: "system", 
-                password: "realtime", 
-                description: "Live performance monitoring with detailed metrics",
-                status: "Active"
-            },
-            { 
-                name: "Task Manager", 
-                category: "System & Diagnostics", 
-                username: "taskmanager", 
-                password: "terminator", 
-                description: "Process management with memory and network usage tracking",
-                status: "Active"
-            },
-            { 
-                name: "Process Viewer", 
-                category: "System & Diagnostics", 
-                username: "process", 
-                password: "viewer", 
-                description: "CPU and GPU usage analysis by core",
-                status: "Active"
-            },
-            
-            // File Management Pro Tools
-            { 
-                name: "Smart Backup Tool", 
-                category: "File Management", 
-                username: "backupmanager", 
-                password: "backupmngr", 
-                description: "Intelligent data backup for sensitive information",
-                status: "Active"
-            },
-            { 
-                name: "Files & Folders Comparator", 
-                category: "File Management", 
-                username: "comparator", 
-                password: "comparator", 
-                description: "Deep comparison algorithms for file differences",
-                status: "Active"
-            },
-            { 
-                name: "ZIP Password Recovery", 
-                category: "File Management", 
-                username: "zippass", 
-                password: "wordsmith", 
-                description: "Archive security management with encryption capabilities",
-                status: "Active"
-            },
-            { 
-                name: "File Organizer", 
-                category: "File Management", 
-                username: "junk", 
-                password: "manager", 
-                description: "Automatic file categorization based on type and usage",
-                status: "Active"
-            },
-            { 
-                name: "Explorer Mode", 
-                category: "File Management", 
-                username: "commander", 
-                password: "total", 
-                description: "Dynamic local file/folder copying with path saving functionality",
-                status: "Active"
-            },
-            { 
-                name: "Copy App", 
-                category: "File Management", 
-                username: "user", 
-                password: "nopass", 
-                description: "Network file copying from servers to C:\\KIT directory with profiles",
-                status: "Active"
-            },
-            { 
-                name: "Rename Utility", 
-                category: "File Management", 
-                username: "renamemanager", 
-                password: "renamer", 
-                description: "Batch file renaming operations with pattern matching",
-                status: "Active"
-            },
-            { 
-                name: "File Archeologist", 
-                category: "File Management", 
-                username: "history", 
-                password: "files", 
-                description: "File history tools for tracking changes and versions",
-                status: "Active"
-            },
-            { 
-                name: "Archive Management", 
-                category: "File Management", 
-                username: "zipmanager", 
-                password: "zipmngr", 
-                description: "Comprehensive compression and management for ZIP files",
-                status: "Active"
-            },
-            { 
-                name: "File Fisher", 
-                category: "File Management", 
-                username: "fisher", 
-                password: "file", 
-                description: "Searching files tool",
-                status: "Active"
-            },
-            { 
-                name: "Recovery Tunnel", 
-                category: "File Management", 
-                username: "recovery", 
-                password: "tunnel", 
-                description: "Advanced file recovery tool",
-                status: "Active"
-            },
-            
-            // Security Suite Tools
-            { 
-                name: "File Encryption", 
-                category: "Security", 
-                username: "cryptoV2", 
-                password: "security", 
-                description: "High-complexity encryption algorithms for sensitive data protection",
-                status: "Active"
-            },
-            { 
-                name: "Password Manager", 
-                category: "Security", 
-                username: "password", 
-                password: "manager", 
-                description: "Encrypted password database with secure storage",
-                status: "Active"
-            },
-            { 
-                name: "Password Generator", 
-                category: "Security", 
-                username: "passgen", 
-                password: "passgen", 
-                description: "Basic password generation tools with customizable parameters",
-                status: "Active"
-            },
-            { 
-                name: "Advanced Password Generator", 
-                category: "Security", 
-                username: "passgenV2", 
-                password: "passgenV2", 
-                description: "Advanced password generation with complex options",
-                status: "Active"
-            },
-            { 
-                name: "Safety Tool", 
-                category: "Security", 
-                username: "safe", 
-                password: "checker", 
-                description: "Designed for avoiding vulnerabilities on your system",
-                status: "Active"
-            },
-            
-            // Office Suite Lite Tools
-            { 
-                name: "Office Document Reader", 
-                category: "Office", 
-                username: "reader", 
-                password: "office", 
-                description: "View Word, PowerPoint & Excel files without installation",
-                status: "Active"
-            },
-            { 
-                name: "Spreadsheet Editor", 
-                category: "Office", 
-                username: "excel", 
-                password: "lite", 
-                description: "Excel-compatible editor with formula support",
-                status: "Active"
-            },
-            { 
-                name: "PDF to Word Converter", 
-                category: "Office", 
-                username: "convertorpdf", 
-                password: "toword", 
-                description: "PDF to Word conversion utility",
-                status: "Active"
-            },
-            { 
-                name: "PDF Tools Suite", 
-                category: "Office", 
-                username: "pdftools", 
-                password: "enjoyit", 
-                description: "Comprehensive PDF manipulation tools",
-                status: "Active"
-            },
-			{
-				name: "PDF Viewer", 
-                category: "Office", 
-                username: "pdfviewer", 
-                password: "pdfviewer", 
-                description: "Simple PDF viewer",
-                status: "Active"
-			},
-            { 
-                name: "Paint App", 
-                category: "Office", 
-                username: "paint", 
-                password: "paint", 
-                description: "Digital drawing and diagramming tools",
-                status: "Active"
-            },
-            { 
-                name: "Text Find & Replace", 
-                category: "Office", 
-                username: "textreplace", 
-                password: "textfind", 
-                description: "Advanced search and replacement with regex support",
-                status: "Active"
-            },
-            { 
-                name: "Contacts Manager", 
-                category: "Office", 
-                username: "contact", 
-                password: "manager", 
-                description: "Contact information database with search capabilities",
-                status: "Active"
-            },
-            
-            // Development Tools
-            { 
-                name: "Python IDE", 
-                category: "Development", 
-                username: "ide", 
-                password: "pycharm", 
-                description: "Complete development environment with debugging support",
-                status: "Active"
-            },
-			{ 
-                name: "Python IDE", 
-                category: "Development", 
-                username: "ide", 
-                password: "vscode", 
-                description: "Complete development environment with debugging support",
-                status: "Active"
-            },
-            { 
-                name: "Text Editor", 
-                category: "Development", 
-                username: "notepad", 
-                password: "notepad", 
-                description: "Notepad++ functionality with syntax highlighting",
-                status: "Active"
-            },
-            { 
-                name: "Markdown Viewer", 
-                category: "Development", 
-                username: "md", 
-                password: "mdviewer", 
-                description: "View and edit Markdown files",
-                status: "Active"
-            },
-            { 
-                name: "SQLite Editor", 
-                category: "Development", 
-                username: "sql", 
-                password: "editor", 
-                description: "Database management with syntax highlighting and query tools",
-                status: "Active"
-            },
-            { 
-                name: "Script Agent", 
-                category: "Development", 
-                username: "script", 
-                password: "agent", 
-                description: "Script runner for daily tasks and automation",
-                status: "Active"
-            },
-            { 
-                name: "Multi File Editor", 
-                category: "Development", 
-                username: "multifile", 
-                password: "editor", 
-                description: "Configuration file editing for various formats",
-                status: "Active"
-            },
-            { 
-                name: "XML Editor", 
-                category: "Development", 
-                username: "xml", 
-                password: "editor", 
-                description: "Configuration file editing capabilities with validation",
-                status: "Active"
-            },
-            
-            // AI & Productivity Tools
-            { 
-                name: "AI Chatbot", 
-                category: "AI & Productivity", 
-                username: "chatbot", 
-                password: "aichatbot", 
-                description: "Virtual assistant with 95% Romanian language support",
-                status: "Active"
-            },
-            { 
-                name: "Smart Calendar", 
-                category: "AI & Productivity", 
-                username: "calendar", 
-                password: "calendar", 
-                description: "Event management system with intelligent planning",
-                status: "Active"
-            },
-            { 
-                name: "Task Manager System", 
-                category: "AI & Productivity", 
-                username: "taskmanager", 
-                password: "terminator", 
-                description: "Comprehensive task management and tracking",
-                status: "Active"
-            },
-            { 
-                name: "Knowledge Base", 
-                category: "AI & Productivity", 
-                username: "kbmanager", 
-                password: "knowladgebase", 
-                description: "Built-in documentation platform with search capabilities",
-                status: "Active"
-            },
-            { 
-                name: "Retro Knowledge Base", 
-                category: "AI & Productivity", 
-                username: "kbretro", 
-                password: "kbretro", 
-                description: "Retro-styled knowledge base manager",
-                status: "Active"
-            },
-            { 
-                name: "Account Launcher", 
-                category: "AI & Productivity", 
-                username: "launcher", 
-                password: "launcher", 
-                description: "Unified account management system",
-                status: "Active"
-            },
-            { 
-                name: "Pause Manager", 
-                category: "AI & Productivity", 
-                username: "pausemanager", 
-                password: "pauze", 
-                description: "Break management system for productivity",
-                status: "Active"
-            },
-            { 
-                name: "Screen Recorder", 
-                category: "AI & Productivity", 
-                username: "screenrec", 
-                password: "screenrec", 
-                description: "Capture and recording tools for training and documentation",
-                status: "Active"
-            },
-            { 
-                name: "Visual Diagram Creator", 
-                category: "AI & Productivity", 
-                username: "diagram", 
-                password: "beta", 
-                description: "Professional diagram tools for flowcharts and process mapping",
-                status: "Active"
-            },
-            { 
-                name: "Mindmap Creator", 
-                category: "AI & Productivity", 
-                username: "mindmap", 
-                password: "diagram", 
-                description: "Visual mindmap creation tool",
-                status: "Active"
-            },
-            { 
-                name: "Expense Tracker", 
-                category: "AI & Productivity", 
-                username: "expense", 
-                password: "tracker", 
-                description: "Financial tracking with visual diagrams and reporting",
-                status: "Active"
-            },
-            { 
-                name: "Quiz Maker", 
-                category: "AI & Productivity", 
-                username: "quizmaker", 
-                password: "quizmaker", 
-                description: "Quiz creation and editing tool",
-                status: "Active"
-            },
-            { 
-                name: "Quiz Testing", 
-                category: "AI & Productivity", 
-                username: "quiz", 
-                password: "test", 
-                description: "Quiz testing and evaluation system",
-                status: "Active"
-            },
-            
-            // Network & Connectivity Tools
-            { 
-                name: "Network Information", 
-                category: "Network", 
-                username: "bandmonitoring", 
-                password: "networking", 
-                description: "Get IP & MAC address information for all network adapters",
-                status: "Active"
-            },
-            { 
-                name: "Port Scanner", 
-                category: "Network", 
-                username: "traffic", 
-                password: "network", 
-                description: "Open port detection on network devices with service identification",
-                status: "Active"
-            },
-            { 
-                name: "Ping Tool", 
-                category: "Network", 
-                username: "check", 
-                password: "devices", 
-                description: "Connectivity testing with port discovery and latency analysis",
-                status: "Active"
-            },
-            { 
-                name: "Device Status Listener", 
-                category: "Network", 
-                username: "check", 
-                password: "devices", 
-                description: "Track online/offline status of network devices",
-                status: "Active"
-            }
-        ];
-
-        // Pagination variables
-        let currentPage = 1;
-        const itemsPerPage = 10;
-        let filteredTools = [...tools];
-
-        // DOM Elements
-        const toolsTableBody = document.getElementById('toolsTableBody');
-        const searchInput = document.getElementById('searchInput');
-        const prevPageBtn = document.getElementById('prevPage');
-        const nextPageBtn = document.getElementById('nextPage');
-        const visibleItemsSpan = document.getElementById('visibleItems');
-        const totalItemsSpan = document.getElementById('totalItems');
-        const themeToggle = document.getElementById('themeToggle');
-        const themeIcon = document.getElementById('themeIcon');
-        const themeText = document.getElementById('themeText');
-        const toolSelect = document.getElementById('toolSelect');
-        const toolUsername = document.getElementById('toolUsername');
-        const toolPassword = document.getElementById('toolPassword');
-
-        // Initialize tool select dropdown
-        function initializeToolSelect() {
-            toolSelect.innerHTML = '<option value="">Select a tool</option>';
-            tools.forEach(tool => {
-                const option = document.createElement('option');
-                option.value = tool.name;
-                option.textContent = `${tool.name} (${tool.category})`;
-                toolSelect.appendChild(option);
+        // Simple smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
             });
-        }
-
-        // Update username/password when tool is selected
-        toolSelect.addEventListener('change', function() {
-            const selectedTool = tools.find(tool => tool.name === this.value);
-            if (selectedTool) {
-                toolUsername.value = selectedTool.username;
-                toolPassword.value = selectedTool.password;
-            } else {
-                toolUsername.value = '';
-                toolPassword.value = '';
-            }
         });
 
-        // Render table based on current page and filters
-        function renderTable() {
-            const startIndex = (currentPage - 1) * itemsPerPage;
-            const endIndex = startIndex + itemsPerPage;
-            const pageItems = filteredTools.slice(startIndex, endIndex);
-            
-            toolsTableBody.innerHTML = '';
-            
-            pageItems.forEach(tool => {
-                const row = document.createElement('tr');
-                
-                row.innerHTML = `
-                    <td><span class="tool-name">${tool.name}</span></td>
-                    <td><span class="category-badge">${tool.category}</span></td>
-                    <td>${tool.username}/${tool.password}</td>
-                    <td>${tool.description}</td>
-                    <td><span class="status-badge status-${tool.status.toLowerCase()}">${tool.status}</span></td>
-                    <td class="actions">
-                        <button class="btn-icon" title="Launch" onclick="launchTool('${tool.name}')">▶️</button>
-                        <button class="btn-icon" title="Info" onclick="showToolInfo('${tool.name}')">ℹ️</button>
-                    </td>
-                `;
-                
-                toolsTableBody.appendChild(row);
+        // Simple fade-in animation for cards
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
             });
-            
-            // Update pagination info
-            visibleItemsSpan.textContent = Math.min(filteredTools.length, endIndex);
-            totalItemsSpan.textContent = filteredTools.length;
-            
-            // Update pagination buttons
-            prevPageBtn.disabled = currentPage === 1;
-            nextPageBtn.disabled = endIndex >= filteredTools.length;
-        }
+        }, observerOptions);
 
-        // Filter tools based on search input
-        function filterTools() {
-            const searchTerm = searchInput.value.toLowerCase();
-            
-            filteredTools = tools.filter(tool => 
-                tool.name.toLowerCase().includes(searchTerm) || 
-                tool.category.toLowerCase().includes(searchTerm) || 
-                tool.description.toLowerCase().includes(searchTerm) || 
-                tool.username.toLowerCase().includes(searchTerm) || 
-                tool.password.toLowerCase().includes(searchTerm)
-            );
-            
-            currentPage = 1;
-            renderTable();
-        }
-
-        // Search input event
-        searchInput.addEventListener('input', filterTools);
-
-        // Pagination controls
-        prevPageBtn.addEventListener('click', function() {
-            if (currentPage > 1) {
-                currentPage--;
-                renderTable();
-            }
+        // Initialize animation for feature cards
+        document.addEventListener('DOMContentLoaded', () => {
+            const cards = document.querySelectorAll('.feature-card, .req-card, .stat-item');
+            cards.forEach(card => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px)';
+                card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                observer.observe(card);
+            });
         });
-
-        nextPageBtn.addEventListener('click', function() {
-            const maxPage = Math.ceil(filteredTools.length / itemsPerPage);
-            if (currentPage < maxPage) {
-                currentPage++;
-                renderTable();
-            }
-        });
-
-        // Theme toggle
-        let isDarkTheme = true;
-        
-        themeToggle.addEventListener('click', function() {
-            if (isDarkTheme) {
-                document.body.classList.add('light-theme');
-                themeIcon.textContent = '☀️';
-                themeText.textContent = 'Dark Theme';
-            } else {
-                document.body.classList.remove('light-theme');
-                themeIcon.textContent = '🌙';
-                themeText.textContent = 'Light Theme';
-            }
-            
-            isDarkTheme = !isDarkTheme;
-        });
-
-        // Modal functions
-        function openModal() {
-            document.getElementById('launchModal').style.display = 'flex';
-        }
-
-        function closeModal() {
-            document.getElementById('launchModal').style.display = 'none';
-            document.getElementById('launchForm').reset();
-        }
-
-        // Tool actions
-        function launchTool(toolName) {
-            const tool = tools.find(t => t.name === toolName);
-            if (tool) {
-                showNotification(`Launching ${tool.name} with ${tool.username}/${tool.password}`, 'success');
-            }
-        }
-
-        function showToolInfo(toolName) {
-            const tool = tools.find(t => t.name === toolName);
-            if (tool) {
-                showNotification(`${tool.name}: ${tool.description}`, 'info');
-            }
-        }
-
-        // Form submission
-        document.getElementById('launchForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            const toolName = document.getElementById('toolSelect').value;
-            const tool = tools.find(t => t.name === toolName);
-            
-            if (tool) {
-                showNotification(`Launching ${tool.name} with ${tool.username}/${tool.password}`, 'success');
-                closeModal();
-            }
-        });
-
-        // Notification function
-        function showNotification(message, type = 'info') {
-            const notification = document.createElement('div');
-            notification.className = 'notification';
-            notification.textContent = message;
-            
-            if (type === 'success') {
-                notification.style.background = 'linear-gradient(135deg, #22c55e 0%, #16a34a 100%)';
-            } else if (type === 'error') {
-                notification.style.background = 'linear-gradient(135deg, #ef4444 0%, #dc2626 100%)';
-            } else {
-                notification.style.background = 'linear-gradient(135deg, #3b82f6 0%, #2563eb 100%)';
-            }
-            
-            document.body.appendChild(notification);
-            
-            // Animation
-            setTimeout(() => {
-                notification.style.transform = 'translateX(0)';
-            }, 10);
-            
-            // Remove after 3 seconds
-            setTimeout(() => {
-                notification.style.transform = 'translateX(100%)';
-                setTimeout(() => {
-                    document.body.removeChild(notification);
-                }, 300);
-            }, 3000);
-        }
-
-        // Close modal with ESC key
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape') {
-                closeModal();
-            }
-        });
-
-        // Click outside modal to close
-        document.getElementById('launchModal').addEventListener('click', function(e) {
-            if (e.target === this) {
-                closeModal();
-            }
-        });
-
-        // Initialize
-        initializeToolSelect();
-        renderTable();
     </script>
 </body>
 </html>
