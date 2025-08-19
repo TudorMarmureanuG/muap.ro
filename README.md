@@ -350,7 +350,7 @@ Use shell/integrator account and execute commands in sequence:
 8. `X/1,0`
 9. `X/1,1`
 10. `CLI/1/0/0,t`
-11. `cfg,0/0/1` (use 'init' for Windows 10 x64 if this fails)
+11. `cfg,0/0/1`
 12. `launch_multiapp`
 
 ### Common Solutions
