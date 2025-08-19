@@ -164,6 +164,7 @@ For optimal display on laptops:
   - Quiz Testing system for evaluation (quiz/test)
 - **XML Editor** - Configuration file editing capabilities with validation
 - **Text Search and Replace Utility** - Advanced find and replace with pattern matching (textreplace/textfind)
+- **Clipboard History**
 
 ### 🌐 Network & Connectivity Tools
 
@@ -199,6 +200,7 @@ Multiapp 95 Professional uses a comprehensive authentication system with predefi
 - **backupmanager/backupmngr** - File backup management
 - **calendar/calendar** - Calendar display & event planning
 - **check/devices** - Online device checker
+- **clipboard/history** - Clipboard history
 - **comparator/comparator** - File comparison tool
 - **contact/manager** - Contact management system
 - **diagram/beta** - Diagram creation and editing (beta version)
@@ -307,14 +309,14 @@ Multiapp 95 Professional uses a comprehensive authentication system with predefi
 - **Config folder** - XML configuration files for various modules
 
 ### First-Time Setup Checklist
-□ Verify system requirements  
-□ Run compatibility check  
-□ Configure display settings  
-□ Preset the config.xml file in Config folder  
-□ Test login with basic account (user/nopass)  
-□ Explore main features using launcher/launcher account  
-□ Configure network paths if needed  
-□ Set up backup locations if using backup features  
+- Verify system requirements  
+- Run compatibility check  
+- Configure display settings  
+- Preset the config.xml file in Config folder  
+- Test login with basic account (user/nopass)  
+- Explore main features using launcher/launcher account  
+- Configure network paths if needed  
+- Set up backup locations if using backup features  
 
 ### Quick Start Tips
 - Start with the launcher/launcher account to explore all features (or dev mode if you have the code)
